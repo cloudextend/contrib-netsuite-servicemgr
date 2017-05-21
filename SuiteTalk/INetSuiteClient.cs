@@ -53,5 +53,5 @@ namespace SuiteTalk
 
     }
 
-    public partial class NetSuitePortTypeClient: INetSuiteClient { }
+    public partial class NetSuitePortTypeClient : INetSuiteClient { }
 }
