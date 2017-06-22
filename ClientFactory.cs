@@ -30,7 +30,6 @@ namespace Celigo.ServiceManager.NetSuite
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);
 
-
             return client;
         }
     }

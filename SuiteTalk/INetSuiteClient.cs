@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -7,6 +8,8 @@ namespace SuiteTalk
 {
     public interface INetSuiteClient
     {
+        ServiceEndpoint Endpoint { get; }
+
         Task<loginResponse> loginAsync(Passport passport);
         Task<logoutResponse> logoutAsync();
         Task<addResponse> addAsync(Record record);
