@@ -7,30 +7,25 @@ namespace StubGenerator.Common
 {
     public class MethodStub
     {
-        public string Name { get; set; }
+        public string Name { get; }
         public TypeStub ReturnType { get; set; }
-        public IList<ParameterStub> Parameters { get; }
+        public IList<ParameterStub> Parameters { get; } = new List<ParameterStub>();
 
-        public TypeStub Owner { get; }
+        public IList<string> MethodBody { get; set; } = new List<string>();
 
-        protected MethodInfo ActualMethod { get; }
-
-        public MethodStub(MethodInfo methodInfo, TypeStub owner)
+        public MethodStub(string name)
         {
-            this.Owner = owner;
-            this.ActualMethod = methodInfo;
+            this.Name = name;
+        }
 
+        public MethodStub(MethodInfo methodInfo)
+        {
             var parameters = methodInfo.GetParameters();
             this.Parameters = new List<ParameterStub>(parameters.Length);
             foreach (var param in parameters)
             {
-                Parameters.Add(new ParameterStub(this, param));
+                Parameters.Add(new ParameterStub(param));
             }
-        }
-
-        public override int GetHashCode()
-        {
-            return this.ActualMethod.GetHashCode();
         }
 
         public override string ToString()
@@ -38,10 +33,15 @@ namespace StubGenerator.Common
             return this.ToString(null);
         }
 
-        public string ToString(NamespaceStub relativeTo)
+        public string ToString(string accessor)
+        {
+            return this.ToString(null, accessor);
+        }
+
+        public string ToString(string relativeTo, string accessor = "public")
         {
             var signatureBuilder = new StringBuilder(100);
-            if (!this.Owner.IsInterface) signatureBuilder.Append("public ");
+            if (accessor != null) signatureBuilder.Append(accessor + " ");
 
             signatureBuilder.Append(this.ReturnType.ToString(relativeTo));
             signatureBuilder.Append(" ");
@@ -49,12 +49,16 @@ namespace StubGenerator.Common
             signatureBuilder.Append("(");
 
             int paramCount = this.Parameters.Count;
-            for (int i = 1; i < paramCount; i++)
+            if (paramCount > 0)
             {
-                signatureBuilder.Append(",");
-                signatureBuilder.Append(this.Parameters[i].ToString(relativeTo));
+                signatureBuilder.Append(this.Parameters[0].ToString(relativeTo));
+                for (int i = 1; i < paramCount; i++)
+                {
+                    signatureBuilder.Append(",");
+                    signatureBuilder.Append(this.Parameters[i].ToString(relativeTo));
+                }
             }
-
+            
             signatureBuilder.Append(")");
             return signatureBuilder.ToString();
         }

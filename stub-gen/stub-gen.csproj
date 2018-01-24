@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="SharedStubs\INetSuiteRequest.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="INetSuiteRequest.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -43,10 +39,6 @@
     <None Update="INetSuiteClient.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SharedStubs\" />
   </ItemGroup>
 
 </Project>

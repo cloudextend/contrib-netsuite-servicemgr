@@ -60,11 +60,16 @@ namespace StubGenerator
 
             if (string.IsNullOrWhiteSpace(sourceAssemblyPath)) sourceAssemblyPath = string.Concat(sourceProjectPath, @"bin\Debug\netcoreapp2.0\", targetWSDL, ".dll");
 
-            var engine = new TemplatingEngine(Assembly.LoadFile(sourceAssemblyPath));
-            var generator = new Generator(Path.Combine(sourceProjectPath, "SuiteTalk"));
+            var sourceAssembly = Assembly.LoadFile(sourceAssemblyPath);
+            var outputPath = Path.Combine(sourceProjectPath, "SuiteTalk");
+
+            var engine = new TemplatingEngine();
+            // var generator = new Generator(sourceAssembly, outputPath);
+            var clientGenerator = new ClientStub.ClientStubGenerator(sourceAssembly, outputPath);
 
             Task.WaitAll(
-                generator.Generate(engine, "INetSuiteRequest")
+                // generator.Generate(engine, "INetSuiteRequest")
+                clientGenerator.Generate(engine, "INetSuiteClient")
             );
             
             // TODO Steps: 
@@ -72,14 +77,6 @@ namespace StubGenerator
             // 2. Remove Reference.cs from Connected Services\SuiteTalk
             // 3. Run dotnet-svcutil for the new WSDL
         }
-
-        //private static string GetClientContent(ClientFile clientFile)
-        //{
-        //    var templateText = File.ReadAllText("INetSuiteClient.cshtml");
-        //    var srcDoc = RazorSourceDocument.Create(templateText, "INetSuiteClient.cs");
-        //    var engine = RazorEngine.Create();
-        //    engine.Process(RazorCodeDocument.Create(srcDoc));
-        //}
 
         private static string ExtractParam(string param)
         {

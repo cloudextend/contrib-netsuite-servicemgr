@@ -1,33 +1,39 @@
-﻿@using System;
+﻿@using System
 @using System.Reflection
-@using StubGenerator.Common;
-@inherits RazorLight.TemplatePage<Type>;
+@using StubGenerator.Common
+@using StubGenerator.ClientStub
+@inherits RazorLight.TemplatePage<Context<ClientTypeStub>>
 @{ DisableEncoding = true; }
-@{ string targetInterfaceName = "INetSuiteClient"; }
-namespace @Model.Namespace
+@{ string targetInterfaceName = Model.Data.Interface.Name; }
+namespace @Model.Configuration.TargetNamespace
 {
     public partial interface @targetInterfaceName
     {
     #pragma warning disable IDE1006 // Naming Styles
-@{ 
-    
-}
-    @foreach (var mthd in Reflector.GetPublicMethods(Model))
+
+    @foreach (var mthd in Model.Data.Interface.Methods)
     {
-        
-    } 
+@:        @mthd.ToString(Model.Configuration.TargetNamespace, null);
+    }
     #pragma warning restore IDE1006 // Naming Styles
     }
 
     public partial class NetSuitePortTypeClient: @targetInterfaceName
     {
-        public static System.ServiceModel.EndpointAddress GetDefaultEndpoint()
-        {
-            return GetDefaultEndpointAddress();
-        }
+    @foreach (var mthd in Model.Data.Methods)
+    {
+@:      @(mthd.ToString(Model.Configuration.TargetNamespace, "public"))
+@:      {
+            @foreach (var line in mthd.MethodBody)
+            {
+@:          @line
+            }
+@:      }
+@:
+    }
     }
 }
-@functions {
-    
+    @functions {
 
-}
+
+    }

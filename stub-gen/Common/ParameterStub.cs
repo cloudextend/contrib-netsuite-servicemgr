@@ -5,17 +5,29 @@ using System.Text;
 
 namespace StubGenerator.Common
 {
-    public class ParameterStub: TypeStub
+    public class ParameterStub
     {
-        public string ParameterName => ActualParameter.Name;
+        public string Name { get; set; }
+        public TypeStub ParameterType { get; set; }
 
-        protected ParameterInfo ActualParameter { get; }
-        protected MethodStub Method { get; }
-
-        public ParameterStub(MethodStub method, ParameterInfo parameter) : base(parameter.ParameterType)
+        public ParameterStub(ParameterInfo parameter)
         {
-            this.ActualParameter = parameter;
-            this.Method = method;
+            this.Name = parameter.Name;
+            this.ParameterType = new TypeStub(parameter.ParameterType);
+        }
+
+        public ParameterStub()
+        {
+        }
+
+        public override string ToString()
+        {
+            return this.ToString(null);
+        }
+
+        public string ToString(string relativeTo)
+        {
+            return string.Concat(this.ParameterType.ToString(relativeTo), " ", this.Name);
         }
     }
 }

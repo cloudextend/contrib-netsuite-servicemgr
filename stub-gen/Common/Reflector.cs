@@ -9,25 +9,24 @@ namespace StubGenerator.Common
     {
         public static IEnumerable<MethodInfo> GetPublicMethods(Type clientType)
         {
-            if (clientType == null)
+            if (clientType.IsInterface)
             {
-                throw new InvalidOperationException($"NetSuite Client type was not specified.");
+                return clientType.GetMethods();
             }
-            else if (!clientType.IsClass)
+            else
             {
-                throw new InvalidOperationException($"Provided NetSuite Client type is not a Class.");
+                return clientType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                    .Where(m => !m.IsSpecialName && !m.IsVirtual);
             }
 
-            return clientType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                .Where(m => !m.IsSpecialName && !m.IsVirtual);
         }
 
-        public static IEnumerable<PropertyInfo> GetPublicProperties(Type type)
+        public static PropertyInfo[] GetPublicProperties(Type type)
         {
             return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
         }
 
-        public static IEnumerable<FieldInfo> GetPublicFields(Type type)
+        public static FieldInfo[] GetPublicFields(Type type)
         {
             return type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
         }

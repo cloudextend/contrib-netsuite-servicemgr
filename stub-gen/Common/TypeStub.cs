@@ -6,17 +6,19 @@ namespace StubGenerator.Common
 {
     public class TypeStub
     {
-        public NamespaceStub Namespace { get; set; }
+        public string Namespace { get; set; }
 
         public string Name { get; set; }
-        public string FullName => string.Concat(this.Namespace.Name, ".", this.Name);
+
+        public string FullName => TypeStub.GetTypeName(this);
 
         public bool IsInterface { get; set; }
 
         public bool IsGeneric { get; set; }
         public IList<TypeStub> GenericParameters { get; set; }
 
-        public IList<MethodStub> Methods { get; }
+        public IList<MethodStub> Methods { get; } = new List<MethodStub>();
+        public IList<PropertyStub> Properties { get; } = new List<PropertyStub>();
 
         public TypeStub()
         {
@@ -25,6 +27,8 @@ namespace StubGenerator.Common
         public TypeStub(Type type)
         {
             IsInterface = type.IsInterface;
+
+            this.Namespace = type.Namespace;
 
             IsGeneric = type.IsGenericType;
             if (IsGeneric)
@@ -35,12 +39,12 @@ namespace StubGenerator.Common
                 {
                     this.GenericParameters.Add(new TypeStub(param));
                 }
+                this.Name = type.Name.Substring(0, type.Name.IndexOf('`'));
             }
-
-            Namespace = new NamespaceStub(type.Namespace);
-            Methods = new List<MethodStub>();
-
-            Name = TypeStub.GetTypeName(this, this.Namespace);
+            else
+            {
+                this.Name = type.Name;
+            }
         }
 
         public override string ToString()
@@ -48,12 +52,12 @@ namespace StubGenerator.Common
             return this.FullName;
         }
 
-        public string ToString(NamespaceStub relativeTo)
+        public string ToString(string relativeTo)
         {
-            return TypeStub.GetTypeName(this, relativeTo);
+            return GetTypeName(this, relativeTo);
         }
 
-        public static string GetTypeName(TypeStub type, NamespaceStub relativeTo = null)
+        private static string GetTypeName(TypeStub type, string relativeTo = null)
         {
             if (type.IsGeneric)
             {
@@ -65,13 +69,24 @@ namespace StubGenerator.Common
             }
         }
 
-        private static string GetSimpleType(TypeStub type, NamespaceStub relativeTo = null, bool isGeneric = false)
+        private static string GetSimpleType(TypeStub type, string relativeTo = null, bool isGeneric = false)
         {
-            var name = relativeTo == null ? type.FullName : relativeTo.GetRelativeTypeName(type);
-            return isGeneric ? name.Substring(0, type.Name.IndexOf('`')) : name;
+            string relativeNamespace;
+            if (relativeTo != null)
+            {
+                return string.Concat(type.Namespace, ".", type.Name);
+            }
+            else if (string.IsNullOrEmpty(relativeNamespace = Namespaces.GetRelativeNamespace(type.Namespace, relativeTo)))
+            {
+                return type.Name;
+            }
+            else
+            {
+                return string.Concat(relativeNamespace, ".", type.Name);
+            }
         }
 
-        private static string GetGenericTypeSignature(TypeStub genericType, NamespaceStub relativeTo = null)
+        private static string GetGenericTypeSignature(TypeStub genericType, string relativeTo = null)
         {
             var signatureBuilder = new StringBuilder(25);
             signatureBuilder.Append(GetSimpleType(genericType, relativeTo, true));
