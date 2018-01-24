@@ -1,0 +1,43 @@
+﻿@using System.Linq;
+@using System.Reflection
+@using System.Text.RegularExpressions;
+@using StubGenerator.Common
+@inherits RazorLight.TemplatePage<StubGenerator.Common.Context>;
+@{ DisableEncoding = true; }
+@{
+    string sampleRequestTypeName = "addRequest";
+    string targetInterfaceName = "INetSuiteRquest";
+
+    string sampleTypeFullName = string.Concat(Model.Configuration.SourceNamespace, ".", sampleRequestTypeName);
+    Type requestType = Model.Configuration.SourceAssembly.GetType(sampleTypeFullName);
+    if (requestType == null)
+    {
+        @:Type @sampleTypeFullName was not found in order to generate @targetInterfaceName interface
+        return;
+    }
+}
+namespace @Model.Configuration.TargetNamespace
+{
+    public partial interface @targetInterfaceName
+    {
+#pragma warning disable IDE1006 // Naming Styles
+
+    @foreach (var field in Reflector.GetPublicFields(requestType))
+    {
+@:          @field.FieldType @field.Name { get; set; }
+    }
+    
+#pragma warning restore IDE1006 // Naming Styles
+    }
+
+    @{
+        var requestNamePattern = new Regex("^[a-z]+Request$", RegexOptions.Compiled | RegexOptions.Singleline);
+        var applicableTypes = from t in Model.Configuration.SourceAssembly.GetTypes()
+                              where t.Namespace == Model.Configuration.SourceNamespace && requestNamePattern.IsMatch(t.Name)
+                              select t;
+        foreach (var type in applicableTypes)
+        {
+@:  public partial class @type.Name : @targetInterfaceName { }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+﻿@using System;
+@using System.Reflection
+@using StubGenerator.Common;
+@inherits RazorLight.TemplatePage<Type>;
+@{ DisableEncoding = true; }
+@{ string targetInterfaceName = "INetSuiteClient"; }
+namespace @Model.Namespace
+{
+    public partial interface @targetInterfaceName
+    {
+    #pragma warning disable IDE1006 // Naming Styles
+@{ 
+    
+}
+    @foreach (var mthd in Reflector.GetPublicMethods(Model))
+    {
+        
+    } 
+    #pragma warning restore IDE1006 // Naming Styles
+    }
+
+    public partial class NetSuitePortTypeClient: @targetInterfaceName
+    {
+        public static System.ServiceModel.EndpointAddress GetDefaultEndpoint()
+        {
+            return GetDefaultEndpointAddress();
+        }
+    }
+}
+@functions {
+    
+
+}
