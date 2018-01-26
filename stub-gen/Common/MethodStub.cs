@@ -11,7 +11,7 @@ namespace StubGenerator.Common
         public TypeStub ReturnType { get; set; }
         public IList<ParameterStub> Parameters { get; } = new List<ParameterStub>();
 
-        public IList<string> MethodBody { get; set; } = new List<string>();
+        // public IList<string> MethodBody { get; set; } = new List<string>();
 
         public MethodStub(string name)
         {

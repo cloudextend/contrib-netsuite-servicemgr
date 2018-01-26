@@ -1,7 +1,7 @@
 ﻿using StubGenerator.Common;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace StubGenerator.ClientStub
 {
@@ -11,6 +11,13 @@ namespace StubGenerator.ClientStub
 
         public ClientTypeStub(Type clientType): base(clientType)
         {
+        }
+
+        public IEnumerable<WrapperMethodStub> GetWrapperMethods()
+        {
+            return from m in this.Methods
+                   where m is WrapperMethodStub
+                   select (WrapperMethodStub)m;
         }
     }
 }

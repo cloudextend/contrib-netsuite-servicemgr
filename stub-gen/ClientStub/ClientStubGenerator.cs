@@ -79,25 +79,29 @@ namespace StubGenerator.ClientStub
 
             var requestParam = parameters[0];
 
-            var requestNamePattern = new Regex("^[a-z]+Request$", RegexOptions.Compiled | RegexOptions.Singleline);
-            var responseNamePattern = new Regex("^[a-z]+Response$", RegexOptions.Compiled | RegexOptions.Singleline);
+            var requestNamePattern = new Regex(@"^[a-z]\w+Request$", RegexOptions.Compiled | RegexOptions.Singleline);
+            var responseNamePattern = new Regex(@"^[a-z]\w+Response$", RegexOptions.Compiled | RegexOptions.Singleline);
 
-            var stub = new MethodStub(methodInfo.Name);
+            var stub = new WrapperMethodStub(methodInfo.Name);
             bool useStub = false;
 
             if (requestNamePattern.IsMatch(requestParam.ParameterType.Name))
             {
-                // Unwrap and create request and create a method signature
-                var unwrappedRequest = this.UnwrapRequestType(requestParam.ParameterType);
-                foreach (var f in unwrappedRequest.dataFields)
+                stub.WrappedParameterType = new TypeStub(requestParam.ParameterType);
+
+                var allFields = Reflector.GetPublicFields(requestParam.ParameterType);
+                foreach (var field in allFields)
                 {
-                    stub.Parameters.Add(new ParameterStub() {
-                        Name = f.Name,
-                        ParameterType = new TypeStub(f.FieldType)
-                    });
+                    stub.WrappedParameterProperties.Add(field.Name);
+                    // If the field can be set through configuration, don't include it as a parameter.
+                    if (!this.configurableProperties.Contains(field.Name))
+                    {
+                        stub.Parameters.Add(new ParameterStub() {
+                            Name = field.Name,
+                            ParameterType = new TypeStub(field.FieldType)
+                        });
+                    }
                 }
-                // Add the code that will generate the request object and send to 
-                CreateWrapperBody(stub, unwrappedRequest);
                 useStub |= true;
             }
 
@@ -130,20 +134,6 @@ namespace StubGenerator.ClientStub
                 }
             }
             return unwrap;
-        }
-
-        private void CreateWrapperBody(MethodStub stub, RequestWrap wrap)
-        {
-            stub.MethodBody.Add($"var request = new {wrap.requestType.Name}();");
-            foreach (var field in wrap.configFields)
-            {
-                stub.MethodBody.Add($"request.{field.Name} = this.{field.Name};");
-            }
-            foreach (var field in wrap.dataFields)
-            {
-                stub.MethodBody.Add($"request.{field.Name} = {field.Name};");
-            }
-            stub.MethodBody.Add($"return ((NetSuitePortType)this).{stub.Name}(request);");
         }
     }
 }

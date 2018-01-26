@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celigo.ServiceManager.NetSuite", "Celigo.ServiceManager.NetSuite\Celigo.ServiceManager.NetSuite.csproj", "{9F1FC547-844D-4234-ABAA-A23284D6033B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuiteTalk-2016.2", "SuiteTalk-2016.2\SuiteTalk-2016.2.csproj", "{DD628AFB-9DFF-481F-B232-32F8EC712B5B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuiteTalk.2017.2", "SuiteTalk-2017.2\SuiteTalk.2017.2.csproj", "{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "stub-gen", "stub-gen\stub-gen.csproj", "{1F633996-24A1-413C-B19D-4A9FBF201102}"
@@ -21,10 +19,6 @@ Global
 		{9F1FC547-844D-4234-ABAA-A23284D6033B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F1FC547-844D-4234-ABAA-A23284D6033B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F1FC547-844D-4234-ABAA-A23284D6033B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD628AFB-9DFF-481F-B232-32F8EC712B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD628AFB-9DFF-481F-B232-32F8EC712B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD628AFB-9DFF-481F-B232-32F8EC712B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD628AFB-9DFF-481F-B232-32F8EC712B5B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}.Release|Any CPU.ActiveCfg = Release|Any CPU

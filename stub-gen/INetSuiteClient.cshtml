@@ -11,29 +11,28 @@ namespace @Model.Configuration.TargetNamespace
     {
     #pragma warning disable IDE1006 // Naming Styles
 
-    @foreach (var mthd in Model.Data.Interface.Methods)
-    {
+@foreach (var mthd in Model.Data.Interface.Methods)
+{
 @:        @mthd.ToString(Model.Configuration.TargetNamespace, null);
-    }
+}
     #pragma warning restore IDE1006 // Naming Styles
     }
 
     public partial class NetSuitePortTypeClient: @targetInterfaceName
     {
-    @foreach (var mthd in Model.Data.Methods)
+@foreach (var mthd in Model.Data.GetWrapperMethods())
     {
 @:      @(mthd.ToString(Model.Configuration.TargetNamespace, "public"))
 @:      {
-            @foreach (var line in mthd.MethodBody)
-            {
-@:          @line
-            }
+@:          var request = new @(mthd.WrappedParameterType.Name)() {
+    @foreach (var prop in mthd.WrappedParameterProperties)
+    {
+        @:              @prop = @prop,
+    }
+@:          };
+@:          return ((NetSuitePortType)this).@(mthd.Name)(request);
 @:      }
 @:
-    }
+}
     }
 }
-    @functions {
-
-
-    }
