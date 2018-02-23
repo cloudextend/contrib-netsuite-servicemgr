@@ -22,7 +22,7 @@ namespace @Model.Configuration.TargetNamespace
     {
 @foreach (var mthd in Model.Data.GetWrapperMethods())
     {
-@:      @(mthd.ToString(Model.Configuration.TargetNamespace, "public"))
+@:      @(mthd.ToString(Model.Configuration.TargetNamespace, "public async"))
 @:      {
 @:          var request = new @(mthd.WrappedParameterType.Name)() {
     @foreach (var prop in mthd.WrappedParameterProperties)
@@ -30,7 +30,8 @@ namespace @Model.Configuration.TargetNamespace
         @:              @prop = @prop,
     }
 @:          };
-@:          return ((NetSuitePortType)this).@(mthd.Name)(request);
+@:          var response = await ((NetSuitePortType)this).@(mthd.Name)(request);
+@:          return response.@(mthd.WrappedReturnValueProperty);
 @:      }
 @:
 }

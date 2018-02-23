@@ -15,7 +15,7 @@ namespace StubGenerator.Common
         public bool IsInterface { get; set; }
 
         public bool IsGeneric { get; set; }
-        public IList<TypeStub> GenericParameters { get; set; }
+        public IList<TypeStub> GenericParameters { get; } = new List<TypeStub>();
 
         public IList<MethodStub> Methods { get; } = new List<MethodStub>();
         public IList<PropertyStub> Properties { get; } = new List<PropertyStub>();

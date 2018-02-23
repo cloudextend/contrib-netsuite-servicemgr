@@ -4,88 +4,91 @@ namespace SuiteTalk
     {
     #pragma warning disable IDE1006 // Naming Styles
 
-        System.Threading.Tasks.Task<SuiteTalk.loginResponse> loginAsync();
-        System.Threading.Tasks.Task<SuiteTalk.ssoLoginResponse> ssoLoginAsync(SuiteTalk.SsoPassport ssoPassport);
-        System.Threading.Tasks.Task<SuiteTalk.mapSsoResponse> mapSsoAsync(SuiteTalk.SsoCredentials ssoCredentials);
-        System.Threading.Tasks.Task<SuiteTalk.changePasswordResponse> changePasswordAsync(SuiteTalk.ChangePassword changePassword);
-        System.Threading.Tasks.Task<SuiteTalk.changeEmailResponse> changeEmailAsync(SuiteTalk.ChangeEmail changeEmail);
-        System.Threading.Tasks.Task<SuiteTalk.logoutResponse> logoutAsync();
-        System.Threading.Tasks.Task<SuiteTalk.addResponse> addAsync(SuiteTalk.Record record);
-        System.Threading.Tasks.Task<SuiteTalk.deleteResponse> deleteAsync(SuiteTalk.BaseRef baseRef,SuiteTalk.DeletionReason deletionReason);
-        System.Threading.Tasks.Task<SuiteTalk.searchResponse> searchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord);
-        System.Threading.Tasks.Task<SuiteTalk.searchMoreResponse> searchMoreAsync(SuiteTalk.SearchPreferences searchPreferences,System.Int32 pageIndex);
-        System.Threading.Tasks.Task<SuiteTalk.searchMoreWithIdResponse> searchMoreWithIdAsync(SuiteTalk.SearchPreferences searchPreferences,System.String searchId,System.Int32 pageIndex);
-        System.Threading.Tasks.Task<SuiteTalk.searchNextResponse> searchNextAsync(SuiteTalk.SearchPreferences searchPreferences);
-        System.Threading.Tasks.Task<SuiteTalk.updateResponse> updateAsync(SuiteTalk.Record record);
-        System.Threading.Tasks.Task<SuiteTalk.upsertResponse> upsertAsync(SuiteTalk.Record record);
-        System.Threading.Tasks.Task<SuiteTalk.addListResponse> addListAsync(SuiteTalk.Record[] record);
-        System.Threading.Tasks.Task<SuiteTalk.deleteListResponse> deleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason);
-        System.Threading.Tasks.Task<SuiteTalk.updateListResponse> updateListAsync(SuiteTalk.Record[] record);
-        System.Threading.Tasks.Task<SuiteTalk.upsertListResponse> upsertListAsync(SuiteTalk.Record[] record);
-        System.Threading.Tasks.Task<SuiteTalk.getResponse> getAsync(SuiteTalk.BaseRef baseRef);
-        System.Threading.Tasks.Task<SuiteTalk.getListResponse> getListAsync(SuiteTalk.BaseRef[] baseRef);
-        System.Threading.Tasks.Task<SuiteTalk.getAllResponse> getAllAsync(SuiteTalk.GetAllRecord record);
-        System.Threading.Tasks.Task<SuiteTalk.getSavedSearchResponse> getSavedSearchAsync(SuiteTalk.GetSavedSearchRecord record);
-        System.Threading.Tasks.Task<SuiteTalk.getCustomizationIdResponse> getCustomizationIdAsync(SuiteTalk.CustomizationType customizationType,System.Boolean includeInactives);
-        System.Threading.Tasks.Task<SuiteTalk.initializeResponse> initializeAsync(SuiteTalk.InitializeRecord initializeRecord);
-        System.Threading.Tasks.Task<SuiteTalk.initializeListResponse> initializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord);
-        System.Threading.Tasks.Task<SuiteTalk.getSelectValueResponse> getSelectValueAsync(SuiteTalk.GetSelectValueFieldDescription fieldDescription,System.Int32 pageIndex);
-        System.Threading.Tasks.Task<SuiteTalk.getItemAvailabilityResponse> getItemAvailabilityAsync(SuiteTalk.ItemAvailabilityFilter itemAvailabilityFilter);
-        System.Threading.Tasks.Task<SuiteTalk.getBudgetExchangeRateResponse> getBudgetExchangeRateAsync(SuiteTalk.BudgetExchangeRateFilter budgetExchangeRateFilter);
-        System.Threading.Tasks.Task<SuiteTalk.getCurrencyRateResponse> getCurrencyRateAsync(SuiteTalk.CurrencyRateFilter currencyRateFilter);
-        System.Threading.Tasks.Task<SuiteTalk.getDataCenterUrlsResponse> getDataCenterUrlsAsync(System.String account);
-        System.Threading.Tasks.Task<SuiteTalk.getPostingTransactionSummaryResponse> getPostingTransactionSummaryAsync(SuiteTalk.PostingTransactionSummaryField fields,SuiteTalk.PostingTransactionSummaryFilter filters,System.Int32 pageIndex,System.String operationId);
-        System.Threading.Tasks.Task<SuiteTalk.getServerTimeResponse> getServerTimeAsync();
-        System.Threading.Tasks.Task<SuiteTalk.attachResponse> attachAsync(SuiteTalk.AttachReference attachReference);
-        System.Threading.Tasks.Task<SuiteTalk.detachResponse> detachAsync(SuiteTalk.DetachReference detachReference);
-        System.Threading.Tasks.Task<SuiteTalk.updateInviteeStatusResponse> updateInviteeStatusAsync(SuiteTalk.UpdateInviteeStatusReference updateInviteeStatusReference);
-        System.Threading.Tasks.Task<SuiteTalk.updateInviteeStatusListResponse> updateInviteeStatusListAsync(SuiteTalk.UpdateInviteeStatusReference[] updateInviteeStatusReference);
-        System.Threading.Tasks.Task<SuiteTalk.asyncAddListResponse> asyncAddListAsync(SuiteTalk.Record[] record);
-        System.Threading.Tasks.Task<SuiteTalk.asyncUpdateListResponse> asyncUpdateListAsync(SuiteTalk.Record[] record);
-        System.Threading.Tasks.Task<SuiteTalk.asyncUpsertListResponse> asyncUpsertListAsync(SuiteTalk.Record[] record);
-        System.Threading.Tasks.Task<SuiteTalk.asyncDeleteListResponse> asyncDeleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason);
-        System.Threading.Tasks.Task<SuiteTalk.asyncGetListResponse> asyncGetListAsync(SuiteTalk.BaseRef[] baseRef);
-        System.Threading.Tasks.Task<SuiteTalk.asyncInitializeListResponse> asyncInitializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord);
-        System.Threading.Tasks.Task<SuiteTalk.asyncSearchResponse> asyncSearchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord);
-        System.Threading.Tasks.Task<SuiteTalk.getAsyncResultResponse> getAsyncResultAsync(System.String jobId,System.Int32 pageIndex);
-        System.Threading.Tasks.Task<SuiteTalk.checkAsyncStatusResponse> checkAsyncStatusAsync(System.String jobId);
-        System.Threading.Tasks.Task<SuiteTalk.getDeletedResponse> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.SessionResponse> loginAsync();
+        System.Threading.Tasks.Task<SuiteTalk.SessionResponse> ssoLoginAsync(SuiteTalk.SsoPassport ssoPassport);
+        System.Threading.Tasks.Task<SuiteTalk.SessionResponse> mapSsoAsync(SuiteTalk.SsoCredentials ssoCredentials);
+        System.Threading.Tasks.Task<SuiteTalk.SessionResponse> changePasswordAsync(SuiteTalk.ChangePassword changePassword);
+        System.Threading.Tasks.Task<SuiteTalk.SessionResponse> changeEmailAsync(SuiteTalk.ChangeEmail changeEmail);
+        System.Threading.Tasks.Task<SuiteTalk.SessionResponse> logoutAsync();
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponse> addAsync(SuiteTalk.Record record);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponse> deleteAsync(SuiteTalk.BaseRef baseRef,SuiteTalk.DeletionReason deletionReason);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(SuiteTalk.SearchPreferences searchPreferences,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(SuiteTalk.SearchPreferences searchPreferences,System.String searchId,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchNextAsync(SuiteTalk.SearchPreferences searchPreferences);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponse> updateAsync(SuiteTalk.Record record);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponse> upsertAsync(SuiteTalk.Record record);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> addListAsync(SuiteTalk.Record[] record);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> deleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> updateListAsync(SuiteTalk.Record[] record);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> upsertListAsync(SuiteTalk.Record[] record);
+        System.Threading.Tasks.Task<SuiteTalk.ReadResponse> getAsync(SuiteTalk.BaseRef baseRef);
+        System.Threading.Tasks.Task<SuiteTalk.ReadResponseList> getListAsync(SuiteTalk.BaseRef[] baseRef);
+        System.Threading.Tasks.Task<SuiteTalk.GetAllResult> getAllAsync(SuiteTalk.GetAllRecord record);
+        System.Threading.Tasks.Task<SuiteTalk.GetSavedSearchResult> getSavedSearchAsync(SuiteTalk.GetSavedSearchRecord record);
+        System.Threading.Tasks.Task<SuiteTalk.GetCustomizationIdResult> getCustomizationIdAsync(SuiteTalk.CustomizationType customizationType,System.Boolean includeInactives);
+        System.Threading.Tasks.Task<SuiteTalk.ReadResponse> initializeAsync(SuiteTalk.InitializeRecord initializeRecord);
+        System.Threading.Tasks.Task<SuiteTalk.ReadResponseList> initializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord);
+        System.Threading.Tasks.Task<SuiteTalk.GetSelectValueResult> getSelectValueAsync(SuiteTalk.GetSelectValueFieldDescription fieldDescription,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.GetItemAvailabilityResult> getItemAvailabilityAsync(SuiteTalk.ItemAvailabilityFilter itemAvailabilityFilter);
+        System.Threading.Tasks.Task<SuiteTalk.GetBudgetExchangeRateResult> getBudgetExchangeRateAsync(SuiteTalk.BudgetExchangeRateFilter budgetExchangeRateFilter);
+        System.Threading.Tasks.Task<SuiteTalk.GetCurrencyRateResult> getCurrencyRateAsync(SuiteTalk.CurrencyRateFilter currencyRateFilter);
+        System.Threading.Tasks.Task<SuiteTalk.GetDataCenterUrlsResult> getDataCenterUrlsAsync(System.String account);
+        System.Threading.Tasks.Task<SuiteTalk.GetPostingTransactionSummaryResult> getPostingTransactionSummaryAsync(SuiteTalk.PostingTransactionSummaryField fields,SuiteTalk.PostingTransactionSummaryFilter filters,System.Int32 pageIndex,System.String operationId);
+        System.Threading.Tasks.Task<SuiteTalk.GetServerTimeResult> getServerTimeAsync();
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponse> attachAsync(SuiteTalk.AttachReference attachReference);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponse> detachAsync(SuiteTalk.DetachReference detachReference);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponse> updateInviteeStatusAsync(SuiteTalk.UpdateInviteeStatusReference updateInviteeStatusReference);
+        System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> updateInviteeStatusListAsync(SuiteTalk.UpdateInviteeStatusReference[] updateInviteeStatusReference);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncAddListAsync(SuiteTalk.Record[] record);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncUpdateListAsync(SuiteTalk.Record[] record);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncUpsertListAsync(SuiteTalk.Record[] record);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncDeleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncGetListAsync(SuiteTalk.BaseRef[] baseRef);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncInitializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncSearchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncResult> getAsyncResultAsync(System.String jobId,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> checkAsyncStatusAsync(System.String jobId);
+        System.Threading.Tasks.Task<SuiteTalk.GetDeletedResult> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,System.Int32 pageIndex);
     #pragma warning restore IDE1006 // Naming Styles
     }
 
     public partial class NetSuitePortTypeClient: INetSuiteClient
     {
-      public System.Threading.Tasks.Task<SuiteTalk.loginResponse> loginAsync()
+      public async System.Threading.Tasks.Task<SuiteTalk.SessionResponse> loginAsync()
       {
           var request = new loginRequest() {
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
                       passport = passport,
           };
-          return ((NetSuitePortType)this).loginAsync(request);
+          var response = await ((NetSuitePortType)this).loginAsync(request);
+          return response.sessionResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.ssoLoginResponse> ssoLoginAsync(SuiteTalk.SsoPassport ssoPassport)
+      public async System.Threading.Tasks.Task<SuiteTalk.SessionResponse> ssoLoginAsync(SuiteTalk.SsoPassport ssoPassport)
       {
           var request = new ssoLoginRequest() {
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
                       ssoPassport = ssoPassport,
           };
-          return ((NetSuitePortType)this).ssoLoginAsync(request);
+          var response = await ((NetSuitePortType)this).ssoLoginAsync(request);
+          return response.sessionResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.mapSsoResponse> mapSsoAsync(SuiteTalk.SsoCredentials ssoCredentials)
+      public async System.Threading.Tasks.Task<SuiteTalk.SessionResponse> mapSsoAsync(SuiteTalk.SsoCredentials ssoCredentials)
       {
           var request = new mapSsoRequest() {
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
                       ssoCredentials = ssoCredentials,
           };
-          return ((NetSuitePortType)this).mapSsoAsync(request);
+          var response = await ((NetSuitePortType)this).mapSsoAsync(request);
+          return response.sessionResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.changePasswordResponse> changePasswordAsync(SuiteTalk.ChangePassword changePassword)
+      public async System.Threading.Tasks.Task<SuiteTalk.SessionResponse> changePasswordAsync(SuiteTalk.ChangePassword changePassword)
       {
           var request = new changePasswordRequest() {
                       passport = passport,
@@ -93,10 +96,11 @@ namespace SuiteTalk
                       partnerInfo = partnerInfo,
                       changePassword = changePassword,
           };
-          return ((NetSuitePortType)this).changePasswordAsync(request);
+          var response = await ((NetSuitePortType)this).changePasswordAsync(request);
+          return response.sessionResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.changeEmailResponse> changeEmailAsync(SuiteTalk.ChangeEmail changeEmail)
+      public async System.Threading.Tasks.Task<SuiteTalk.SessionResponse> changeEmailAsync(SuiteTalk.ChangeEmail changeEmail)
       {
           var request = new changeEmailRequest() {
                       passport = passport,
@@ -104,18 +108,20 @@ namespace SuiteTalk
                       partnerInfo = partnerInfo,
                       changeEmail = changeEmail,
           };
-          return ((NetSuitePortType)this).changeEmailAsync(request);
+          var response = await ((NetSuitePortType)this).changeEmailAsync(request);
+          return response.sessionResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.logoutResponse> logoutAsync()
+      public async System.Threading.Tasks.Task<SuiteTalk.SessionResponse> logoutAsync()
       {
           var request = new logoutRequest() {
                       applicationInfo = applicationInfo,
           };
-          return ((NetSuitePortType)this).logoutAsync(request);
+          var response = await ((NetSuitePortType)this).logoutAsync(request);
+          return response.sessionResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.addResponse> addAsync(SuiteTalk.Record record)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponse> addAsync(SuiteTalk.Record record)
       {
           var request = new addRequest() {
                       passport = passport,
@@ -125,10 +131,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).addAsync(request);
+          var response = await ((NetSuitePortType)this).addAsync(request);
+          return response.writeResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.deleteResponse> deleteAsync(SuiteTalk.BaseRef baseRef,SuiteTalk.DeletionReason deletionReason)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponse> deleteAsync(SuiteTalk.BaseRef baseRef,SuiteTalk.DeletionReason deletionReason)
       {
           var request = new deleteRequest() {
                       passport = passport,
@@ -139,10 +146,11 @@ namespace SuiteTalk
                       baseRef = baseRef,
                       deletionReason = deletionReason,
           };
-          return ((NetSuitePortType)this).deleteAsync(request);
+          var response = await ((NetSuitePortType)this).deleteAsync(request);
+          return response.writeResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.searchResponse> searchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord)
       {
           var request = new searchRequest() {
                       passport = passport,
@@ -152,20 +160,22 @@ namespace SuiteTalk
                       searchPreferences = searchPreferences,
                       searchRecord = searchRecord,
           };
-          return ((NetSuitePortType)this).searchAsync(request);
+          var response = await ((NetSuitePortType)this).searchAsync(request);
+          return response.searchResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.searchMoreResponse> searchMoreAsync(SuiteTalk.SearchPreferences searchPreferences,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(SuiteTalk.SearchPreferences searchPreferences,System.Int32 pageIndex)
       {
           var request = new searchMoreRequest() {
                       applicationInfo = applicationInfo,
                       searchPreferences = searchPreferences,
                       pageIndex = pageIndex,
           };
-          return ((NetSuitePortType)this).searchMoreAsync(request);
+          var response = await ((NetSuitePortType)this).searchMoreAsync(request);
+          return response.searchResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.searchMoreWithIdResponse> searchMoreWithIdAsync(SuiteTalk.SearchPreferences searchPreferences,System.String searchId,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(SuiteTalk.SearchPreferences searchPreferences,System.String searchId,System.Int32 pageIndex)
       {
           var request = new searchMoreWithIdRequest() {
                       passport = passport,
@@ -176,19 +186,21 @@ namespace SuiteTalk
                       searchId = searchId,
                       pageIndex = pageIndex,
           };
-          return ((NetSuitePortType)this).searchMoreWithIdAsync(request);
+          var response = await ((NetSuitePortType)this).searchMoreWithIdAsync(request);
+          return response.searchResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.searchNextResponse> searchNextAsync(SuiteTalk.SearchPreferences searchPreferences)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchNextAsync(SuiteTalk.SearchPreferences searchPreferences)
       {
           var request = new searchNextRequest() {
                       applicationInfo = applicationInfo,
                       searchPreferences = searchPreferences,
           };
-          return ((NetSuitePortType)this).searchNextAsync(request);
+          var response = await ((NetSuitePortType)this).searchNextAsync(request);
+          return response.searchResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.updateResponse> updateAsync(SuiteTalk.Record record)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponse> updateAsync(SuiteTalk.Record record)
       {
           var request = new updateRequest() {
                       passport = passport,
@@ -198,10 +210,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).updateAsync(request);
+          var response = await ((NetSuitePortType)this).updateAsync(request);
+          return response.writeResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.upsertResponse> upsertAsync(SuiteTalk.Record record)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponse> upsertAsync(SuiteTalk.Record record)
       {
           var request = new upsertRequest() {
                       passport = passport,
@@ -211,10 +224,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).upsertAsync(request);
+          var response = await ((NetSuitePortType)this).upsertAsync(request);
+          return response.writeResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.addListResponse> addListAsync(SuiteTalk.Record[] record)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> addListAsync(SuiteTalk.Record[] record)
       {
           var request = new addListRequest() {
                       passport = passport,
@@ -224,10 +238,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).addListAsync(request);
+          var response = await ((NetSuitePortType)this).addListAsync(request);
+          return response.writeResponseList;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.deleteListResponse> deleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> deleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason)
       {
           var request = new deleteListRequest() {
                       passport = passport,
@@ -238,10 +253,11 @@ namespace SuiteTalk
                       baseRef = baseRef,
                       deletionReason = deletionReason,
           };
-          return ((NetSuitePortType)this).deleteListAsync(request);
+          var response = await ((NetSuitePortType)this).deleteListAsync(request);
+          return response.writeResponseList;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.updateListResponse> updateListAsync(SuiteTalk.Record[] record)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> updateListAsync(SuiteTalk.Record[] record)
       {
           var request = new updateListRequest() {
                       passport = passport,
@@ -251,10 +267,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).updateListAsync(request);
+          var response = await ((NetSuitePortType)this).updateListAsync(request);
+          return response.writeResponseList;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.upsertListResponse> upsertListAsync(SuiteTalk.Record[] record)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> upsertListAsync(SuiteTalk.Record[] record)
       {
           var request = new upsertListRequest() {
                       passport = passport,
@@ -264,10 +281,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).upsertListAsync(request);
+          var response = await ((NetSuitePortType)this).upsertListAsync(request);
+          return response.writeResponseList;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getResponse> getAsync(SuiteTalk.BaseRef baseRef)
+      public async System.Threading.Tasks.Task<SuiteTalk.ReadResponse> getAsync(SuiteTalk.BaseRef baseRef)
       {
           var request = new getRequest() {
                       passport = passport,
@@ -277,10 +295,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       baseRef = baseRef,
           };
-          return ((NetSuitePortType)this).getAsync(request);
+          var response = await ((NetSuitePortType)this).getAsync(request);
+          return response.readResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getListResponse> getListAsync(SuiteTalk.BaseRef[] baseRef)
+      public async System.Threading.Tasks.Task<SuiteTalk.ReadResponseList> getListAsync(SuiteTalk.BaseRef[] baseRef)
       {
           var request = new getListRequest() {
                       passport = passport,
@@ -290,10 +309,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       baseRef = baseRef,
           };
-          return ((NetSuitePortType)this).getListAsync(request);
+          var response = await ((NetSuitePortType)this).getListAsync(request);
+          return response.readResponseList;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getAllResponse> getAllAsync(SuiteTalk.GetAllRecord record)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetAllResult> getAllAsync(SuiteTalk.GetAllRecord record)
       {
           var request = new getAllRequest() {
                       passport = passport,
@@ -303,10 +323,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).getAllAsync(request);
+          var response = await ((NetSuitePortType)this).getAllAsync(request);
+          return response.getAllResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getSavedSearchResponse> getSavedSearchAsync(SuiteTalk.GetSavedSearchRecord record)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetSavedSearchResult> getSavedSearchAsync(SuiteTalk.GetSavedSearchRecord record)
       {
           var request = new getSavedSearchRequest() {
                       passport = passport,
@@ -316,10 +337,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).getSavedSearchAsync(request);
+          var response = await ((NetSuitePortType)this).getSavedSearchAsync(request);
+          return response.getSavedSearchResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getCustomizationIdResponse> getCustomizationIdAsync(SuiteTalk.CustomizationType customizationType,System.Boolean includeInactives)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetCustomizationIdResult> getCustomizationIdAsync(SuiteTalk.CustomizationType customizationType,System.Boolean includeInactives)
       {
           var request = new getCustomizationIdRequest() {
                       passport = passport,
@@ -330,10 +352,11 @@ namespace SuiteTalk
                       customizationType = customizationType,
                       includeInactives = includeInactives,
           };
-          return ((NetSuitePortType)this).getCustomizationIdAsync(request);
+          var response = await ((NetSuitePortType)this).getCustomizationIdAsync(request);
+          return response.getCustomizationIdResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.initializeResponse> initializeAsync(SuiteTalk.InitializeRecord initializeRecord)
+      public async System.Threading.Tasks.Task<SuiteTalk.ReadResponse> initializeAsync(SuiteTalk.InitializeRecord initializeRecord)
       {
           var request = new initializeRequest() {
                       passport = passport,
@@ -343,10 +366,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       initializeRecord = initializeRecord,
           };
-          return ((NetSuitePortType)this).initializeAsync(request);
+          var response = await ((NetSuitePortType)this).initializeAsync(request);
+          return response.readResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.initializeListResponse> initializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord)
+      public async System.Threading.Tasks.Task<SuiteTalk.ReadResponseList> initializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord)
       {
           var request = new initializeListRequest() {
                       passport = passport,
@@ -356,10 +380,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       initializeRecord = initializeRecord,
           };
-          return ((NetSuitePortType)this).initializeListAsync(request);
+          var response = await ((NetSuitePortType)this).initializeListAsync(request);
+          return response.readResponseList;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getSelectValueResponse> getSelectValueAsync(SuiteTalk.GetSelectValueFieldDescription fieldDescription,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetSelectValueResult> getSelectValueAsync(SuiteTalk.GetSelectValueFieldDescription fieldDescription,System.Int32 pageIndex)
       {
           var request = new getSelectValueRequest() {
                       passport = passport,
@@ -370,10 +395,11 @@ namespace SuiteTalk
                       fieldDescription = fieldDescription,
                       pageIndex = pageIndex,
           };
-          return ((NetSuitePortType)this).getSelectValueAsync(request);
+          var response = await ((NetSuitePortType)this).getSelectValueAsync(request);
+          return response.getSelectValueResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getItemAvailabilityResponse> getItemAvailabilityAsync(SuiteTalk.ItemAvailabilityFilter itemAvailabilityFilter)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetItemAvailabilityResult> getItemAvailabilityAsync(SuiteTalk.ItemAvailabilityFilter itemAvailabilityFilter)
       {
           var request = new getItemAvailabilityRequest() {
                       passport = passport,
@@ -383,10 +409,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       itemAvailabilityFilter = itemAvailabilityFilter,
           };
-          return ((NetSuitePortType)this).getItemAvailabilityAsync(request);
+          var response = await ((NetSuitePortType)this).getItemAvailabilityAsync(request);
+          return response.getItemAvailabilityResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getBudgetExchangeRateResponse> getBudgetExchangeRateAsync(SuiteTalk.BudgetExchangeRateFilter budgetExchangeRateFilter)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetBudgetExchangeRateResult> getBudgetExchangeRateAsync(SuiteTalk.BudgetExchangeRateFilter budgetExchangeRateFilter)
       {
           var request = new getBudgetExchangeRateRequest() {
                       passport = passport,
@@ -396,10 +423,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       budgetExchangeRateFilter = budgetExchangeRateFilter,
           };
-          return ((NetSuitePortType)this).getBudgetExchangeRateAsync(request);
+          var response = await ((NetSuitePortType)this).getBudgetExchangeRateAsync(request);
+          return response.getBudgetExchangeRateResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getCurrencyRateResponse> getCurrencyRateAsync(SuiteTalk.CurrencyRateFilter currencyRateFilter)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetCurrencyRateResult> getCurrencyRateAsync(SuiteTalk.CurrencyRateFilter currencyRateFilter)
       {
           var request = new getCurrencyRateRequest() {
                       passport = passport,
@@ -409,10 +437,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       currencyRateFilter = currencyRateFilter,
           };
-          return ((NetSuitePortType)this).getCurrencyRateAsync(request);
+          var response = await ((NetSuitePortType)this).getCurrencyRateAsync(request);
+          return response.getCurrencyRateResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getDataCenterUrlsResponse> getDataCenterUrlsAsync(System.String account)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetDataCenterUrlsResult> getDataCenterUrlsAsync(System.String account)
       {
           var request = new getDataCenterUrlsRequest() {
                       passport = passport,
@@ -422,10 +451,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       account = account,
           };
-          return ((NetSuitePortType)this).getDataCenterUrlsAsync(request);
+          var response = await ((NetSuitePortType)this).getDataCenterUrlsAsync(request);
+          return response.getDataCenterUrlsResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getPostingTransactionSummaryResponse> getPostingTransactionSummaryAsync(SuiteTalk.PostingTransactionSummaryField fields,SuiteTalk.PostingTransactionSummaryFilter filters,System.Int32 pageIndex,System.String operationId)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetPostingTransactionSummaryResult> getPostingTransactionSummaryAsync(SuiteTalk.PostingTransactionSummaryField fields,SuiteTalk.PostingTransactionSummaryFilter filters,System.Int32 pageIndex,System.String operationId)
       {
           var request = new getPostingTransactionSummaryRequest() {
                       passport = passport,
@@ -438,10 +468,11 @@ namespace SuiteTalk
                       pageIndex = pageIndex,
                       operationId = operationId,
           };
-          return ((NetSuitePortType)this).getPostingTransactionSummaryAsync(request);
+          var response = await ((NetSuitePortType)this).getPostingTransactionSummaryAsync(request);
+          return response.getPostingTransactionSummaryResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getServerTimeResponse> getServerTimeAsync()
+      public async System.Threading.Tasks.Task<SuiteTalk.GetServerTimeResult> getServerTimeAsync()
       {
           var request = new getServerTimeRequest() {
                       passport = passport,
@@ -449,10 +480,11 @@ namespace SuiteTalk
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
           };
-          return ((NetSuitePortType)this).getServerTimeAsync(request);
+          var response = await ((NetSuitePortType)this).getServerTimeAsync(request);
+          return response.getServerTimeResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.attachResponse> attachAsync(SuiteTalk.AttachReference attachReference)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponse> attachAsync(SuiteTalk.AttachReference attachReference)
       {
           var request = new attachRequest() {
                       passport = passport,
@@ -462,10 +494,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       attachReference = attachReference,
           };
-          return ((NetSuitePortType)this).attachAsync(request);
+          var response = await ((NetSuitePortType)this).attachAsync(request);
+          return response.writeResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.detachResponse> detachAsync(SuiteTalk.DetachReference detachReference)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponse> detachAsync(SuiteTalk.DetachReference detachReference)
       {
           var request = new detachRequest() {
                       passport = passport,
@@ -475,10 +508,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       detachReference = detachReference,
           };
-          return ((NetSuitePortType)this).detachAsync(request);
+          var response = await ((NetSuitePortType)this).detachAsync(request);
+          return response.writeResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.updateInviteeStatusResponse> updateInviteeStatusAsync(SuiteTalk.UpdateInviteeStatusReference updateInviteeStatusReference)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponse> updateInviteeStatusAsync(SuiteTalk.UpdateInviteeStatusReference updateInviteeStatusReference)
       {
           var request = new updateInviteeStatusRequest() {
                       passport = passport,
@@ -488,10 +522,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       updateInviteeStatusReference = updateInviteeStatusReference,
           };
-          return ((NetSuitePortType)this).updateInviteeStatusAsync(request);
+          var response = await ((NetSuitePortType)this).updateInviteeStatusAsync(request);
+          return response.writeResponse;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.updateInviteeStatusListResponse> updateInviteeStatusListAsync(SuiteTalk.UpdateInviteeStatusReference[] updateInviteeStatusReference)
+      public async System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> updateInviteeStatusListAsync(SuiteTalk.UpdateInviteeStatusReference[] updateInviteeStatusReference)
       {
           var request = new updateInviteeStatusListRequest() {
                       passport = passport,
@@ -501,10 +536,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       updateInviteeStatusReference = updateInviteeStatusReference,
           };
-          return ((NetSuitePortType)this).updateInviteeStatusListAsync(request);
+          var response = await ((NetSuitePortType)this).updateInviteeStatusListAsync(request);
+          return response.writeResponseList;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.asyncAddListResponse> asyncAddListAsync(SuiteTalk.Record[] record)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncAddListAsync(SuiteTalk.Record[] record)
       {
           var request = new asyncAddListRequest() {
                       passport = passport,
@@ -514,10 +550,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).asyncAddListAsync(request);
+          var response = await ((NetSuitePortType)this).asyncAddListAsync(request);
+          return response.asyncStatusResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.asyncUpdateListResponse> asyncUpdateListAsync(SuiteTalk.Record[] record)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncUpdateListAsync(SuiteTalk.Record[] record)
       {
           var request = new asyncUpdateListRequest() {
                       passport = passport,
@@ -527,10 +564,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).asyncUpdateListAsync(request);
+          var response = await ((NetSuitePortType)this).asyncUpdateListAsync(request);
+          return response.asyncStatusResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.asyncUpsertListResponse> asyncUpsertListAsync(SuiteTalk.Record[] record)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncUpsertListAsync(SuiteTalk.Record[] record)
       {
           var request = new asyncUpsertListRequest() {
                       passport = passport,
@@ -540,10 +578,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       record = record,
           };
-          return ((NetSuitePortType)this).asyncUpsertListAsync(request);
+          var response = await ((NetSuitePortType)this).asyncUpsertListAsync(request);
+          return response.asyncStatusResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.asyncDeleteListResponse> asyncDeleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncDeleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason)
       {
           var request = new asyncDeleteListRequest() {
                       passport = passport,
@@ -554,10 +593,11 @@ namespace SuiteTalk
                       baseRef = baseRef,
                       deletionReason = deletionReason,
           };
-          return ((NetSuitePortType)this).asyncDeleteListAsync(request);
+          var response = await ((NetSuitePortType)this).asyncDeleteListAsync(request);
+          return response.asyncStatusResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.asyncGetListResponse> asyncGetListAsync(SuiteTalk.BaseRef[] baseRef)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncGetListAsync(SuiteTalk.BaseRef[] baseRef)
       {
           var request = new asyncGetListRequest() {
                       passport = passport,
@@ -567,10 +607,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       baseRef = baseRef,
           };
-          return ((NetSuitePortType)this).asyncGetListAsync(request);
+          var response = await ((NetSuitePortType)this).asyncGetListAsync(request);
+          return response.asyncStatusResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.asyncInitializeListResponse> asyncInitializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncInitializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord)
       {
           var request = new asyncInitializeListRequest() {
                       passport = passport,
@@ -580,10 +621,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       initializeRecord = initializeRecord,
           };
-          return ((NetSuitePortType)this).asyncInitializeListAsync(request);
+          var response = await ((NetSuitePortType)this).asyncInitializeListAsync(request);
+          return response.asyncStatusResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.asyncSearchResponse> asyncSearchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncSearchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord)
       {
           var request = new asyncSearchRequest() {
                       passport = passport,
@@ -593,10 +635,11 @@ namespace SuiteTalk
                       searchPreferences = searchPreferences,
                       searchRecord = searchRecord,
           };
-          return ((NetSuitePortType)this).asyncSearchAsync(request);
+          var response = await ((NetSuitePortType)this).asyncSearchAsync(request);
+          return response.asyncStatusResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getAsyncResultResponse> getAsyncResultAsync(System.String jobId,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncResult> getAsyncResultAsync(System.String jobId,System.Int32 pageIndex)
       {
           var request = new getAsyncResultRequest() {
                       passport = passport,
@@ -607,10 +650,11 @@ namespace SuiteTalk
                       jobId = jobId,
                       pageIndex = pageIndex,
           };
-          return ((NetSuitePortType)this).getAsyncResultAsync(request);
+          var response = await ((NetSuitePortType)this).getAsyncResultAsync(request);
+          return response.asyncResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.checkAsyncStatusResponse> checkAsyncStatusAsync(System.String jobId)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> checkAsyncStatusAsync(System.String jobId)
       {
           var request = new checkAsyncStatusRequest() {
                       passport = passport,
@@ -620,10 +664,11 @@ namespace SuiteTalk
                       preferences = preferences,
                       jobId = jobId,
           };
-          return ((NetSuitePortType)this).checkAsyncStatusAsync(request);
+          var response = await ((NetSuitePortType)this).checkAsyncStatusAsync(request);
+          return response.asyncStatusResult;
       }
 
-      public System.Threading.Tasks.Task<SuiteTalk.getDeletedResponse> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetDeletedResult> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,System.Int32 pageIndex)
       {
           var request = new getDeletedRequest() {
                       passport = passport,
@@ -634,7 +679,8 @@ namespace SuiteTalk
                       getDeletedFilter = getDeletedFilter,
                       pageIndex = pageIndex,
           };
-          return ((NetSuitePortType)this).getDeletedAsync(request);
+          var response = await ((NetSuitePortType)this).getDeletedAsync(request);
+          return response.getDeletedResult;
       }
 
     }

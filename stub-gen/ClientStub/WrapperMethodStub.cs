@@ -10,6 +10,8 @@ namespace StubGenerator.ClientStub
         public TypeStub WrappedParameterType { get; set; }
         public List<string> WrappedParameterProperties { get; set; } = new List<string>(7);
 
+        public string WrappedReturnValueProperty { get; set; }
+
         public WrapperMethodStub(string methodName): base(methodName)
         {
         }
