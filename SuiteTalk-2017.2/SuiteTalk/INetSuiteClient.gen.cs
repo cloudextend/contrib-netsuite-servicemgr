@@ -1,9 +1,9 @@
 namespace SuiteTalk
 {
-    public partial interface INetSuiteClient
-    {
     #pragma warning disable IDE1006 // Naming Styles
 
+    public partial interface INetSuiteClient
+    {
         System.Threading.Tasks.Task<SuiteTalk.SessionResponse> loginAsync();
         System.Threading.Tasks.Task<SuiteTalk.SessionResponse> ssoLoginAsync(SuiteTalk.SsoPassport ssoPassport);
         System.Threading.Tasks.Task<SuiteTalk.SessionResponse> mapSsoAsync(SuiteTalk.SsoCredentials ssoCredentials);
@@ -50,7 +50,6 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<SuiteTalk.AsyncResult> getAsyncResultAsync(System.String jobId,System.Int32 pageIndex);
         System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> checkAsyncStatusAsync(System.String jobId);
         System.Threading.Tasks.Task<SuiteTalk.GetDeletedResult> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,System.Int32 pageIndex);
-    #pragma warning restore IDE1006 // Naming Styles
     }
 
     public partial class NetSuitePortTypeClient: INetSuiteClient
@@ -684,4 +683,6 @@ namespace SuiteTalk
       }
 
     }
+
+    #pragma warning restore IDE1006 // Naming Styles
 }

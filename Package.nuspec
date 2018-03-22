@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Celigo.ServiceManager.NetSuite</id>
+    <version>1.0.0</version>
+    <authors>Sameera Perera</authors>
+    <owners>Celigo, Inc</owners>
+    <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</projectUrl>
+    <iconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>ServiceManager for NetSuite SuiteTalk WebServices</description>
+    <releaseNotes>Supports NetSuite SuiteTalk 2017.2</releaseNotes>
+    <copyright>Copyright (C) Celigo, Inc. 2018</copyright>
+    <tags>NetSuite Celigo SuiteTalk ServiceManager</tags>
+    <dependencies>
+      <dependency id="System.ServiceModel.Duplex" version="4.3" />
+      <dependency id="System.ServiceModel.Http" version="4.3" />
+      <dependency id="System.ServiceModel.NetTcp" version="4.3" />
+      <dependency id="System.ServiceModel.Security" version="4.3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Celigo.ServiceManager.NetSuite\bin\Release\netstandard2.0\SuiteTalk-2017_2.dll" target="lib\SuiteTalk-2017_2.dll" />
+    <file src="Celigo.ServiceManager.NetSuite\bin\Release\netstandard2.0\Celigo.ServiceManager.NetSuite.dll" target="lib\Celigo.ServiceManager.NetSuite.dll" />
+  </files>
+</package>

@@ -2,7 +2,7 @@
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>SuiteTalk</RootNamespace>
     <AssemblyName>SuiteTalk-2017_2</AssemblyName>
 
@@ -21,6 +21,11 @@ copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
 
   <ItemGroup>
     <None Remove=".gitignore" />
+    <None Remove="SuiteTalk\INetSuiteClient.gen.cs.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="SuiteTalk\INetSuiteClient.gen.cs.bak" />
   </ItemGroup>
 
   <ItemGroup>
