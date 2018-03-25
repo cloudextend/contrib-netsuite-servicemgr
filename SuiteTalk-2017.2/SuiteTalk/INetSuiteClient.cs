@@ -4,6 +4,7 @@ namespace SuiteTalk
 {
     public partial interface INetSuiteClient : NetSuitePortType
     {
+#pragma warning disable IDE1006 // Naming Styles
         ApplicationInfo applicationInfo { get; set; }
         Passport passport { get; set; }
         TokenPassport tokenPassport { get; set; }
@@ -13,6 +14,7 @@ namespace SuiteTalk
         string SuiteTalkVersion { get; }
 
         ServiceEndpoint Endpoint { get; }
+#pragma warning restore IDE1006 // Naming Styles
     }
 
     public partial class NetSuitePortTypeClient: INetSuiteClient

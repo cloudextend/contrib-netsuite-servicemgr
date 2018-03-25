@@ -21,11 +21,6 @@ copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
 
   <ItemGroup>
     <None Remove=".gitignore" />
-    <None Remove="SuiteTalk\INetSuiteClient.gen.cs.bak" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="SuiteTalk\INetSuiteClient.gen.cs.bak" />
   </ItemGroup>
 
   <ItemGroup>
