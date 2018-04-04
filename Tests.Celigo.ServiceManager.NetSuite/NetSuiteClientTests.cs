@@ -1,4 +1,5 @@
 using Celigo.ServiceManager.NetSuite;
+using FluentAssertions;
 using SuiteTalk;
 using System;
 using Xunit;
@@ -23,8 +24,8 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         {
             
             var serverTimeResult = await client.getServerTimeAsync();
-            Assert.True(serverTimeResult.status.isSuccess);
-            Assert.Equal(DateTime.Now.Year, serverTimeResult.serverTime.Year);
+            serverTimeResult.status.isSuccess.Should().BeTrue();
+            serverTimeResult.serverTime.Year.Should().Be(DateTime.Now.Year);
         }
 
         [Fact]
@@ -34,7 +35,34 @@ namespace Tests.Celigo.ServiceManager.NetSuite
                 getCustomizationType = GetCustomizationType.customRecordType,
                 getCustomizationTypeSpecified = true
             }, false);
-            Assert.True(customizationResult.status.isSuccess);
+            customizationResult.status.isSuccess.Should().BeTrue();
+        }
+
+        [Fact]
+        public async void Can_execute_a_method_that_returns_a_paged_result()
+        {
+            var searchResult = await client.searchAsync(
+                null,
+                new TransactionSearchAdvanced {
+                    columns = new TransactionSearchRow {
+                        basic = new TransactionSearchRowBasic {
+                            tranId = new SearchColumnStringField[1] { new SearchColumnStringField { customLabel = "Trans ID" } },
+                            amount = new SearchColumnDoubleField[1] { new SearchColumnDoubleField { customLabel = "Amount" } },
+                            entity = new SearchColumnSelectField[1] { new SearchColumnSelectField { customLabel = "Customer" } },
+                        },
+                    },
+                    criteria = new TransactionSearch {
+                        basic = new TransactionSearchBasic {
+                            type = new SearchEnumMultiSelectField {
+                                @operator = SearchEnumMultiSelectFieldOperator.anyOf,
+                                operatorSpecified = true,
+                                searchValue = new[] { "salesOrder" }
+                            }
+                        }
+                    }
+                });
+            searchResult.status.isSuccess.Should().BeTrue();
+            searchResult.searchRowList.Length.Should().BeGreaterThan(0);
         }
     }
 }

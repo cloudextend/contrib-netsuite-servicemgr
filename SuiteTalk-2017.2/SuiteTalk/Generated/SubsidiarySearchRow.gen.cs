@@ -1,0 +1,68 @@
+using System;
+
+namespace SuiteTalk
+{
+    public partial class SubsidiarySearchRow: SearchRow, SupportsCustomSearchJoin
+    {
+        public SearchRowBasic GetBasic() => this.basic;
+
+        public SearchRowBasic CreateBasic()
+        {
+            if (this.basic == null) this.basic = new SubsidiarySearchRowBasic();
+            return this.basic;
+        }
+
+        public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
+
+        public SearchRowBasic CreateJoin(string joinName) => GetOrCreateJoin(this, joinName, true);
+
+
+          public CustomSearchRowBasic[] GetCustomSearchJoin() => this.customSearchJoin;
+  
+          public CustomSearchRowBasic[] CreateCustomSearchJoin()
+          {
+              if (this.customSearchJoin == null) this.customSearchJoin = new CustomSearchRowBasic[0];
+              return this.customSearchJoin;
+          }
+        private static SearchRowBasic GetOrCreateJoin(SubsidiarySearchRow target, string joinName, bool createIfNull = false)
+        {
+
+            SearchRowBasic result;
+            Func<SearchRowBasic> creator;
+
+            switch (joinName)
+            {
+
+                case "addressJoin":
+                    result = target.addressJoin;
+                    creator = () => target.addressJoin = new AddressSearchRowBasic();
+                    break;
+        
+                case "defaultAdvanceToApplyAccountJoin":
+                    result = target.defaultAdvanceToApplyAccountJoin;
+                    creator = () => target.defaultAdvanceToApplyAccountJoin = new AccountSearchRowBasic();
+                    break;
+        
+                case "returnAddressJoin":
+                    result = target.returnAddressJoin;
+                    creator = () => target.returnAddressJoin = new AddressSearchRowBasic();
+                    break;
+        
+                case "shippingAddressJoin":
+                    result = target.shippingAddressJoin;
+                    creator = () => target.shippingAddressJoin = new AddressSearchRowBasic();
+                    break;
+        
+                case "userJoin":
+                    result = target.userJoin;
+                    creator = () => target.userJoin = new EmployeeSearchRowBasic();
+                    break;
+                        default:
+                    throw new ArgumentException("SubsidiarySearchRow does not have a " + joinName);
+            }
+
+            if (createIfNull && result == null) result = creator();
+            return result;
+                }
+    }
+}
