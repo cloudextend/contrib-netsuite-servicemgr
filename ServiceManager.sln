@@ -1,9 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celigo.ServiceManager.NetSuite", "Celigo.ServiceManager.NetSuite.csproj", "{217D6C8D-6FF6-4E73-809B-D8682E4791D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celigo.ServiceManager.NetSuite", "Celigo.ServiceManager.NetSuite\Celigo.ServiceManager.NetSuite.csproj", "{9F1FC547-844D-4234-ABAA-A23284D6033B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuiteTalk.2017.2", "SuiteTalk-2017.2\SuiteTalk.2017.2.csproj", "{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Celigo.ServiceManager.NetSuite", "Tests.Celigo.ServiceManager.NetSuite\Tests.Celigo.ServiceManager.NetSuite.csproj", "{29EEEE86-4BF9-4659-9D20-A33250D7A9DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{E9FD5E14-3B7E-48A3-A886-33992275C95E}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +20,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{217D6C8D-6FF6-4E73-809B-D8682E4791D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{217D6C8D-6FF6-4E73-809B-D8682E4791D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{217D6C8D-6FF6-4E73-809B-D8682E4791D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{217D6C8D-6FF6-4E73-809B-D8682E4791D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1FC547-844D-4234-ABAA-A23284D6033B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1FC547-844D-4234-ABAA-A23284D6033B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1FC547-844D-4234-ABAA-A23284D6033B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1FC547-844D-4234-ABAA-A23284D6033B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29EEEE86-4BF9-4659-9D20-A33250D7A9DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29EEEE86-4BF9-4659-9D20-A33250D7A9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29EEEE86-4BF9-4659-9D20-A33250D7A9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29EEEE86-4BF9-4659-9D20-A33250D7A9DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59A10E02-9D79-4D4A-83B9-1A7312199D51}
 	EndGlobalSection
 EndGlobal
