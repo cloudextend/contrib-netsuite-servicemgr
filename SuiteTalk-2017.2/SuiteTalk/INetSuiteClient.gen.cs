@@ -12,10 +12,10 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<SuiteTalk.SessionResponse> logoutAsync();
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> addAsync(SuiteTalk.Record record);
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> deleteAsync(SuiteTalk.BaseRef baseRef,SuiteTalk.DeletionReason deletionReason);
-        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord);
-        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(SuiteTalk.SearchPreferences searchPreferences,System.Int32 pageIndex);
-        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(SuiteTalk.SearchPreferences searchPreferences,System.String searchId,System.Int32 pageIndex);
-        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchNextAsync(SuiteTalk.SearchPreferences searchPreferences);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SuiteTalk.SearchRecord searchRecord);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(System.String searchId,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchNextAsync();
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> updateAsync(SuiteTalk.Record record);
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> upsertAsync(SuiteTalk.Record record);
         System.Threading.Tasks.Task<SuiteTalk.WriteResponseList> addListAsync(SuiteTalk.Record[] record);
@@ -46,7 +46,7 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncDeleteListAsync(SuiteTalk.BaseRef[] baseRef,SuiteTalk.DeletionReason deletionReason);
         System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncGetListAsync(SuiteTalk.BaseRef[] baseRef);
         System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncInitializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord);
-        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncSearchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncSearchAsync(SuiteTalk.SearchRecord searchRecord);
         System.Threading.Tasks.Task<SuiteTalk.AsyncResult> getAsyncResultAsync(System.String jobId,System.Int32 pageIndex);
         System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> checkAsyncStatusAsync(System.String jobId);
         System.Threading.Tasks.Task<SuiteTalk.GetDeletedResult> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,System.Int32 pageIndex);
@@ -149,7 +149,7 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SuiteTalk.SearchRecord searchRecord)
       {
           var request = new searchRequest() {
                       passport = passport,
@@ -163,7 +163,7 @@ namespace SuiteTalk
           return response.searchResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(SuiteTalk.SearchPreferences searchPreferences,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(System.Int32 pageIndex)
       {
           var request = new searchMoreRequest() {
                       applicationInfo = applicationInfo,
@@ -174,7 +174,7 @@ namespace SuiteTalk
           return response.searchResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(SuiteTalk.SearchPreferences searchPreferences,System.String searchId,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(System.String searchId,System.Int32 pageIndex)
       {
           var request = new searchMoreWithIdRequest() {
                       passport = passport,
@@ -189,7 +189,7 @@ namespace SuiteTalk
           return response.searchResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchNextAsync(SuiteTalk.SearchPreferences searchPreferences)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchNextAsync()
       {
           var request = new searchNextRequest() {
                       applicationInfo = applicationInfo,
@@ -624,7 +624,7 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncSearchAsync(SuiteTalk.SearchPreferences searchPreferences,SuiteTalk.SearchRecord searchRecord)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncSearchAsync(SuiteTalk.SearchRecord searchRecord)
       {
           var request = new asyncSearchRequest() {
                       passport = passport,

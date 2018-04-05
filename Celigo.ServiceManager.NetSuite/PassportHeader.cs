@@ -1,10 +1,10 @@
-﻿using System.ServiceModel.Channels;
+﻿using SuiteTalk;
+using System.ServiceModel.Channels;
 using System.Xml;
-using SuiteTalk;
 
 namespace Celigo.ServiceManager.NetSuite
 {
-    public class PassportHeader : MessageHeader
+    public class PassportHeader : SuiteTalkHeader
     {
         private readonly IPassportProvider provider;
 

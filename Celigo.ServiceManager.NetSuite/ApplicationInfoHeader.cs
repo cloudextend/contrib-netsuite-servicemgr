@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace Celigo.ServiceManager.NetSuite
 {
-    public class ApplicationInfoHeader : MessageHeader
+    public class ApplicationInfoHeader : SuiteTalkHeader
     {
         public string ApplicationId { get; set; }
 
