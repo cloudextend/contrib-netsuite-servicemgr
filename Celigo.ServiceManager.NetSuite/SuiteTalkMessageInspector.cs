@@ -6,7 +6,7 @@ namespace Celigo.ServiceManager.NetSuite
 {
     public class SuiteTalkMessageInspector : IClientMessageInspector
     {
-        private readonly MessageHeader[] headers;
+        private readonly SuiteTalkHeader[] headers;
 
         public void AfterReceiveReply(ref Message reply, object correlationState)
         {
@@ -16,12 +16,12 @@ namespace Celigo.ServiceManager.NetSuite
         {
             for (int i = this.headers.Length - 1; i >= 0; i--)
             {
-                request.Headers.Add(this.headers[i]);
+                if (this.headers[i].IsApplicableTo(request)) request.Headers.Add(this.headers[i]);
             }
             return null;
         }
 
-        public SuiteTalkMessageInspector(MessageHeader[] headers)
+        public SuiteTalkMessageInspector(SuiteTalkHeader[] headers)
         {
             this.headers = headers;
         }

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <Version>1.2.0</Version>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
+    <Version>1.2.1</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
     <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</Description>
@@ -16,8 +16,7 @@
     <RepositoryType>Git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>- SearchRowBasic.SetColumns(..) method to set search columns by name.
-- SearchRow methods for retrieving joins by name.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed bug that prevented searchPreferences from being set (e.g. pageSize could not be set previously)</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

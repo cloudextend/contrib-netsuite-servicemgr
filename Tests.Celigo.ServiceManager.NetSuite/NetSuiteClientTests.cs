@@ -39,8 +39,10 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         }
 
         [Fact]
-        public async void Can_execute_a_method_that_returns_a_paged_result()
+        public async void Applies_search_pereferences_to_Search_requests()
         {
+            const int pageSize = 10;
+
             var searchColumns = new TransactionSearchRow();
             searchColumns.CreateBasic(b => {
                 b.SetColumns(new[] {
@@ -51,10 +53,25 @@ namespace Tests.Celigo.ServiceManager.NetSuite
             });
 
             var searchResult = await client.searchAsync(
-                null,
-                new TransactionSearchAdvanced { columns = searchColumns }
+                new TransactionSearchAdvanced {
+                    columns = searchColumns,
+                    criteria = new TransactionSearch {
+                        basic = new TransactionSearchBasic {
+                            dateCreated = new SearchDateField {
+                                @operator = SearchDateFieldOperator.after,
+                                operatorSpecified = true,
+                                searchValue = new DateTime(2018, 01, 01),
+                                searchValueSpecified = true
+                            }
+                        }
+                    }
+                }, new SearchPreferences {
+                    pageSize = pageSize,
+                    pageSizeSpecified = true
+                }
             );
             searchResult.status.isSuccess.Should().BeTrue();
+            searchResult.pageSize.Should().Be(pageSize);
             searchResult.searchRowList.Length.Should().BeGreaterThan(0);
         }
     }

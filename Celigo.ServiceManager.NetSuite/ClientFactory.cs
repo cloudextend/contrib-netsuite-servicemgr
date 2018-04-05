@@ -1,7 +1,5 @@
 ﻿using SuiteTalk;
-using System;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 
 namespace Celigo.ServiceManager.NetSuite
 {
@@ -9,7 +7,11 @@ namespace Celigo.ServiceManager.NetSuite
     {
         string ApplicationId { get; set; }
 
-        INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider = null);
+        INetSuiteClient CreateClient();
+
+        INetSuiteClient CreateClient(IPassportProvider passportProvider);
+
+        INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider);
     }
 
     public class ClientFactory : INetSuiteClientFactory
@@ -28,8 +30,12 @@ namespace Celigo.ServiceManager.NetSuite
         {
             this.ApplicationId = appId;
         }
-        
-        public INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider = null)
+
+        public INetSuiteClient CreateClient() => this.CreateClient(null, null);
+
+        public INetSuiteClient CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
+
+        public INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider)
         {
             var client = new NetSuitePortTypeClient();
 
@@ -38,9 +44,10 @@ namespace Celigo.ServiceManager.NetSuite
                 client.Endpoint.Address = GetDataCenterEndpoint(configProvider.DataCenter.DataCenterDomain);
             }
 
-            var inspector = new SuiteTalkMessageInspector(new MessageHeader[] {
+            var inspector = new SuiteTalkMessageInspector(new SuiteTalkHeader[] {
                 new ApplicationInfoHeader(this.ApplicationId),
-                new PassportHeader(passportProvider)
+                new PassportHeader(passportProvider ?? client),
+                new SearchPreferencesHeader(client)
             });
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);
