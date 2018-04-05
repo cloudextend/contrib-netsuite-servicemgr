@@ -2,19 +2,37 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial class CustomerCategorySearchRow: SearchRow
+    public partial class CustomerCategorySearchRow: SearchRow<CustomerCategorySearchRowBasic>
     {
-        public SearchRowBasic GetBasic() => this.basic;
+        public CustomerCategorySearchRowBasic GetBasic() => this.basic;
 
-        public SearchRowBasic CreateBasic()
+        public CustomerCategorySearchRowBasic CreateBasic()
         {
             if (this.basic == null) this.basic = new CustomerCategorySearchRowBasic();
             return this.basic;
         }
 
+        public CustomerCategorySearchRowBasic CreateBasic(Action<CustomerCategorySearchRowBasic> initializer)
+        {
+            var basic = this.CreateBasic();
+            initializer(basic);
+            return basic;
+        }
+
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
+        public J GetJoin<J>(string joinName) where J: SearchRowBasic => (J)this.GetJoin(joinName);
+
         public SearchRowBasic CreateJoin(string joinName) => GetOrCreateJoin(this, joinName, true);
+
+        public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
+
+        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        {
+            J join =  this.CreateJoin<J>(joinName);
+            initializer(join);
+            return join;
+        }
 
         private static SearchRowBasic GetOrCreateJoin(CustomerCategorySearchRow target, string joinName, bool createIfNull = false)
         {

@@ -1,14 +1,24 @@
+using System;
+
 namespace SuiteTalk
 {
-    public partial interface SearchRow
+    public partial interface SearchRow<T> where T: SearchRowBasic
     {
-        SearchRowBasic GetBasic();
+        T GetBasic();
 
-        SearchRowBasic CreateBasic();
+        T CreateBasic();
+
+        T CreateBasic(Action<T> initializer);
 
         SearchRowBasic GetJoin(string joinName);
 
+        J GetJoin<J>(string joinName) where J: SearchRowBasic;
+
         SearchRowBasic CreateJoin(string joinName);
+
+        J CreateJoin<J>(string joinName) where J: SearchRowBasic;
+
+        J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic;
     }
 
     partial interface SupportsCustomSearchJoin
@@ -18,14 +28,8 @@ namespace SuiteTalk
         CustomSearchRowBasic[] CreateCustomSearchJoin();
     }
 
-//    public static partial class SearchColumnFactory
-//    {
-//        public static SearchColumnStringField CreateStringColumn(string columnName, string searchValue = null)
-//        {
-//            return new SearchColumnStringField {
-//                customLabel = columnName,
-//                searchValue = searchValue
-//            };
-//        }
-//    }
+    partial class SearchRowBasic
+    {
+        public abstract void SetColumns(string[] columnNames);
+    }
 }

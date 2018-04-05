@@ -2,6 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <Version>1.2.0</Version>
+    <Authors>Sameera Perera</Authors>
+    <Company>Celigo, Inc.</Company>
+    <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</Description>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
+    <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
+    <Copyright>Copyright © Celigo, Inc. 2018</Copyright>
+    <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
+    <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>- SearchRowBasic.SetColumns(..) method to set search columns by name.
+- SearchRow methods for retrieving joins by name.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -2,19 +2,37 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial class CurrencyRateSearchRow: SearchRow
+    public partial class CurrencyRateSearchRow: SearchRow<CurrencyRateSearchRowBasic>
     {
-        public SearchRowBasic GetBasic() => this.basic;
+        public CurrencyRateSearchRowBasic GetBasic() => this.basic;
 
-        public SearchRowBasic CreateBasic()
+        public CurrencyRateSearchRowBasic CreateBasic()
         {
             if (this.basic == null) this.basic = new CurrencyRateSearchRowBasic();
             return this.basic;
         }
 
+        public CurrencyRateSearchRowBasic CreateBasic(Action<CurrencyRateSearchRowBasic> initializer)
+        {
+            var basic = this.CreateBasic();
+            initializer(basic);
+            return basic;
+        }
+
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
+        public J GetJoin<J>(string joinName) where J: SearchRowBasic => (J)this.GetJoin(joinName);
+
         public SearchRowBasic CreateJoin(string joinName) => GetOrCreateJoin(this, joinName, true);
+
+        public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
+
+        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        {
+            J join =  this.CreateJoin<J>(joinName);
+            initializer(join);
+            return join;
+        }
 
         private static SearchRowBasic GetOrCreateJoin(CurrencyRateSearchRow target, string joinName, bool createIfNull = false)
         {

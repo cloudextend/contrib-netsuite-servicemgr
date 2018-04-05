@@ -2,19 +2,37 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial class CustomRecordSearchRow: SearchRow, SupportsCustomSearchJoin
+    public partial class CustomRecordSearchRow: SearchRow<CustomRecordSearchRowBasic>, SupportsCustomSearchJoin
     {
-        public SearchRowBasic GetBasic() => this.basic;
+        public CustomRecordSearchRowBasic GetBasic() => this.basic;
 
-        public SearchRowBasic CreateBasic()
+        public CustomRecordSearchRowBasic CreateBasic()
         {
             if (this.basic == null) this.basic = new CustomRecordSearchRowBasic();
             return this.basic;
         }
 
+        public CustomRecordSearchRowBasic CreateBasic(Action<CustomRecordSearchRowBasic> initializer)
+        {
+            var basic = this.CreateBasic();
+            initializer(basic);
+            return basic;
+        }
+
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
+        public J GetJoin<J>(string joinName) where J: SearchRowBasic => (J)this.GetJoin(joinName);
+
         public SearchRowBasic CreateJoin(string joinName) => GetOrCreateJoin(this, joinName, true);
+
+        public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
+
+        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        {
+            J join =  this.CreateJoin<J>(joinName);
+            initializer(join);
+            return join;
+        }
 
 
           public CustomSearchRowBasic[] GetCustomSearchJoin() => this.customSearchJoin;

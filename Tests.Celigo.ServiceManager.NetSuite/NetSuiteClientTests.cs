@@ -41,26 +41,19 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         [Fact]
         public async void Can_execute_a_method_that_returns_a_paged_result()
         {
+            var searchColumns = new TransactionSearchRow();
+            searchColumns.CreateBasic(b => {
+                b.SetColumns(new[] {
+                    nameof(b.tranId),
+                    nameof(b.amount),
+                    nameof(b.entity)
+                });
+            });
+
             var searchResult = await client.searchAsync(
                 null,
-                new TransactionSearchAdvanced {
-                    columns = new TransactionSearchRow {
-                        basic = new TransactionSearchRowBasic {
-                            tranId = new SearchColumnStringField[1] { new SearchColumnStringField { customLabel = "Trans ID" } },
-                            amount = new SearchColumnDoubleField[1] { new SearchColumnDoubleField { customLabel = "Amount" } },
-                            entity = new SearchColumnSelectField[1] { new SearchColumnSelectField { customLabel = "Customer" } },
-                        },
-                    },
-                    criteria = new TransactionSearch {
-                        basic = new TransactionSearchBasic {
-                            type = new SearchEnumMultiSelectField {
-                                @operator = SearchEnumMultiSelectFieldOperator.anyOf,
-                                operatorSpecified = true,
-                                searchValue = new[] { "salesOrder" }
-                            }
-                        }
-                    }
-                });
+                new TransactionSearchAdvanced { columns = searchColumns }
+            );
             searchResult.status.isSuccess.Should().BeTrue();
             searchResult.searchRowList.Length.Should().BeGreaterThan(0);
         }

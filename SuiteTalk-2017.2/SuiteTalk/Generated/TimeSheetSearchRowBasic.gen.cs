@@ -7,11 +7,11 @@ namespace SuiteTalk
 {
     partial class TimeSheetSearchRowBasic
     {
-        private static readonly Lazy<ColumnFactory> meta = new Lazy<ColumnFactory>(() => new ColumnFactory());
+        private static readonly Lazy<ColumnFactory> columnFactoryLoader = new Lazy<ColumnFactory>(() => new ColumnFactory());
 
-        public void SetColumns(string[] columnNames)
+        public override void SetColumns(string[] columnNames)
         {
-            var factory = meta.Value;
+            var factory = columnFactoryLoader.Value;
             for (int i = 0; i < columnNames.Length; i++)
             {
                 factory.BuildColumn(this, columnNames[i]);

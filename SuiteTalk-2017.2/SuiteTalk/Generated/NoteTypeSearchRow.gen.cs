@@ -2,19 +2,37 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial class NoteTypeSearchRow: SearchRow
+    public partial class NoteTypeSearchRow: SearchRow<NoteTypeSearchRowBasic>
     {
-        public SearchRowBasic GetBasic() => this.basic;
+        public NoteTypeSearchRowBasic GetBasic() => this.basic;
 
-        public SearchRowBasic CreateBasic()
+        public NoteTypeSearchRowBasic CreateBasic()
         {
             if (this.basic == null) this.basic = new NoteTypeSearchRowBasic();
             return this.basic;
         }
 
+        public NoteTypeSearchRowBasic CreateBasic(Action<NoteTypeSearchRowBasic> initializer)
+        {
+            var basic = this.CreateBasic();
+            initializer(basic);
+            return basic;
+        }
+
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
+        public J GetJoin<J>(string joinName) where J: SearchRowBasic => (J)this.GetJoin(joinName);
+
         public SearchRowBasic CreateJoin(string joinName) => GetOrCreateJoin(this, joinName, true);
+
+        public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
+
+        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        {
+            J join =  this.CreateJoin<J>(joinName);
+            initializer(join);
+            return join;
+        }
 
         private static SearchRowBasic GetOrCreateJoin(NoteTypeSearchRow target, string joinName, bool createIfNull = false)
         {
