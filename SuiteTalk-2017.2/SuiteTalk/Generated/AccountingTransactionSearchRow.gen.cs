@@ -2,9 +2,11 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial class AccountingTransactionSearchRow: SearchRow<AccountingTransactionSearchRowBasic>
+    public partial class AccountingTransactionSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<AccountingTransactionSearchRowBasic>
     {
         public AccountingTransactionSearchRowBasic GetBasic() => this.basic;
+
+        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
 
         public AccountingTransactionSearchRowBasic CreateBasic()
         {
@@ -18,6 +20,8 @@ namespace SuiteTalk
             initializer(basic);
             return basic;
         }
+
+        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 

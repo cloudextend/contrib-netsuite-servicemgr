@@ -2,9 +2,11 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial class VendorSearchRow: SearchRow<VendorSearchRowBasic>, SupportsCustomSearchJoin
+    public partial class VendorSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<VendorSearchRowBasic>, SupportsCustomSearchJoin
     {
         public VendorSearchRowBasic GetBasic() => this.basic;
+
+        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
 
         public VendorSearchRowBasic CreateBasic()
         {
@@ -18,6 +20,8 @@ namespace SuiteTalk
             initializer(basic);
             return basic;
         }
+
+        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 

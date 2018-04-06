@@ -31,6 +31,26 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         }
 
         [Fact]
+        public void Create_basic_of_an_IAdvancedSearchRow()
+        {
+            IAdvancedSearchRow row = new SupportCaseSearchRow();
+            var basic = row.CreateBasic();
+            basic.Should().BeOfType<SupportCaseSearchRowBasic>();
+        }
+
+        [Fact]
+        public void Get_basic_of_an_IAdvancedSearchRow()
+        {
+            IAdvancedSearchRow row = new SupportCaseSearchRow();
+            var basic = row.GetBasic();
+            basic.Should().BeNull();
+
+            basic = row.CreateBasic();
+            basic.Should().BeOfType<SupportCaseSearchRowBasic>();
+            basic.Should().Be(row.GetBasic());
+        }
+
+        [Fact]
         public void Create_a_join_on_a_SearchRow_by_name()
         {
             var searchRow = new AccountSearchRow();

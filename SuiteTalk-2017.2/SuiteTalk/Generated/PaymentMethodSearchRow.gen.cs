@@ -2,9 +2,11 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial class PaymentMethodSearchRow: SearchRow<PaymentMethodSearchRowBasic>
+    public partial class PaymentMethodSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<PaymentMethodSearchRowBasic>
     {
         public PaymentMethodSearchRowBasic GetBasic() => this.basic;
+
+        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
 
         public PaymentMethodSearchRowBasic CreateBasic()
         {
@@ -18,6 +20,8 @@ namespace SuiteTalk
             initializer(basic);
             return basic;
         }
+
+        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 

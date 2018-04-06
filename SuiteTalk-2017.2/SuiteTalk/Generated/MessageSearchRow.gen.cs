@@ -2,9 +2,11 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial class MessageSearchRow: SearchRow<MessageSearchRowBasic>
+    public partial class MessageSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<MessageSearchRowBasic>
     {
         public MessageSearchRowBasic GetBasic() => this.basic;
+
+        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
 
         public MessageSearchRowBasic CreateBasic()
         {
@@ -18,6 +20,8 @@ namespace SuiteTalk
             initializer(basic);
             return basic;
         }
+
+        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 

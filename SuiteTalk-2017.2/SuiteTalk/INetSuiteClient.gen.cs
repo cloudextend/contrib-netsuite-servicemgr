@@ -13,8 +13,8 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> addAsync(SuiteTalk.Record record);
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> deleteAsync(SuiteTalk.BaseRef baseRef,SuiteTalk.DeletionReason deletionReason);
         System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SuiteTalk.SearchRecord searchRecord);
-        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(System.Int32 pageIndex);
-        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(System.String searchId,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(int pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(string searchId,int pageIndex);
         System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchNextAsync();
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> updateAsync(SuiteTalk.Record record);
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> upsertAsync(SuiteTalk.Record record);
@@ -26,15 +26,15 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<SuiteTalk.ReadResponseList> getListAsync(SuiteTalk.BaseRef[] baseRef);
         System.Threading.Tasks.Task<SuiteTalk.GetAllResult> getAllAsync(SuiteTalk.GetAllRecord record);
         System.Threading.Tasks.Task<SuiteTalk.GetSavedSearchResult> getSavedSearchAsync(SuiteTalk.GetSavedSearchRecord record);
-        System.Threading.Tasks.Task<SuiteTalk.GetCustomizationIdResult> getCustomizationIdAsync(SuiteTalk.CustomizationType customizationType,System.Boolean includeInactives);
+        System.Threading.Tasks.Task<SuiteTalk.GetCustomizationIdResult> getCustomizationIdAsync(SuiteTalk.CustomizationType customizationType,bool includeInactives);
         System.Threading.Tasks.Task<SuiteTalk.ReadResponse> initializeAsync(SuiteTalk.InitializeRecord initializeRecord);
         System.Threading.Tasks.Task<SuiteTalk.ReadResponseList> initializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord);
-        System.Threading.Tasks.Task<SuiteTalk.GetSelectValueResult> getSelectValueAsync(SuiteTalk.GetSelectValueFieldDescription fieldDescription,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.GetSelectValueResult> getSelectValueAsync(SuiteTalk.GetSelectValueFieldDescription fieldDescription,int pageIndex);
         System.Threading.Tasks.Task<SuiteTalk.GetItemAvailabilityResult> getItemAvailabilityAsync(SuiteTalk.ItemAvailabilityFilter itemAvailabilityFilter);
         System.Threading.Tasks.Task<SuiteTalk.GetBudgetExchangeRateResult> getBudgetExchangeRateAsync(SuiteTalk.BudgetExchangeRateFilter budgetExchangeRateFilter);
         System.Threading.Tasks.Task<SuiteTalk.GetCurrencyRateResult> getCurrencyRateAsync(SuiteTalk.CurrencyRateFilter currencyRateFilter);
-        System.Threading.Tasks.Task<SuiteTalk.GetDataCenterUrlsResult> getDataCenterUrlsAsync(System.String account);
-        System.Threading.Tasks.Task<SuiteTalk.GetPostingTransactionSummaryResult> getPostingTransactionSummaryAsync(SuiteTalk.PostingTransactionSummaryField fields,SuiteTalk.PostingTransactionSummaryFilter filters,System.Int32 pageIndex,System.String operationId);
+        System.Threading.Tasks.Task<SuiteTalk.GetDataCenterUrlsResult> getDataCenterUrlsAsync(string account);
+        System.Threading.Tasks.Task<SuiteTalk.GetPostingTransactionSummaryResult> getPostingTransactionSummaryAsync(SuiteTalk.PostingTransactionSummaryField fields,SuiteTalk.PostingTransactionSummaryFilter filters,int pageIndex,string operationId);
         System.Threading.Tasks.Task<SuiteTalk.GetServerTimeResult> getServerTimeAsync();
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> attachAsync(SuiteTalk.AttachReference attachReference);
         System.Threading.Tasks.Task<SuiteTalk.WriteResponse> detachAsync(SuiteTalk.DetachReference detachReference);
@@ -47,9 +47,9 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncGetListAsync(SuiteTalk.BaseRef[] baseRef);
         System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncInitializeListAsync(SuiteTalk.InitializeRecord[] initializeRecord);
         System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> asyncSearchAsync(SuiteTalk.SearchRecord searchRecord);
-        System.Threading.Tasks.Task<SuiteTalk.AsyncResult> getAsyncResultAsync(System.String jobId,System.Int32 pageIndex);
-        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> checkAsyncStatusAsync(System.String jobId);
-        System.Threading.Tasks.Task<SuiteTalk.GetDeletedResult> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,System.Int32 pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncResult> getAsyncResultAsync(string jobId,int pageIndex);
+        System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> checkAsyncStatusAsync(string jobId);
+        System.Threading.Tasks.Task<SuiteTalk.GetDeletedResult> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,int pageIndex);
     }
 
     public partial class NetSuitePortTypeClient: INetSuiteClient
@@ -163,7 +163,7 @@ namespace SuiteTalk
           return response.searchResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreAsync(int pageIndex)
       {
           var request = new searchMoreRequest() {
                       applicationInfo = applicationInfo,
@@ -174,7 +174,7 @@ namespace SuiteTalk
           return response.searchResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(System.String searchId,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchMoreWithIdAsync(string searchId,int pageIndex)
       {
           var request = new searchMoreWithIdRequest() {
                       passport = passport,
@@ -340,7 +340,7 @@ namespace SuiteTalk
           return response.getSavedSearchResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.GetCustomizationIdResult> getCustomizationIdAsync(SuiteTalk.CustomizationType customizationType,System.Boolean includeInactives)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetCustomizationIdResult> getCustomizationIdAsync(SuiteTalk.CustomizationType customizationType,bool includeInactives)
       {
           var request = new getCustomizationIdRequest() {
                       passport = passport,
@@ -383,7 +383,7 @@ namespace SuiteTalk
           return response.readResponseList;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.GetSelectValueResult> getSelectValueAsync(SuiteTalk.GetSelectValueFieldDescription fieldDescription,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetSelectValueResult> getSelectValueAsync(SuiteTalk.GetSelectValueFieldDescription fieldDescription,int pageIndex)
       {
           var request = new getSelectValueRequest() {
                       passport = passport,
@@ -440,7 +440,7 @@ namespace SuiteTalk
           return response.getCurrencyRateResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.GetDataCenterUrlsResult> getDataCenterUrlsAsync(System.String account)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetDataCenterUrlsResult> getDataCenterUrlsAsync(string account)
       {
           var request = new getDataCenterUrlsRequest() {
                       passport = passport,
@@ -454,7 +454,7 @@ namespace SuiteTalk
           return response.getDataCenterUrlsResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.GetPostingTransactionSummaryResult> getPostingTransactionSummaryAsync(SuiteTalk.PostingTransactionSummaryField fields,SuiteTalk.PostingTransactionSummaryFilter filters,System.Int32 pageIndex,System.String operationId)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetPostingTransactionSummaryResult> getPostingTransactionSummaryAsync(SuiteTalk.PostingTransactionSummaryField fields,SuiteTalk.PostingTransactionSummaryFilter filters,int pageIndex,string operationId)
       {
           var request = new getPostingTransactionSummaryRequest() {
                       passport = passport,
@@ -638,7 +638,7 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.AsyncResult> getAsyncResultAsync(System.String jobId,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncResult> getAsyncResultAsync(string jobId,int pageIndex)
       {
           var request = new getAsyncResultRequest() {
                       passport = passport,
@@ -653,7 +653,7 @@ namespace SuiteTalk
           return response.asyncResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> checkAsyncStatusAsync(System.String jobId)
+      public async System.Threading.Tasks.Task<SuiteTalk.AsyncStatusResult> checkAsyncStatusAsync(string jobId)
       {
           var request = new checkAsyncStatusRequest() {
                       passport = passport,
@@ -667,7 +667,7 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public async System.Threading.Tasks.Task<SuiteTalk.GetDeletedResult> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,System.Int32 pageIndex)
+      public async System.Threading.Tasks.Task<SuiteTalk.GetDeletedResult> getDeletedAsync(SuiteTalk.GetDeletedFilter getDeletedFilter,int pageIndex)
       {
           var request = new getDeletedRequest() {
                       passport = passport,
