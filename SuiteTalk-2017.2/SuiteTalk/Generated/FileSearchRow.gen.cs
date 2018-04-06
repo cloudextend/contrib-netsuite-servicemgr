@@ -1,12 +1,14 @@
+// Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
+
 using System;
 
 namespace SuiteTalk
 {
-    public partial class FileSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<FileSearchRowBasic>
+    public partial class FileSearchRow: ISearchAdvancedRow, ISearchAdvancedRow<FileSearchRowBasic>
     {
         public FileSearchRowBasic GetBasic() => this.basic;
 
-        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
+        SearchRowBasic ISearchAdvancedRow.GetBasic() => this.basic;
 
         public FileSearchRowBasic CreateBasic()
         {
@@ -14,14 +16,17 @@ namespace SuiteTalk
             return this.basic;
         }
 
-        public FileSearchRowBasic CreateBasic(Action<FileSearchRowBasic> initializer)
+        ISearchAdvancedRow<FileSearchRowBasic> 
+            ISearchAdvancedRow<FileSearchRowBasic>.CreateBasic(Action<FileSearchRowBasic> initializer) => this.CreateBasic(initializer);
+
+        public FileSearchRow CreateBasic(Action<FileSearchRowBasic> initializer)
         {
             var basic = this.CreateBasic();
             initializer(basic);
-            return basic;
+            return this;
         }
 
-        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
+        SearchRowBasic ISearchAdvancedRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
@@ -31,21 +36,27 @@ namespace SuiteTalk
 
         public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
 
-        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        ISearchAdvancedRow<FileSearchRowBasic> 
+            ISearchAdvancedRow<FileSearchRowBasic>.CreateJoin<J>(string joinName, Action<J> initializer) => this.CreateJoin(joinName, initializer);
+
+        public FileSearchRow CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
         {
             J join =  this.CreateJoin<J>(joinName);
             initializer(join);
-            return join;
+            return this;
         }
 
         private static SearchRowBasic GetOrCreateJoin(FileSearchRow target, string joinName, bool createIfNull = false)
         {
-
             SearchRowBasic result;
             Func<SearchRowBasic> creator;
 
             switch (joinName)
             {
+                case "basic":
+                    result = target.basic;
+                    creator = () => target.basic = new FileSearchRowBasic();
+                    break;
 
                 case "shopperJoin":
                     result = target.shopperJoin;
@@ -62,6 +73,6 @@ namespace SuiteTalk
 
             if (createIfNull && result == null) result = creator();
             return result;
-                }
+        }
     }
 }

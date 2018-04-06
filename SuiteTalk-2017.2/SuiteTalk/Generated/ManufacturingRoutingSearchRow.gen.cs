@@ -1,12 +1,14 @@
+// Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
+
 using System;
 
 namespace SuiteTalk
 {
-    public partial class ManufacturingRoutingSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<ManufacturingRoutingSearchRowBasic>, SupportsCustomSearchJoin
+    public partial class ManufacturingRoutingSearchRow: ISearchAdvancedRow, ISearchAdvancedRow<ManufacturingRoutingSearchRowBasic>, SupportsCustomSearchJoin
     {
         public ManufacturingRoutingSearchRowBasic GetBasic() => this.basic;
 
-        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
+        SearchRowBasic ISearchAdvancedRow.GetBasic() => this.basic;
 
         public ManufacturingRoutingSearchRowBasic CreateBasic()
         {
@@ -14,14 +16,17 @@ namespace SuiteTalk
             return this.basic;
         }
 
-        public ManufacturingRoutingSearchRowBasic CreateBasic(Action<ManufacturingRoutingSearchRowBasic> initializer)
+        ISearchAdvancedRow<ManufacturingRoutingSearchRowBasic> 
+            ISearchAdvancedRow<ManufacturingRoutingSearchRowBasic>.CreateBasic(Action<ManufacturingRoutingSearchRowBasic> initializer) => this.CreateBasic(initializer);
+
+        public ManufacturingRoutingSearchRow CreateBasic(Action<ManufacturingRoutingSearchRowBasic> initializer)
         {
             var basic = this.CreateBasic();
             initializer(basic);
-            return basic;
+            return this;
         }
 
-        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
+        SearchRowBasic ISearchAdvancedRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
@@ -31,11 +36,14 @@ namespace SuiteTalk
 
         public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
 
-        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        ISearchAdvancedRow<ManufacturingRoutingSearchRowBasic> 
+            ISearchAdvancedRow<ManufacturingRoutingSearchRowBasic>.CreateJoin<J>(string joinName, Action<J> initializer) => this.CreateJoin(joinName, initializer);
+
+        public ManufacturingRoutingSearchRow CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
         {
             J join =  this.CreateJoin<J>(joinName);
             initializer(join);
-            return join;
+            return this;
         }
 
 
@@ -48,12 +56,15 @@ namespace SuiteTalk
           }
         private static SearchRowBasic GetOrCreateJoin(ManufacturingRoutingSearchRow target, string joinName, bool createIfNull = false)
         {
-
             SearchRowBasic result;
             Func<SearchRowBasic> creator;
 
             switch (joinName)
             {
+                case "basic":
+                    result = target.basic;
+                    creator = () => target.basic = new ManufacturingRoutingSearchRowBasic();
+                    break;
 
                 case "itemJoin":
                     result = target.itemJoin;
@@ -85,6 +96,6 @@ namespace SuiteTalk
 
             if (createIfNull && result == null) result = creator();
             return result;
-                }
+        }
     }
 }

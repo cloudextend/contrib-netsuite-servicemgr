@@ -31,17 +31,17 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         }
 
         [Fact]
-        public void Create_basic_of_an_IAdvancedSearchRow()
+        public void Create_basic_of_an_ISearchAdvancedRow()
         {
-            IAdvancedSearchRow row = new SupportCaseSearchRow();
+            ISearchAdvancedRow row = new SupportCaseSearchRow();
             var basic = row.CreateBasic();
             basic.Should().BeOfType<SupportCaseSearchRowBasic>();
         }
 
         [Fact]
-        public void Get_basic_of_an_IAdvancedSearchRow()
+        public void Get_basic_of_an_ISearchAdvancedRow()
         {
-            IAdvancedSearchRow row = new SupportCaseSearchRow();
+            ISearchAdvancedRow row = new SupportCaseSearchRow();
             var basic = row.GetBasic();
             basic.Should().BeNull();
 
@@ -108,6 +108,24 @@ namespace Tests.Celigo.ServiceManager.NetSuite
             basic.entityNumber.Should().NotBeNull();
             basic.entityNumber.Length.Should().Be(1);
             basic.entityNumber[0].customLabel.Should().Be("entityNumber");
+        }
+
+        [Fact]
+        public void Set_columns_of_an_Advanced_search()
+        {
+            var search = new TaskSearchAdvanced().CreateColumns(columns =>
+                    columns.CreateBasic(
+                        b => b.SetColumns(new[] {
+                            nameof(b.startDate),
+                            nameof(b.status)
+                        })
+                    ));
+
+            search.columns.Should().NotBeNull();
+            search.columns.basic.Should().NotBeNull();
+            search.columns.basic.startDate.Should().NotBeNull();
+            search.columns.basic.status.Should().NotBeNull();
+            search.columns.basic.timeRemaining.Should().BeNull();
         }
     }
 }

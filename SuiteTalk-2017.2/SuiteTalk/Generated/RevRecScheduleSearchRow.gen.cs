@@ -1,12 +1,14 @@
+// Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
+
 using System;
 
 namespace SuiteTalk
 {
-    public partial class RevRecScheduleSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<RevRecScheduleSearchRowBasic>
+    public partial class RevRecScheduleSearchRow: ISearchAdvancedRow, ISearchAdvancedRow<RevRecScheduleSearchRowBasic>
     {
         public RevRecScheduleSearchRowBasic GetBasic() => this.basic;
 
-        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
+        SearchRowBasic ISearchAdvancedRow.GetBasic() => this.basic;
 
         public RevRecScheduleSearchRowBasic CreateBasic()
         {
@@ -14,14 +16,17 @@ namespace SuiteTalk
             return this.basic;
         }
 
-        public RevRecScheduleSearchRowBasic CreateBasic(Action<RevRecScheduleSearchRowBasic> initializer)
+        ISearchAdvancedRow<RevRecScheduleSearchRowBasic> 
+            ISearchAdvancedRow<RevRecScheduleSearchRowBasic>.CreateBasic(Action<RevRecScheduleSearchRowBasic> initializer) => this.CreateBasic(initializer);
+
+        public RevRecScheduleSearchRow CreateBasic(Action<RevRecScheduleSearchRowBasic> initializer)
         {
             var basic = this.CreateBasic();
             initializer(basic);
-            return basic;
+            return this;
         }
 
-        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
+        SearchRowBasic ISearchAdvancedRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
@@ -31,21 +36,27 @@ namespace SuiteTalk
 
         public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
 
-        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        ISearchAdvancedRow<RevRecScheduleSearchRowBasic> 
+            ISearchAdvancedRow<RevRecScheduleSearchRowBasic>.CreateJoin<J>(string joinName, Action<J> initializer) => this.CreateJoin(joinName, initializer);
+
+        public RevRecScheduleSearchRow CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
         {
             J join =  this.CreateJoin<J>(joinName);
             initializer(join);
-            return join;
+            return this;
         }
 
         private static SearchRowBasic GetOrCreateJoin(RevRecScheduleSearchRow target, string joinName, bool createIfNull = false)
         {
-
             SearchRowBasic result;
             Func<SearchRowBasic> creator;
 
             switch (joinName)
             {
+                case "basic":
+                    result = target.basic;
+                    creator = () => target.basic = new RevRecScheduleSearchRowBasic();
+                    break;
 
                 case "appliedToTransactionJoin":
                     result = target.appliedToTransactionJoin;
@@ -77,6 +88,6 @@ namespace SuiteTalk
 
             if (createIfNull && result == null) result = creator();
             return result;
-                }
+        }
     }
 }

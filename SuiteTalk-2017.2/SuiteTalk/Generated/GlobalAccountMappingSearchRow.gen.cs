@@ -1,12 +1,14 @@
+// Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
+
 using System;
 
 namespace SuiteTalk
 {
-    public partial class GlobalAccountMappingSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<GlobalAccountMappingSearchRowBasic>, SupportsCustomSearchJoin
+    public partial class GlobalAccountMappingSearchRow: ISearchAdvancedRow, ISearchAdvancedRow<GlobalAccountMappingSearchRowBasic>, SupportsCustomSearchJoin
     {
         public GlobalAccountMappingSearchRowBasic GetBasic() => this.basic;
 
-        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
+        SearchRowBasic ISearchAdvancedRow.GetBasic() => this.basic;
 
         public GlobalAccountMappingSearchRowBasic CreateBasic()
         {
@@ -14,14 +16,17 @@ namespace SuiteTalk
             return this.basic;
         }
 
-        public GlobalAccountMappingSearchRowBasic CreateBasic(Action<GlobalAccountMappingSearchRowBasic> initializer)
+        ISearchAdvancedRow<GlobalAccountMappingSearchRowBasic> 
+            ISearchAdvancedRow<GlobalAccountMappingSearchRowBasic>.CreateBasic(Action<GlobalAccountMappingSearchRowBasic> initializer) => this.CreateBasic(initializer);
+
+        public GlobalAccountMappingSearchRow CreateBasic(Action<GlobalAccountMappingSearchRowBasic> initializer)
         {
             var basic = this.CreateBasic();
             initializer(basic);
-            return basic;
+            return this;
         }
 
-        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
+        SearchRowBasic ISearchAdvancedRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
@@ -31,11 +36,14 @@ namespace SuiteTalk
 
         public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
 
-        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        ISearchAdvancedRow<GlobalAccountMappingSearchRowBasic> 
+            ISearchAdvancedRow<GlobalAccountMappingSearchRowBasic>.CreateJoin<J>(string joinName, Action<J> initializer) => this.CreateJoin(joinName, initializer);
+
+        public GlobalAccountMappingSearchRow CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
         {
             J join =  this.CreateJoin<J>(joinName);
             initializer(join);
-            return join;
+            return this;
         }
 
 
@@ -48,12 +56,15 @@ namespace SuiteTalk
           }
         private static SearchRowBasic GetOrCreateJoin(GlobalAccountMappingSearchRow target, string joinName, bool createIfNull = false)
         {
-
             SearchRowBasic result;
             Func<SearchRowBasic> creator;
 
             switch (joinName)
             {
+                case "basic":
+                    result = target.basic;
+                    creator = () => target.basic = new GlobalAccountMappingSearchRowBasic();
+                    break;
 
                 case "classJoin":
                     result = target.classJoin;
@@ -90,6 +101,6 @@ namespace SuiteTalk
 
             if (createIfNull && result == null) result = creator();
             return result;
-                }
+        }
     }
 }

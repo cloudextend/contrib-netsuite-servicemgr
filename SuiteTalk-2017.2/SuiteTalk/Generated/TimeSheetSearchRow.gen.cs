@@ -1,12 +1,14 @@
+// Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
+
 using System;
 
 namespace SuiteTalk
 {
-    public partial class TimeSheetSearchRow: IAdvancedSearchRow, IAdvancedSearchRow<TimeSheetSearchRowBasic>, SupportsCustomSearchJoin
+    public partial class TimeSheetSearchRow: ISearchAdvancedRow, ISearchAdvancedRow<TimeSheetSearchRowBasic>, SupportsCustomSearchJoin
     {
         public TimeSheetSearchRowBasic GetBasic() => this.basic;
 
-        SearchRowBasic IAdvancedSearchRow.GetBasic() => this.basic;
+        SearchRowBasic ISearchAdvancedRow.GetBasic() => this.basic;
 
         public TimeSheetSearchRowBasic CreateBasic()
         {
@@ -14,14 +16,17 @@ namespace SuiteTalk
             return this.basic;
         }
 
-        public TimeSheetSearchRowBasic CreateBasic(Action<TimeSheetSearchRowBasic> initializer)
+        ISearchAdvancedRow<TimeSheetSearchRowBasic> 
+            ISearchAdvancedRow<TimeSheetSearchRowBasic>.CreateBasic(Action<TimeSheetSearchRowBasic> initializer) => this.CreateBasic(initializer);
+
+        public TimeSheetSearchRow CreateBasic(Action<TimeSheetSearchRowBasic> initializer)
         {
             var basic = this.CreateBasic();
             initializer(basic);
-            return basic;
+            return this;
         }
 
-        SearchRowBasic IAdvancedSearchRow.CreateBasic() => this.CreateBasic();
+        SearchRowBasic ISearchAdvancedRow.CreateBasic() => this.CreateBasic();
 
         public SearchRowBasic GetJoin(string joinName) => GetOrCreateJoin(this, joinName);
 
@@ -31,11 +36,14 @@ namespace SuiteTalk
 
         public J CreateJoin<J>(string joinName) where J: SearchRowBasic => (J)this.CreateJoin(joinName);
 
-        public J CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
+        ISearchAdvancedRow<TimeSheetSearchRowBasic> 
+            ISearchAdvancedRow<TimeSheetSearchRowBasic>.CreateJoin<J>(string joinName, Action<J> initializer) => this.CreateJoin(joinName, initializer);
+
+        public TimeSheetSearchRow CreateJoin<J>(string joinName, Action<J> initializer) where J: SearchRowBasic
         {
             J join =  this.CreateJoin<J>(joinName);
             initializer(join);
-            return join;
+            return this;
         }
 
 
@@ -48,12 +56,15 @@ namespace SuiteTalk
           }
         private static SearchRowBasic GetOrCreateJoin(TimeSheetSearchRow target, string joinName, bool createIfNull = false)
         {
-
             SearchRowBasic result;
             Func<SearchRowBasic> creator;
 
             switch (joinName)
             {
+                case "basic":
+                    result = target.basic;
+                    creator = () => target.basic = new TimeSheetSearchRowBasic();
+                    break;
 
                 case "employeeJoin":
                     result = target.employeeJoin;
@@ -75,6 +86,6 @@ namespace SuiteTalk
 
             if (createIfNull && result == null) result = creator();
             return result;
-                }
+        }
     }
 }
