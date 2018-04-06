@@ -2,7 +2,7 @@
 
 namespace SuiteTalk
 {
-    public interface IAdvancedSearchRow
+    public interface ISearchAdvancedRow
     {
         SearchRowBasic GetBasic();
 
@@ -13,19 +13,19 @@ namespace SuiteTalk
         SearchRowBasic CreateJoin(string joinName);
     }
 
-    public interface IAdvancedSearchRow<T> where T : SearchRowBasic
+    public interface ISearchAdvancedRow<T> where T : SearchRowBasic
     {
         T GetBasic();
 
         T CreateBasic();
 
-        T CreateBasic(Action<T> initializer);
+        ISearchAdvancedRow<T> CreateBasic(Action<T> initializer);
 
         J GetJoin<J>(string joinName) where J : SearchRowBasic;
 
         J CreateJoin<J>(string joinName) where J : SearchRowBasic;
 
-        J CreateJoin<J>(string joinName, Action<J> initializer) where J : SearchRowBasic;
+        ISearchAdvancedRow<T> CreateJoin<J>(string joinName, Action<J> initializer) where J : SearchRowBasic;
     }
 
     partial interface SupportsCustomSearchJoin
