@@ -14,7 +14,7 @@
     <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>Implemented ISearchAdvanced 
 Renamed interface names</PackageReleaseNotes>
