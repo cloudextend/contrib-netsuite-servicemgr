@@ -2,7 +2,15 @@ using System;
 
 namespace SuiteTalk
 {
-    public partial interface SearchRow<T> where T: SearchRowBasic
+    public partial interface SearchRow
+    {
+        SearchRowBasic GetBasic();
+
+        SearchRowBasic CreateBasic();
+    }
+
+    public partial interface SearchRow<T>
+        where T: SearchRowBasic
     {
         T GetBasic();
 
