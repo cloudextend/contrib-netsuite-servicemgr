@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <Version>1.3.0</Version>
+    <AssemblyVersion>1.3.2.0</AssemblyVersion>
+    <Version>1.3.2</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
     <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</Description>
@@ -18,7 +18,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>Implemented ISearchAdvanced 
 Renamed interface names</PackageReleaseNotes>
-    <FileVersion>1.3.0.0</FileVersion>    
+    <FileVersion>1.3.2.0</FileVersion>    
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
