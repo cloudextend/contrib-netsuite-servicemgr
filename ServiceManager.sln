@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celigo.ServiceManager.NetSuite", "Celigo.ServiceManager.NetSuite\Celigo.ServiceManager.NetSuite.csproj", "{9F1FC547-844D-4234-ABAA-A23284D6033B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuiteTalk.2017.2", "SuiteTalk-2017.2\SuiteTalk.2017.2.csproj", "{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celigo.SuiteTalk.2017_2", "SuiteTalk-2017.2\Celigo.SuiteTalk.2017_2.csproj", "{2ABBEC84-C45C-4BCB-85C1-2D19CA405856}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Celigo.ServiceManager.NetSuite", "Tests.Celigo.ServiceManager.NetSuite\Tests.Celigo.ServiceManager.NetSuite.csproj", "{29EEEE86-4BF9-4659-9D20-A33250D7A9DA}"
 EndProject

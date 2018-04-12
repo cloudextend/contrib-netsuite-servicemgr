@@ -15,15 +15,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="FluentAssertions" Version="5.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="xunit" Version="2.4.0-beta.1.build3958" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0-beta.1.build3958" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Celigo.ServiceManager.NetSuite\Celigo.ServiceManager.NetSuite.csproj" />
-    <ProjectReference Include="..\SuiteTalk-2017.2\SuiteTalk.2017.2.csproj" />
+    <ProjectReference Include="..\SuiteTalk-2017.2\Celigo.SuiteTalk.2017_2.csproj" />
   </ItemGroup>
 
   <ItemGroup>

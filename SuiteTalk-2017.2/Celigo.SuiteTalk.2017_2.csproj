@@ -1,0 +1,70 @@
+﻿<Project>
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>SuiteTalk</RootNamespace>
+    <AssemblyName>Celigo.SuiteTalk.2017_2</AssemblyName>
+
+  </PropertyGroup>
+
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
+
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+    <PostBuildEvent>cd "$(ProjectDir)\bin"
+mkdir LastBuild
+copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>SuiteTalk.snk</AssemblyOriginatorKeyFile>
+    <Version>2.2.0-preview</Version>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <FileVersion>2.2.0.0</FileVersion>
+    <Authors>Sameera Perera, CloudExtend.io</Authors>
+    <Company>Celigo, Inc</Company>
+    <Product>Celigo Wrappers for NetSuite SuiteTalk 2017.2</Product>
+    <Description>Proxy Classes for workign with NetSuite SuiteTalk 2017.2. Use with Celigo.ServiceManager.NetSuite nuget package.</Description>
+    <Copyright>Copyright © Celigo, Inc. 2018</Copyright>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
+    <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
+    <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>NetSuite Celigo SuiteTalk ServiceManager 2017.2</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageId>Celigo.SuiteTalk.2017_2</PackageId>    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove=".gitignore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.5.0-preview2-26410-01" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.5.0-preview2-26410-01" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.5.0-preview2-26410-01" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.5.0-preview2-26410-01" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
