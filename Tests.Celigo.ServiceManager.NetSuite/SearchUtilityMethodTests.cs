@@ -127,5 +127,33 @@ namespace Tests.Celigo.ServiceManager.NetSuite
             search.columns.basic.status.Should().NotBeNull();
             search.columns.basic.timeRemaining.Should().BeNull();
         }
+
+        [Fact]
+        public void Create_basic_of_a_standard_search()
+        {
+            var search = new BudgetSearch();
+            var basic = search.CreateBasic();
+
+            search.basic.Should().NotBeNull();
+            basic.Should().NotBeNull();
+
+            basic.Should().Be(search.basic);
+        }
+
+        [Fact]
+        public void Getting_the_basic_of_a_standard_search()
+        {
+            var search = new CalendarEventSearch();
+            var basic = search.GetBasic();
+
+            basic.Should().BeNull();
+
+            var newBasic = search.CreateBasic();
+
+            basic = search.GetBasic();
+
+            basic.Should().NotBeNull();
+            basic.Should().Be(newBasic);
+        }
     }
 }
