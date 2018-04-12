@@ -1,32 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Celigo.ServiceManager.NetSuite</id>
-    <version>1.3.8</version>
-    <title>Celigo Service Manager for NetSuite</title>
-    <authors>Sameera Perera,CloudExtend.io</authors>
-    <owners>Celigo,Inc.</owners>
+    <version>2.2.0-preview</version>
+    <authors>Sameera Perera</authors>
+    <owners>Sameera Perera</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</projectUrl>
     <iconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</iconUrl>
     <description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</description>
-    <releaseNotes>Fixing a packaging issue with the Celigo.ServiceManager.NetSuite.dll
-    </releaseNotes>
+    <releaseNotes>Release SuiteTalk library in its own nuget package.</releaseNotes>
     <copyright>Copyright © Celigo, Inc. 2018</copyright>
     <tags>NetSuite Celigo SuiteTalk ServiceManager</tags>
     <repository type="Git" url="https://pro-celigo.github.io/lib-netsuite-servicemgr/" />
     <dependencies>
-      <group targetFramework=".NETStandard2.0" />
-    </dependencies>
-    <references>
       <group targetFramework=".NETStandard2.0">
-        <reference file="SuiteTalk-2017_2.dll" />
+        <dependency id="Celigo.SuiteTalk.2017_2" version="1.0.0" exclude="Build,Analyzers" />
       </group>
-    </references>
+    </dependencies>
   </metadata>
   <files>
     <file src="bin\Release\netstandard2.0\Celigo.ServiceManager.NetSuite.dll" target="lib\netstandard2.0\Celigo.ServiceManager.NetSuite.dll" />
-    <file src="bin\Release\netstandard2.0\SuiteTalk-2017_2.dll" target="lib\netstandard2.0\SuiteTalk-2017_2.dll" />
   </files>
 </package>
