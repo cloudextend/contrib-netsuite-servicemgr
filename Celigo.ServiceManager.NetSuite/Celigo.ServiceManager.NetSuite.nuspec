@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
   <metadata>
     <id>Celigo.ServiceManager.NetSuite</id>
-    <version>1.3.5</version>
+    <version>1.3.8</version>
     <title>Celigo Service Manager for NetSuite</title>
     <authors>Sameera Perera,CloudExtend.io</authors>
     <owners>Celigo,Inc.</owners>
@@ -11,7 +11,7 @@
     <projectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</projectUrl>
     <iconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</iconUrl>
     <description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</description>
-    <releaseNotes>Added ISearch interface to xxSearch types
+    <releaseNotes>Fixing a packaging issue with the Celigo.ServiceManager.NetSuite.dll
     </releaseNotes>
     <copyright>Copyright © Celigo, Inc. 2018</copyright>
     <tags>NetSuite Celigo SuiteTalk ServiceManager</tags>
