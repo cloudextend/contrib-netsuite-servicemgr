@@ -10,6 +10,8 @@ namespace SuiteTalk
 
         SearchRowBasic GetJoin(string joinName);
 
+        // IEnumerable<SearchRowBasic> GetJoins();
+
         SearchRowBasic CreateJoin(string joinName);
     }
 

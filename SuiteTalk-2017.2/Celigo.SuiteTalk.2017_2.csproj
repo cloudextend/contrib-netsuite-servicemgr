@@ -17,9 +17,9 @@ mkdir LastBuild
 copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>SuiteTalk.snk</AssemblyOriginatorKeyFile>
-    <Version>2.2.0-preview</Version>
-    <AssemblyVersion>2.2.0.0</AssemblyVersion>
-    <FileVersion>2.2.0.0</FileVersion>
+    <Version>2.2.2-preview</Version>
+    <AssemblyVersion>2.5.0.0</AssemblyVersion>
+    <FileVersion>2.5.0.0</FileVersion>
     <Authors>Sameera Perera, CloudExtend.io</Authors>
     <Company>Celigo, Inc</Company>
     <Product>Celigo Wrappers for NetSuite SuiteTalk 2017.2</Product>
@@ -31,7 +31,7 @@ copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>NetSuite Celigo SuiteTalk ServiceManager 2017.2</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>Celigo.SuiteTalk.2017_2</PackageId>    
   </PropertyGroup>
@@ -49,10 +49,10 @@ copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.5.0-preview2-26410-01" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.5.0-preview2-26410-01" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.5.0-preview2-26410-01" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.5.0-preview2-26410-01" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.2" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.2" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.2" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.2" />
   </ItemGroup>
 
   <ItemGroup>

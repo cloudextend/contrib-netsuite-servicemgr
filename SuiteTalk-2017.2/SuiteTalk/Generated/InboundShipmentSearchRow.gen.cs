@@ -1,6 +1,7 @@
 // Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
 
 using System;
+using System.Collections.Generic;
 
 namespace SuiteTalk
 {
@@ -46,6 +47,15 @@ namespace SuiteTalk
             return this;
         }
 
+        // public IEnumerable<SearchRowBasic> GetJoins()
+        // {
+        //    yield return this.basic;
+      //      yield return this.itemJoin;
+      //      yield return this.itemReceiptJoin;
+      //      yield return this.purchaseOrderJoin;
+      //      yield return this.vendorJoin;
+        //}
+
 
           public CustomSearchRowBasic[] GetCustomSearchJoin() => this.customSearchJoin;
   
@@ -65,6 +75,7 @@ namespace SuiteTalk
                     result = target.basic;
                     creator = () => target.basic = new InboundShipmentSearchRowBasic();
                     break;
+
 
                 case "itemJoin":
                     result = target.itemJoin;

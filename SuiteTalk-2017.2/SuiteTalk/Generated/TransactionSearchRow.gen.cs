@@ -1,6 +1,7 @@
 // Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
 
 using System;
+using System.Collections.Generic;
 
 namespace SuiteTalk
 {
@@ -46,6 +47,75 @@ namespace SuiteTalk
             return this;
         }
 
+        // public IEnumerable<SearchRowBasic> GetJoins()
+        // {
+        //    yield return this.basic;
+      //      yield return this.accountJoin;
+      //      yield return this.accountingPeriodJoin;
+      //      yield return this.accountingTransactionJoin;
+      //      yield return this.advanceToApplyAccountJoin;
+      //      yield return this.appliedToTransactionJoin;
+      //      yield return this.applyingTransactionJoin;
+      //      yield return this.billingAddressJoin;
+      //      yield return this.billingTransactionJoin;
+      //      yield return this.binNumberJoin;
+      //      yield return this.callJoin;
+      //      yield return this.caseJoin;
+      //      yield return this.classJoin;
+      //      yield return this.cogsPurchaseJoin;
+      //      yield return this.cogsSaleJoin;
+      //      yield return this.contactPrimaryJoin;
+      //      yield return this.createdFromJoin;
+      //      yield return this.customerJoin;
+      //      yield return this.customerMainJoin;
+      //      yield return this.departmentJoin;
+      //      yield return this.depositTransactionJoin;
+      //      yield return this.employeeJoin;
+      //      yield return this.eventJoin;
+      //      yield return this.expenseCategoryJoin;
+      //      yield return this.fileJoin;
+      //      yield return this.fromLocationJoin;
+      //      yield return this.fulfillingTransactionJoin;
+      //      yield return this.headerBillingAccountJoin;
+      //      yield return this.inventoryDetailJoin;
+      //      yield return this.itemJoin;
+      //      yield return this.itemNumberJoin;
+      //      yield return this.jobJoin;
+      //      yield return this.jobMainJoin;
+      //      yield return this.leadSourceJoin;
+      //      yield return this.lineBillingAccountJoin;
+      //      yield return this.locationJoin;
+      //      yield return this.manufacturingOperationTaskJoin;
+      //      yield return this.messagesJoin;
+      //      yield return this.nextApproverJoin;
+      //      yield return this.opportunityJoin;
+      //      yield return this.paidTransactionJoin;
+      //      yield return this.partnerJoin;
+      //      yield return this.payingTransactionJoin;
+      //      yield return this.payrollItemJoin;
+      //      yield return this.projectTaskJoin;
+      //      yield return this.purchaseOrderJoin;
+      //      yield return this.requestorJoin;
+      //      yield return this.revCommittingTransactionJoin;
+      //      yield return this.revisionJoin;
+      //      yield return this.revRecScheduleJoin;
+      //      yield return this.rgPostingTransactionJoin;
+      //      yield return this.salesOrderJoin;
+      //      yield return this.salesRepJoin;
+      //      yield return this.shippingAddressJoin;
+      //      yield return this.subsidiaryJoin;
+      //      yield return this.taskJoin;
+      //      yield return this.taxCodeJoin;
+      //      yield return this.taxDetailJoin;
+      //      yield return this.taxItemJoin;
+      //      yield return this.timeJoin;
+      //      yield return this.toLocationJoin;
+      //      yield return this.userJoin;
+      //      yield return this.userNotesJoin;
+      //      yield return this.vendorJoin;
+      //      yield return this.vendorLineJoin;
+        //}
+
 
           public CustomSearchRowBasic[] GetCustomSearchJoin() => this.customSearchJoin;
   
@@ -65,6 +135,7 @@ namespace SuiteTalk
                     result = target.basic;
                     creator = () => target.basic = new TransactionSearchRowBasic();
                     break;
+
 
                 case "accountJoin":
                     result = target.accountJoin;

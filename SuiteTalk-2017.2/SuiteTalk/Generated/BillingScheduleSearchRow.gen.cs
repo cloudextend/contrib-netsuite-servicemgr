@@ -1,6 +1,7 @@
 // Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
 
 using System;
+using System.Collections.Generic;
 
 namespace SuiteTalk
 {
@@ -46,6 +47,11 @@ namespace SuiteTalk
             return this;
         }
 
+        // public IEnumerable<SearchRowBasic> GetJoins()
+        // {
+        //    yield return this.basic;
+        //}
+
         private static SearchRowBasic GetOrCreateJoin(BillingScheduleSearchRow target, string joinName, bool createIfNull = false)
         {
             SearchRowBasic result;
@@ -57,6 +63,7 @@ namespace SuiteTalk
                     result = target.basic;
                     creator = () => target.basic = new BillingScheduleSearchRowBasic();
                     break;
+
                 default:
                     throw new ArgumentException("BillingScheduleSearchRow does not have a " + joinName);
             }

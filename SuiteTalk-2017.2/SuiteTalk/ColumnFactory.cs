@@ -5,15 +5,15 @@ namespace SuiteTalk
 {
     abstract class ColumnFactory<T> where T: SearchRowBasic
     {
-        private readonly WeakReference<Dictionary<string, Action<T>>> columnBuilders;
-        private readonly object builderLock = new object();
+        private readonly WeakReference<Dictionary<string, Action<T>>> _columnBuilders;
+        private readonly object _builderLock = new object();
 
         protected abstract Dictionary<string, Action<T>> InitializeColumnBuilders();
 
         public ColumnFactory()
         {
             var builders = this.InitializeColumnBuilders();
-            this.columnBuilders = new WeakReference<Dictionary<string, Action<T>>>(builders);
+            _columnBuilders = new WeakReference<Dictionary<string, Action<T>>>(builders);
         }
 
         public void BuildColumn(T rowBasic, string columnName)
@@ -24,18 +24,18 @@ namespace SuiteTalk
 
         private Dictionary<string, Action<T>> GetBuilders()
         {
-            if (columnBuilders.TryGetTarget(out Dictionary<string, Action<T>> builders))
+            if (_columnBuilders.TryGetTarget(out Dictionary<string, Action<T>> builders))
             {
                 return builders;
             }
             else
             {
-                lock(builderLock)
+                lock(_builderLock)
                 { 
-                    if (!columnBuilders.TryGetTarget(out builders))
+                    if (!_columnBuilders.TryGetTarget(out builders))
                     {
                         builders = this.InitializeColumnBuilders();
-                        columnBuilders.SetTarget(builders);
+                        _columnBuilders.SetTarget(builders);
                     }
                     return builders;
                 }
