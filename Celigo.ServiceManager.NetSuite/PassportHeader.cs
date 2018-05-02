@@ -1,4 +1,5 @@
 ﻿using SuiteTalk;
+using System;
 using System.ServiceModel.Channels;
 using System.Xml;
 
@@ -6,7 +7,7 @@ namespace Celigo.ServiceManager.NetSuite
 {
     public class PassportHeader : SuiteTalkHeader
     {
-        private readonly IPassportProvider provider;
+        private readonly IPassportProvider _provider;
 
         public override string Name => "passport";
 
@@ -14,12 +15,14 @@ namespace Celigo.ServiceManager.NetSuite
 
         public PassportHeader(IPassportProvider provider)
         {
-            this.provider = provider;
+            _provider = provider;
         }
 
         protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
-            var credentials = this.provider.GetPassport();
+            var credentials = _provider.GetPassport();
+
+            if (credentials == null) throw new InvalidOperationException("The Credentials Provider provided null credentials");
 
             writer.WriteElementString("email", SuiteTalkSchemas.Core, credentials.email);
             writer.WriteElementString("password", SuiteTalkSchemas.Core, credentials.password);
