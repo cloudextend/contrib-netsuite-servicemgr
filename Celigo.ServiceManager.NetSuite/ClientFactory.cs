@@ -49,6 +49,7 @@ namespace Celigo.ServiceManager.NetSuite
                 new PassportHeader(passportProvider ?? client),
                 new SearchPreferencesHeader(client)
             });
+
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);
                         

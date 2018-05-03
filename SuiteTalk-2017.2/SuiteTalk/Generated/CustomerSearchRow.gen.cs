@@ -1,6 +1,7 @@
 // Generator { Name = "SearchRowGenerator", Template = "ISearchRow" }
 
 using System;
+using System.Collections.Generic;
 
 namespace SuiteTalk
 {
@@ -46,6 +47,45 @@ namespace SuiteTalk
             return this;
         }
 
+        // public IEnumerable<SearchRowBasic> GetJoins()
+        // {
+        //    yield return this.basic;
+      //      yield return this.billingAccountJoin;
+      //      yield return this.billingScheduleJoin;
+      //      yield return this.callJoin;
+      //      yield return this.campaignResponseJoin;
+      //      yield return this.caseJoin;
+      //      yield return this.contactJoin;
+      //      yield return this.contactPrimaryJoin;
+      //      yield return this.eventJoin;
+      //      yield return this.fileJoin;
+      //      yield return this.hostedPageJoin;
+      //      yield return this.jobJoin;
+      //      yield return this.leadSourceJoin;
+      //      yield return this.messagesJoin;
+      //      yield return this.messagesFromJoin;
+      //      yield return this.messagesToJoin;
+      //      yield return this.mseSubsidiaryJoin;
+      //      yield return this.opportunityJoin;
+      //      yield return this.originatingLeadJoin;
+      //      yield return this.parentCustomerJoin;
+      //      yield return this.partnerJoin;
+      //      yield return this.pricingJoin;
+      //      yield return this.purchasedItemJoin;
+      //      yield return this.resourceAllocationJoin;
+      //      yield return this.salesRepJoin;
+      //      yield return this.subCustomerJoin;
+      //      yield return this.taskJoin;
+      //      yield return this.timeJoin;
+      //      yield return this.topLevelParentJoin;
+      //      yield return this.transactionJoin;
+      //      yield return this.upsellItemJoin;
+      //      yield return this.userJoin;
+      //      yield return this.userNotesJoin;
+      //      yield return this.webSiteCategoryJoin;
+      //      yield return this.webSiteItemJoin;
+        //}
+
 
           public CustomSearchRowBasic[] GetCustomSearchJoin() => this.customSearchJoin;
   
@@ -65,6 +105,7 @@ namespace SuiteTalk
                     result = target.basic;
                     creator = () => target.basic = new CustomerSearchRowBasic();
                     break;
+
 
                 case "billingAccountJoin":
                     result = target.billingAccountJoin;

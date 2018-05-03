@@ -7,6 +7,7 @@ namespace SuiteTalk
 {
     partial class CustomerStatusSearchRowBasic
     {
+        // TODO: Make this Lazy and Weak referenced so that it can be garbaged collected
         private static readonly Lazy<ColumnFactory> columnFactoryLoader = new Lazy<ColumnFactory>(() => new ColumnFactory());
 
         public override void SetColumns(string[] columnNames)

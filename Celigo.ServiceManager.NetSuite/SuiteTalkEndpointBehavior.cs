@@ -6,11 +6,11 @@ namespace Celigo.ServiceManager.NetSuite
 {
     class SuiteTalkEndpointBehavior : IEndpointBehavior
     {
-        private readonly SuiteTalkMessageInspector inspector;
+        private readonly SuiteTalkMessageInspector _inspector;
 
         public SuiteTalkEndpointBehavior(SuiteTalkMessageInspector inspector)
         {
-            this.inspector = inspector;
+            _inspector = inspector;
         }
 
         public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
@@ -19,7 +19,7 @@ namespace Celigo.ServiceManager.NetSuite
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
-            clientRuntime.ClientMessageInspectors.Add(this.inspector);
+            clientRuntime.ClientMessageInspectors.Add(_inspector);
         }
 
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>2.2.0.0</AssemblyVersion>
-    <Version>2.2.0</Version>
+    <AssemblyVersion>2.4.0.0</AssemblyVersion>
+    <Version>2.2.2</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
     <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</Description>
@@ -14,10 +14,10 @@
     <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Release SuiteTalk library in its own nuget package.</PackageReleaseNotes>
-    <FileVersion>2.2.0.0</FileVersion>    
+    <PackageReleaseNotes>ISearchColumnField interface</PackageReleaseNotes>
+    <FileVersion>2.4.0.0</FileVersion>    
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
