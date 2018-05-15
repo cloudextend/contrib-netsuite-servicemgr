@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Celigo.SuiteTalk.2017_2</id>
-    <version>2.5.0</version>
+    <version>2.5.2</version>
     <title>Celigo Wrappers for NetSuite SuiteTalk 2017.2</title>
     <authors>Sameera Perera,CloudExtend.io</authors>
     <owners>Sameera Perera,CloudExtend.io</owners>
@@ -12,7 +12,7 @@
     <iconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</iconUrl>
     <description>Removing pre-release dependancies</description>
     <copyright>Copyright © Celigo, Inc. 2018</copyright>
-    <releaseNotes>Non-generic ISearchColumnField and IValueTypeSearchColumnField interface</releaseNotes>
+    <releaseNotes>ISearchAdvance now has savedSearchId and savedSearchScriptId properties.</releaseNotes>
     <tags>NetSuite Celigo SuiteTalk ServiceManager 2017.2</tags>
     <repository type="Git" url="https://pro-celigo.github.io/lib-netsuite-servicemgr/" />
     <dependencies>
