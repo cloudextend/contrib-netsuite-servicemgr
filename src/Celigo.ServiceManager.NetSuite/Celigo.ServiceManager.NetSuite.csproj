@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>2.4.0.0</AssemblyVersion>
-    <Version>2.2.2</Version>
+    <AssemblyVersion>2.6.4.0</AssemblyVersion>
+    <Version>2.6.4</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
     <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</Description>
@@ -17,7 +17,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>ISearchColumnField interface</PackageReleaseNotes>
-    <FileVersion>2.4.0.0</FileVersion>    
+    <FileVersion>2.6.4.0</FileVersion>    
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Celigo.SuiteTalk.2017_2" Version="2.5.2" />
+    <PackageReference Include="Celigo.SuiteTalk.2017_2" Version="2.6.4" />
   </ItemGroup>
 
 </Project>

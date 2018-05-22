@@ -16,6 +16,10 @@ namespace Celigo.ServiceManager.NetSuite
         INetSuiteClient CreateClient(IPassportProvider passportProvider);
 
         INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider);
+
+        INetSuiteClient CreateClient(ITokenPassportProvider passportProvider);
+
+        INetSuiteClient CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider);
     }
 
     public class ClientFactory : INetSuiteClientFactory
@@ -29,7 +33,7 @@ namespace Celigo.ServiceManager.NetSuite
             var endpoint = NetSuitePortTypeClient.GetDefaultEndpoint();
             relativeWsPath = endpoint.Uri.LocalPath;
         }
-        
+
         public ClientFactory(string appId) {
 
             this.ApplicationId = appId;
@@ -38,36 +42,64 @@ namespace Celigo.ServiceManager.NetSuite
         public INetSuiteClient CreateClient()
         {
             var client = new NetSuitePortTypeClient();
-            return this.ConfigureClient(client, null, null);
+            return this.ConfigureClient(client);
         }
 
         public INetSuiteClient CreateClient(Passport passport, IConfigurationProvider configurationProvider)
         {
             var client = new NetSuitePortTypeClient { passport = passport };
-            return this.ConfigureClient(client, null, configurationProvider);
+            return this.ConfigureClient(client, configProvider: configurationProvider);
         }
 
-        public INetSuiteClient CreateClient(Passport passport) => this.CreateClient(passport, null);
+        public INetSuiteClient CreateClient(Passport passport) => this.CreateClient(passport);
 
-        public INetSuiteClient CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
+        public INetSuiteClient CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider);
 
-        public INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider)
-        {
-            return this.ConfigureClient(new NetSuitePortTypeClient(), passportProvider, configProvider);
-        }
+        public INetSuiteClient CreateClient(ITokenPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
 
-        private INetSuiteClient ConfigureClient(NetSuitePortTypeClient client, IPassportProvider passportProvider, IConfigurationProvider configProvider)
+        public INetSuiteClient CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
+                new NetSuitePortTypeClient(), 
+                tokenPassportProvider: passportProvider,
+                configProvider: configProvider
+            );
+
+        public INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
+                new NetSuitePortTypeClient(), 
+                passportProvider: passportProvider, 
+                configProvider: configProvider
+            );
+
+        private INetSuiteClient ConfigureClient(
+                NetSuitePortTypeClient client, 
+                IPassportProvider passportProvider = null, 
+                ITokenPassportProvider tokenPassportProvider = null,
+                IConfigurationProvider configProvider = null
+            )
         {
             if (configProvider != null && configProvider.DataCenter != null)
             {
                 client.Endpoint.Address = GetDataCenterEndpoint(configProvider.DataCenter.DataCenterDomain);
             }
 
-            var inspector = new SuiteTalkMessageInspector(new SuiteTalkHeader[] {
-                new ApplicationInfoHeader(this.ApplicationId),
-                new PassportHeader(passportProvider ?? client),
-                new SearchPreferencesHeader(client)
-            });
+            SuiteTalkHeader[] headers;
+
+            if (tokenPassportProvider != null)
+            {
+                headers = new SuiteTalkHeader[] {
+                    new TokenPassportHeader(tokenPassportProvider),
+                    new SearchPreferencesHeader(client)
+                };
+            }
+            else
+            {
+                headers = new SuiteTalkHeader[] {
+                    new ApplicationInfoHeader(this.ApplicationId),
+                    new PassportHeader(passportProvider ?? client),
+                    new SearchPreferencesHeader(client)
+                };
+            } 
+
+            var inspector = new SuiteTalkMessageInspector(headers);
 
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);

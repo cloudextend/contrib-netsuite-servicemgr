@@ -16,7 +16,7 @@ namespace SuiteTalk
 
         ServiceEndpoint Endpoint { get; }
 
-        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences);
+        System.Threading.Tasks.Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences);
 #pragma warning restore IDE1006 // Naming Styles
 
     }
@@ -37,7 +37,7 @@ namespace SuiteTalk
             return GetDefaultEndpointAddress();
         }
 
-        public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences)
+        public async System.Threading.Tasks.Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences)
         {
             var originalPreferences = this.searchPreferences;
             this.searchPreferences = searchPreferences;
