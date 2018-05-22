@@ -22,7 +22,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         [Fact]
         public async void Can_execute_a_parameterless_SuiteTalk_method()
         {
-            
+
             var serverTimeResult = await client.getServerTimeAsync();
             serverTimeResult.status.isSuccess.Should().BeTrue();
             serverTimeResult.serverTime.Year.Should().Be(DateTime.Now.Year);
@@ -73,6 +73,18 @@ namespace Tests.Celigo.ServiceManager.NetSuite
             searchResult.status.isSuccess.Should().BeTrue();
             searchResult.pageSize.Should().Be(pageSize);
             searchResult.searchRowList.Length.Should().BeGreaterThan(0);
+        }
+
+        [Fact]
+        public async void Can_execute_a_PickList_lookup_on_a_CustomRecord()
+        {
+            var gsvDesc = new GetSelectValueFieldDescription {
+                customRecordType = new RecordRef { internalId = "54" },
+                field = "custrecord_advpromo_customer_sid"
+            };
+            var result = await client.getSelectValueAsync(gsvDesc, 0);
+            result.status.isSuccess.Should().BeTrue();
+            result.baseRefList.Should().NotBeNull();
         }
     }
 }
