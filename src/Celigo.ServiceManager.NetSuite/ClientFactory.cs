@@ -22,16 +22,22 @@ namespace Celigo.ServiceManager.NetSuite
         INetSuiteClient CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider);
     }
 
-    public class ClientFactory : INetSuiteClientFactory
+    public class ClientFactory : ClientFactory<NetSuitePortTypeClient>
+    {
+        public ClientFactory(string appId): base(appId) { }
+    }
+
+    public class ClientFactory<T>: INetSuiteClientFactory 
+        where T: INetSuiteCompositeClient, new()
     {
         public string ApplicationId { get; set; }
 
-        private static string relativeWsPath;
+        private static readonly string _relativeWsPath;
 
         static ClientFactory()
         {
             var endpoint = NetSuitePortTypeClient.GetDefaultEndpoint();
-            relativeWsPath = endpoint.Uri.LocalPath;
+            _relativeWsPath = endpoint.Uri.LocalPath;
         }
 
         public ClientFactory(string appId) {
@@ -41,37 +47,37 @@ namespace Celigo.ServiceManager.NetSuite
 
         public INetSuiteClient CreateClient()
         {
-            var client = new NetSuitePortTypeClient();
+            var client = new T();
             return this.ConfigureClient(client);
         }
 
         public INetSuiteClient CreateClient(Passport passport, IConfigurationProvider configurationProvider)
         {
-            var client = new NetSuitePortTypeClient { passport = passport };
+            var client = new T { passport = passport };
             return this.ConfigureClient(client, configProvider: configurationProvider);
         }
 
         public INetSuiteClient CreateClient(Passport passport) => this.CreateClient(passport);
 
-        public INetSuiteClient CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider);
+        public INetSuiteClient CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
 
         public INetSuiteClient CreateClient(ITokenPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
 
         public INetSuiteClient CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
-                new NetSuitePortTypeClient(), 
+                new T(), 
                 tokenPassportProvider: passportProvider,
                 configProvider: configProvider
             );
 
         public INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
-                new NetSuitePortTypeClient(), 
+                new T(), 
                 passportProvider: passportProvider, 
                 configProvider: configProvider
             );
 
         private INetSuiteClient ConfigureClient(
-                NetSuitePortTypeClient client, 
-                IPassportProvider passportProvider = null, 
+                INetSuiteCompositeClient client,
+                IPassportProvider passportProvider = null,
                 ITokenPassportProvider tokenPassportProvider = null,
                 IConfigurationProvider configProvider = null
             )
@@ -97,8 +103,7 @@ namespace Celigo.ServiceManager.NetSuite
                     new PassportHeader(passportProvider ?? client),
                     new SearchPreferencesHeader(client)
                 };
-            } 
-
+            }
             var inspector = new SuiteTalkMessageInspector(headers);
 
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
@@ -107,15 +112,16 @@ namespace Celigo.ServiceManager.NetSuite
             return client;
         }
 
+
         private EndpointAddress GetDataCenterEndpoint(string dataCenter)
         {
             if (dataCenter.EndsWith("/"))
             {
-                return new EndpointAddress(dataCenter + ClientFactory.relativeWsPath);
+                return new EndpointAddress(dataCenter + ClientFactory._relativeWsPath);
             }
             else
             {
-                return new EndpointAddress(string.Concat(dataCenter, "/", ClientFactory.relativeWsPath));
+                return new EndpointAddress(string.Concat(dataCenter, "/", ClientFactory._relativeWsPath));
             }
         }
     }

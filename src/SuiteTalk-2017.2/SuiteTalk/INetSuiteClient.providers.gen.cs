@@ -2,9 +2,11 @@ using System;
 
 namespace SuiteTalk
 {
-    partial class NetSuitePortTypeClient: IPassportProvider, IPreferenceProvider
+    partial class NetSuitePortTypeClient: INetSuiteCompositeClient
     {
         Passport IPassportProvider.GetPassport() => this.passport;
+
+        TokenPassport ITokenPassportProvider.GetTokenPassport() => this.tokenPassport;
         
         SearchPreferences IPreferenceProvider.GetSearchPreferences() => this.searchPreferences;
 

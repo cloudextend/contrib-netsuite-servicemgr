@@ -75,7 +75,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Meta
 
                         string token = env("NS_TBA_TOKEN");
                         string tokenSecret = env("NS_TBA_TOKEN_SECRET");
-                        string account = env("NV_ACCOUNT");
+                        string account = env("NS_ACCOUNT");
 
                         _tokenPassport = passportBuilder.Build(account, token, tokenSecret);
                     }

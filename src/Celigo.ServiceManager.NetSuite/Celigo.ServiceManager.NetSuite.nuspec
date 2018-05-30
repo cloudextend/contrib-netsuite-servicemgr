@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Celigo.ServiceManager.NetSuite</id>
-    <version>2.6.4</version>
+    <version>2.7.1</version>
     <authors>Sameera Perera</authors>
     <owners>Sameera Perera</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
@@ -10,13 +10,16 @@
     <projectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</projectUrl>
     <iconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</iconUrl>
     <description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</description>
-    <releaseNotes>Support for TBA</releaseNotes>
+    <summary>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</summary>
+    <releaseNotes>Support for TBA, 
+      Generic ClientFactory to enable building other implemenations of NetSuitePortType
+    </releaseNotes>
     <copyright>Copyright © Celigo, Inc. 2018</copyright>
     <tags>NetSuite Celigo SuiteTalk ServiceManager</tags>
     <repository type="Git" url="https://pro-celigo.github.io/lib-netsuite-servicemgr/" />
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="Celigo.SuiteTalk.2017_2" version="2.0.0" exclude="Build,Analyzers" />
+        <dependency id="Celigo.SuiteTalk.2017_2" version="2.7.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>

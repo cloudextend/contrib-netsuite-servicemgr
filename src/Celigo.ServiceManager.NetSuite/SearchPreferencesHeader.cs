@@ -9,7 +9,7 @@ namespace Celigo.ServiceManager.NetSuite
 
     class SearchPreferencesHeader : SuiteTalkHeader
     {
-        private readonly IPreferenceProvider provider;
+        private readonly IPreferenceProvider _provider;
 
         public override string Name => "searchPreferences";
 
@@ -17,7 +17,7 @@ namespace Celigo.ServiceManager.NetSuite
 
         public SearchPreferencesHeader(IPreferenceProvider provider)
         {
-            this.provider = provider;
+            _provider = provider;
         }
 
         public override bool IsApplicableTo(in Message message)
@@ -29,9 +29,9 @@ namespace Celigo.ServiceManager.NetSuite
 
         protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
-            Contract.Requires(this.provider != null);
+            Contract.Requires(_provider != null);
 
-            var searchPrefs = this.provider.GetSearchPreferences();
+            var searchPrefs = _provider.GetSearchPreferences();
             if (searchPrefs == null) return;
 
             void write<T>(string elementName, T value) {

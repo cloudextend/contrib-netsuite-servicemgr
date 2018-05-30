@@ -21,6 +21,10 @@ namespace SuiteTalk
 
     }
 
+    public interface INetSuiteCompositeClient: INetSuiteClient, IPassportProvider, IPreferenceProvider, ITokenPassportProvider
+    {
+    }
+
     public partial class NetSuitePortTypeClient : INetSuiteClient
     {
         public ApplicationInfo applicationInfo { get; set; }
