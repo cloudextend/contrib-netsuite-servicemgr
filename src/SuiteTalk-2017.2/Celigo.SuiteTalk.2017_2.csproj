@@ -33,9 +33,9 @@ copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
     <PackageReleaseNotes>Support for Token Based Auth. 
 Streamlined dependencies.
 INetSuiteCompositeClient</PackageReleaseNotes>
-    <Version>2.6.5</Version>
-    <AssemblyVersion>2.6.6.0</AssemblyVersion>
-    <FileVersion>2.6.6.0</FileVersion>    
+    <Version>2.7.1</Version>
+    <AssemblyVersion>2.7.1.0</AssemblyVersion>
+    <FileVersion>2.7.1.0</FileVersion>    
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

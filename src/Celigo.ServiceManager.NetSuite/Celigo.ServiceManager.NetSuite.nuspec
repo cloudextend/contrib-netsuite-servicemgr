@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Celigo.ServiceManager.NetSuite</id>
-    <version>2.7.1</version>
+    <version>2.7.3</version>
     <authors>Sameera Perera</authors>
     <owners>Sameera Perera</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
@@ -12,7 +12,8 @@
     <description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</description>
     <summary>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</summary>
     <releaseNotes>Support for TBA, 
-      Generic ClientFactory to enable building other implemenations of NetSuitePortType
+      Generic ClientFactory to enable building other implemenations of NetSuitePortType,
+      ClientInitializer callback for ClientFactory.
     </releaseNotes>
     <copyright>Copyright © Celigo, Inc. 2018</copyright>
     <tags>NetSuite Celigo SuiteTalk ServiceManager</tags>

@@ -1,4 +1,5 @@
 ﻿using SuiteTalk;
+using System;
 using System.ServiceModel;
 
 namespace Celigo.ServiceManager.NetSuite
@@ -31,6 +32,8 @@ namespace Celigo.ServiceManager.NetSuite
         where T: INetSuiteCompositeClient, new()
     {
         public string ApplicationId { get; set; }
+
+        public Func<T, T> ClientInitializer { get; set; }
 
         private static readonly string _relativeWsPath;
 
@@ -76,7 +79,7 @@ namespace Celigo.ServiceManager.NetSuite
             );
 
         private INetSuiteClient ConfigureClient(
-                INetSuiteCompositeClient client,
+                T client,
                 IPassportProvider passportProvider = null,
                 ITokenPassportProvider tokenPassportProvider = null,
                 IConfigurationProvider configProvider = null
@@ -108,8 +111,15 @@ namespace Celigo.ServiceManager.NetSuite
 
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);
-                        
-            return client;
+
+            if (this.ClientInitializer != null)
+            {
+                return this.ClientInitializer(client);
+            }
+            else
+            {
+                return client;
+            }
         }
 
 
