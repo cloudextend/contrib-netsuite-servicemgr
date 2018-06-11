@@ -4,32 +4,34 @@ using System.ServiceModel;
 
 namespace Celigo.ServiceManager.NetSuite
 {
-    public interface INetSuiteClientFactory
+    public interface INetSuiteClientFactory<T> where T: INetSuiteClient
     {
         string ApplicationId { get; set; }
 
-        INetSuiteClient CreateClient();
+        T CreateClient();
 
-        INetSuiteClient CreateClient(Passport passport);
+        T CreateClient(Passport passport);
 
-        INetSuiteClient CreateClient(Passport passport, IConfigurationProvider configurationProvider);
+        T CreateClient(Passport passport, IConfigurationProvider configurationProvider);
 
-        INetSuiteClient CreateClient(IPassportProvider passportProvider);
+        T CreateClient(IPassportProvider passportProvider);
 
-        INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider);
+        T CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider);
 
-        INetSuiteClient CreateClient(ITokenPassportProvider passportProvider);
+        T CreateClient(ITokenPassportProvider passportProvider);
 
-        INetSuiteClient CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider);
+        T CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider);
     }
+
+    public interface INetSuiteClientFactory: INetSuiteClientFactory<INetSuiteClient>{ }
 
     public class ClientFactory : ClientFactory<NetSuitePortTypeClient>
     {
         public ClientFactory(string appId): base(appId) { }
     }
 
-    public class ClientFactory<T>: INetSuiteClientFactory 
-        where T: INetSuiteCompositeClient, new()
+    public class ClientFactory<T>: INetSuiteClientFactory<T>
+        where T: INetSuiteClient, new()
     {
         public string ApplicationId { get; set; }
 
@@ -43,42 +45,54 @@ namespace Celigo.ServiceManager.NetSuite
             _relativeWsPath = endpoint.Uri.LocalPath;
         }
 
-        public ClientFactory(string appId) {
-
+        public ClientFactory(string appId)
+        {
             this.ApplicationId = appId;
         }
 
-        public INetSuiteClient CreateClient()
+        public T CreateClient()
         {
             var client = new T();
             return this.ConfigureClient(client);
         }
 
-        public INetSuiteClient CreateClient(Passport passport, IConfigurationProvider configurationProvider)
+        public T CreateClient(Passport passport, IConfigurationProvider configurationProvider)
         {
             var client = new T { passport = passport };
             return this.ConfigureClient(client, configProvider: configurationProvider);
         }
 
-        public INetSuiteClient CreateClient(Passport passport) => this.CreateClient(passport);
+        public T CreateClient(Passport passport) => this.CreateClient(passport, null);
 
-        public INetSuiteClient CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
+        public T CreateClient(TokenPassport passport, IConfigurationProvider configurationProvider)
+        {
+            var client = new T { tokenPassport = passport };
+            return this.ConfigureClient(
+                client, 
+                tokenPassportProvider: client,
+                configProvider: configurationProvider
+            );
+        }
 
-        public INetSuiteClient CreateClient(ITokenPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
+        public T CreateClient(TokenPassport passport) => this.CreateClient(passport, null);
 
-        public INetSuiteClient CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
+        public T CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
+
+        public T CreateClient(ITokenPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
+
+        public T CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
                 new T(), 
                 tokenPassportProvider: passportProvider,
                 configProvider: configProvider
             );
 
-        public INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
+        public T CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
                 new T(), 
                 passportProvider: passportProvider, 
                 configProvider: configProvider
             );
 
-        private INetSuiteClient ConfigureClient(
+        private T ConfigureClient(
                 T client,
                 IPassportProvider passportProvider = null,
                 ITokenPassportProvider tokenPassportProvider = null,

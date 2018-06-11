@@ -10,7 +10,10 @@
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
 
   <PropertyGroup>
-    <PreBuildEvent></PreBuildEvent>
+    <PreBuildEvent>if $(ConfigurationName) == Release (
+cd ..\..\
+nuget pack $(ProjectDir)$(ProjectName).nuspec
+)</PreBuildEvent>
     <PostBuildEvent>cd "$(ProjectDir)\bin"
 mkdir LastBuild
 copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>

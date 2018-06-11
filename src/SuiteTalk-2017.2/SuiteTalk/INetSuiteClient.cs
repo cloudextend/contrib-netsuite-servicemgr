@@ -1,9 +1,10 @@
+using System;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
 
 namespace SuiteTalk
 {
-    public partial interface INetSuiteClient : NetSuitePortType
+    public partial interface INetSuiteClient : NetSuitePortType, IPassportProvider, IPreferenceProvider, ITokenPassportProvider
     {
 #pragma warning disable IDE1006 // Naming Styles
         ApplicationInfo applicationInfo { get; set; }
@@ -22,7 +23,8 @@ namespace SuiteTalk
 
     }
 
-    public interface INetSuiteCompositeClient: INetSuiteClient, IPassportProvider, IPreferenceProvider, ITokenPassportProvider
+    [Obsolete]
+    public interface INetSuiteCompositeClient: INetSuiteClient
     {
     }
 

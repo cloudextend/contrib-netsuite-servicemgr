@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>2.7.3.0</AssemblyVersion>
+    <AssemblyVersion>2.8.2.0</AssemblyVersion>
     <Version>2.6.4</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
@@ -17,7 +17,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>ISearchColumnField interface</PackageReleaseNotes>
-    <FileVersion>2.7.3.0</FileVersion>    
+    <FileVersion>2.8.2.0</FileVersion>    
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -29,7 +29,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Celigo.SuiteTalk.2017_2" Version="2.7.1" />
+    <PackageReference Include="Celigo.SuiteTalk.2017_2" Version="2.8.0" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;cd ..\..\&#xD;&#xA;nuget pack $(ProjectDir)$(ProjectName).nuspec&#xD;&#xA;)" />
+  </Target>
 
 </Project>
