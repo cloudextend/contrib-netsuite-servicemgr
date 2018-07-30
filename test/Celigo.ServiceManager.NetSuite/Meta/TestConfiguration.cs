@@ -1,4 +1,5 @@
-﻿using SuiteTalk;
+﻿using Celigo.ServiceManager.NetSuite;
+using SuiteTalk;
 using System;
 
 namespace Tests.Celigo.ServiceManager.NetSuite.Meta

@@ -4,12 +4,22 @@ using System.Text;
 
 namespace SuiteTalk
 {
-    public interface TokenPassportBuilder
+    public interface ITokenPassportBuilder
     {
+        TokenPassport Build(TbaUserToken userToken);
         TokenPassport Build(string accountNumber, string tokenId, string tokenSecret);
     }
 
-    public class DefaultTokenPassportBuilder
+    public class TbaUserToken
+    {
+#pragma warning disable IDE1006
+        public string account { get; set; }
+        public string token { get; set; }
+        public string tokenSecret { get; set; }
+#pragma warning restore IDE1006
+    }
+
+    public class DefaultTokenPassportBuilder: ITokenPassportBuilder
     {
         private readonly string _consumerKey;
         private readonly string _consumerSecret;
@@ -20,11 +30,13 @@ namespace SuiteTalk
             _consumerSecret = consumerSecret;
         }
 
-        public TokenPassport Build(string accountNumber, string tokenId, string tokenSecret)
+        public TokenPassport Build(TbaUserToken userToken) => this.Build(userToken.account, userToken.token, userToken.tokenSecret);
+
+        public TokenPassport Build(string accountNumber, string token, string tokenSecret)
         {
             string nonce = this.ComputeNonce();
             long timestamp = this.ComputeTimestamp();
-            var signature = this.ComputeSignature(accountNumber, tokenId, tokenSecret, nonce, timestamp);
+            var signature = this.ComputeSignature(accountNumber, token, tokenSecret, nonce, timestamp);
 
             return new TokenPassport {
                 account = accountNumber,
@@ -32,7 +44,7 @@ namespace SuiteTalk
                 nonce = nonce,
                 signature = signature,
                 timestamp = timestamp,
-                token = tokenId
+                token = token
             };
         }
 

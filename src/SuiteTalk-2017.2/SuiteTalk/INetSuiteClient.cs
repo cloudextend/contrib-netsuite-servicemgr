@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SuiteTalk
 {
-    public partial interface INetSuiteClient : NetSuitePortType, IPassportProvider, IPreferenceProvider, ITokenPassportProvider
+    public partial interface INetSuiteClient : NetSuitePortType, IPassportProvider, IPreferenceProvider
     {
 #pragma warning disable IDE1006 // Naming Styles
         ApplicationInfo applicationInfo { get; set; }

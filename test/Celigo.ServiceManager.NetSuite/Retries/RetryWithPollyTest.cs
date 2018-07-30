@@ -1,9 +1,7 @@
-﻿using FluentAssertions;
+﻿using Celigo.ServiceManager.NetSuite;
+using FluentAssertions;
 using SuiteTalk;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Tests.Celigo.ServiceManager.NetSuite.Meta;
 using Xunit;
@@ -18,9 +16,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Retries
         public async Task Retries_multiple_times_when_concurrent_error_is_encountered()
         {
             var config = new TestConfiguration();
-            var client = new PollyClientFactory(config.ApplicationId)
-                .CreateClient(config.PassportProvider)
-                as PollyNetSuiteClient;
+            var client = new ClientFactory<PollyNetSuiteClient>(config.ApplicationId).CreateClient(config.PassportProvider);
 
             client.Should().NotBeNull();
 

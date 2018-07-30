@@ -4,38 +4,36 @@ using System.ServiceModel;
 
 namespace Celigo.ServiceManager.NetSuite
 {
-    public interface INetSuiteClientFactory<T> where T: INetSuiteClient
+    public interface INetSuiteClientFactory
     {
         string ApplicationId { get; set; }
 
-        T CreateClient();
+        INetSuiteClient CreateClient();
 
-        T CreateClient(Passport passport);
+        INetSuiteClient CreateClient(Passport passport);
 
-        T CreateClient(Passport passport, IConfigurationProvider configurationProvider);
+        INetSuiteClient CreateClient(Passport passport, IConfigurationProvider configurationProvider);
 
-        T CreateClient(IPassportProvider passportProvider);
+        INetSuiteClient CreateClient(IPassportProvider passportProvider);
 
-        T CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider);
+        INetSuiteClient CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider);
 
-        T CreateClient(ITokenPassportProvider passportProvider);
+        INetSuiteClient CreateClient(ITokenPassportProvider passportProvider);
 
-        T CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider);
+        INetSuiteClient CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider);
     }
-
-    public interface INetSuiteClientFactory: INetSuiteClientFactory<INetSuiteClient>{ }
-
+    
     public class ClientFactory : ClientFactory<NetSuitePortTypeClient>
     {
         public ClientFactory(string appId): base(appId) { }
     }
 
-    public class ClientFactory<T>: INetSuiteClientFactory<T>
-        where T: INetSuiteClient, new()
+    public class ClientFactory<T>: INetSuiteClientFactory where T: class, INetSuiteClient, new()
     {
         public string ApplicationId { get; set; }
 
-        public Func<T, T> ClientInitializer { get; set; }
+        public Action<T> ClientInitializer { get; set; }
+        string INetSuiteClientFactory.ApplicationId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private static readonly string _relativeWsPath;
 
@@ -64,25 +62,13 @@ namespace Celigo.ServiceManager.NetSuite
 
         public T CreateClient(Passport passport) => this.CreateClient(passport, null);
 
-        public T CreateClient(TokenPassport passport, IConfigurationProvider configurationProvider)
-        {
-            var client = new T { tokenPassport = passport };
-            return this.ConfigureClient(
-                client, 
-                tokenPassportProvider: client,
-                configProvider: configurationProvider
-            );
-        }
-
-        public T CreateClient(TokenPassport passport) => this.CreateClient(passport, null);
-
         public T CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
 
-        public T CreateClient(ITokenPassportProvider passportProvider) => this.CreateClient(passportProvider, null);
+        public T CreateClient(ITokenPassportProvider tokenPassportProvider) => this.CreateClient(tokenPassportProvider, null);
 
-        public T CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
+        public T CreateClient(ITokenPassportProvider tokenPassportProvider, IConfigurationProvider configProvider) => this.ConfigureClient(
                 new T(), 
-                tokenPassportProvider: passportProvider,
+                tokenPassportProvider: tokenPassportProvider,
                 configProvider: configProvider
             );
 
@@ -106,7 +92,18 @@ namespace Celigo.ServiceManager.NetSuite
 
             SuiteTalkHeader[] headers;
 
-            if (tokenPassportProvider != null)
+            if (client.tokenPassport != null)
+            {
+                headers = new SuiteTalkHeader[] { new SearchPreferencesHeader(client) };
+            }
+            else if (client.passport != null)
+            {
+                headers = new SuiteTalkHeader[] {
+                    new ApplicationInfoHeader(this.ApplicationId),
+                    new SearchPreferencesHeader(client)
+                };
+            }
+            else if (tokenPassportProvider != null)
             {
                 headers = new SuiteTalkHeader[] {
                     new TokenPassportHeader(tokenPassportProvider),
@@ -117,7 +114,7 @@ namespace Celigo.ServiceManager.NetSuite
             {
                 headers = new SuiteTalkHeader[] {
                     new ApplicationInfoHeader(this.ApplicationId),
-                    new PassportHeader(passportProvider ?? client),
+                    new PassportHeader(passportProvider),
                     new SearchPreferencesHeader(client)
                 };
             }
@@ -128,7 +125,8 @@ namespace Celigo.ServiceManager.NetSuite
 
             if (this.ClientInitializer != null)
             {
-                return this.ClientInitializer(client);
+                this.ClientInitializer(client);
+                return client;
             }
             else
             {
@@ -148,5 +146,29 @@ namespace Celigo.ServiceManager.NetSuite
                 return new EndpointAddress(string.Concat(dataCenter, "/", ClientFactory._relativeWsPath));
             }
         }
+
+        INetSuiteClient 
+            INetSuiteClientFactory.CreateClient() => this.CreateClient();
+
+        INetSuiteClient 
+            INetSuiteClientFactory.CreateClient(Passport passport) => this.CreateClient(passport);
+
+        INetSuiteClient 
+            INetSuiteClientFactory.CreateClient(Passport passport, IConfigurationProvider configurationProvider) => 
+                this.CreateClient(passport, configurationProvider);
+
+        INetSuiteClient 
+            INetSuiteClientFactory.CreateClient(IPassportProvider passportProvider) => this.CreateClient(passportProvider);
+
+        INetSuiteClient 
+            INetSuiteClientFactory.CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider) => 
+                this.CreateClient(passportProvider, configProvider);
+
+        INetSuiteClient 
+            INetSuiteClientFactory.CreateClient(ITokenPassportProvider passportProvider) => this.CreateClient(passportProvider);
+
+        INetSuiteClient 
+            INetSuiteClientFactory.CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider) => 
+                this.CreateClient(passportProvider, configProvider);
     }
 }

@@ -34,11 +34,4 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Retries
             return _retryPolicy.ExecuteAsync(() => base.searchAsync(searchRecord));
         }
     }
-
-    class PollyClientFactory: ClientFactory<PollyNetSuiteClient>
-    {
-        public PollyClientFactory(string appId): base(appId)
-        {
-        }
-    }
 }

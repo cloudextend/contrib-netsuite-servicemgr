@@ -1,4 +1,5 @@
-﻿using SuiteTalk;
+﻿using Celigo.ServiceManager.NetSuite;
+using SuiteTalk;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -68,14 +69,14 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Meta
                             return value;
                         }
 
-                        string consumerSecret = env("NS_CONSUMER_SECRET");
-                        string consumerKey = env("NS_CONSUMER_KEY");
+                        string consumerSecret = env("Celigo_NetSuite_TBA__ConsumerSecret");
+                        string consumerKey = env("Celigo_NetSuite_TBA__ConsumerKey");
 
                         var passportBuilder = new DefaultTokenPassportBuilder(consumerKey, consumerSecret);
 
-                        string token = env("NS_TBA_TOKEN");
-                        string tokenSecret = env("NS_TBA_TOKEN_SECRET");
-                        string account = env("NS_ACCOUNT");
+                        string token = env("netsuite-tba-token");
+                        string tokenSecret = env("netsuite-tba-token-secret");
+                        string account = env("netsuite-account");
 
                         _tokenPassport = passportBuilder.Build(account, token, tokenSecret);
                     }
