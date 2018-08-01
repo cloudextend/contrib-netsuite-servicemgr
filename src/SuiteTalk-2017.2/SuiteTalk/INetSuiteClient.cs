@@ -1,4 +1,3 @@
-using System;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
 
@@ -21,11 +20,6 @@ namespace SuiteTalk
         Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences);
 #pragma warning restore IDE1006 // Naming Styles
 
-    }
-
-    [Obsolete]
-    public interface INetSuiteCompositeClient: INetSuiteClient
-    {
     }
 
     public partial class NetSuitePortTypeClient : INetSuiteClient

@@ -7,6 +7,8 @@ using Xunit;
 namespace Tests.Celigo.ServiceManager.NetSuite
 {
     using Meta;
+    using System.Linq;
+    using Task = System.Threading.Tasks.Task;
 
     public class NetSuiteClientTests
     {
@@ -20,7 +22,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         }
 
         [Fact]
-        public async void Can_execute_a_parameterless_SuiteTalk_method()
+        public async Task Can_execute_a_parameterless_SuiteTalk_method()
         {
 
             var serverTimeResult = await client.getServerTimeAsync();
@@ -29,7 +31,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         }
 
         [Fact]
-        public async void Can_execute_a_parameterized_SuiteTalk_method()
+        public async Task Can_execute_a_parameterized_SuiteTalk_method()
         {
             var customizationResult = await client.getCustomizationIdAsync(new CustomizationType {
                 getCustomizationType = GetCustomizationType.customRecordType,
@@ -39,7 +41,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         }
 
         [Fact]
-        public async void Applies_search_pereferences_to_Search_requests()
+        public async Task Applies_search_pereferences_to_Search_requests()
         {
             const int pageSize = 10;
 
@@ -76,7 +78,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         }
 
         [Fact]
-        public async void Can_execute_a_PickList_lookup_on_a_CustomRecord()
+        public async Task Can_execute_a_PickList_lookup_on_a_CustomRecord()
         {
             var gsvDesc = new GetSelectValueFieldDescription {
                 customRecordType = new RecordRef { internalId = "54" },
@@ -85,6 +87,25 @@ namespace Tests.Celigo.ServiceManager.NetSuite
             var result = await client.getSelectValueAsync(gsvDesc, 0);
             result.status.isSuccess.Should().BeTrue();
             result.baseRefList.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task Deserializes_base_class_properties_when_fetching()
+        {
+            var customizationList = await client.getCustomizationIdAsync(new CustomizationType {
+                getCustomizationType = GetCustomizationType.transactionBodyCustomField,
+                getCustomizationTypeSpecified = true,
+            }, false);
+
+            customizationList.status.isSuccess.Should().BeTrue();
+            customizationList.customizationRefList.Should().NotBeNull();
+            customizationList.customizationRefList.Length.Should().BeGreaterThan(0, "Test is inconclusive on this account without Transaction Body Custom Fields");
+
+            var customFields = await client.getListAsync(customizationList.customizationRefList);
+            customFields.status.isSuccess.Should().BeTrue();
+            customFields.readResponse.Should().NotBeNull();
+            customFields.readResponse.Length.Should().BeGreaterThan(0);
+            customFields.readResponse.All(r => r.record is TransactionBodyCustomField field && field.fieldTypeSpecified).Should().BeTrue();
         }
     }
 }
