@@ -16,7 +16,7 @@ namespace Celigo.ServiceManager.NetSuite
         {
             for (int i = _headers.Length - 1; i >= 0; i--)
             {
-                if (_headers[i].IsApplicableTo(request)) request.Headers.Add(this._headers[i]);
+                if (_headers[i].IsApplicableTo(request)) request.Headers.Add(_headers[i]);
             }
             return null;
         }

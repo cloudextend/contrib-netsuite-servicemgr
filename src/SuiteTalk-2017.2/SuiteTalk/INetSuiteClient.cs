@@ -1,8 +1,9 @@
 using System.ServiceModel.Description;
+using System.Threading.Tasks;
 
 namespace SuiteTalk
 {
-    public partial interface INetSuiteClient : NetSuitePortType
+    public partial interface INetSuiteClient : NetSuitePortType, IPassportProvider, IPreferenceProvider
     {
 #pragma warning disable IDE1006 // Naming Styles
         ApplicationInfo applicationInfo { get; set; }
@@ -16,7 +17,7 @@ namespace SuiteTalk
 
         ServiceEndpoint Endpoint { get; }
 
-        System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences);
+        Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences);
 #pragma warning restore IDE1006 // Naming Styles
 
     }
@@ -37,7 +38,7 @@ namespace SuiteTalk
             return GetDefaultEndpointAddress();
         }
 
-        public async System.Threading.Tasks.Task<SuiteTalk.SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences)
+        public virtual async Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences)
         {
             var originalPreferences = this.searchPreferences;
             this.searchPreferences = searchPreferences;

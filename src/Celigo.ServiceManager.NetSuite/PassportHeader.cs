@@ -7,30 +7,30 @@ namespace Celigo.ServiceManager.NetSuite
 {
     public class PassportHeader : SuiteTalkHeader
     {
-        private readonly IPassportProvider _provider;
-
-        public override string Name => "passport";
+        private readonly IPassportProvider _basicPassportProvider;
 
         public override string Namespace => SuiteTalkSchemas.Messages;
 
+        public override string Name { get; } = "passport";
+
         public PassportHeader(IPassportProvider provider)
         {
-            _provider = provider;
+            _basicPassportProvider = provider;
         }
 
         protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
-            var credentials = _provider.GetPassport();
+            var credentials = _basicPassportProvider.GetPassport();
 
             if (credentials == null) throw new InvalidOperationException("The Credentials Provider provided null credentials");
 
-            writer.WriteElementString("email", SuiteTalkSchemas.Core, credentials.email);
-            writer.WriteElementString("password", SuiteTalkSchemas.Core, credentials.password);
-            writer.WriteElementString("account", SuiteTalkSchemas.Core, credentials.account);
+            writer.WriteElementString(nameof(credentials.email), SuiteTalkSchemas.Core, credentials.email);
+            writer.WriteElementString(nameof(credentials.password), SuiteTalkSchemas.Core, credentials.password);
+            writer.WriteElementString(nameof(credentials.account), SuiteTalkSchemas.Core, credentials.account);
             if (credentials.role != null)
             {
-                writer.WriteStartElement("role", SuiteTalkSchemas.Core);
-                writer.WriteElementString("internalId", credentials.role.internalId);
+                writer.WriteStartElement(nameof(credentials.role), SuiteTalkSchemas.Core);
+                writer.WriteElementString(nameof(credentials.role.internalId), credentials.role.internalId);
                 writer.WriteEndElement();
             }
         }

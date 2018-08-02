@@ -1,8 +1,6 @@
 ﻿using Celigo.ServiceManager.NetSuite;
 using SuiteTalk;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Tests.Celigo.ServiceManager.NetSuite.Meta
 {
@@ -10,11 +8,13 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Meta
     {
         public string ApplicationId { get; set; }
         public IPassportProvider PassportProvider { get; set; }
+        public ITokenPassportProvider TokenPassportProvider { get; set; }
 
         public TestConfiguration()
         {
             this.ApplicationId = Environment.GetEnvironmentVariable("NS_APP_ID");
             this.PassportProvider = new EnvVariablePassportProvider();
+            this.TokenPassportProvider = new EnvVariableTokenPassportProvider();
         }
     }
 }

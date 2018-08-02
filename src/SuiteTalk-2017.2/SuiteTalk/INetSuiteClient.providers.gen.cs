@@ -1,8 +1,6 @@
-using System;
-
 namespace SuiteTalk
 {
-    partial class NetSuitePortTypeClient: IPassportProvider, IPreferenceProvider
+    partial class NetSuitePortTypeClient
     {
         Passport IPassportProvider.GetPassport() => this.passport;
         
