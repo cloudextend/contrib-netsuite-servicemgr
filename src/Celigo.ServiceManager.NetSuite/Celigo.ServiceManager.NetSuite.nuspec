@@ -11,9 +11,7 @@
     <iconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</iconUrl>
     <description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</description>
     <summary>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</summary>
-    <releaseNotes>Support for TBA, 
-      Generic ClientFactory to enable building other implemenations of NetSuitePortType,
-      ClientInitializer callback for ClientFactory.
+    <releaseNotes>Updated to support Celigo.SuiteTalk.2017_2 v2.10
     </releaseNotes>
     <copyright>Copyright © Celigo, Inc. 2018</copyright>
     <tags>NetSuite Celigo SuiteTalk ServiceManager</tags>

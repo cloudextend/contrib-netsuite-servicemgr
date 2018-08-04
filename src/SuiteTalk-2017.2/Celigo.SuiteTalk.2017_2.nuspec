@@ -13,10 +13,7 @@
     <description>Celigo Wrappers for NetSuite SuiteTalk 2017.2</description>
     <summary>Celigo Wrappers for NetSuite SuiteTalk 2017.2</summary>
     <copyright>Copyright © Celigo, Inc. 2018</copyright>
-    <releaseNotes>Support for Token Based Auth.
-      All INetSuiteClient method implmenentations marked as virtual on NetSuitePortTypeClient. 
-      ICompositeNetSuiteClient is marked obsolete and interface elements moved to INetSuiteClient. 
-      Renamed TokenPassportBuilder to ITokenPassportBuilder. 
+    <releaseNotes>Fix: CustomField metadata does not include fieldType and scriptId fields.
     </releaseNotes>
     <tags>NetSuite Celigo SuiteTalk ServiceManager 2017.2</tags>
     <repository type="Git" url="https://pro-celigo.github.io/lib-netsuite-servicemgr/" />

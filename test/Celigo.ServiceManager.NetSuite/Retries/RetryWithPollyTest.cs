@@ -20,7 +20,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Retries
 
             client.Should().NotBeNull();
 
-            var tasks = new Task<SearchResult>[6];
+            var tasks = new Task<SearchResult>[20];
             for (int i = 0; i < tasks.Length; i++)
             {
                 tasks[i] = client.searchAsync(new EmployeeSearchBasic());
