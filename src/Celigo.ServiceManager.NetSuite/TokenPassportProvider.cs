@@ -18,6 +18,9 @@ namespace Celigo.ServiceManager.NetSuite
 
         public TbaUserToken UserToken { get; set; }
 
+        public DefaultTokenPassportManager(string consumerKey, string consumerSecret)
+            : this(new DefaultTokenPassportBuilder(consumerKey, consumerSecret)) {}
+
         public DefaultTokenPassportManager(ITokenPassportBuilder passportBuilder)
         {
             _passportBuilder = passportBuilder;
