@@ -1,10 +1,6 @@
 ---
 layout: default
 ---
-# Celigo ServiceManager NetSuite for SuiteTalk WebServices
-
-## (.NET Core 2.0)
-
 ### Testing
 In order to execute the Unit Tests, create an environment variable called `NETSUITE_CREDS` and set it's value as: 			
 
