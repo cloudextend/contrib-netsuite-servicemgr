@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # Celigo ServiceManager NetSuite for SuiteTalk WebServices
 
 ## (.NET Core 2.0)
