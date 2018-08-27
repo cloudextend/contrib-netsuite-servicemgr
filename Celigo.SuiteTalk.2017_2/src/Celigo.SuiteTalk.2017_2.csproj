@@ -31,7 +31,6 @@ copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>NetSuite Celigo SuiteTalk ServiceManager 2017.2</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>Celigo.SuiteTalk.2017_2</PackageId>
     <PackageReleaseNotes>Support for Token Based Auth.
@@ -39,9 +38,7 @@ All INetSuiteClient method implmenentations marked as virtual on NetSuitePortTyp
 ICompositeNetSuiteClient is marked obsolete and interface elements moved to INetSuiteClient. 
 Renamed TokenPassportBuilder to ITokenPassportBuilder. 
 Passport and TbaUserToken classes marked as Serializable</PackageReleaseNotes>
-    <Version>2.9.9</Version>
-    <AssemblyVersion>2.9.9.0</AssemblyVersion>
-    <FileVersion>2.9.9.0</FileVersion>    
+    <Version>2.10.2</Version>   
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

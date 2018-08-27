@@ -1,4 +1,5 @@
 ﻿using Celigo.ServiceManager.NetSuite;
+using Celigo.SuiteTalk.PassportProviders.EnvironmentVariables;
 using SuiteTalk;
 using System;
 
