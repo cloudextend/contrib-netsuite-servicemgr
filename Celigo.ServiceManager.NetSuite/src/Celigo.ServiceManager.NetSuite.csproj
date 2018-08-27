@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.10.2</Version>
+    <Version>2.10.4</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
     <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</Description>
@@ -12,20 +13,13 @@
     <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>ISearchColumnField interface</PackageReleaseNotes>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;cd ..\..\&#xD;&#xA;nuget pack $(ProjectDir)$(ProjectName).nuspec&#xD;&#xA;)" />
-  </Target>
+  
   <ItemGroup>
     <ProjectReference Include="..\..\Celigo.SuiteTalk.2017_2\src\Celigo.SuiteTalk.2017_2.csproj" />
   </ItemGroup>
+
 </Project>

@@ -3,6 +3,7 @@
   
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>2.10.4</Version>
     <RootNamespace>SuiteTalk</RootNamespace>
     <AssemblyName>Celigo.SuiteTalk.2017_2</AssemblyName>
   </PropertyGroup>
@@ -10,14 +11,6 @@
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
 
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release (
-cd ..\..\
-nuget pack $(ProjectDir)$(ProjectName).nuspec
-)
-
-cd "$(ProjectDir)\bin"
-mkdir LastBuild
-copy /y "$(TargetDir)\*.*" LastBuild</PostBuildEvent>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>SuiteTalk.snk</AssemblyOriginatorKeyFile>
     <Authors>Sameera Perera, CloudExtend.io</Authors>
@@ -38,15 +31,6 @@ All INetSuiteClient method implmenentations marked as virtual on NetSuitePortTyp
 ICompositeNetSuiteClient is marked obsolete and interface elements moved to INetSuiteClient. 
 Renamed TokenPassportBuilder to ITokenPassportBuilder. 
 Passport and TbaUserToken classes marked as Serializable</PackageReleaseNotes>
-    <Version>2.10.2</Version>   
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -59,10 +43,6 @@ Passport and TbaUserToken classes marked as Serializable</PackageReleaseNotes>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>

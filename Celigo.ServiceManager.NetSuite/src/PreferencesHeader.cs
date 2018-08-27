@@ -10,7 +10,7 @@ namespace Celigo.ServiceManager.NetSuite
 
         public override string Namespace => SuiteTalkSchemas.Messages;
 
-        public override bool IsApplicableTo(in System.ServiceModel.Channels.Message message)
+        public override bool IsApplicableTo(System.ServiceModel.Channels.Message message)
         {
             return message.Headers != null
                 && message.Headers.Action != null
