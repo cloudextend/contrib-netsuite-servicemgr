@@ -4,7 +4,7 @@ namespace Celigo.ServiceManager.NetSuite
 {
     public abstract class SuiteTalkHeader: MessageHeader
     {
-        public virtual bool IsApplicableTo(in Message message)
+        public virtual bool IsApplicableTo(Message message)
         {
             return true;
         }

@@ -20,7 +20,7 @@ namespace Celigo.ServiceManager.NetSuite
             _provider = provider;
         }
 
-        public override bool IsApplicableTo(in Message message)
+        public override bool IsApplicableTo(Message message)
         {
             return message.Headers != null
                 && message.Headers.Action != null

@@ -20,6 +20,8 @@ namespace Celigo.ServiceManager.NetSuite
 
         protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
+            if (_basicPassportProvider == null) throw new InvalidOperationException("The PassportProvider has not been set.");
+
             var credentials = _basicPassportProvider.GetPassport();
 
             if (credentials == null) throw new InvalidOperationException("The Credentials Provider provided null credentials");

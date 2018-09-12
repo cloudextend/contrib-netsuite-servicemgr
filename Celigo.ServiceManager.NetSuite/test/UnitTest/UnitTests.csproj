@@ -26,8 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Celigo.ServiceManager.NetSuite\Celigo.ServiceManager.NetSuite.csproj" />
-    <ProjectReference Include="..\..\src\SuiteTalk-2017.2\Celigo.SuiteTalk.2017_2.csproj" />
+    <ProjectReference Include="..\..\..\Celigo.SuiteTalk.2017_2\src\Celigo.SuiteTalk.2017_2.csproj" />
+    <ProjectReference Include="..\..\..\Celigo.SuiteTalk.PassportProviders.EnvironmentVariables\src\Celigo.SuiteTalk.PassportProviders.EnvironmentVariables.csproj" />
+    <ProjectReference Include="..\..\src\Celigo.ServiceManager.NetSuite.csproj" />
   </ItemGroup>
 
   <ItemGroup>
