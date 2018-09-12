@@ -1,1 +1,5 @@
+title: Celigo ServiceManager for NetSuite
+description: Provides a wrapper around NetSuite SuiteTalk WebServices with an array of utility functionality for .NET Standard projects.
+show_downloads: false
+google_analytics:
 theme: jekyll-theme-slate
