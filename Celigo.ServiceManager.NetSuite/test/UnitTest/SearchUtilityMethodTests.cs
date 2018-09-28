@@ -33,7 +33,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         [Fact]
         public void Create_basic_of_an_ISearchAdvancedRow()
         {
-            ISearchAdvancedRow row = new SupportCaseSearchRow();
+            ISearchRow row = new SupportCaseSearchRow();
             var basic = row.CreateBasic();
             basic.Should().BeOfType<SupportCaseSearchRowBasic>();
         }
@@ -41,7 +41,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         [Fact]
         public void Get_basic_of_an_ISearchAdvancedRow()
         {
-            ISearchAdvancedRow row = new SupportCaseSearchRow();
+            ISearchRow row = new SupportCaseSearchRow();
             var basic = row.GetBasic();
             basic.Should().BeNull();
 

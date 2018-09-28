@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.10.4</Version>
+    <Version>3.0.0</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
-    <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2017.2</Description>
+    <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2018.2</Description>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
     <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
@@ -17,9 +17,9 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>ISearchColumnField interface</PackageReleaseNotes>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <ProjectReference Include="..\..\Celigo.SuiteTalk.2017_2\src\Celigo.SuiteTalk.2017_2.csproj" />
+    <ProjectReference Include="..\..\Celigo.SuiteTalk\src\Celigo.SuiteTalk.csproj" />
   </ItemGroup>
 
 </Project>

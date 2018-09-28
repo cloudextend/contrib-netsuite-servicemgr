@@ -34,15 +34,7 @@ namespace Celigo.ServiceManager.NetSuite
 
         public Action<T> ClientInitializer { get; set; }
         string INetSuiteClientFactory.ApplicationId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        private static readonly string _relativeWsPath;
-
-        static ClientFactory()
-        {
-            var endpoint = NetSuitePortTypeClient.GetDefaultEndpoint();
-            _relativeWsPath = endpoint.Uri.LocalPath;
-        }
-
+        
         public ClientFactory(string appId)
         {
             this.ApplicationId = appId;
@@ -137,13 +129,16 @@ namespace Celigo.ServiceManager.NetSuite
 
         private EndpointAddress GetDataCenterEndpoint(string dataCenter)
         {
+            var endpoint = NetSuitePortTypeClient.GetDefaultEndpoint();
+            var relativeWsPath = endpoint.Uri.LocalPath;
+
             if (dataCenter.EndsWith("/"))
             {
-                return new EndpointAddress(dataCenter + ClientFactory._relativeWsPath);
+                return new EndpointAddress(dataCenter + relativeWsPath);
             }
             else
             {
-                return new EndpointAddress(string.Concat(dataCenter, "/", ClientFactory._relativeWsPath));
+                return new EndpointAddress(string.Concat(dataCenter, "/", relativeWsPath));
             }
         }
 
