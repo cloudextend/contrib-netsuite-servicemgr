@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: grid;
+
+    background-color: #f8f8f8;
+    color: #999;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}

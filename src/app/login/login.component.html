@@ -1,0 +1,10 @@
+<div>
+    <app-basic-login *ngIf="type === 'basic'" [email]="userEmail"
+        (basicLoginStateChange)="onBasicLoginStateChange($event)" ></app-basic-login>
+
+    <app-tba-login *ngIf="type === 'tba'" [email]="userEmail"
+        (tbaLoginStateChange)="onTBALoginStateChange($event)" ></app-tba-login>
+
+    <app-sso-login *ngIf="type === 'sso'" [email]="userEmail"
+        (ssoLoginStateChange)="onSSOLoginStateChange($event)" ></app-sso-login>
+</div>

@@ -1,0 +1,6 @@
+<div class="email-form">
+    <input type="email" #email [value]="userEmail" (input)="userEmail = $event.target.value"
+        placeholder="user email id"/>
+    <br/>
+    <a routerLink="/login" [queryParams]="{email:userEmail}" >Login</a>
+</div>

@@ -1,0 +1,15 @@
+<div class="login-grid">
+    <div class="login-list">
+        <div class="login-link" *ngIf="showBasic" routerLink="/login/basic" [queryParams]="{email:userEmail}" >
+            Basic
+        </div>
+        <div class="login-link" *ngIf="showTBA" routerLink="/login/tba" [queryParams]="{email:userEmail}" >
+            TBA
+        </div>
+        <div class="login-link" *ngIf="showSSO" routerLink="/login/sso" [queryParams]="{email:userEmail}" >
+            SSO
+        </div>
+        <br/>
+        <div routerLink="/">back</div>
+    </div>
+</div>
