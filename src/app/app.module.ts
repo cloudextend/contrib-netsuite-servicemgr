@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { LocalStorageModule } from '@ngx-pwa/local-storage';
+import { FormsModule } from '@angular/forms';
 
 import { ClientAuthNetSuiteModule, AuthConfigService } from 'lib-client-auth-netsuite';
 
@@ -13,6 +13,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LoginTypesComponent } from './login-types/login-types.component';
 import { EmailFormComponent } from './email-form/email-form.component';
+import { UnlockTbaTokensComponent } from './unlock-tba-tokens/unlock-tba-tokens.component';
+import { PersistTbaTokensComponent } from './persist-tba-tokens/persist-tba-tokens.component';
+import { ListTbaTokensComponent } from './list-tba-tokens/list-tba-tokens.component';
+// import { NgMaterialModule } from './ng-material/ng-material.module';
 
 @NgModule({
     declarations: [
@@ -20,13 +24,17 @@ import { EmailFormComponent } from './email-form/email-form.component';
         LoginTypesComponent,
         LoginComponent,
         EmailFormComponent,
+        UnlockTbaTokensComponent,
+        PersistTbaTokensComponent,
+        ListTbaTokensComponent,
     ],
     imports: [
         AppRoutingModule,
         BrowserModule,
         ClientAuthNetSuiteModule,
+        FormsModule,
         HttpClientModule,
-        LocalStorageModule
+        // NgMaterialModule
     ],
     providers: [StorageService],
     bootstrap: [AppComponent]

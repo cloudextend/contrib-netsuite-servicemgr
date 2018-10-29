@@ -2,8 +2,26 @@
     <app-basic-login *ngIf="type === 'basic'" [email]="userEmail"
         (basicLoginStateChange)="onBasicLoginStateChange($event)" ></app-basic-login>
 
-    <app-tba-login *ngIf="type === 'tba'" [email]="userEmail"
-        (tbaLoginStateChange)="onTBALoginStateChange($event)" ></app-tba-login>
+    <app-tba-login *ngIf="type === 'tba'" (tbaLoginStateChange)="onTBALoginStateChange($event)"
+        [email]="userEmail"
+        tokenPlaceholder="e0d6a3f4e41bbbeb5acb4b8643f0a2931b795b3dcaf2daba85740ebe0a1e794c"
+        tokenSecretPlaceholder="d17012941b4b968173066c1279905908c7a0baaf87d234650de2c564b651e999"
+        accountPlaceholder="TSTDRV1291203"
+    >
+        <div footer-content>
+            <input type="checkbox" [(ngModel)]="persistTokens"/>Save this token to the device
+            <app-pin-access-link>
+                <div tokens-present-content>
+                    <a
+                        routerLink="/login/tba/unlock-tokens"
+                        [queryParams]="{email:userEmail}"
+                    >
+                        Use a saved token
+                    </a>
+                </div>
+            </app-pin-access-link>
+        </div>
+    </app-tba-login>
 
     <app-sso-login *ngIf="type === 'sso'" [email]="userEmail"
         (ssoLoginStateChange)="onSSOLoginStateChange($event)" ></app-sso-login>

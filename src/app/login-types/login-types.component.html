@@ -1,15 +1,16 @@
-<div class="login-grid">
-    <div class="login-list">
-        <div class="login-link" *ngIf="showBasic" routerLink="/login/basic" [queryParams]="{email:userEmail}" >
-            Basic
-        </div>
-        <div class="login-link" *ngIf="showTBA" routerLink="/login/tba" [queryParams]="{email:userEmail}" >
-            TBA
-        </div>
-        <div class="login-link" *ngIf="showSSO" routerLink="/login/sso" [queryParams]="{email:userEmail}" >
-            SSO
-        </div>
-        <br/>
-        <div routerLink="/">back</div>
-    </div>
-</div>
+<button routerLink="/login/basic" [queryParams]="{email:userEmail}">Basic</button>
+<button routerLink="/login/tba" [queryParams]="{email:userEmail}">TBA</button>
+<button routerLink="/login/sso" [queryParams]="{email:userEmail}">SSO</button>
+<!-- <mat-nav-list class="login-list">
+    <mat-list-item *ngIf="showBasic">
+        <button mat-button routerLink="/login/basic" [queryParams]="{email:userEmail}">Basic</button>
+    </mat-list-item>
+    <mat-list-item *ngIf="showTBA">
+        <button mat-button routerLink="/login/tba" [queryParams]="{email:userEmail}">TBA</button>
+    </mat-list-item>
+    <mat-list-item *ngIf="showSSO">
+        <button mat-button routerLink="/login/sso" [queryParams]="{email:userEmail}">SSO</button>
+    </mat-list-item>
+</mat-nav-list> -->
+<!-- <button mat-button routerLink="/">back</button> -->
+<button routerLink="/">back</button>
