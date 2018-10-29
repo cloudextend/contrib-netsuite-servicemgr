@@ -35,21 +35,31 @@ export class LoginComponent implements OnInit {
 
         if (LoginStates[state] === 'Success') {
             this.storage.set('celigo_cexl_session_data', data);
+
+            window.location.href = 'https://00a817a2.ap.ngrok.io/';
         }
     }
 
     onTBALoginStateChange(event) {
-        const {inputs: {account, token, tokenSecret}} = event;
+        const {data, inputs: {account, token, tokenSecret}} = event;
+
+        data.credentialType = 'celigo-tba';
+
+        data.user = {...data.user, email: this.userEmail};
 
         console.log(event);
 
         if (event.state === LoginStates.Success) {
-            this.storage.set('celigo_cexl_session_data', event.data);
+            this.storage.set('celigo_cexl_session_data', data);
 
             if (this.persistTokens) {
                 const queryParams = {account, token, tokenSecret, email: this.userEmail};
                 this.router.navigate(['login', 'tba', 'persist-tokens'], { queryParams });
+
+                return;
             }
+
+            window.location.href = 'https://00a817a2.ap.ngrok.io/';
         }
     }
 }
