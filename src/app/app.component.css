@@ -1,6 +1,13 @@
 .app{
     margin: 0;
     padding: 0;
+    font-family: "san_francisco_textregular", 'Roboto', sans-serif;
+    color: #222;
+    font-size: 13px;
+    line-height: 18px;
+    max-width: 100%;
+    background: #f8f8f8;
+    position: relative;
 }
 
 .app .text-left {
@@ -27,21 +34,10 @@
     font-size: 17px !important;
 }
 
-.app {
-    font-family: "san_francisco_textregular", 'Roboto', sans-serif;
-    color: #222;
-    font-size: 13px;
-    line-height: 18px;
-    max-width: 100%;
-    /* width: 340px; */
-    /* float: right; */
-    background: #f8f8f8;
-    position: relative;
-}
-
 .app .title {
     background: #0075DA;
     padding: 10px 15px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -52,6 +48,7 @@
 }
 
 .app .title .title-text {
+    font-size: x-large;
     color: #fff;
     margin: 0 0 3px 0;
     font-weight: 300;

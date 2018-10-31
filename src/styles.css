@@ -12,3 +12,13 @@ html, body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
+
+.loading-text {
+    text-align: center;
+    padding-top: 60px;
+}
+
+.spinner{
+    font-size: 5em;
+    padding: 50px;
+}

@@ -1,7 +1,14 @@
-<div class="email-form">
-    <input type="email" #email [value]="userEmail" (input)="userEmail = $event.target.value"
-        placeholder="user email id"/>
-</div>
-<div>
-    <a routerLink="/login" [queryParams]="{email:userEmail}" >Login</a>
+<div class="form">
+    <div class="form-group">
+        <input class="form-control" type="email" #email
+            [value]="userEmail"
+            (input)="userEmail = $event.target.value"
+            placeholder="user email id"
+        />
+    </div>
+    <div class="form-group">
+        <a class="btn btn-primary" routerLink="/login" [queryParams]="{email:userEmail}" >
+            Login
+        </a>
+    </div>
 </div>

@@ -1,16 +1,46 @@
-<button routerLink="/login/basic" [queryParams]="{email:userEmail}">Basic</button>
-<button routerLink="/login/tba" [queryParams]="{email:userEmail}">TBA</button>
-<button routerLink="/login/sso" [queryParams]="{email:userEmail}">SSO</button>
-<!-- <mat-nav-list class="login-list">
-    <mat-list-item *ngIf="showBasic">
-        <button mat-button routerLink="/login/basic" [queryParams]="{email:userEmail}">Basic</button>
-    </mat-list-item>
-    <mat-list-item *ngIf="showTBA">
-        <button mat-button routerLink="/login/tba" [queryParams]="{email:userEmail}">TBA</button>
-    </mat-list-item>
-    <mat-list-item *ngIf="showSSO">
-        <button mat-button routerLink="/login/sso" [queryParams]="{email:userEmail}">SSO</button>
-    </mat-list-item>
-</mat-nav-list> -->
-<!-- <button mat-button routerLink="/">back</button> -->
-<button routerLink="/">back</button>
+<template [ngIf]="!accounts">
+    <div class="loading-text">
+        <i class="fas fa-circle-notch fa-spin spinner"></i>
+        <h4>Getting your accounts ready...</h4>
+    </div>
+</template>
+<template [ngIf]="accounts && accounts.length">
+    <div class="form accounts-select">
+        <select class="form-control" [(ngModel)]="selectedAccount">
+            <template ngFor let-account [ngForOf]="accounts">
+                <option [ngValue]="account">{{account.accountName}}</option>
+            </template>
+        </select>
+    </div>
+    <ul class="list-group">
+        <li *ngIf="selectedAccount.basic" class="list-group-item">
+            <button
+                class="btn btn-primary"
+                routerLink="/login/basic"
+                [queryParams]="{email:userEmail}"
+            >
+                Login using Basic credentials
+            </button>
+        </li>
+        <li *ngIf="selectedAccount.tba" class="list-group-item">
+            <button
+                class="btn btn-primary"
+                routerLink="/login/tba"
+                [queryParams]="{email:userEmail}"
+            >
+                Login using TBA tokens
+            </button>
+        </li>
+        <li *ngIf="selectedAccount.sso" class="list-group-item">
+            <button
+                class="btn btn-primary"
+                routerLink="/login/sso"
+                [queryParams]="{email:userEmail}"
+            >
+                Login via SSO
+            </button>
+        </li>
+    </ul>
+    <hr/>
+    <button class="btn btn-secondary" routerLink="/">back</button>
+</template>

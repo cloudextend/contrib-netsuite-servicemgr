@@ -19,3 +19,17 @@
     display: inline-block;
     border: 2px solid #FFF;
 }
+
+.accounts-select {
+    margin-bottom: 20px;
+}
+
+.loading-text {
+    text-align: center;
+    padding-top: 60px;
+}
+
+.spinner{
+    font-size: 5em;
+    padding: 50px;
+}
