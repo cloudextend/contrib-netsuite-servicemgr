@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoginStates, AuthService } from 'lib-client-auth-netsuite';
+import { AuthUserPreferencesService, LoginStates, SsoFlowStates, TbaPersistedStates, TokenService } from 'lib-client-auth-netsuite';
 
+import { OfficeService } from '../office.service';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -14,16 +15,30 @@ export class LoginComponent implements OnInit {
     type: string;
     userEmail: string;
     persistTokens: boolean;
+    tagName: string;
+
+    account: string;
+    token: string;
+    tokenSecret: string;
+
+    private $ = (<any>window).$;
 
     constructor(
+        private officeService: OfficeService,
         private route: ActivatedRoute,
         private router: Router,
         private storage: StorageService,
-    ) {}
+        private tokenService: TokenService,
+        private userPreferenceService: AuthUserPreferencesService,
+    ) {
+        this.persistTokens = true;
+    }
 
     ngOnInit() {
         this.type = this.route.snapshot.params.type;
-        this.userEmail = this.route.snapshot.queryParams.email;
+        this.userEmail = this.userPreferenceService.getDefaultEmail();
+
+        this.tagName = this.tokenService.generateTagName('AccountId');
     }
 
     onBasicLoginStateChange({state, data}) {
@@ -54,12 +69,35 @@ export class LoginComponent implements OnInit {
 
             if (this.persistTokens) {
                 const queryParams = {account, token, tokenSecret, email: this.userEmail};
-                this.router.navigate(['login', 'tba', 'persist-tokens'], { queryParams });
+
+                this.account = account;
+                this.token = token;
+                this.tokenSecret = tokenSecret;
+
+                this.$('#confirmPinModal').modal('show');
 
                 return;
             }
 
             window.location.href = 'https://00a817a2.ap.ngrok.io/';
+        }
+    }
+
+    onTokenPersistStateChanged(event) {
+        if (event.state === TbaPersistedStates.SuccessfullySavedTokens) {
+            this.$('#confirmPinModal').modal('hide');
+
+            window.location.href = 'https://00a817a2.ap.ngrok.io/';
+        }
+    }
+
+    onInitiateSSOFlow(event) {
+        if (event === SsoFlowStates.AttemptInProgress) {
+            console.log('in progress');
+
+            const ssoSignUrl = 'https://00a817a2.ap.ngrok.io/api/netsuite/2.0/auth/initiate-sso';
+            this.officeService.openDialog(ssoSignUrl , (data) => {
+            });
         }
     }
 }

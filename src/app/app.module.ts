@@ -7,6 +7,7 @@ import { ClientAuthNetSuiteModule, AuthConfigService } from 'lib-client-auth-net
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
+import { OfficeService } from './office.service';
 import { StorageService } from './storage.service';
 
 import { AppComponent } from './app.component';
@@ -36,7 +37,7 @@ import { ListTbaTokensComponent } from './list-tba-tokens/list-tba-tokens.compon
         HttpClientModule,
         // NgMaterialModule
     ],
-    providers: [StorageService],
+    providers: [OfficeService, StorageService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

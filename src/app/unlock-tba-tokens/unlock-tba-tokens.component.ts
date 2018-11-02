@@ -16,8 +16,6 @@ export class UnlockTbaTokensComponent implements OnInit {
     ngOnInit() { }
 
     onTokenRetrievalStateChanged(event) {
-        console.log(event);
-
         if (event.state === TbaPersistedStates.HasSavedTokens) {
             const queryParams = {pin: event.inputs.pin};
             this.router.navigate(['login', 'tba', 'list-tokens'], { queryParams });

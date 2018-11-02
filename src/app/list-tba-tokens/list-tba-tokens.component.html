@@ -1,2 +1,6 @@
 <app-tba-tokens-view (loginStateChanged)="onLoginStateChange($event)" [pin]="pin">
 </app-tba-tokens-view>
+
+<hr/>
+
+<a routerLink="/login/tba" [queryParams]="{email:userEmail}">Add a new token</a>

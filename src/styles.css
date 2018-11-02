@@ -22,3 +22,7 @@ html, body {
     font-size: 5em;
     padding: 50px;
 }
+
+.btn{
+    width: 100%
+}

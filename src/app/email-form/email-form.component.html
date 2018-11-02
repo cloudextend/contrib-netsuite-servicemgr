@@ -1,14 +1,10 @@
 <div class="form">
     <div class="form-group">
-        <input class="form-control" type="email" #email
-            [value]="userEmail"
-            (input)="userEmail = $event.target.value"
-            placeholder="user email id"
-        />
-    </div>
-    <div class="form-group">
-        <a class="btn btn-primary" routerLink="/login" [queryParams]="{email:userEmail}" >
-            Login
+        <label for="user-email">Enter your email id:</label>
+        <input id="user-email" class="form-control email-box" type="email" [(ngModel)]="userEmail"/>
+
+        <a class="btn btn-primary" (click)="onContinue()">
+            Continue
         </a>
     </div>
 </div>

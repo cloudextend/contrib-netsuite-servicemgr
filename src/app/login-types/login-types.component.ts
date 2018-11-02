@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 
+import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
+
+enum LoginMethodsFetchStates {
+    Fetching,
+    Done,
+    Failed
+}
 
 @Component({
     selector: 'app-login-types',
@@ -11,60 +18,48 @@ import { Http } from '@angular/http';
 export class LoginTypesComponent implements OnInit {
 
     userEmail: string;
-    showBasic: boolean;
-    showTBA: boolean;
-    showSSO: boolean;
 
-    accounts: object[];
-    selectedAccount: object;
+    basic: object;
+    tba: object;
+    sso: object;
+
+    loginMethodsFetchStates = LoginMethodsFetchStates;
+    fetchState: LoginMethodsFetchStates = LoginMethodsFetchStates.Fetching;
 
     constructor(
-        private route: ActivatedRoute,
-        private http: Http
-    ) {
-        const loginMethods = {
-            'celigo-basic': 'basic',
-            'celigo-tba': 'tba',
-            'celigo-sso': 'sso',
-        };
-        this.selectedAccount = {
-            accountName: 'choose an account',
-            basic: false,
-            tba: false,
-            sso: false
-        };
-
-        this.userEmail = this.route.snapshot.queryParams.email;
-        this.http.get('https://00a817a2.ap.ngrok.io/api/netsuite/2.0/auth/type?' +
-            `email=${this.route.snapshot.queryParams.email}`
-        )
-        .map(resp => resp.json())
-        .subscribe((response) => {
-            const { accounts } = response;
-
-            this.accounts = accounts.map(({account, methods}) => {
-                const loginMap = methods.reduce((map, {method, enabled }) => {
-                    map[loginMethods[method]] = enabled;
-
-                    return map;
-                }, {});
-
-                return {
-                    accountName: account.name,
-                    ...loginMap
-                };
-            });
-
-            this.selectedAccount = this.accounts[0];
-
-            console.log(this.accounts);
-
-            // this.showBasic = basic;
-            // this.showTBA = tba;
-            // this.showSSO = sso;
-        });
-    }
+        private http: Http,
+        private router: Router,
+        private userPreferenceService: AuthUserPreferencesService,
+        private tokenService: TokenService,
+    ) {}
 
     ngOnInit() {
+        this.userEmail = this.userPreferenceService.getDefaultEmail();
+
+        this.http
+        .get(`https://00a817a2.ap.ngrok.io/api/netsuite/2.0/auth/type?email=${this.userEmail}`)
+        .map(resp => resp.json())
+        .subscribe((response) => {
+            const { basic, tba, sso } = response;
+
+            this.basic = basic;
+            this.tba = tba;
+            this.sso = sso;
+
+            this.fetchState = LoginMethodsFetchStates.Done;
+
+            console.log({sso});
+        },
+        (error) => { this.fetchState = LoginMethodsFetchStates.Failed; });
+    }
+
+    onTBASelection(event) {
+        if (this.tokenService.hasSavedTokens()) {
+            this.router.navigate(['login', 'tba', 'unlock-tokens']);
+
+            return;
+        }
+
+        this.router.navigate(['login', 'tba'], { queryParams: {email: this.userEmail}});
     }
 }

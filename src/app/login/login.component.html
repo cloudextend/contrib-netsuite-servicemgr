@@ -8,21 +8,37 @@
         tokenSecretPlaceholder="d17012941b4b968173066c1279905908c7a0baaf87d234650de2c564b651e999"
         accountPlaceholder="TSTDRV1291203"
     >
-        <div footer-content>
+        <div optional-content>
             <input type="checkbox" [(ngModel)]="persistTokens"/>Save this token to the device
-            <app-pin-access-link>
-                <div tokens-present-content>
-                    <a
-                        routerLink="/login/tba/unlock-tokens"
-                        [queryParams]="{email:userEmail}"
-                    >
-                        Use a saved token
-                    </a>
+
+            <div *ngIf="persistTokens" style="margin-top:10px; margin-bottom:10px;">
+                <label for="tag-name">Token Name</label>
+                <input class="form-control" id="tag-name" type="text" [(ngModel)]="tagName"/>
+            </div>
+
+            <div class="modal fade" id="confirmPinModal" tabindex="-1" role="dialog" aria-labelledby="confirmPinModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                        <app-tba-persist-view [showTag]="false" [account]="account"
+                            [token]="token" [tokenSecret]="tokenSecret" [systemTag]="tagName"
+                            (tokenPersistStateChanged)= "onTokenPersistStateChanged($event)"
+                        >
+                            <span pin-label>Re-enter your pin to continue</span>
+                            <span save-label>Save the token</span>
+                        </app-tba-persist-view>
+                    </div>
+                  </div>
                 </div>
-            </app-pin-access-link>
+            </div>
         </div>
     </app-tba-login>
 
     <app-sso-login *ngIf="type === 'sso'" [email]="userEmail"
+        (initiateSsoFlow)="onInitiateSSOFlow($event)"
         (ssoLoginStateChange)="onSSOLoginStateChange($event)" ></app-sso-login>
+
+    <hr/>
+
+    <a routerLink="/login" [queryParams]="{email:userEmail}">Login with a different method</a>
 </div>
