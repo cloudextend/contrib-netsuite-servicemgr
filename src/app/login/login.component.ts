@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthUserPreferencesService, LoginStates, SsoFlowStates, TbaPersistedStates, TokenService } from 'lib-client-auth-netsuite';
+import { AuthUserPreferencesService, LoginStates, SsoFlowStates, TbaPersistedStates, TokenService,
+    SsoLoginViewComponent } from 'lib-client-auth-netsuite';
 
 import { OfficeService } from '../office.service';
 import { StorageService } from '../storage.service';
@@ -22,6 +23,10 @@ export class LoginComponent implements OnInit {
     tokenSecret: string;
 
     hasASavedPin: boolean;
+
+    tokens = [];
+
+    @ViewChild(SsoLoginViewComponent) ssoLoginComponentRef: SsoLoginViewComponent;
 
     private $ = (<any>window).$;
 
@@ -99,7 +104,26 @@ export class LoginComponent implements OnInit {
             const ssoSignUrl = 'https://00a817a2.ap.ngrok.io/api/netsuite/2.0/auth/initiate-sso';
             this.officeService.openDialog(ssoSignUrl , (data) => {
                 console.log(data);
+                const {message} = data;
+
+                try {
+                    const {tbaClaims = []} = JSON.parse(message);
+
+                    this.tokens = tbaClaims.concat([{
+                        tokenId: 'e0d6a3f4e41bbbeb5acb4b8643f0a2931b795b3dcaf2daba85740ebe0a1e794c',
+                        tokenSecret: 'd17012941b4b968173066c1279905908c7a0baaf87d234650de2c564b651e999',
+                        account: 'TSTDRV1291203'
+                    }]);
+
+                    this.ssoLoginComponentRef.setState(SsoFlowStates.Success);
+                } catch (error) {
+                    console.log(error);
+                }
             });
         }
+    }
+
+    onSSOLoginStateChange(event) {
+        console.log(event);
     }
 }

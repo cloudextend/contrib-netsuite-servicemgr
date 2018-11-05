@@ -34,7 +34,9 @@
 
     <app-sso-login *ngIf="type === 'sso'" [email]="userEmail"
         (initiateSsoFlow)="onInitiateSSOFlow($event)"
-        (ssoLoginStateChange)="onSSOLoginStateChange($event)" ></app-sso-login>
+        (ssoLoginStateChange)="onSSOLoginStateChange($event)"
+        [tokenList]="tokens"
+    ></app-sso-login>
 
     <hr/>
 
