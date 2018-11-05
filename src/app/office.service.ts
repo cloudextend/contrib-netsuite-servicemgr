@@ -5,9 +5,9 @@ export class OfficeService {
     private office;
 
     constructor() {
-        // if ( !window.hasOwnProperty( 'Office' ) ) {
-        //     throw new Error( 'Unable to find the Office API' );
-        // }
+        if ( !window.hasOwnProperty( 'Office' ) ) {
+            throw new Error( 'Unable to find the Office API' );
+        }
 
         this.office = ( <any>window ).Office;
     }
