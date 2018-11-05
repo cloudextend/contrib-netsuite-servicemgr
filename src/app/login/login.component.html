@@ -4,9 +4,6 @@
 
     <app-tba-login *ngIf="type === 'tba'" (tbaLoginStateChange)="onTBALoginStateChange($event)"
         [email]="userEmail"
-        tokenPlaceholder="e0d6a3f4e41bbbeb5acb4b8643f0a2931b795b3dcaf2daba85740ebe0a1e794c"
-        tokenSecretPlaceholder="d17012941b4b968173066c1279905908c7a0baaf87d234650de2c564b651e999"
-        accountPlaceholder="TSTDRV1291203"
     >
         <div optional-content>
             <input type="checkbox" [(ngModel)]="persistTokens"/>Save this token to the device
@@ -24,7 +21,8 @@
                             [token]="token" [tokenSecret]="tokenSecret" [systemTag]="tagName"
                             (tokenPersistStateChanged)= "onTokenPersistStateChanged($event)"
                         >
-                            <span pin-label>Re-enter your pin to continue</span>
+                            <span pin-label *ngIf="!hasASavedPin">Enter a pin to continue</span>
+                            <span pin-label *ngIf="hasASavedPin">Re-enter your pin to continue</span>
                             <span save-label>Save the token</span>
                         </app-tba-persist-view>
                     </div>
@@ -40,5 +38,5 @@
 
     <hr/>
 
-    <a routerLink="/login" [queryParams]="{email:userEmail}">Login with a different method</a>
+    <a routerLink="/login">Login with a different method</a>
 </div>

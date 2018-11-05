@@ -24,12 +24,10 @@ export class EmailFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.userEmail = this.userPreferenceService.getDefaultEmail() || 'vamshikrishna.alladi@celigo.com' || 'someone@somewhere.com';
+        if (!!this.userPreferenceService.getDefaultEmail()) { return this.goToNextRoute(); }
     }
 
-    onContinue() {
-        this.userPreferenceService.setDefaultEmail(this.userEmail);
-
+    private goToNextRoute() {
         const defaultMethod = this.userPreferenceService.getDefaultLoginMethod();
 
         const nextRoute = (defaultMethod === 'celigo-tba' && this.tokenService.hasSavedTokens())
@@ -37,5 +35,11 @@ export class EmailFormComponent implements OnInit {
             : loginMethodMap[defaultMethod] || '/login';
 
         this.router.navigate([nextRoute]);
+    }
+
+    onContinue() {
+        this.userPreferenceService.setDefaultEmail(this.userEmail);
+
+        this.goToNextRoute();
     }
 }

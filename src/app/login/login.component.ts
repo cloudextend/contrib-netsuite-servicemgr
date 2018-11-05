@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthUserPreferencesService, LoginStates, SsoFlowStates, TbaPersistedStates, TokenService } from 'lib-client-auth-netsuite';
 
 import { OfficeService } from '../office.service';
@@ -21,12 +21,13 @@ export class LoginComponent implements OnInit {
     token: string;
     tokenSecret: string;
 
+    hasASavedPin: boolean;
+
     private $ = (<any>window).$;
 
     constructor(
         private officeService: OfficeService,
         private route: ActivatedRoute,
-        private router: Router,
         private storage: StorageService,
         private tokenService: TokenService,
         private userPreferenceService: AuthUserPreferencesService,
@@ -68,11 +69,11 @@ export class LoginComponent implements OnInit {
             this.storage.set('celigo_cexl_session_data', data);
 
             if (this.persistTokens) {
-                const queryParams = {account, token, tokenSecret, email: this.userEmail};
-
                 this.account = account;
                 this.token = token;
                 this.tokenSecret = tokenSecret;
+
+                this.hasASavedPin = this.tokenService.hasSavedPin();
 
                 this.$('#confirmPinModal').modal('show');
 
@@ -97,6 +98,7 @@ export class LoginComponent implements OnInit {
 
             const ssoSignUrl = 'https://00a817a2.ap.ngrok.io/api/netsuite/2.0/auth/initiate-sso';
             this.officeService.openDialog(ssoSignUrl , (data) => {
+                console.log(data);
             });
         }
     }

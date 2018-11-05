@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PersistTbaTokensComponent implements OnInit {
 
-    email: string;
     account: string;
     token: string;
     tokenSecret: string;
@@ -19,7 +18,6 @@ export class PersistTbaTokensComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.email = this.route.snapshot.queryParams.email;
         this.account = this.route.snapshot.queryParams.account;
         this.token = this.route.snapshot.queryParams.token;
         this.tokenSecret = this.route.snapshot.queryParams.tokenSecret;

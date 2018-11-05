@@ -11,7 +11,6 @@
             <button
                 class="btn btn-primary"
                 routerLink="/login/basic"
-                [queryParams]="{email:userEmail}"
             >
                 Login using Basic credentials
             </button>
@@ -29,7 +28,7 @@
                 <button
                     class="btn btn-primary"
                     routerLink="/login/sso"
-                    [queryParams]="{email:userEmail, accountId:option.accountId}"
+                    [queryParams]="{accountId:option.accountId}"
                     >
                     Login via SSO ({{option.label}})
                 </button>

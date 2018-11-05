@@ -60,6 +60,6 @@ export class LoginTypesComponent implements OnInit {
             return;
         }
 
-        this.router.navigate(['login', 'tba'], { queryParams: {email: this.userEmail}});
+        this.router.navigate(['login', 'tba']);
     }
 }
