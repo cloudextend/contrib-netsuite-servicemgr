@@ -6,7 +6,7 @@ import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsui
 
 import { environment } from './../../environments/environment';
 
-enum LoginMethodsFetchStates {
+export enum LoginMethodsFetchStates {
     Fetching,
     Done,
     Failed
