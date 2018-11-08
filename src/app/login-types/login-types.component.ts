@@ -4,6 +4,8 @@ import { Http } from '@angular/http';
 
 import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
 
+import { environment } from './../../environments/environment';
+
 enum LoginMethodsFetchStates {
     Fetching,
     Done,
@@ -36,8 +38,9 @@ export class LoginTypesComponent implements OnInit {
     ngOnInit() {
         this.userEmail = this.userPreferenceService.getDefaultEmail();
 
-        this.http
-        .get(`https://00a817a2.ap.ngrok.io/api/netsuite/2.0/auth/type?email=${this.userEmail}`)
+        const {base, loginMethods} = environment.urls.authAPI;
+
+        this.http.get(`${base}${loginMethods}?email=${this.userEmail}`)
         .map(resp => resp.json())
         .subscribe((response) => {
             const { basic, tba, sso } = response;

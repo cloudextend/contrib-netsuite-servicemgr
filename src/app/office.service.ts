@@ -15,7 +15,9 @@ export class OfficeService {
     public openDialog( url: string, callback: Function ): void {
         this.office.context.ui.displayDialogAsync( url, ( res: any ) => {
             const dialog = res.value;
-            dialog.addEventHandler( this.office.EventType.DialogMessageReceived, callback );
+            dialog.addEventHandler( this.office.EventType.DialogMessageReceived, response => {
+                return callback({ dialog, response });
+            } );
         } );
     }
 }

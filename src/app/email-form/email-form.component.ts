@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
-
 import { Router } from '@angular/router';
+
+import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
 
 const loginMethodMap = {
     'celigo-basic': '/login/basic',
