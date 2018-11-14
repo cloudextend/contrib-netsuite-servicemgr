@@ -48,11 +48,17 @@
         </app-tba-login>
     </div>
 
-    <app-sso-login *ngIf="type === 'sso'" [email]="userEmail"
-        (initiateSsoFlow)="onInitiateSSOFlow($event)"
-        (ssoLoginStateChange)="onSSOLoginStateChange($event)"
-        [tokenList]="tokens"
-    ></app-sso-login>
+    <div *ngIf="type === 'sso'">
+        <label class="view-title">Login using Single-Sign-On</label>
+
+        <app-sso-login [email]="userEmail"
+            (initiateSsoFlow)="onInitiateSSOFlow($event)"
+            (ssoLoginStateChange)="onSSOLoginStateChange($event)"
+            [tokenList]="tokens"
+        ></app-sso-login>
+        <br/>
+        <br/>
+    </div>
 
     <a routerLink="/login">Login with a different method</a>
 </div>
