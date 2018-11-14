@@ -6,43 +6,53 @@
         ></app-basic-login>
     </div>
 
-    <app-tba-login *ngIf="type === 'tba'" (tbaLoginStateChange)="onTBALoginStateChange($event)"
-        [email]="userEmail"
-    >
-        <div optional-content>
-            <input type="checkbox" [(ngModel)]="persistTokens"/>Save this token to the device
+    <div *ngIf="type === 'tba'">
+        <label class="view-title">Login with your NetSuite TBA Token</label>
+        <app-tba-login (tbaLoginStateChange)="onTBALoginStateChange($event)" [email]="userEmail">
+            <div optional-content>
+                <div class="persist-tokens">
+                    <input id="persistTokensCheckbox" type="checkbox" [(ngModel)]="persistTokens" class="form-control"/>
+                    <label for="persistTokensCheckbox">
+                        Save this token to the device
+                    </label>
+                </div>
 
-            <div *ngIf="persistTokens" style="margin-top:10px; margin-bottom:10px;">
-                <label for="tag-name">Token Name</label>
-                <input class="form-control" id="tag-name" type="text" [(ngModel)]="tagName"/>
-            </div>
+                <div *ngIf="persistTokens" style="margin-top:10px; margin-bottom:10px;">
+                    <label for="tag-name">Token Name</label>
+                    <input class="form-control" id="tag-name" type="text" [(ngModel)]="tagName"/>
+                </div>
 
-            <div class="modal fade" id="confirmPinModal" tabindex="-1" role="dialog" aria-labelledby="confirmPinModalTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-body">
-                        <app-tba-persist-view [showTag]="false" [account]="account"
-                            [token]="token" [tokenSecret]="tokenSecret" [systemTag]="tagName"
-                            (tokenPersistStateChanged)= "onTokenPersistStateChanged($event)"
-                        >
-                            <span pin-label *ngIf="!hasASavedPin">Enter a pin to continue</span>
-                            <span pin-label *ngIf="hasASavedPin">Re-enter your pin to continue</span>
-                            <span save-label>Save the token</span>
-                        </app-tba-persist-view>
+                <div class="modal fade" id="confirmPinModal" tabindex="-1" role="dialog" aria-labelledby="confirmPinModalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <app-tba-persist-view [showTag]="false" [account]="account"
+                                    [token]="token" [tokenSecret]="tokenSecret" [systemTag]="tagName"
+                                    (tokenPersistStateChanged)= "onTokenPersistStateChanged($event)"
+                                >
+                                    <span pin-label *ngIf="!hasASavedPin">
+                                        Setup a pin to continue
+                                    </span>
+                                    <span pin-label *ngIf="hasASavedPin">
+                                        Re-enter your pin to continue
+                                    </span>
+                                    <span save-label>
+                                        Save the token
+                                    </span>
+                                </app-tba-persist-view>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
             </div>
-        </div>
-    </app-tba-login>
+        </app-tba-login>
+    </div>
 
     <app-sso-login *ngIf="type === 'sso'" [email]="userEmail"
         (initiateSsoFlow)="onInitiateSSOFlow($event)"
         (ssoLoginStateChange)="onSSOLoginStateChange($event)"
         [tokenList]="tokens"
     ></app-sso-login>
-
-    <hr/>
 
     <a routerLink="/login">Login with a different method</a>
 </div>

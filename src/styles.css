@@ -43,6 +43,7 @@ input[type=text].form-control{
 
 input[type=email].form-control:focus,
 input[type=password].form-control:focus,
+input[type=checkbox].form-control:focus,
 input[type=text].form-control:focus{
     box-shadow: none;
 }
@@ -53,6 +54,14 @@ textarea:focus,
 button:focus {
     outline: none;
     box-shadow: none;
+}
+
+input[type=checkbox].form-control{
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .form-label {
