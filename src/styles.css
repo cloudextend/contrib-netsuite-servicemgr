@@ -26,5 +26,34 @@ html, body {
 }
 
 .btn{
-    width: 100%
+    width: 100%;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+
+input[type=email].form-control,
+input[type=password].form-control,
+input[type=text].form-control{
+    border: none;
+    border-bottom: 1px solid #E1E1E1;
+    border-radius: 0;
+    background: transparent;
+}
+
+input[type=email].form-control:focus,
+input[type=password].form-control:focus,
+input[type=text].form-control:focus{
+    box-shadow: none;
+}
+
+.form-label {
+    color: #999;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+    box-shadow: none;
 }
