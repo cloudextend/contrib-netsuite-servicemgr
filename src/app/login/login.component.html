@@ -1,6 +1,10 @@
 <div>
-    <app-basic-login *ngIf="type === 'basic'" [email]="userEmail"
-        (basicLoginStateChange)="onBasicLoginStateChange($event)" ></app-basic-login>
+    <div *ngIf="type === 'basic'">
+        <label class="view-title">Login with your NetSuite Credentials</label>
+        <app-basic-login [email]="userEmail"
+        (basicLoginStateChange)="onBasicLoginStateChange($event)"
+        ></app-basic-login>
+    </div>
 
     <app-tba-login *ngIf="type === 'tba'" (tbaLoginStateChange)="onTBALoginStateChange($event)"
         [email]="userEmail"
