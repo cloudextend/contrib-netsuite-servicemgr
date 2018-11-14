@@ -1,40 +1,27 @@
-<template [ngIf]="fetchState === loginMethodsFetchStates.Fetching">
+<ng-template [ngIf]="fetchState === loginMethodsFetchStates.Fetching">
     <div class="loading-text">
         <i class="fas fa-circle-notch fa-spin spinner"></i>
         <h4>Getting your accounts ready...</h4>
     </div>
-</template>
+</ng-template>
 
-<template [ngIf]="fetchState === loginMethodsFetchStates.Done">
-    <ul class="list-group" style="padding-bottom:20px;">
-        <li *ngIf="basic.enabled" class="list-group-item">
-            <button
-                class="btn btn-primary"
-                routerLink="/login/basic"
-            >
-                Login using Basic credentials
+<ng-template [ngIf]="fetchState === loginMethodsFetchStates.Done">
+    <div>
+        <label class="view-title">Choose your login option</label>
+    </div>
+    <div>
+        <button *ngIf="basic.enabled" class="btn btn-primary" routerLink="/login/basic" >
+            Use a Password
+        </button>
+        <button *ngIf="tba.enabled" class="btn btn-primary" (click)="onTBASelection($event)">
+            Use a TBA token
+        </button>
+    </div>
+    <div *ngIf="sso.enabled">
+        <ng-template ngFor let-option [ngForOf]="sso.options">
+            <button class="btn btn-primary" routerLink="/login/sso" [queryParams]="{accountId: option.accountId}" >
+                Use SSO [{{option.label}}]
             </button>
-        </li>
-        <li *ngIf="tba.enabled" class="list-group-item">
-            <button class="btn btn-primary" (click)="onTBASelection($event)">
-                Login using TBA tokens
-            </button>
-        </li>
-    </ul>
-
-    <ul *ngIf="sso.enabled" class="list-group">
-        <template ngFor let-option [ngForOf]="sso.options">
-            <li class="list-group-item">
-                <button
-                    class="btn btn-primary"
-                    routerLink="/login/sso"
-                    [queryParams]="{accountId: option.accountId}"
-                    >
-                    Login via SSO ({{option.label}})
-                </button>
-            </li>
-        </template>
-    </ul>
-    <hr/>
-    <button class="btn btn-secondary" routerLink="/">back</button>
-</template>
+        </ng-template>
+    </div>
+</ng-template>
