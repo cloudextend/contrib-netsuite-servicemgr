@@ -33,20 +33,20 @@
     font-size: 17px !important;
 }
 
-.app .title {
+.app .app-title {
     background: #0075DA;
     padding: 10px 15px;
     margin-bottom: 20px;
     text-align: center;
 }
 
-.app .title .img img {
+.app .app-title .img img {
     height: 35px;
     display: block;
     margin: 0 auto;
 }
 
-.app .title .title-text {
+.app .app-title .title-text {
     font-size: x-large;
     color: #fff;
     margin: 0 0 3px 0;
