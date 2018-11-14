@@ -1,7 +1,10 @@
 <div class="form">
-    <div class="form-group">
-        <label for="user-email" class="form-label">Enter your NetSuite username</label>
-        <input id="user-email" class="form-control email-box" type="email" [(ngModel)]="userEmail"/>
+    <label class="view-title">Enter your NetSuite username</label>
+
+    <div>
+        <label for="user-email" class="form-label">Username</label>
+        <input id="user-email" class="form-control email-box"
+            type="email" [(ngModel)]="userEmail"/>
 
         <button class="btn btn-primary" (click)="onContinue()">
             Continue
