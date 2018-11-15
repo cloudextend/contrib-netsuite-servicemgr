@@ -20,7 +20,8 @@
     <div *ngIf="sso.enabled">
         <ng-template ngFor let-option [ngForOf]="sso.options">
             <button class="btn btn-primary" routerLink="/login/sso" [queryParams]="{accountId: option.accountId}" >
-                Use SSO [{{option.label}}]
+                Use Single Sign-On<br/>
+                <small>[{{option.label}}]</small>
             </button>
         </ng-template>
     </div>
