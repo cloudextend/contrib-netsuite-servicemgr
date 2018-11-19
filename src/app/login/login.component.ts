@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import {
@@ -15,7 +15,7 @@ import { environment } from '../../environments/environment';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
     type: string;
     accountId: string;
@@ -53,6 +53,12 @@ export class LoginComponent implements OnInit {
         this.userEmail = this.userPreferenceService.getDefaultEmail();
 
         this.tagName = this.tokenService.generateTagName('AccountId');
+    }
+
+    ngAfterViewInit() {
+        if (this.type === 'sso') {
+            this.ssoLoginComponentRef.initiateSso();
+        }
     }
 
     private redirectToCEXLApp() {

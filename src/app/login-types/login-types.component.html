@@ -11,17 +11,16 @@
     </div>
     <div>
         <button *ngIf="basic.enabled" class="btn btn-primary" routerLink="/login/basic" >
-            Use a Password
+            Username & Password
         </button>
         <button *ngIf="tba.enabled" class="btn btn-primary" (click)="onTBASelection($event)">
-            Use a TBA token
+            Token Based Authentication
         </button>
     </div>
     <div *ngIf="sso.enabled">
         <ng-template ngFor let-option [ngForOf]="sso.options">
             <button class="btn btn-primary" routerLink="/login/sso" [queryParams]="{accountId: option.accountId}" >
-                Use Single Sign-On<br/>
-                <small>[{{option.label}}]</small>
+                SSO: {{option.label}}
             </button>
         </ng-template>
     </div>
