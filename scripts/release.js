@@ -2,7 +2,6 @@ const fse = require( 'fs-extra' );
 const simpleGit = require( 'simple-git/promise' );
 const readPkgUp = require( 'read-pkg-up' );
 const listr = require( 'listr' );
-const input = require( 'listr-input' );
 const chalk = require( 'chalk' );
 
 const tempGitFolder = './.temp-git';
@@ -46,10 +45,10 @@ taskArray.push( {
 taskArray.push( {
     'title': 'Clone the dist repository...',
     'task': context => {
-        const { 'release': { repo, sandbox } } = context;
+        const { 'release': { repo, sandbox }, branch } = context;
 
         return simpleGit()
-        .clone( repo, sandbox )
+        .clone( repo, sandbox, [ `--branch=${branch}` ] )
         .then( () => { context.localGit = simpleGit( sandbox ); } );
     }
 } );
@@ -112,34 +111,29 @@ taskArray.push( {
             'task': ( { localGit } ) => localGit.add( './*' )
         },
         {
-            'title': 'Get a commit message...',
-            'task': context => input( 'Commit message for the release please >', {
-                'validate': value => !!value,
-                'done': commitMessage => { context.git = { commitMessage }; }
-            } )
-        },
-        {
             'title': 'Commit the staged files with the given commit message...',
-            'task': ( { localGit, 'git': { commitMessage } } ) => localGit.commit( commitMessage )
+            'task': ( { localGit, version } ) => localGit.commit( `release the version ${version}` )
         }
     ] )
 } );
 
 taskArray.push( {
     'title': 'Create a release tag for the commit just created...',
-    'task': ( { localGit, version } ) => localGit.addTag( `v${version}` )
+    'task': ( { localGit, version } ) => localGit.tag( [ `v${version}` ] )
 } );
 
 taskArray.push( {
     'title': 'Push the commit and the tag to the dist repository...',
-    'task': ( { localGit } ) => localGit.push( 'origin', 'master' ).then( () => localGit.pushTags( 'origin' ) )
+    'task': ( { localGit, branch } ) => localGit.push( 'origin', branch ).then( () => localGit.pushTags( 'origin' ) )
 } );
+
+const branch = process.argv[ 2 ] || 'master';
 
 const tasks = new listr( taskArray );
 
 console.log( `${chalk.yellow.bold( 'Performing a release, for the current version, to the dist repository.' )}\n` );
 
-tasks.run()
+tasks.run( { branch } )
 .then( () => {
     console.log( `\n\n${chalk.green( 'The release, for the current version, to the dist repo, was successful.' )}\n` );
 } )

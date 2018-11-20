@@ -13,7 +13,7 @@
         "release": "node scripts/release.js",
         "postrelease": "node scripts/post-release.js",
         "prerelease:staging": "rimraf dist/ && ng build --env=staging",
-        "release:staging": "node scripts/release.js",
+        "release:staging": "node scripts/release.js staging",
         "postrelease:staging": "node scripts/post-release.js"
     },
     "release": {
