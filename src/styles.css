@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import '~@angular/material/prebuilt-themes/indigo-pink.css'; */
+
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css';
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: grid;
+
+    background-color: #f8f8f8;
+    color: #999;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.loading-text {
+    text-align: center;
+    padding-top: 60px;
+}
+
+.spinner{
+    font-size: 5em;
+    padding: 50px;
+}
+
+.btn{
+    width: 100%;
+    border-radius: 2px;
+    text-transform: uppercase;
+    margin: 10px 0px;
+}
+
+input[type=email].form-control,
+input[type=password].form-control,
+input[type=text].form-control{
+    border: none;
+    border-bottom: 1px solid #E1E1E1;
+    border-radius: 0;
+    background: transparent;
+}
+
+input[type=email].form-control:focus,
+input[type=password].form-control:focus,
+input[type=checkbox].form-control:focus,
+input[type=text].form-control:focus{
+    box-shadow: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+input[type=checkbox].form-control{
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.form-label {
+    color: #999;
+}
+
+.view-title {
+    font-size: 16px;
+    line-height:25px;
+    margin-bottom: 30px;
+}

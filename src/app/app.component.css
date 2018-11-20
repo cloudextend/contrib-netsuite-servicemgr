@@ -1,0 +1,69 @@
+.app{
+    margin: 0;
+    padding: 0;
+    font-family: "san_francisco_textregular", 'Roboto', sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    max-width: 100%;
+    background: #f8f8f8;
+    position: relative;
+}
+
+.app .text-left {
+    text-align: left !important;
+}
+
+.app .text-right {
+    text-align: right !important;
+}
+
+.app .f11 {
+    font-size: 11px !important;
+}
+
+.app .f13 {
+    font-size: 13px !important;
+}
+
+.app .f15 {
+    font-size: 15px !important;
+}
+
+.app .f17 {
+    font-size: 17px !important;
+}
+
+.app .app-title {
+    background: #0075DA;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.app .app-title .img img {
+    height: 35px;
+    display: block;
+    margin: 0 auto;
+}
+
+.app .app-title .title-text {
+    font-size: x-large;
+    color: #fff;
+    margin: 0 0 3px 0;
+    font-weight: 300;
+}
+
+.app label {
+    font-weight: normal;
+}
+
+.app a {
+    color: #0075DA;
+    text-decoration: none;
+}
+
+.app a:hover {
+    color: #0075DA;
+    text-decoration: none;
+}
+

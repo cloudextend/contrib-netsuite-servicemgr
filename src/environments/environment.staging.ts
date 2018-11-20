@@ -2,7 +2,7 @@ export const environment = {
     production: true,
     urls: {
         authAPI: {
-            base: 'https://app.smartclient.io',
+            base: 'https://staging.smartclient.io',
 
             basicAuth: '/api/netsuite/2.0/auth',
             tbaAuth: '/api/netsuite/2.0/auth',
@@ -10,6 +10,6 @@ export const environment = {
             loginMethods: '/api/netsuite/2.0/auth/type',
             initiateSSO: '/api/netsuite/2.0/auth/initiate-sso'
         },
-        cexlApp: 'https://app.smartclient.io/'
+        cexlApp: 'https://staging.smartclient.io/'
     }
 };

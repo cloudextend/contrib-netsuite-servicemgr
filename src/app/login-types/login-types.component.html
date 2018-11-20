@@ -1,0 +1,27 @@
+<ng-template [ngIf]="fetchState === loginMethodsFetchStates.Fetching">
+    <div class="loading-text">
+        <i class="fas fa-circle-notch fa-spin spinner"></i>
+        <h4>Getting your accounts ready...</h4>
+    </div>
+</ng-template>
+
+<ng-template [ngIf]="fetchState === loginMethodsFetchStates.Done">
+    <div>
+        <label class="view-title">Choose your login option</label>
+    </div>
+    <div>
+        <button *ngIf="basic.enabled" class="btn btn-primary" routerLink="/login/basic" >
+            Username & Password
+        </button>
+        <button *ngIf="tba.enabled" class="btn btn-primary" (click)="onTBASelection($event)">
+            Token Based Authentication
+        </button>
+    </div>
+    <div *ngIf="sso.enabled">
+        <ng-template ngFor let-option [ngForOf]="sso.options">
+            <button class="btn btn-primary" routerLink="/login/sso" [queryParams]="{accountId: option.accountId}" >
+                SSO: {{option.label}}
+            </button>
+        </ng-template>
+    </div>
+</ng-template>
