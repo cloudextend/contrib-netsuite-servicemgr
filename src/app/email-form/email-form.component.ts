@@ -15,7 +15,9 @@ const loginMethodMap = {
     styleUrls: ['./email-form.component.css']
 })
 export class EmailFormComponent implements OnInit {
-    @Input() userEmail = '';
+    @Input() email: string;
+
+    userEmail = '';
 
     constructor(
         private router: Router,

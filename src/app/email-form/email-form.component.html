@@ -1,12 +1,23 @@
 <div class="form">
     <label class="view-title">Enter your NetSuite username</label>
 
-    <div>
-        <label for="user-email" class="form-label">Username</label>
-        <input id="user-email" class="form-control email-box"
-            type="email" [(ngModel)]="userEmail"/>
+    <div class="form-group" [class.has-error]="email.invalid && email.touched">
+        <div style="height: 105px;">
+            <label for="email" class="form-label">Username</label>
+            <input id="email" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                name="email" #email="ngModel" type="email" [(ngModel)]="userEmail" class="form-control email-box"/>
 
-        <button class="btn btn-primary" (click)="onContinue()">
+            <span class="error-text" *ngIf="email.errors?.required && email.touched">
+                Email is required
+            </span>
+
+            <span class="error-text" *ngIf="email.errors?.pattern && email.touched">
+                Email is invalid
+            </span>
+        </div>
+
+        <button class="btn btn-primary" (click)="onContinue()"
+            [disabled]='!email.touched || (email.errors?.required || email.errors?.pattern)'>
             Continue
         </button>
     </div>
