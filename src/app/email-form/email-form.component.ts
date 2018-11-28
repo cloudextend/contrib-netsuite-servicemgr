@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
 
@@ -20,13 +20,24 @@ export class EmailFormComponent implements OnInit {
     userEmail = '';
 
     constructor(
+        private route: ActivatedRoute,
         private router: Router,
         private userPreferenceService: AuthUserPreferencesService,
         private tokenService: TokenService,
     ) {}
 
     ngOnInit() {
-        if (!!this.userPreferenceService.getDefaultEmail()) { return this.goToNextRoute(); }
+        const clearEmail = this.route.snapshot.queryParams.clearEmail;
+
+        if (clearEmail === 'true') {
+            this.userPreferenceService.setDefaultEmail('');
+
+            return;
+        }
+
+        if (!!this.userPreferenceService.getDefaultEmail()) {
+            return this.goToNextRoute();
+        }
     }
 
     private goToNextRoute() {

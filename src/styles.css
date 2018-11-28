@@ -73,3 +73,7 @@ input[type=checkbox].form-control{
     line-height:25px;
     margin-bottom: 30px;
 }
+
+.router-link {
+    margin: 10px;
+}

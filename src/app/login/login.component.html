@@ -2,7 +2,7 @@
     <div *ngIf="type === 'basic'">
         <label class="view-title">Login with your NetSuite Credentials</label>
         <app-basic-login [email]="userEmail"
-        (basicLoginStateChange)="onBasicLoginStateChange($event)"
+            (basicLoginStateChange)="onBasicLoginStateChange($event)"
         ></app-basic-login>
     </div>
 
@@ -60,5 +60,12 @@
         <br/>
     </div>
 
-    <a routerLink="/login">Login with a different method</a>
+    <div class="router-link">
+        <a routerLink="/login">Login with a different method</a>
+    </div>
+    <div class="router-link">
+        <a routerLink="/" [queryParams]="{clearEmail: true}">
+            Login with a different email
+        </a>
+    </div>
 </div>
