@@ -3,5 +3,11 @@
 ></app-tba-tokens-view>
 
 <hr/>
-
-<a routerLink="/login/tba">Add a new token</a>
+<div class="router-link">
+    <a routerLink="/login/tba">Add a new token</a>
+</div>
+<div class="router-link">
+    <a routerLink="/" [queryParams]="{clearEmail: true}">
+        Login with a different email
+    </a>
+</div>

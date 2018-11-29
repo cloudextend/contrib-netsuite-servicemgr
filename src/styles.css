@@ -15,14 +15,21 @@ html, body {
     font-weight: 300;
 }
 
-.loading-text {
+.splash-screen{
+    height: 100%;
+    background: #0075DA;
+    padding: 20%;
+    margin: 0px;
     text-align: center;
-    padding-top: 60px;
+    display: grid;
 }
 
-.spinner{
-    font-size: 5em;
-    padding: 50px;
+.splash-screen img{
+    height: auto;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    align-self: center;
 }
 
 .btn{
@@ -72,4 +79,12 @@ input[type=checkbox].form-control{
     font-size: 16px;
     line-height:25px;
     margin-bottom: 30px;
+}
+
+.router-link {
+    margin: 10px;
+}
+
+.error-text {
+    color: red;
 }

@@ -15,6 +15,7 @@ import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
 // Local - services
+import { LoaderService } from './loader.service';
 import { OfficeService } from './office.service';
 import { StorageService } from './storage.service';
 
@@ -48,6 +49,7 @@ import { ListTbaTokensComponent } from './list-tba-tokens/list-tba-tokens.compon
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
+        LoaderService,
         OfficeService,
         StorageService
     ],

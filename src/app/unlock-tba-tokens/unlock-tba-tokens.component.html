@@ -1,10 +1,17 @@
 <app-tba-tokens-unlock-view (tokenRetrievalStateChanged)="onTokenRetrievalStateChanged($event)">
-    <div invalid-pin-content>You have entered an invalid PIN</div>
+    <div invalid-pin-content class="error-text">
+        You have entered an invalid pin. Please try again.
+    </div>
 </app-tba-tokens-unlock-view>
 
-<div style="margin:10px;">
-    <a routerLink="/login/tba">Log into a different account or role</a>
+<div class="router-link">
+    <a routerLink="/login/tba">Login with a different account/role's TBA token</a>
 </div>
-<div style="margin:10px;">
+<div class="router-link">
     <a routerLink="/login">Login with a different method</a>
+</div>
+<div class="router-link">
+    <a routerLink="/" [queryParams]="{clearEmail: true}">
+        Login with a different email
+    </a>
 </div>

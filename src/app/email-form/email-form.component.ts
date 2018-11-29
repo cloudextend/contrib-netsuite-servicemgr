@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
 
@@ -15,16 +15,29 @@ const loginMethodMap = {
     styleUrls: ['./email-form.component.css']
 })
 export class EmailFormComponent implements OnInit {
-    @Input() userEmail = '';
+    @Input() email: string;
+
+    userEmail = '';
 
     constructor(
+        private route: ActivatedRoute,
         private router: Router,
         private userPreferenceService: AuthUserPreferencesService,
         private tokenService: TokenService,
     ) {}
 
     ngOnInit() {
-        if (!!this.userPreferenceService.getDefaultEmail()) { return this.goToNextRoute(); }
+        const clearEmail = this.route.snapshot.queryParams.clearEmail;
+
+        if (clearEmail === 'true') {
+            this.userPreferenceService.setDefaultEmail('');
+
+            return;
+        }
+
+        if (!!this.userPreferenceService.getDefaultEmail()) {
+            return this.goToNextRoute();
+        }
     }
 
     private goToNextRoute() {
@@ -37,7 +50,9 @@ export class EmailFormComponent implements OnInit {
         this.router.navigate([nextRoute]);
     }
 
-    onContinue() {
+    onContinue(disabled) {
+        if (disabled) { return; }
+
         this.userPreferenceService.setDefaultEmail(this.userEmail);
 
         this.goToNextRoute();
