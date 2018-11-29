@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     tokens = [];
 
+    loginFailed = false;
+
     @ViewChild(SsoLoginViewComponent) ssoLoginComponentRef: SsoLoginViewComponent;
 
     private $ = (<any>window).$;
@@ -66,6 +68,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     onBasicLoginStateChange({state, data}) {
+        this.loginFailed = false;
+
         data.credentialType = 'celigo-basic';
 
         data.user = {...data.user, email: this.userEmail};
@@ -75,6 +79,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (state === LoginStates.Success) {
             this.storage.set('celigo_cexl_session_data', data);
             this.redirectToCEXLApp();
+        } else if (state === LoginStates.FailedAuth) {
+            this.loginFailed = true;
         }
     }
 

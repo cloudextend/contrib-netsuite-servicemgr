@@ -77,3 +77,7 @@ input[type=checkbox].form-control{
 .router-link {
     margin: 10px;
 }
+
+.error-text {
+    color: red;
+}

@@ -3,7 +3,13 @@
         <label class="view-title">Login with your NetSuite Credentials</label>
         <app-basic-login [email]="userEmail"
             (basicLoginStateChange)="onBasicLoginStateChange($event)"
-        ></app-basic-login>
+        >
+            <div footer-content>
+                <span class="error-text" *ngIf="loginFailed">
+                    Invalid login credentials. Please try again.
+                </span>
+            </div>
+        </app-basic-login>
     </div>
 
     <div *ngIf="type === 'tba'">
