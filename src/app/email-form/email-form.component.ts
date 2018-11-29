@@ -50,7 +50,9 @@ export class EmailFormComponent implements OnInit {
         this.router.navigate([nextRoute]);
     }
 
-    onContinue() {
+    onContinue(disabled) {
+        if (disabled) { return; }
+
         this.userPreferenceService.setDefaultEmail(this.userEmail);
 
         this.goToNextRoute();
