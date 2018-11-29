@@ -7,4 +7,9 @@
     <div class="container">
         <router-outlet></router-outlet>
     </div>
+    <div class="loader" *ngIf="load">
+        <div class="loader-background"></div>
+        <div class="spinner"></div>
+        <div class="loading-text">{{loadingMessage}}</div>
+    </div>
 </div>

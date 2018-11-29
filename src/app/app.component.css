@@ -1,4 +1,6 @@
 .app{
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     font-family: "san_francisco_textregular", 'Roboto', sans-serif;
@@ -67,3 +69,50 @@
     text-decoration: none;
 }
 
+@keyframes rotation {
+    0% {
+        transform: rotate(0)
+    }
+    to {
+        transform: rotate(359deg)
+    }
+}
+
+.loader-background{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #FFF;
+    opacity: 0.4;
+}
+
+.spinner{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.spinner::after{
+    content: "";
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border: 2px solid #0075da;
+    border-left-color: transparent;
+    border-radius: 50%;
+    top: calc(50% - 24px);
+    left: calc(50% - 24px);
+    animation: rotation 1.5s linear infinite;
+}
+
+.loading-text {
+    text-align: center;
+    padding-top: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+}

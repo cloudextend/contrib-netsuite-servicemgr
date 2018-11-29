@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     title = 'CloudExtend Excel for NetSuite';
+
+    load = true;
+
+    loadingMessage = 'testing';
 }
