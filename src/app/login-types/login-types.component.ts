@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
 
 import { environment } from './../../environments/environment';
+import { LoaderService } from '../loader.service';
 
 export enum LoginMethodsFetchStates {
     Fetching,
@@ -30,6 +31,7 @@ export class LoginTypesComponent implements OnInit {
 
     constructor(
         private http: Http,
+        private loader: LoaderService,
         private router: Router,
         private userPreferenceService: AuthUserPreferencesService,
         private tokenService: TokenService,
@@ -39,6 +41,9 @@ export class LoginTypesComponent implements OnInit {
         this.userEmail = this.userPreferenceService.getDefaultEmail();
 
         const {base, loginMethods} = environment.urls.authAPI;
+
+        this.loader.setLoadingMessage('Fetching your login options...');
+        this.loader.showLoader(true);
 
         this.http.get(`${base}${loginMethods}?email=${this.userEmail}`)
         .map(resp => resp.json())
@@ -50,8 +55,7 @@ export class LoginTypesComponent implements OnInit {
             this.sso = sso;
 
             this.fetchState = LoginMethodsFetchStates.Done;
-
-            console.log({sso});
+            this.loader.showLoader(false);
         },
         (error) => { this.fetchState = LoginMethodsFetchStates.Failed; });
     }
