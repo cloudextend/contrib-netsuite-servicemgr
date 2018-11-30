@@ -1,10 +1,3 @@
-<ng-template [ngIf]="fetchState === loginMethodsFetchStates.Fetching">
-    <div class="loading-text">
-        <i class="fas fa-circle-notch fa-spin spinner"></i>
-        <h4>Getting your accounts ready...</h4>
-    </div>
-</ng-template>
-
 <ng-template [ngIf]="fetchState === loginMethodsFetchStates.Done">
     <div>
         <label class="view-title">Choose your login option</label>

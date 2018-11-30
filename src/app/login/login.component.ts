@@ -5,6 +5,7 @@ import {
     AuthUserPreferencesService, LoginStates, SsoFlowStates, TbaPersistedStates, TokenService, SsoLoginViewComponent
 } from 'lib-client-auth-netsuite';
 
+import { LoaderService } from '../loader.service';
 import { OfficeService } from '../office.service';
 import { StorageService } from '../storage.service';
 
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     constructor(
         private changeDetector: ChangeDetectorRef,
+        private loader: LoaderService,
         private officeService: OfficeService,
         private route: ActivatedRoute,
         private storage: StorageService,
@@ -123,6 +125,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (event === SsoFlowStates.AttemptInProgress) {
             const {base, initiateSSO} = environment.urls.authAPI;
 
+            this.loader.setLoadingMessage('Please login in the dialog window');
+            this.loader.showLoader(true);
+
             this.officeService.openDialog(
                 `${base}${initiateSSO}?accountId=${this.accountId}`,
                 ({ dialog, response: {message}}) => {
@@ -135,6 +140,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
                         this.changeDetector.detectChanges();
 
+                        this.loader.showLoader(false);
                         dialog.close();
                     } catch (error) {
                         console.log(error);
