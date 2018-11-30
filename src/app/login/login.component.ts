@@ -137,10 +137,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
                         this.tokens = tbaClaims;
 
                         this.ssoLoginComponentRef.setState(SsoFlowStates.Success);
+                        this.loader.showLoader(false);
 
                         this.changeDetector.detectChanges();
 
-                        this.loader.showLoader(false);
                         dialog.close();
                     } catch (error) {
                         console.log(error);
