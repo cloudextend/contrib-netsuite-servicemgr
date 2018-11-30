@@ -5,8 +5,8 @@
 
 html, body {
     height: 100%;
+    width: 100%;
     margin: 0;
-    display: grid;
 
     background-color: #f8f8f8;
     color: #999;
@@ -21,7 +21,7 @@ html, body {
     padding: 20%;
     margin: 0px;
     text-align: center;
-    display: grid;
+    display: flex;
 }
 
 .splash-screen img{
