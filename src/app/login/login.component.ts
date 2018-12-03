@@ -125,8 +125,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (event === SsoFlowStates.AttemptInProgress) {
             const {base, initiateSSO} = environment.urls.authAPI;
 
-            this.loader.setLoadingMessage('Please login in the dialog window');
-            this.loader.showLoader(true);
+            this.loader.setMessage('Please login in the dialog window');
+            this.loader.show();
+            this.changeDetector.detectChanges();
 
             this.officeService.openDialog(
                 `${base}${initiateSSO}?accountId=${this.accountId}`,
@@ -137,7 +138,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
                         this.tokens = tbaClaims;
 
                         this.ssoLoginComponentRef.setState(SsoFlowStates.Success);
-                        this.loader.showLoader(false);
+                        this.loader.hide();
 
                         this.changeDetector.detectChanges();
 

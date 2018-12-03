@@ -42,8 +42,8 @@ export class LoginTypesComponent implements OnInit {
 
         const {base, loginMethods} = environment.urls.authAPI;
 
-        this.loader.setLoadingMessage('Fetching your login options...');
-        this.loader.showLoader(true);
+        this.loader.setMessage('Fetching your login options...');
+        this.loader.show();
 
         this.http.get(`${base}${loginMethods}?email=${this.userEmail}`)
         .map(resp => resp.json())
@@ -55,7 +55,7 @@ export class LoginTypesComponent implements OnInit {
             this.sso = sso;
 
             this.fetchState = LoginMethodsFetchStates.Done;
-            this.loader.showLoader(false);
+            this.loader.hide();
         },
         (error) => { this.fetchState = LoginMethodsFetchStates.Failed; });
     }
