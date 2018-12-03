@@ -27,17 +27,19 @@ import { EmailFormComponent } from './email-form/email-form.component';
 import { UnlockTbaTokensComponent } from './unlock-tba-tokens/unlock-tba-tokens.component';
 import { PersistTbaTokensComponent } from './persist-tba-tokens/persist-tba-tokens.component';
 import { ListTbaTokensComponent } from './list-tba-tokens/list-tba-tokens.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 // import { NgMaterialModule } from './ng-material/ng-material.module';
 
 @NgModule({
     declarations: [
         AppComponent,
+        EmailFormComponent,
+        ListTbaTokensComponent,
         LoginTypesComponent,
         LoginComponent,
-        EmailFormComponent,
-        UnlockTbaTokensComponent,
         PersistTbaTokensComponent,
-        ListTbaTokensComponent,
+        UnlockTbaTokensComponent,
+        WelcomeComponent,
     ],
     imports: [
         AppRoutingModule,

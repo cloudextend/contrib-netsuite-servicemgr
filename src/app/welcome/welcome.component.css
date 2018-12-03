@@ -1,0 +1,43 @@
+.welcome-section {
+    padding: 10px 0;
+}
+
+.welcome-section h5 {
+    margin: 0 0 5px 0;
+    font-size: 17px;
+    font-weight: 300;
+    color: black;
+}
+
+.welcome-section p {
+    font-size: 13px;
+    color: #999;
+}
+
+.welcome-section .welcome-box {
+    padding-left: 40px;
+    position: relative;
+}
+
+.welcome-section .icon-box {
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.excel-icon {
+    background-image: url(./../../assets/excel.png);
+}
+
+.clock-icon {
+    background-image: url(./../../assets/clock.png);
+}
+
+.lock-icon {
+    background-image: url(./../../assets/lock.png);
+}

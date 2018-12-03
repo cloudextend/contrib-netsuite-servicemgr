@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
+import { StorageService } from '../storage.service';
 
 const loginMethodMap = {
     'celigo-basic': '/login/basic',
@@ -23,10 +24,16 @@ export class EmailFormComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private userPreferenceService: AuthUserPreferencesService,
+        private storage: StorageService,
         private tokenService: TokenService,
     ) {}
 
     ngOnInit() {
+        if (!this.storage.get('celigo_user_welcomed')) {
+            this.router.navigate(['/welcome']);
+            return;
+        }
+
         const clearEmail = this.route.snapshot.queryParams.clearEmail;
 
         if (clearEmail === 'true') {
