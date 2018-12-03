@@ -48,7 +48,14 @@ export class LoginTypesComponent implements OnInit {
         this.http.get(`${base}${loginMethods}?email=${this.userEmail}`)
         .map(resp => resp.json())
         .subscribe((response) => {
-            const { basic, tba, sso } = response;
+            const { isNewUser, basic, tba, sso } = response;
+
+            if (isNewUser) {
+                this.router.navigate(['trial']);
+                this.loader.hide();
+
+                return;
+            }
 
             this.basic = basic;
             this.tba = tba;

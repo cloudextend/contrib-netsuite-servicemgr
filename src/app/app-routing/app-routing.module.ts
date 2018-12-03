@@ -8,9 +8,11 @@ import { UnlockTbaTokensComponent } from '../unlock-tba-tokens/unlock-tba-tokens
 import { PersistTbaTokensComponent } from '../persist-tba-tokens/persist-tba-tokens.component';
 import { ListTbaTokensComponent } from '../list-tba-tokens/list-tba-tokens.component';
 import { WelcomeComponent } from '../welcome/welcome.component';
+import { TrialComponent } from '../trial/trial.component';
 
 const routes: Routes = [
     { path: '', component: EmailFormComponent },
+    { path: 'trial', component: TrialComponent },
     { path: 'welcome', component: WelcomeComponent },
     { path: 'login', component: LoginTypesComponent },
     { path: 'login/:type', component: LoginComponent },

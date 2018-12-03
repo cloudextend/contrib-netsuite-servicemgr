@@ -28,6 +28,7 @@ import { UnlockTbaTokensComponent } from './unlock-tba-tokens/unlock-tba-tokens.
 import { PersistTbaTokensComponent } from './persist-tba-tokens/persist-tba-tokens.component';
 import { ListTbaTokensComponent } from './list-tba-tokens/list-tba-tokens.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { TrialComponent } from './trial/trial.component';
 // import { NgMaterialModule } from './ng-material/ng-material.module';
 
 @NgModule({
@@ -40,6 +41,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
         PersistTbaTokensComponent,
         UnlockTbaTokensComponent,
         WelcomeComponent,
+        TrialComponent,
     ],
     imports: [
         AppRoutingModule,
