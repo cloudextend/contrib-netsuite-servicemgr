@@ -41,26 +41,12 @@ html, body {
 
 input[type=email].form-control,
 input[type=password].form-control,
-input[type=text].form-control{
+input[type=text].form-control,
+select.form-control{
     border: none;
     border-bottom: 1px solid #E1E1E1;
     border-radius: 0;
     background: transparent;
-}
-
-input[type=email].form-control:focus,
-input[type=password].form-control:focus,
-input[type=checkbox].form-control:focus,
-input[type=text].form-control:focus{
-    box-shadow: none;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-    box-shadow: none;
 }
 
 input[type=checkbox].form-control{
@@ -69,6 +55,29 @@ input[type=checkbox].form-control{
     margin-right: 10px;
     vertical-align: middle;
     display: inline-block;
+}
+
+input[type=email].form-control:focus,
+input[type=password].form-control:focus,
+input[type=checkbox].form-control:focus,
+input[type=text].form-control:focus,
+select.form-control:focus{
+    box-shadow: none;
+}
+
+select.form-control:focus{
+    border: none;
+    border-bottom: 1px solid #E1E1E1;
+    border-radius: 0;
+    background: transparent;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .form-label {

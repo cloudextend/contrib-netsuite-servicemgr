@@ -40,7 +40,7 @@ export class LoginTypesComponent implements OnInit {
     ngOnInit() {
         this.userEmail = this.userPreferenceService.getDefaultEmail();
 
-        const {base, loginMethods} = environment.urls.authAPI;
+        const {base, loginMethods} = environment.urls.backend;
 
         this.loader.setMessage('Fetching your login options...');
         this.loader.show();

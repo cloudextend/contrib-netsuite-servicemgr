@@ -62,9 +62,9 @@ import { TrialComponent } from './trial/trial.component';
 export class AppModule {
     constructor(private authConfigService: AuthConfigService) {
         this.authConfigService.configure({
-            baseUrl: environment.urls.authAPI.base,
-            basicAuthRoute: environment.urls.authAPI.basicAuth,
-            tbaAuthRoute: environment.urls.authAPI.tbaAuth
+            baseUrl: environment.urls.backend.base,
+            basicAuthRoute: environment.urls.backend.basicAuth,
+            tbaAuthRoute: environment.urls.backend.tbaAuth
         });
     }
 }
