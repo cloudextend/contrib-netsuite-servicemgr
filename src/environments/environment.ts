@@ -6,15 +6,19 @@
 export const environment = {
     production: false,
     urls: {
-        authAPI: {
+        backend: {
             base: 'https://00a817a2.ap.ngrok.io',
 
             basicAuth: '/api/netsuite/2.0/auth',
             tbaAuth: '/api/netsuite/2.0/auth',
 
             loginMethods: '/api/netsuite/2.0/auth/type',
-            initiateSSO: '/api/netsuite/2.0/auth/initiate-sso'
+            initiateSSO: '/api/netsuite/2.0/auth/initiate-sso',
+
+            leadCreation: '/integration/salesforce',
+            trialActivation: '/license/activateTrial',
+            licenseCheck: '/license/check',
         },
-        cexlApp: 'https://00a817a2.ap.ngrok.io/'
+        cexlApp: 'https://00a817a2.ap.ngrok.io/',
     }
 };

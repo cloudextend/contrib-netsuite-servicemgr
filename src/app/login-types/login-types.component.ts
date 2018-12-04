@@ -40,22 +40,29 @@ export class LoginTypesComponent implements OnInit {
     ngOnInit() {
         this.userEmail = this.userPreferenceService.getDefaultEmail();
 
-        const {base, loginMethods} = environment.urls.authAPI;
+        const {base, loginMethods} = environment.urls.backend;
 
-        this.loader.setLoadingMessage('Fetching your login options...');
-        this.loader.showLoader(true);
+        this.loader.setMessage('Fetching your login options...');
+        this.loader.show();
 
         this.http.get(`${base}${loginMethods}?email=${this.userEmail}`)
         .map(resp => resp.json())
         .subscribe((response) => {
-            const { basic, tba, sso } = response;
+            const { isNewUser, basic, tba, sso } = response;
+
+            if (isNewUser) {
+                this.router.navigate(['trial']);
+                this.loader.hide();
+
+                return;
+            }
 
             this.basic = basic;
             this.tba = tba;
             this.sso = sso;
 
             this.fetchState = LoginMethodsFetchStates.Done;
-            this.loader.showLoader(false);
+            this.loader.hide();
         },
         (error) => { this.fetchState = LoginMethodsFetchStates.Failed; });
     }

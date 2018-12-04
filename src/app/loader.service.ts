@@ -3,14 +3,18 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class LoaderService {
-    public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public loadingState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public loadingMessage: BehaviorSubject<string> = new BehaviorSubject<string>('Loading...');
 
-    showLoader(shouldShow) {
-        this.isLoading.next(shouldShow);
+    show() {
+        setTimeout(() => { this.loadingState.next(true); }, 0);
     }
 
-    setLoadingMessage(loadingMessage) {
-        this.loadingMessage.next(loadingMessage);
+    hide() {
+        setTimeout(() => { this.loadingState.next(false); }, 0);
+    }
+
+    setMessage(loadingMessage = 'Loading...') {
+        setTimeout(() => { this.loadingMessage.next(loadingMessage); }, 0);
     }
 }

@@ -27,17 +27,21 @@ import { EmailFormComponent } from './email-form/email-form.component';
 import { UnlockTbaTokensComponent } from './unlock-tba-tokens/unlock-tba-tokens.component';
 import { PersistTbaTokensComponent } from './persist-tba-tokens/persist-tba-tokens.component';
 import { ListTbaTokensComponent } from './list-tba-tokens/list-tba-tokens.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { TrialComponent } from './trial/trial.component';
 // import { NgMaterialModule } from './ng-material/ng-material.module';
 
 @NgModule({
     declarations: [
         AppComponent,
+        EmailFormComponent,
+        ListTbaTokensComponent,
         LoginTypesComponent,
         LoginComponent,
-        EmailFormComponent,
-        UnlockTbaTokensComponent,
         PersistTbaTokensComponent,
-        ListTbaTokensComponent,
+        UnlockTbaTokensComponent,
+        WelcomeComponent,
+        TrialComponent,
     ],
     imports: [
         AppRoutingModule,
@@ -58,9 +62,9 @@ import { ListTbaTokensComponent } from './list-tba-tokens/list-tba-tokens.compon
 export class AppModule {
     constructor(private authConfigService: AuthConfigService) {
         this.authConfigService.configure({
-            baseUrl: environment.urls.authAPI.base,
-            basicAuthRoute: environment.urls.authAPI.basicAuth,
-            tbaAuthRoute: environment.urls.authAPI.tbaAuth
+            baseUrl: environment.urls.backend.base,
+            basicAuthRoute: environment.urls.backend.basicAuth,
+            tbaAuthRoute: environment.urls.backend.tbaAuth
         });
     }
 }
