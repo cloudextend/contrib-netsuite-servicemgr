@@ -1,4 +1,19 @@
 <div>
-    <div class="view-title">Fill the form to continue with your trial</div>
+    <div class="view-title">
+        Start your free 14 day trial
+        <br/>
+        <span class="view-sub-title">(No Credit Card Required)</span>
+    </div>
+
     <app-trial-signup-view (signedUp)="onSignUp($event)"></app-trial-signup-view>
+
+    <div style="text-align: center; font-size: 13px; padding-bottom: 20px; color: #222;">
+        You will be asked to enter NetSuite Credentials
+    </div>
+
+    <div class="router-link" style="padding-bottom: 30px;">
+        <a routerLink="/" [queryParams]="{clearEmail: true}">
+            Login with a different email
+        </a>
+    </div>
 </div>

@@ -42,7 +42,7 @@ export class LoginTypesComponent implements OnInit {
 
         const {base, loginMethods} = environment.urls.backend;
 
-        this.loader.setMessage('Fetching your login options...');
+        this.loader.setMessage('Fetching your login methods...');
         this.loader.show();
 
         this.http.get(`${base}${loginMethods}?email=${this.userEmail}`)
