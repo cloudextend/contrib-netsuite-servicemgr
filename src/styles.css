@@ -93,6 +93,7 @@ button:focus {
 }
 
 .router-link {
+    text-align: center;
     margin: 10px;
 }
 
