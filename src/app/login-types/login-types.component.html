@@ -1,6 +1,6 @@
 <ng-template [ngIf]="fetchState === loginMethodsFetchStates.Done">
     <div>
-        <label class="view-title">Choose your login option</label>
+        <div class="view-title">Choose your login method</div>
     </div>
     <div>
         <button *ngIf="basic.enabled" class="btn btn-primary" routerLink="/login/basic" >

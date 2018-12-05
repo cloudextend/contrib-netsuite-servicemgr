@@ -85,7 +85,7 @@
     top: 0px;
     left: 0px;
     background: #FFF;
-    opacity: 0.4;
+    opacity: 0.9;
 }
 
 .spinner{
@@ -120,6 +120,7 @@
     font-size: 16px;
     font-weight: bold;
     justify-content: center;
+    color: #333;
 }
 
 .loading-text span {

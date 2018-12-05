@@ -1,6 +1,6 @@
 <div>
     <div *ngIf="type === 'basic'">
-        <label class="view-title">Login with your NetSuite Credentials</label>
+        <div class="view-title">Sign in with your NetSuite Password</div>
         <app-basic-login [email]="userEmail"
             (basicLoginStateChange)="onBasicLoginStateChange($event)"
         >
@@ -13,7 +13,7 @@
     </div>
 
     <div *ngIf="type === 'tba'">
-        <label class="view-title">Login with your NetSuite TBA Token</label>
+        <div class="view-title">Login with your NetSuite TBA Token</div>
         <app-tba-login (tbaLoginStateChange)="onTBALoginStateChange($event)" [email]="userEmail">
             <div optional-content>
                 <div class="persist-tokens">
@@ -55,7 +55,7 @@
     </div>
 
     <div *ngIf="type === 'sso'">
-        <label class="view-title">Login using Single Sign On</label>
+        <div class="view-title">Login using Single Sign On</div>
 
         <app-sso-login [email]="userEmail"
             (initiateSsoFlow)="onInitiateSSOFlow($event)"

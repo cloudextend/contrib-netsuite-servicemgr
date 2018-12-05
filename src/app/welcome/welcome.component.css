@@ -17,6 +17,7 @@
 .welcome-section .welcome-box {
     padding-left: 40px;
     position: relative;
+    margin-bottom: 30px;
 }
 
 .welcome-section .icon-box {
@@ -28,6 +29,10 @@
     position: absolute;
     left: 0;
     top: 0;
+}
+
+.welcome-section .continue-btn {
+    margin-bottom: 20px;
 }
 
 .excel-icon {
