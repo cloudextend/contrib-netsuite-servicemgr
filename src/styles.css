@@ -85,7 +85,9 @@ button:focus {
 }
 
 .view-title {
-    font-size: 16px;
+    color: black;
+    text-align: center;
+    font-size: 17px;
     line-height:25px;
     margin-bottom: 30px;
 }
