@@ -67,7 +67,9 @@
     </div>
 
     <div class="router-link" *ngIf="!isNewUser">
-        <a routerLink="/login">Login with a different method</a>
+        <a routerLink="/login" [queryParams]="{noFastForwardLogin: true}">
+            Login with a different method
+        </a>
     </div>
     <div class="router-link">
         <a routerLink="/" [queryParams]="{clearEmail: true}">
