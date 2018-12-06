@@ -39,6 +39,8 @@ export class EmailFormComponent implements OnInit {
         if (clearEmail === 'true') {
             this.userPreferenceService.clearDefaultEmail();
             this.userPreferenceService.clearDefaultLoginMethod();
+            this.tokenService.clearPin();
+            this.tokenService.clearTokens();
 
             return;
         }
