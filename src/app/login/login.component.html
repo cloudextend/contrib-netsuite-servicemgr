@@ -55,13 +55,20 @@
     </div>
 
     <div *ngIf="type === 'sso'">
-        <div class="view-title">Login using Single Sign On</div>
+        <div class="view-title">Logging you in using Single Sign On</div>
 
         <app-sso-login [email]="userEmail"
             (initiateSsoFlow)="onInitiateSSOFlow($event)"
             (ssoLoginStateChange)="onSSOLoginStateChange($event)"
             [tokenList]="tokens"
-        ></app-sso-login>
+        >
+            <div login-in-progress-content>
+                <div class="spinner-container">
+                    <div class="spinner"></div>
+                </div>
+                <div class="loading-text">Please login in the dialog window</div>
+            </div>
+        </app-sso-login>
         <br/>
         <br/>
     </div>
