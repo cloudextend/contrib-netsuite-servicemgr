@@ -8,7 +8,9 @@
     <a routerLink="/login/tba">Login with a different account/role's TBA token</a>
 </div>
 <div class="router-link">
-    <a routerLink="/login">Login with a different method</a>
+    <a routerLink="/login" [queryParams]="{noFastForwardLogin: true}">
+        Login with a different method
+    </a>
 </div>
 <div class="router-link">
     <a routerLink="/" [queryParams]="{clearEmail: true}">

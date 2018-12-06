@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
 
 import { AuthUserPreferencesService, TokenService } from 'lib-client-auth-netsuite';
@@ -32,12 +32,14 @@ export class LoginTypesComponent implements OnInit {
     constructor(
         private http: Http,
         private loader: LoaderService,
+        private route: ActivatedRoute,
         private router: Router,
         private userPreferenceService: AuthUserPreferencesService,
         private tokenService: TokenService,
     ) {}
 
     ngOnInit() {
+        const fastForwardLogin = !(this.route.snapshot.queryParams.noFastForwardLogin === 'true');
         this.userEmail = this.userPreferenceService.getDefaultEmail();
 
         const {base, loginMethods} = environment.urls.backend;
@@ -57,6 +59,25 @@ export class LoginTypesComponent implements OnInit {
                 return;
             }
 
+            if (fastForwardLogin) {
+                const basicOnly = basic.enabled && !tba.enabled && !sso.enabled;
+                const tbaOnly = !basic.enabled && tba.enabled && !sso.enabled;
+
+                if (basicOnly) {
+                    this.router.navigate(['login', 'basic']);
+                    this.loader.hide();
+
+                    return;
+                }
+
+                if (tbaOnly) {
+                    this.onTBASelection();
+                    this.loader.hide();
+
+                    return;
+                }
+            }
+
             this.basic = basic;
             this.tba = tba;
             this.sso = sso;
@@ -67,7 +88,7 @@ export class LoginTypesComponent implements OnInit {
         (error) => { this.fetchState = LoginMethodsFetchStates.Failed; });
     }
 
-    onTBASelection(event) {
+    onTBASelection() {
         if (this.tokenService.hasSavedTokens()) {
             this.router.navigate(['login', 'tba', 'unlock-tokens']);
 

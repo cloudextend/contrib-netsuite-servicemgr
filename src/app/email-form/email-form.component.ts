@@ -37,7 +37,10 @@ export class EmailFormComponent implements OnInit {
         const clearEmail = this.route.snapshot.queryParams.clearEmail;
 
         if (clearEmail === 'true') {
-            this.userPreferenceService.setDefaultEmail('');
+            this.userPreferenceService.clearDefaultEmail();
+            this.userPreferenceService.clearDefaultLoginMethod();
+            this.tokenService.clearPin();
+            this.tokenService.clearTokens();
 
             return;
         }

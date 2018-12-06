@@ -1,10 +1,16 @@
 <app-tba-tokens-view (loginStateChanged)="onLoginStateChange($event)"
+    (tokensRemoved)="onRemoveAllTokens($event)"
     [pin]="pin" [email]="userEmail"
 ></app-tba-tokens-view>
 
 <hr/>
 <div class="router-link">
     <a routerLink="/login/tba">Add a new token</a>
+</div>
+<div class="router-link" *ngIf="!isNewUser">
+    <a routerLink="/login" [queryParams]="{noFastForwardLogin: true}">
+        Login with a different method
+    </a>
 </div>
 <div class="router-link">
     <a routerLink="/" [queryParams]="{clearEmail: true}">

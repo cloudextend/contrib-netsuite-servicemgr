@@ -6,7 +6,7 @@
         <button *ngIf="basic.enabled" class="btn btn-primary" routerLink="/login/basic" >
             Username & Password
         </button>
-        <button *ngIf="tba.enabled" class="btn btn-primary" (click)="onTBASelection($event)">
+        <button *ngIf="tba.enabled" class="btn btn-primary" (click)="onTBASelection()">
             Token Based Authentication
         </button>
     </div>
