@@ -5,7 +5,7 @@
             <input id="email" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                 name="email" #email="ngModel" type="email" [(ngModel)]="userEmail"
                 class="form-control email-box"
-                (keyup.enter)="onContinue(!email.touched || email.errors?.required || email.errors?.pattern)"/>
+                (keyup.enter)="onContinue(email.errors?.required || email.errors?.pattern)"/>
 
             <div *ngIf="email.touched">
                 <span class="error-text" *ngIf="email.errors?.required">
@@ -19,8 +19,8 @@
         </div>
 
         <button class="btn btn-primary"
-            (click)="onContinue(!email.touched || email.errors?.required || email.errors?.pattern)"
-            [disabled]='!email.touched || email.errors?.required || email.errors?.pattern'>
+            (click)="onContinue(email.errors?.required || email.errors?.pattern)"
+            [disabled]='email.errors?.required || email.errors?.pattern'>
             Next
         </button>
     </div>
