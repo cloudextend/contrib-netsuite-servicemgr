@@ -134,14 +134,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
                 (<any>postData).trialEmail = postData.email;
                 postData.email = this.userEmail;
 
-                this.loader.setMessage('Activating your trial. Please wait...');
+                this.loader.setMessage('Activating your trial...');
                 this.loader.show();
 
                 this.http.post(`${base}${trialActivation}?system=netsuite`, postData)
                 .map(resp => resp.json())
                 .toPromise()
                 .then(activationDetails => {
-                    this.loader.setMessage('Waiting for Activation confirmation. Please wait...');
+                    this.loader.setMessage('Waiting for Activation confirmation...');
                     return this.waitForLicense( { email: this.userEmail } )
                     .then(() => {
                         this.loader.hide();
