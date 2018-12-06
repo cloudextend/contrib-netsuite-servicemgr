@@ -1,4 +1,5 @@
 <app-tba-tokens-view (loginStateChanged)="onLoginStateChange($event)"
+    (tokensRemoved)="onRemoveAllTokens($event)"
     [pin]="pin" [email]="userEmail"
 ></app-tba-tokens-view>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthUserPreferencesService, LoginStates } from 'lib-client-auth-netsuite';
 
@@ -17,6 +17,7 @@ export class ListTbaTokensComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private storage: StorageService,
         private userPreferenceService: AuthUserPreferencesService,
     ) { }
@@ -42,5 +43,9 @@ export class ListTbaTokensComponent implements OnInit {
             this.storage.set('celigo_cexl_session_data', data);
             this.redirectToCEXLApp();
         }
+    }
+
+    onRemoveAllTokens(event) {
+        this.router.navigate(['login', 'tba']);
     }
 }
