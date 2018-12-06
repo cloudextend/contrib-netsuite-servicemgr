@@ -14,6 +14,6 @@ export const environment = {
             trialActivation: '/license/activateTrial',
             licenseCheck: '/license/check',
         },
-        cexlApp: 'https://app.smartclient.io/'
+        cexlApp: 'https://app.smartclient.io/netsuite'
     }
 };

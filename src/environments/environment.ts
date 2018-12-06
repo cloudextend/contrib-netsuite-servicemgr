@@ -19,6 +19,6 @@ export const environment = {
             trialActivation: '/license/activateTrial',
             licenseCheck: '/license/check',
         },
-        cexlApp: 'https://00a817a2.ap.ngrok.io/',
+        cexlApp: 'https://00a817a2.ap.ngrok.io/netsuite',
     }
 };
