@@ -33,7 +33,11 @@ namespace Celigo.ServiceManager.NetSuite
         public string ApplicationId { get; set; }
 
         public Action<T> ClientInitializer { get; set; }
-        string INetSuiteClientFactory.ApplicationId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        string INetSuiteClientFactory.ApplicationId {
+            get => this.ApplicationId;
+            set => this.ApplicationId = value;
+        }
         
         public ClientFactory(string appId)
         {
