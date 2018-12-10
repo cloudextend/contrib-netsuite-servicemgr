@@ -46,6 +46,16 @@
                                         Save the token
                                     </span>
                                 </app-tba-persist-view>
+                                <div class="error-text">
+                                    <div *ngIf="isInvalidTBAPin">
+                                        You have entered an invalid pin. Please try again.
+                                    </div>
+                                    <div *ngIf="duplicateTBATokenEntered">
+                                        You tried saving a duplicate token.
+                                        <br/>
+                                        You will be logged in without saving the duplicate.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,12 +65,18 @@
     </div>
 
     <div *ngIf="type === 'sso'">
-        <div class="view-title">Logging you in using Single Sign On</div>
+        <div class="view-title" *ngIf="ssoTokenList.length === 0">
+            Logging you in using Single Sign On
+        </div>
+
+        <div class="view-title" *ngIf="ssoTokenList.length !== 0">
+            Select a role to continue
+        </div>
 
         <app-sso-login [email]="userEmail"
             (initiateSsoFlow)="onInitiateSSOFlow($event)"
             (ssoLoginStateChange)="onSSOLoginStateChange($event)"
-            [tokenList]="tokens"
+            [tokenList]="ssoTokenList"
         >
             <div login-in-progress-content>
                 <div class="spinner-container">

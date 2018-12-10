@@ -33,9 +33,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     hasASavedPin: boolean;
 
-    tokens = [];
+    ssoTokenList = [];
 
     loginFailed = false;
+
+    isInvalidTBAPin = false;
+
+    duplicateTBATokenEntered = false;
 
     @ViewChild(SsoLoginViewComponent) ssoLoginComponentRef: SsoLoginViewComponent;
 
@@ -203,15 +207,23 @@ export class LoginComponent implements OnInit, AfterViewInit {
             this.$('#confirmPinModal').modal('hide');
             this.redirectToCEXLApp();
         }
+        else if (event.state === TbaPersistedStates.InvalidPin) {
+            this.isInvalidTBAPin = true;
+            setTimeout(() => { this.isInvalidTBAPin = false; }, 3000);
+        }
+        else if (event.state === TbaPersistedStates.FailedToSaveTokensSinceDuplicate) {
+            this.duplicateTBATokenEntered = true;
+
+            setTimeout(() => {
+                this.duplicateTBATokenEntered = false;
+                this.redirectToCEXLApp();
+            }, 5000);
+        }
     }
 
     onInitiateSSOFlow(event) {
         if (event === SsoFlowStates.AttemptInProgress) {
             const {base, initiateSSO} = environment.urls.backend;
-
-            // this.loader.setMessage('Please login in the dialog window');
-            // this.loader.show();
-            // this.changeDetector.detectChanges();
 
             this.officeService.openDialog(
                 `${base}${initiateSSO}?accountId=${this.accountId}`,
@@ -219,10 +231,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
                     try {
                         const {tbaClaims = []} = JSON.parse(message);
 
-                        this.tokens = tbaClaims;
+                        this.ssoTokenList = tbaClaims;
 
                         this.ssoLoginComponentRef.setState(SsoFlowStates.Success);
-                        // this.loader.hide();
 
                         this.changeDetector.detectChanges();
 
