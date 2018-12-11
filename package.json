@@ -1,6 +1,6 @@
 {
     "name": "smartclient-app-auth-netsuite",
-    "version": "1.2.8",
+    "version": "1.2.9",
     "license": "MIT",
     "scripts": {
         "ng": "ng",
@@ -9,12 +9,15 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "prerelease": "rimraf dist/ && ng build --env=prod",
+        "prerelease": "rimraf dist/ && ng build --prod --aot=false",
         "release": "node scripts/release.js",
         "postrelease": "node scripts/post-release.js",
-        "prerelease:staging": "rimraf dist/ && ng build --env=staging",
+        "prerelease:staging": "rimraf dist/ && ng build --env=staging --aot=false",
         "release:staging": "node scripts/release.js staging",
-        "postrelease:staging": "node scripts/post-release.js"
+        "postrelease:staging": "node scripts/post-release.js",
+        "prerelease:dev": "rimraf dist/ && ng build",
+        "release:dev": "node scripts/release.js development",
+        "postrelease:dev": "node scripts/post-release.js"
     },
     "release": {
         "repo": "https://github.com/pro-celigo/smartclient-app-auth-netsuite-dist.git",
