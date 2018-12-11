@@ -12,7 +12,7 @@
         "prerelease": "rimraf dist/ && ng build --prod --aot=false",
         "release": "node scripts/release.js",
         "postrelease": "node scripts/post-release.js",
-        "prerelease:staging": "rimraf dist/ && ng build --env=staging --aot=false",
+        "prerelease:staging": "rimraf dist/ && ng build --target=production --env=staging --aot=false",
         "release:staging": "node scripts/release.js staging",
         "postrelease:staging": "node scripts/post-release.js",
         "prerelease:dev": "rimraf dist/ && ng build",
