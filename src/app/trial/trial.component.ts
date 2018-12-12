@@ -31,7 +31,7 @@ export class TrialComponent implements OnInit {
             country,
             state,
             product: 'SCNS',
-            plan_id: 'smartclientee',
+            plan_id: environment.cexlPlanID,
             eventType: 'created',
             eventSource: 'trial_form'
         };
