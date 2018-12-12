@@ -92,6 +92,9 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         [Fact]
         public async Task Deserializes_base_class_properties_when_fetching()
         {
+            // This test fails due to a NS WSDL issue as explained in https://github.com/dotnet/wcf/issues/3073
+            // In order to fix this, remove all occurences of Order=[0-9]+
+
             var customizationList = await client.getCustomizationIdAsync(new CustomizationType {
                 getCustomizationType = GetCustomizationType.transactionBodyCustomField,
                 getCustomizationTypeSpecified = true,
