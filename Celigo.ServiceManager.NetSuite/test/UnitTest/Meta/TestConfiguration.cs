@@ -13,7 +13,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Meta
 
         public TestConfiguration()
         {
-            this.ApplicationId = Environment.GetEnvironmentVariable("NS_APP_ID");
+            this.ApplicationId = Environment.GetEnvironmentVariable("NS_TEST_APP_ID");
             this.PassportProvider = new EnvVariablePassportProvider();
             this.TokenPassportProvider = new EnvVariableTokenPassportProvider();
         }
