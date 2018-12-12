@@ -15,5 +15,6 @@ export const environment = {
             licenseCheck: '/license/check',
         },
         cexlApp: 'https://app.smartclient.io/netsuite'
-    }
+    },
+    cexlPlanID: 'excel-smartclient-for-netsuite-enterprise-edition',
 };

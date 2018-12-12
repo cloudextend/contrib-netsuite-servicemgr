@@ -20,5 +20,6 @@ export const environment = {
             licenseCheck: '/license/check',
         },
         cexlApp: 'https://00a817a2.ap.ngrok.io/netsuite',
-    }
+    },
+    cexlPlanID: 'smartclientee',
 };
