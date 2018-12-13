@@ -175,6 +175,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     onTBALoginStateChange(event) {
+        this.loginFailed = false;
         const {data, inputs: {account, token, tokenSecret}} = event;
 
         data.credentialType = 'celigo-tba';
@@ -182,6 +183,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
         data.user = {...data.user, email: this.userEmail};
 
         console.log(event);
+
+
+        if (event.state === LoginStates.FailedAuth) {
+            this.loginFailed = true;
+            return;
+        }
 
         if (event.state === LoginStates.Success) {
             this.storage.set('celigo_cexl_session_data', data);
