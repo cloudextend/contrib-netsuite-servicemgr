@@ -61,6 +61,11 @@
                     </div>
                 </div>
             </div>
+            <div footer-content>
+                <span class="error-text" *ngIf="loginFailed">
+                    Invalid login credentials. Please try again.
+                </span>
+            </div>
         </app-tba-login>
     </div>
 
