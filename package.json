@@ -1,6 +1,6 @@
 {
     "name": "smartclient-app-auth-netsuite",
-    "version": "1.2.17",
+    "version": "1.2.20",
     "license": "MIT",
     "scripts": {
         "ng": "ng",
