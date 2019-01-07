@@ -1,6 +1,8 @@
 ﻿using SuiteTalk;
 using System;
+using System.Collections.Generic;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 
 namespace Celigo.ServiceManager.NetSuite
 {
@@ -30,6 +32,8 @@ namespace Celigo.ServiceManager.NetSuite
 
     public class ClientFactory<T>: INetSuiteClientFactory where T: class, INetSuiteClient, new()
     {
+        private List<IDynamicEndpointBehaviour> _dynamicEndpointBehaviours;
+
         public string ApplicationId { get; set; }
 
         public Action<T> ClientInitializer { get; set; }
@@ -42,6 +46,13 @@ namespace Celigo.ServiceManager.NetSuite
         public ClientFactory(string appId)
         {
             this.ApplicationId = appId;
+            _dynamicEndpointBehaviours = null;
+        }
+
+        public ClientFactory(string appId, List<IDynamicEndpointBehaviour> dynamicEndpointBehaviours)
+        {
+            this.ApplicationId = appId;
+            _dynamicEndpointBehaviours = dynamicEndpointBehaviours;
         }
 
         public T CreateClient()
@@ -73,6 +84,23 @@ namespace Celigo.ServiceManager.NetSuite
                 passportProvider: passportProvider, 
                 configProvider: configProvider
             );
+
+        private T AddDynamicEndpointBehaviours( T client) {
+            if (_dynamicEndpointBehaviours == null)
+            {
+                return client;
+            }
+
+            foreach (IDynamicEndpointBehaviour depb in _dynamicEndpointBehaviours)
+            {
+                if (depb.IsEnabled())
+                {
+                    client.Endpoint.EndpointBehaviors.Add(depb);
+                }
+            }
+
+            return client;
+        }
 
         private T ConfigureClient(
                 T client,
@@ -118,6 +146,8 @@ namespace Celigo.ServiceManager.NetSuite
 
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);
+
+            client = AddDynamicEndpointBehaviours(client);
 
             if (this.ClientInitializer != null)
             {
