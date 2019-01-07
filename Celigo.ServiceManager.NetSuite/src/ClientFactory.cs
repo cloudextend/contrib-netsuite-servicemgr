@@ -1,12 +1,16 @@
 ﻿using SuiteTalk;
 using System;
+using System.Collections.Generic;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 
 namespace Celigo.ServiceManager.NetSuite
 {
     public interface INetSuiteClientFactory
     {
         string ApplicationId { get; set; }
+
+        void AddDynamicEndpointBehaviour(IDynamicEndpointBehaviour dynamicEndpointBehaviour);
 
         INetSuiteClient CreateClient();
 
@@ -30,6 +34,8 @@ namespace Celigo.ServiceManager.NetSuite
 
     public class ClientFactory<T>: INetSuiteClientFactory where T: class, INetSuiteClient, new()
     {
+        private List<IDynamicEndpointBehaviour> _dynamicEndpointBehaviours;
+
         public string ApplicationId { get; set; }
 
         public Action<T> ClientInitializer { get; set; }
@@ -42,6 +48,7 @@ namespace Celigo.ServiceManager.NetSuite
         public ClientFactory(string appId)
         {
             this.ApplicationId = appId;
+            _dynamicEndpointBehaviours = new List<IDynamicEndpointBehaviour>();
         }
 
         public T CreateClient()
@@ -73,6 +80,11 @@ namespace Celigo.ServiceManager.NetSuite
                 passportProvider: passportProvider, 
                 configProvider: configProvider
             );
+
+        public void AddDynamicEndpointBehaviour(IDynamicEndpointBehaviour dynamicEndpointBehaviour)
+        {
+            _dynamicEndpointBehaviours.Add(dynamicEndpointBehaviour);
+        }
 
         private T ConfigureClient(
                 T client,
@@ -118,6 +130,14 @@ namespace Celigo.ServiceManager.NetSuite
 
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);
+
+            foreach(IDynamicEndpointBehaviour depb in _dynamicEndpointBehaviours)
+            {
+                if(depb.IsEnabled())
+                {
+                    client.Endpoint.EndpointBehaviors.Add(depb);
+                }
+            }
 
             if (this.ClientInitializer != null)
             {
