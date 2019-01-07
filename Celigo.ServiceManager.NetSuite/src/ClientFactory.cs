@@ -10,8 +10,6 @@ namespace Celigo.ServiceManager.NetSuite
     {
         string ApplicationId { get; set; }
 
-        void AddDynamicEndpointBehaviour(IDynamicEndpointBehaviour dynamicEndpointBehaviour);
-
         INetSuiteClient CreateClient();
 
         INetSuiteClient CreateClient(Passport passport);
@@ -51,6 +49,12 @@ namespace Celigo.ServiceManager.NetSuite
             _dynamicEndpointBehaviours = new List<IDynamicEndpointBehaviour>();
         }
 
+        public ClientFactory(string appId, List<IDynamicEndpointBehaviour> dynamicEndpointBehaviours)
+        {
+            this.ApplicationId = appId;
+            _dynamicEndpointBehaviours = dynamicEndpointBehaviours;
+        }
+
         public T CreateClient()
         {
             var client = new T();
@@ -80,11 +84,6 @@ namespace Celigo.ServiceManager.NetSuite
                 passportProvider: passportProvider, 
                 configProvider: configProvider
             );
-
-        public void AddDynamicEndpointBehaviour(IDynamicEndpointBehaviour dynamicEndpointBehaviour)
-        {
-            _dynamicEndpointBehaviours.Add(dynamicEndpointBehaviour);
-        }
 
         private T ConfigureClient(
                 T client,
