@@ -24,7 +24,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         [Fact]
         public async Task Can_execute_a_parameterless_SuiteTalk_method()
         {
-
+            client.Endpoint.Address = new System.ServiceModel.EndpointAddress("https://x.netsuite.com/services/NetSuitePort_2018_x");
             var serverTimeResult = await client.getServerTimeAsync();
             serverTimeResult.status.isSuccess.Should().BeTrue();
             serverTimeResult.serverTime.Year.Should().Be(DateTime.Now.Year);
@@ -109,6 +109,27 @@ namespace Tests.Celigo.ServiceManager.NetSuite
             customFields.readResponse.Should().NotBeNull();
             customFields.readResponse.Length.Should().BeGreaterThan(0);
             customFields.readResponse.All(r => r.record is TransactionBodyCustomField field && field.fieldTypeSpecified).Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task Can_upload_records_with_picklists()
+        {
+            var result = await client.addAsync(
+                new VendorBill {
+                    entity = new RecordRef { internalId = "992" },
+                    subsidiary = new RecordRef { internalId = "1" },
+                    location = new RecordRef { internalId = "5" },
+                    expenseList = new VendorBillExpenseList {
+                        expense = new [] {
+                            new VendorBillExpense {
+                                account = new RecordRef { internalId = "119" },
+
+                            }
+                        }
+                    }
+                }
+            );
+
         }
     }
 }
