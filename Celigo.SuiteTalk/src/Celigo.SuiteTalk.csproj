@@ -5,7 +5,7 @@
     <RootNamespace>Celigo.SuiteTalk._2018_2</RootNamespace>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.4</Version>
+    <Version>3.1.0</Version>
     <Authors>Sameera Perera, CloudExtend.io</Authors>
     <Company>Celigo, Inc</Company>
     <Product>Celigo Wrappers for NetSuite SuiteTalk 2018.2</Product>
