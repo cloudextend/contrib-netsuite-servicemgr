@@ -46,7 +46,7 @@ namespace Celigo.ServiceManager.NetSuite
         public ClientFactory(string appId)
         {
             this.ApplicationId = appId;
-            _dynamicEndpointBehaviours = new List<IDynamicEndpointBehaviour>();
+            _dynamicEndpointBehaviours = null;
         }
 
         public ClientFactory(string appId, List<IDynamicEndpointBehaviour> dynamicEndpointBehaviours)
@@ -84,6 +84,23 @@ namespace Celigo.ServiceManager.NetSuite
                 passportProvider: passportProvider, 
                 configProvider: configProvider
             );
+
+        private T AddDynamicEndpointBehaviours( T client) {
+            if (_dynamicEndpointBehaviours == null)
+            {
+                return client;
+            }
+
+            foreach (IDynamicEndpointBehaviour depb in _dynamicEndpointBehaviours)
+            {
+                if (depb.IsEnabled())
+                {
+                    client.Endpoint.EndpointBehaviors.Add(depb);
+                }
+            }
+
+            return client;
+        }
 
         private T ConfigureClient(
                 T client,
@@ -130,13 +147,7 @@ namespace Celigo.ServiceManager.NetSuite
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);
 
-            foreach(IDynamicEndpointBehaviour depb in _dynamicEndpointBehaviours)
-            {
-                if(depb.IsEnabled())
-                {
-                    client.Endpoint.EndpointBehaviors.Add(depb);
-                }
-            }
+            client = AddDynamicEndpointBehaviours(client);
 
             if (this.ClientInitializer != null)
             {
