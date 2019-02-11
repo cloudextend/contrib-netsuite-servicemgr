@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthUserPreferencesService, LoginStates } from 'lib-client-auth-netsuite';
 
+import { LoaderService } from '../loader.service';
 import { StorageService } from '../storage.service';
 import { environment } from '../../environments/environment';
 
@@ -16,6 +17,7 @@ export class ListTbaTokensComponent implements OnInit {
     userEmail: string;
 
     constructor(
+        private loader: LoaderService,
         private route: ActivatedRoute,
         private router: Router,
         private storage: StorageService,
@@ -32,7 +34,12 @@ export class ListTbaTokensComponent implements OnInit {
     }
 
     onLoginStateChange({state, data}) {
-        console.log({state, data});
+        if (state === LoginStates.AttemptInProgress) {
+            this.loader.setMessage('Logging you in...');
+            this.loader.show();
+            return;
+        }
+
         data.credentialType = 'celigo-tba';
 
         data.user = {...data.user, email: this.userEmail};

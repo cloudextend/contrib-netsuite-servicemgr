@@ -113,6 +113,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     onBasicLoginStateChange({state, data}) {
+        if (state === LoginStates.AttemptInProgress) {
+            this.loader.setMessage('Logging you in...');
+            this.loader.show();
+            return;
+        }
+
         this.loginFailed = false;
 
         data.credentialType = 'celigo-basic';
@@ -174,23 +180,25 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
     }
 
-    onTBALoginStateChange(event) {
+    onTBALoginStateChange({state, data, inputs: {account, token, tokenSecret}}) {
+        if (state === LoginStates.AttemptInProgress) {
+            this.loader.setMessage('Logging you in...');
+            this.loader.show();
+            return;
+        }
+
         this.loginFailed = false;
-        const {data, inputs: {account, token, tokenSecret}} = event;
 
         data.credentialType = 'celigo-tba';
 
         data.user = {...data.user, email: this.userEmail};
 
-        console.log(event);
-
-
-        if (event.state === LoginStates.FailedAuth) {
+        if (state === LoginStates.FailedAuth) {
             this.loginFailed = true;
             return;
         }
 
-        if (event.state === LoginStates.Success) {
+        if (state === LoginStates.Success) {
             this.storage.set('celigo_cexl_session_data', data);
 
             if (this.persistTokens) {
@@ -254,6 +262,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     onSSOLoginStateChange({state, data}) {
+        if (state === LoginStates.AttemptInProgress) {
+            this.loader.setMessage('Logging you in...');
+            this.loader.show();
+            return;
+        }
+
         data.credentialType = 'celigo-tba';
 
         data.user = {...data.user, email: this.userEmail};
