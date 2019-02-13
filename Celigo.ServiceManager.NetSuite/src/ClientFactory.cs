@@ -32,7 +32,7 @@ namespace Celigo.ServiceManager.NetSuite
 
     public class ClientFactory<T>: INetSuiteClientFactory where T: class, INetSuiteClient, new()
     {
-        private List<IDynamicEndpointBehaviour> _dynamicEndpointBehaviours;
+        private List<IDynamicEndpointBehavior> _dynamicEndpointBehaviors;
 
         public string ApplicationId { get; set; }
 
@@ -46,13 +46,13 @@ namespace Celigo.ServiceManager.NetSuite
         public ClientFactory(string appId)
         {
             this.ApplicationId = appId;
-            _dynamicEndpointBehaviours = null;
+            _dynamicEndpointBehaviors = null;
         }
 
-        public ClientFactory(string appId, List<IDynamicEndpointBehaviour> dynamicEndpointBehaviours)
+        public ClientFactory(string appId, List<IDynamicEndpointBehavior> dynamicEndpointBehaviours)
         {
             this.ApplicationId = appId;
-            _dynamicEndpointBehaviours = dynamicEndpointBehaviours;
+            _dynamicEndpointBehaviors = dynamicEndpointBehaviours;
         }
 
         public T CreateClient()
@@ -86,12 +86,12 @@ namespace Celigo.ServiceManager.NetSuite
             );
 
         private T AddDynamicEndpointBehaviours( T client) {
-            if (_dynamicEndpointBehaviours == null)
+            if (_dynamicEndpointBehaviors == null)
             {
                 return client;
             }
 
-            foreach (IDynamicEndpointBehaviour depb in _dynamicEndpointBehaviours)
+            foreach (IDynamicEndpointBehavior depb in _dynamicEndpointBehaviors)
             {
                 if (depb.IsEnabled())
                 {
