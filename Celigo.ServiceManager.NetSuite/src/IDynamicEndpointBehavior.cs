@@ -3,7 +3,7 @@ using System.ServiceModel.Description;
 
 namespace Celigo.ServiceManager.NetSuite
 {
-    public interface IDynamicEndpointBehaviour: IEndpointBehavior
+    public interface IDynamicEndpointBehavior: IEndpointBehavior
     {
         bool IsEnabled();
     }
