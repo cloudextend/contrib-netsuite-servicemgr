@@ -5,7 +5,7 @@
     <RootNamespace>Celigo.SuiteTalk._2018_2</RootNamespace>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.1.0</Version>
+    <Version>3.4.0</Version>
     <Authors>Sameera Perera, CloudExtend.io</Authors>
     <Company>Celigo, Inc</Company>
     <Product>Celigo Wrappers for NetSuite SuiteTalk 2018.2</Product>
@@ -17,7 +17,9 @@
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
     <PackageTags>NetSuite Celigo SuiteTalk ServiceManager 2018.2</PackageTags>
     <RepositoryType>Git</RepositoryType>
-    <PackageReleaseNotes>Targets SuiteTalk 2018.2</PackageReleaseNotes>
+    <PackageReleaseNotes>3.1.0 Targets SuiteTalk 2018.2
+3.4.0 Use SHA-256 for TBA Signature 
+</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-svcutil" Version="1.0.*" />
