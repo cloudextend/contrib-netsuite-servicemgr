@@ -40,6 +40,7 @@ export class ListTbaTokensComponent implements OnInit {
             return;
         }
 
+        this.loader.hide();
         data.credentialType = 'celigo-tba';
 
         data.user = {...data.user, email: this.userEmail};

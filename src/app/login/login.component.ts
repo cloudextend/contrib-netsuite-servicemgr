@@ -119,6 +119,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             return;
         }
 
+        this.loader.hide();
         this.loginFailed = false;
 
         data.credentialType = 'celigo-basic';
@@ -187,6 +188,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             return;
         }
 
+        this.loader.hide();
         this.loginFailed = false;
 
         data.credentialType = 'celigo-tba';
@@ -268,6 +270,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             return;
         }
 
+        this.loader.hide();
         data.credentialType = 'celigo-tba';
 
         data.user = {...data.user, email: this.userEmail};
