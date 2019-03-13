@@ -267,6 +267,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (state === LoginStates.AttemptInProgress) {
             this.loader.setMessage('Logging you in...');
             this.loader.show();
+
+            this.changeDetector.detectChanges();
+
             return;
         }
 
