@@ -63,7 +63,7 @@ export class EmailFormComponent implements OnInit {
     onContinue(disabled) {
         if (disabled) { return; }
 
-        this.userPreferenceService.setDefaultEmail(this.userEmail);
+        this.userPreferenceService.setDefaultEmail(this.userEmail.toLowerCase());
 
         this.goToNextRoute();
     }
