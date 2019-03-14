@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LoaderService } from './loader.service';
 
 @Component({
@@ -12,11 +12,23 @@ export class AppComponent implements OnInit {
     loadingMessage = 'testing';
 
     constructor(
+        private changeDetector: ChangeDetectorRef,
         private loader: LoaderService
     ) {}
 
     ngOnInit() {
-        this.loader.loadingState.subscribe(isLoading => this.showLoader = isLoading);
-        this.loader.loadingMessage.subscribe(message => this.loadingMessage = message);
+        this.loader.loadingState.subscribe(isLoading => {
+            this.showLoader = isLoading;
+
+            // Force the re-render using changeDetector in favor of lib components. Check HYSC-1753
+            this.changeDetector.detectChanges();
+        });
+
+        this.loader.loadingMessage.subscribe(message => {
+            this.loadingMessage = message;
+
+            // Force the re-render using changeDetector in favor of lib components. Check HYSC-1753
+            this.changeDetector.detectChanges();
+        });
     }
 }

@@ -268,8 +268,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
             this.loader.setMessage('Logging you in...');
             this.loader.show();
 
-            this.changeDetector.detectChanges();
-
             return;
         }
 
