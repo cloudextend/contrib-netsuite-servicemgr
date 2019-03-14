@@ -7,7 +7,7 @@
     <div class="container">
         <router-outlet></router-outlet>
     </div>
-    <div class="loader" *ngIf="showLoader">
+    <div class="loader" [hidden]="!showLoader">
         <div class="loader-background"></div>
         <div class="spinner"></div>
         <div class="loading-text">
