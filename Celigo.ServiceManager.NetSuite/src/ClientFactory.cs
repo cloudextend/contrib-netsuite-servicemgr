@@ -166,13 +166,15 @@ namespace Celigo.ServiceManager.NetSuite
             var endpoint = NetSuitePortTypeClient.GetDefaultEndpoint();
             var relativeWsPath = endpoint.Uri.LocalPath;
 
-            if (dataCenter.EndsWith("/"))
+            if (!dataCenter.EndsWith("/"))
             {
                 return new EndpointAddress(dataCenter + relativeWsPath);
             }
             else
             {
-                return new EndpointAddress(string.Concat(dataCenter, "/", relativeWsPath));
+                return new EndpointAddress(
+                    string.Concat(dataCenter.Substring(0, dataCenter.Length - 1), relativeWsPath)
+                );
             }
         }
 
