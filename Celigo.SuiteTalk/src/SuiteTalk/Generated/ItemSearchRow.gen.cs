@@ -51,6 +51,7 @@ namespace SuiteTalk
         // public IEnumerable<SearchRowBasic> GetJoins()
         // {
         //    yield return this.basic;
+      //      yield return this.accountingBookRevRecScheduleJoin;
       //      yield return this.assemblyItemBillOfMaterialsJoin;
       //      yield return this.binNumberJoin;
       //      yield return this.binOnHandJoin;
@@ -95,6 +96,11 @@ namespace SuiteTalk
                     break;
 
 
+                case "accountingBookRevRecScheduleJoin":
+                    result = target.accountingBookRevRecScheduleJoin;
+                    creator = () => target.accountingBookRevRecScheduleJoin = new RevRecTemplateSearchRowBasic();
+                    break;
+        
                 case "assemblyItemBillOfMaterialsJoin":
                     result = target.assemblyItemBillOfMaterialsJoin;
                     creator = () => target.assemblyItemBillOfMaterialsJoin = new AssemblyItemBomSearchRowBasic();

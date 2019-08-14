@@ -66,6 +66,7 @@ namespace SuiteTalk
                     { "countryCode", r => r.@countryCode = new [] { new SearchColumnStringField { customLabel = "countryCode" } } },
                     { "customer", r => r.@customer = new [] { new SearchColumnSelectField { customLabel = "customer" } } },
                     { "dateCreated", r => r.@dateCreated = new [] { new SearchColumnDateField { customLabel = "dateCreated" } } },
+                    { "defaultTaxReg", r => r.@defaultTaxReg = new [] { new SearchColumnStringField { customLabel = "defaultTaxReg" } } },
                     { "email", r => r.@email = new [] { new SearchColumnStringField { customLabel = "email" } } },
                     { "endDate", r => r.@endDate = new [] { new SearchColumnDateField { customLabel = "endDate" } } },
                     { "entityId", r => r.@entityId = new [] { new SearchColumnStringField { customLabel = "entityId" } } },

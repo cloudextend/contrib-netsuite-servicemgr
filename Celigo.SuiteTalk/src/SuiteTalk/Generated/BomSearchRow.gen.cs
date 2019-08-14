@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SuiteTalk
 {
-    public partial class BomSearchRow: ISearchRow, ISearchRow<BomSearchRowBasic>
+    public partial class BomSearchRow: ISearchRow, ISearchRow<BomSearchRowBasic>, ISupportsCustomSearchJoin
     {
         public BomSearchRowBasic GetBasic() => this.basic;
 
@@ -51,11 +51,19 @@ namespace SuiteTalk
         // public IEnumerable<SearchRowBasic> GetJoins()
         // {
         //    yield return this.basic;
+      //      yield return this.assemblyItemJoin;
       //      yield return this.revisionJoin;
       //      yield return this.transactionJoin;
-      //      yield return this.assemblyItemJoin;
         //}
 
+
+          public CustomSearchRowBasic[] GetCustomSearchJoin() => this.customSearchJoin;
+  
+          public CustomSearchRowBasic[] CreateCustomSearchJoin()
+          {
+              if (this.customSearchJoin == null) this.customSearchJoin = new CustomSearchRowBasic[0];
+              return this.customSearchJoin;
+          }
         private static SearchRowBasic GetOrCreateJoin(BomSearchRow target, string joinName, bool createIfNull = false)
         {
             SearchRowBasic result;
@@ -69,6 +77,11 @@ namespace SuiteTalk
                     break;
 
 
+                case "assemblyItemJoin":
+                    result = target.assemblyItemJoin;
+                    creator = () => target.assemblyItemJoin = new AssemblyItemBomSearchRowBasic();
+                    break;
+        
                 case "revisionJoin":
                     result = target.revisionJoin;
                     creator = () => target.revisionJoin = new BomRevisionSearchRowBasic();
@@ -77,11 +90,6 @@ namespace SuiteTalk
                 case "transactionJoin":
                     result = target.transactionJoin;
                     creator = () => target.transactionJoin = new TransactionSearchRowBasic();
-                    break;
-        
-                case "assemblyItemJoin":
-                    result = target.assemblyItemJoin;
-                    creator = () => target.assemblyItemJoin = new AssemblyItemBomSearchRowBasic();
                     break;
                         default:
                     throw new ArgumentException("BomSearchRow does not have a " + joinName);

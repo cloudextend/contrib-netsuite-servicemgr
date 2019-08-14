@@ -77,6 +77,7 @@ namespace SuiteTalk
       //      yield return this.salesRepJoin;
       //      yield return this.subCustomerJoin;
       //      yield return this.taskJoin;
+      //      yield return this.taxRegistrationJoin;
       //      yield return this.timeJoin;
       //      yield return this.topLevelParentJoin;
       //      yield return this.transactionJoin;
@@ -236,6 +237,11 @@ namespace SuiteTalk
                 case "taskJoin":
                     result = target.taskJoin;
                     creator = () => target.taskJoin = new TaskSearchRowBasic();
+                    break;
+        
+                case "taxRegistrationJoin":
+                    result = target.taxRegistrationJoin;
+                    creator = () => target.taxRegistrationJoin = new EntityTaxRegistrationSearchRowBasic();
                     break;
         
                 case "timeJoin":

@@ -24,13 +24,14 @@ namespace SuiteTalk
             protected override Dictionary<string, Action<PayrollItemSearchRowBasic>> InitializeColumnBuilders()
             {
                 return new Dictionary<string, Action<PayrollItemSearchRowBasic>> {
+                    { "expenseAccount", r => r.@expenseAccount = new [] { new SearchColumnStringField { customLabel = "expenseAccount" } } },
                     { "externalId", r => r.@externalId = new [] { new SearchColumnSelectField { customLabel = "externalId" } } },
                     { "internalId", r => r.@internalId = new [] { new SearchColumnSelectField { customLabel = "internalId" } } },
-                    { "expenseAccount", r => r.@expenseAccount = new [] { new SearchColumnStringField { customLabel = "expenseAccount" } } },
                     { "isInactive", r => r.@isInactive = new [] { new SearchColumnBooleanField { customLabel = "isInactive" } } },
                     { "itemTypeNoHierarchy", r => r.@itemTypeNoHierarchy = new [] { new SearchColumnStringField { customLabel = "itemTypeNoHierarchy" } } },
                     { "liabilityAccount", r => r.@liabilityAccount = new [] { new SearchColumnStringField { customLabel = "liabilityAccount" } } },
                     { "name", r => r.@name = new [] { new SearchColumnStringField { customLabel = "name" } } },
+                    { "subsidiary", r => r.@subsidiary = new [] { new SearchColumnStringField { customLabel = "subsidiary" } } },
                     { "vendor", r => r.@vendor = new [] { new SearchColumnStringField { customLabel = "vendor" } } },
                 };
             }

@@ -58,6 +58,11 @@ namespace SuiteTalk
                     creator = () => target.basic = new ItemSearchBasic();
                     break;
 
+                case "accountingBookRevRecScheduleJoin":
+                    result = target.accountingBookRevRecScheduleJoin;
+                    creator = () => target.accountingBookRevRecScheduleJoin = new RevRecTemplateSearchBasic();
+                    break;
+        
                 case "assemblyItemBillOfMaterialsJoin":
                     result = target.assemblyItemBillOfMaterialsJoin;
                     creator = () => target.assemblyItemBillOfMaterialsJoin = new AssemblyItemBomSearchBasic();

@@ -108,6 +108,11 @@ namespace SuiteTalk
                     creator = () => target.messagesToJoin = new MessageSearchBasic();
                     break;
         
+                case "taxRegistrationJoin":
+                    result = target.taxRegistrationJoin;
+                    creator = () => target.taxRegistrationJoin = new EntityTaxRegistrationSearchBasic();
+                    break;
+        
                 case "timeApproverJoin":
                     result = target.timeApproverJoin;
                     creator = () => target.timeApproverJoin = new EmployeeSearchBasic();

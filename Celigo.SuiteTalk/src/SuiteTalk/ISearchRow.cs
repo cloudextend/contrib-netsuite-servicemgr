@@ -2,9 +2,7 @@
 
 namespace SuiteTalk
 {
-    //public interface ISearchAdvancedRow { } // Stop using ISearchAdvancedRow. References to it will be removed in the future. Use ISearchRow.
-
-    public interface ISearchRow //: ISearchAdvancedRow
+    public interface ISearchRow
     {
         SearchRowBasic GetBasic();
 

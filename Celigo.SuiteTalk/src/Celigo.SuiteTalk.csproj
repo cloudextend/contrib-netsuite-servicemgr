@@ -2,35 +2,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>Celigo.SuiteTalk._2018_2</RootNamespace>
+    <RootNamespace>Celigo.SuiteTalk</RootNamespace>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.4.2</Version>
+    <Version>4.0.0</Version>
     <Authors>Sameera Perera, CloudExtend.io</Authors>
     <Company>Celigo, Inc</Company>
-    <Product>Celigo Wrappers for NetSuite SuiteTalk 2018.2</Product>
+    <Product>Celigo Wrappers for NetSuite SuiteTalk 2019.1</Product>
     <Description>Proxy Classes for workign with NetSuite SuiteTalk 2018.2. Use with Celigo.ServiceManager.NetSuite nuget package.</Description>
-    <Copyright>Copyright © Celigo, Inc. 2018</Copyright>
-    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <Copyright>Copyright © Celigo, Inc. 2019</Copyright>
     <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
     <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
-    <PackageTags>NetSuite Celigo SuiteTalk ServiceManager 2018.2</PackageTags>
+    <PackageTags>NetSuite Celigo SuiteTalk ServiceManager 2019.1</PackageTags>
     <RepositoryType>Git</RepositoryType>
     <PackageReleaseNotes>3.1.0 Targets SuiteTalk 2018.2
 3.4.0 Use SHA-256 for TBA Signature 
 3.4.2 .net core 2.1 compatible.
-</PackageReleaseNotes>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+
+4.0.0 Targets SuiteTalk 2019.1. From this point on, major versions of this library will always indicate an upgrade in the SuiteTalk version.</PackageReleaseNotes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-svcutil" Version="1.0.*" />
-    <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="2.1.0-preview4.19212.13" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.XmlSerializer.Generator" Version="2.1.0-preview4.19212.13" />
     <PackageReference Include="System.ServiceModel.duplex" Version="4.5.3" />
     <PackageReference Include="System.ServiceModel.http" Version="4.5.3" />
     <PackageReference Include="System.ServiceModel.nettcp" Version="4.5.3" />

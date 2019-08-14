@@ -32,6 +32,7 @@ namespace SuiteTalk
                     { "parentNexus", r => r.@parentNexus = new [] { new SearchColumnSelectField { customLabel = "parentNexus" } } },
                     { "state", r => r.@state = new [] { new SearchColumnSelectField { customLabel = "state" } } },
                     { "taxAgency", r => r.@taxAgency = new [] { new SearchColumnSelectField { customLabel = "taxAgency" } } },
+                    { "taxDateFromFulfillment", r => r.@taxDateFromFulfillment = new [] { new SearchColumnBooleanField { customLabel = "taxDateFromFulfillment" } } },
                 };
             }
         }

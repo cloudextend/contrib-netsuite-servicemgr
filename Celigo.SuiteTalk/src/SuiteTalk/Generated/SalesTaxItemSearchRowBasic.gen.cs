@@ -29,6 +29,7 @@ namespace SuiteTalk
                     { "internalId", r => r.@internalId = new [] { new SearchColumnSelectField { customLabel = "internalId" } } },
                     { "isInactive", r => r.@isInactive = new [] { new SearchColumnBooleanField { customLabel = "isInactive" } } },
                     { "itemId", r => r.@itemId = new [] { new SearchColumnStringField { customLabel = "itemId" } } },
+                    { "name", r => r.@name = new [] { new SearchColumnStringField { customLabel = "name" } } },
                     { "taxType", r => r.@taxType = new [] { new SearchColumnSelectField { customLabel = "taxType" } } },
                 };
             }

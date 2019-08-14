@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SuiteTalk
 {
-    public partial class BomRevisionSearchRow: ISearchRow, ISearchRow<BomRevisionSearchRowBasic>
+    public partial class BomRevisionSearchRow: ISearchRow, ISearchRow<BomRevisionSearchRowBasic>, ISupportsCustomSearchJoin
     {
         public BomRevisionSearchRowBasic GetBasic() => this.basic;
 
@@ -56,6 +56,14 @@ namespace SuiteTalk
       //      yield return this.transactionJoin;
         //}
 
+
+          public CustomSearchRowBasic[] GetCustomSearchJoin() => this.customSearchJoin;
+  
+          public CustomSearchRowBasic[] CreateCustomSearchJoin()
+          {
+              if (this.customSearchJoin == null) this.customSearchJoin = new CustomSearchRowBasic[0];
+              return this.customSearchJoin;
+          }
         private static SearchRowBasic GetOrCreateJoin(BomRevisionSearchRow target, string joinName, bool createIfNull = false)
         {
             SearchRowBasic result;

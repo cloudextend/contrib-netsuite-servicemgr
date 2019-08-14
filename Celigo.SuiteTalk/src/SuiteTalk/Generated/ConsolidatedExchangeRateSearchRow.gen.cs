@@ -51,6 +51,9 @@ namespace SuiteTalk
         // public IEnumerable<SearchRowBasic> GetJoins()
         // {
         //    yield return this.basic;
+      //      yield return this.fromSubsidiaryJoin;
+      //      yield return this.periodJoin;
+      //      yield return this.toSubsidiaryJoin;
       //      yield return this.userJoin;
         //}
 
@@ -67,6 +70,21 @@ namespace SuiteTalk
                     break;
 
 
+                case "fromSubsidiaryJoin":
+                    result = target.fromSubsidiaryJoin;
+                    creator = () => target.fromSubsidiaryJoin = new SubsidiarySearchRowBasic();
+                    break;
+        
+                case "periodJoin":
+                    result = target.periodJoin;
+                    creator = () => target.periodJoin = new AccountingPeriodSearchRowBasic();
+                    break;
+        
+                case "toSubsidiaryJoin":
+                    result = target.toSubsidiaryJoin;
+                    creator = () => target.toSubsidiaryJoin = new SubsidiarySearchRowBasic();
+                    break;
+        
                 case "userJoin":
                     result = target.userJoin;
                     creator = () => target.userJoin = new EmployeeSearchRowBasic();

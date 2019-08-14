@@ -5,7 +5,7 @@ using System;
 namespace SuiteTalk
 {
 
-      partial class SearchColumnDateField : ISearchColumnField<DateTime>, IValueTypeSearchColumnField<DateTime>
+      partial class SearchColumnStringField : ISearchColumnField<string>
       {
             public object GetSearchValue() => this.searchValue;
       }
@@ -16,6 +16,11 @@ namespace SuiteTalk
       }
 
       partial class SearchColumnEnumSelectField : ISearchColumnField<string>
+      {
+            public object GetSearchValue() => this.searchValue;
+      }
+
+      partial class SearchColumnDateField : ISearchColumnField<DateTime>, IValueTypeSearchColumnField<DateTime>
       {
             public object GetSearchValue() => this.searchValue;
       }
@@ -31,11 +36,6 @@ namespace SuiteTalk
       }
 
       partial class SearchColumnLongField : ISearchColumnField<long>, IValueTypeSearchColumnField<long>
-      {
-            public object GetSearchValue() => this.searchValue;
-      }
-
-      partial class SearchColumnStringField : ISearchColumnField<string>
       {
             public object GetSearchValue() => this.searchValue;
       }

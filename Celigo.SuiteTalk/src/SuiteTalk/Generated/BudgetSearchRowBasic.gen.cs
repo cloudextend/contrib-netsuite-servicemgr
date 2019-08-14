@@ -25,6 +25,7 @@ namespace SuiteTalk
             {
                 return new Dictionary<string, Action<BudgetSearchRowBasic>> {
                     { "account", r => r.@account = new [] { new SearchColumnStringField { customLabel = "account" } } },
+                    { "accountingBook", r => r.@accountingBook = new [] { new SearchColumnStringField { customLabel = "accountingBook" } } },
                     { "amount", r => r.@amount = new [] { new SearchColumnDoubleField { customLabel = "amount" } } },
                     { "category", r => r.@category = new [] { new SearchColumnStringField { customLabel = "category" } } },
                     { "class", r => r.@class = new [] { new SearchColumnStringField { customLabel = "class" } } },
