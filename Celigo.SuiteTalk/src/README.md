@@ -10,4 +10,13 @@
    ```
 
 3. This will generate a `Reference.cs file in `<SolutionDir>\2018.2\ServiceReference`. Move this file to 
-   `<SolutionDir>\Celigo.SuiteTalk\src\Connected Services\SuiteTalk` folder overwriting the existing file. Build the project.
+   `<SolutionDir>\Celigo.SuiteTalk\src\Connected Services\SuiteTalk` folder overwriting the existing file. 
+   
+4. Open `Reference.cs` file and do a Find & Replace and replace the following regex patterns with empty strings:
+    `\(Order=[0-9]+\)`
+    `\,\sOrder=[0-9]+`
+
+5. Ensure that all `Order` attributes have been removed from XmlElementAttribute annotations by searching for the text `Order=`.
+   If there are any ordering left, remove them as well.
+
+5. Build the project.
