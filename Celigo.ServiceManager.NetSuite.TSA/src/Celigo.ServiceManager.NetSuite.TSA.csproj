@@ -2,10 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>Apache2.0</PackageLicenseExpression>
+    <Copyright>Celigo, Inc.</Copyright>
+    <Company>CloudExtend.io</Company>
+    <Authors>Sameera Perera, CloudExtend.io</Authors>
+    <Description>Provides helper functions to implement NetSuite's Three-step Authorization Flow.</Description>
+    <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
+    <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
+    <PackageTags>NetSuite Celigo TSA 3SA Three-Step Authorization</PackageTags>
+    <PackageReleaseNotes>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.json" Version="12.0.2" />
   </ItemGroup>
 
