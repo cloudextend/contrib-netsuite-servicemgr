@@ -14,6 +14,7 @@
     <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
     <PackageTags>NetSuite Celigo TSA 3SA Three-Step Authorization</PackageTags>
     <PackageReleaseNotes>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

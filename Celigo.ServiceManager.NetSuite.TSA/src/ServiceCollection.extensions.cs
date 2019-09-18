@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Celigo.ServiceManager.NetSuite.TSA;
 
-namespace Celigo.ServiceManager.NetSuite.TSA
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
