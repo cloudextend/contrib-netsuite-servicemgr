@@ -61,6 +61,7 @@ namespace SuiteTalk
       //      yield return this.mseSubsidiaryJoin;
       //      yield return this.messagesFromJoin;
       //      yield return this.messagesToJoin;
+      //      yield return this.taxRegistrationJoin;
       //      yield return this.timeApproverJoin;
       //      yield return this.transactionJoin;
       //      yield return this.userJoin;
@@ -136,6 +137,11 @@ namespace SuiteTalk
                 case "messagesToJoin":
                     result = target.messagesToJoin;
                     creator = () => target.messagesToJoin = new MessageSearchRowBasic();
+                    break;
+        
+                case "taxRegistrationJoin":
+                    result = target.taxRegistrationJoin;
+                    creator = () => target.taxRegistrationJoin = new EntityTaxRegistrationSearchRowBasic();
                     break;
         
                 case "timeApproverJoin":

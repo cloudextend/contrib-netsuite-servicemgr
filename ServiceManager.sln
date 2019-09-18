@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{E9FD5E14-3B7E-48A3-A886-33992275C95E}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,6 +15,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celigo.SuiteTalk.PassportProviders.EnvironmentVariables", "Celigo.SuiteTalk.PassportProviders.EnvironmentVariables\src\Celigo.SuiteTalk.PassportProviders.EnvironmentVariables.csproj", "{6FCB8E3B-0D9F-41E3-9CB3-2F9D060392BB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celigo.SuiteTalk", "Celigo.SuiteTalk\src\Celigo.SuiteTalk.csproj", "{85EF0E88-2099-44AF-A4B3-C79131BDA92A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celigo.ServiceManager.NetSuite.TSA", "Celigo.ServiceManager.NetSuite.TSA\src\Celigo.ServiceManager.NetSuite.TSA.csproj", "{E74F8EE3-6748-472E-9349-83DF27FE9620}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreeStepAuthentication", "Samples\ThreeStepAuthentication\ThreeStepAuthentication.csproj", "{0C51D4E1-2CF1-4FFE-B735-8A95A91672F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{7170DE1A-6F01-4571-AC82-228E00269EFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +44,20 @@ Global
 		{85EF0E88-2099-44AF-A4B3-C79131BDA92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85EF0E88-2099-44AF-A4B3-C79131BDA92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85EF0E88-2099-44AF-A4B3-C79131BDA92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E74F8EE3-6748-472E-9349-83DF27FE9620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E74F8EE3-6748-472E-9349-83DF27FE9620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E74F8EE3-6748-472E-9349-83DF27FE9620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E74F8EE3-6748-472E-9349-83DF27FE9620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C51D4E1-2CF1-4FFE-B735-8A95A91672F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C51D4E1-2CF1-4FFE-B735-8A95A91672F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C51D4E1-2CF1-4FFE-B735-8A95A91672F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C51D4E1-2CF1-4FFE-B735-8A95A91672F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C51D4E1-2CF1-4FFE-B735-8A95A91672F3} = {7170DE1A-6F01-4571-AC82-228E00269EFB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F748508-F7FF-4F09-B5CC-4DEEE247969C}

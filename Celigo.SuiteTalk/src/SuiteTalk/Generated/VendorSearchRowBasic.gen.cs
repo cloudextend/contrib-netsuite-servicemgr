@@ -62,6 +62,7 @@ namespace SuiteTalk
                     { "currency", r => r.@currency = new [] { new SearchColumnSelectField { customLabel = "currency" } } },
                     { "currentExchangeRate", r => r.@currentExchangeRate = new [] { new SearchColumnDoubleField { customLabel = "currentExchangeRate" } } },
                     { "dateCreated", r => r.@dateCreated = new [] { new SearchColumnDateField { customLabel = "dateCreated" } } },
+                    { "defaultTaxReg", r => r.@defaultTaxReg = new [] { new SearchColumnStringField { customLabel = "defaultTaxReg" } } },
                     { "eligibleForCommission", r => r.@eligibleForCommission = new [] { new SearchColumnBooleanField { customLabel = "eligibleForCommission" } } },
                     { "email", r => r.@email = new [] { new SearchColumnStringField { customLabel = "email" } } },
                     { "emailPreference", r => r.@emailPreference = new [] { new SearchColumnEnumSelectField { customLabel = "emailPreference" } } },

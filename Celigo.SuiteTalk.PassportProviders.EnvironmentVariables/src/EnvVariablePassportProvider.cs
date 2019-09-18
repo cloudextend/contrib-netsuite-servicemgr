@@ -16,11 +16,19 @@ namespace Celigo.SuiteTalk.PassportProviders.EnvironmentVariables
     public class EnvVariablePassportProvider : ITestPassportProvider
     {
         private static readonly Regex authPattern = new Regex(@"(?<keyword>\w+)=(?<value>.*?)(,|$)", RegexOptions.Compiled);
+        private readonly string credsEnvVariableName;
+
+        public EnvVariablePassportProvider(): this("NETSUITE_CREDS") {}
+
+        public EnvVariablePassportProvider(string envVariableName)
+        {
+            this.credsEnvVariableName = envVariableName;
+        }
 
         public string GetAuthString()
         {
-            var creds = Environment.GetEnvironmentVariable("NETSUITE_CREDS");
-            if (string.IsNullOrWhiteSpace(creds)) throw new InvalidOperationException("NETSUITE_CREDS environment variable should be configured");
+            var creds = Environment.GetEnvironmentVariable(this.credsEnvVariableName);
+            if (string.IsNullOrWhiteSpace(creds)) throw new InvalidOperationException(this.credsEnvVariableName + " environment variable should be configured");
 
             return creds;
         }
@@ -30,7 +38,7 @@ namespace Celigo.SuiteTalk.PassportProviders.EnvironmentVariables
             string authHeader = GetAuthString();
 
             var matches = authPattern.Matches(authHeader);
-            if (matches.Count < 3) throw new InvalidOperationException("NETSUITE_CREDS have been misconfigured");
+            if (matches.Count < 3) throw new InvalidOperationException(this.credsEnvVariableName + " have been misconfigured");
 
             var detailsMap = new Dictionary<string, string>(4);
             foreach (Match match in matches)

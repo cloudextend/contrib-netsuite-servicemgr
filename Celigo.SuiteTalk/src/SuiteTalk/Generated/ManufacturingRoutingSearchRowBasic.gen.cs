@@ -30,7 +30,6 @@ namespace SuiteTalk
                     { "internalId", r => r.@internalId = new [] { new SearchColumnSelectField { customLabel = "internalId" } } },
                     { "isDefault", r => r.@isDefault = new [] { new SearchColumnBooleanField { customLabel = "isDefault" } } },
                     { "isInactive", r => r.@isInactive = new [] { new SearchColumnBooleanField { customLabel = "isInactive" } } },
-                    { "subsidiary", r => r.@subsidiary = new [] { new SearchColumnSelectField { customLabel = "subsidiary" } } },
                     { "item", r => r.@item = new [] { new SearchColumnSelectField { customLabel = "item" } } },
                     { "lagAmount", r => r.@lagAmount = new [] { new SearchColumnDoubleField { customLabel = "lagAmount" } } },
                     { "lagType", r => r.@lagType = new [] { new SearchColumnEnumSelectField { customLabel = "lagType" } } },
@@ -45,6 +44,7 @@ namespace SuiteTalk
                     { "runRate", r => r.@runRate = new [] { new SearchColumnDoubleField { customLabel = "runRate" } } },
                     { "sequence", r => r.@sequence = new [] { new SearchColumnLongField { customLabel = "sequence" } } },
                     { "setupTime", r => r.@setupTime = new [] { new SearchColumnDoubleField { customLabel = "setupTime" } } },
+                    { "subsidiary", r => r.@subsidiary = new [] { new SearchColumnSelectField { customLabel = "subsidiary" } } },
                 };
             }
         }

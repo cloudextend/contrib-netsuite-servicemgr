@@ -36,7 +36,7 @@ namespace SuiteTalk
         {
             string nonce = this.ComputeNonce();
             long timestamp = this.ComputeTimestamp();
-            var signature = this.ComputeSignature(accountNumber, tokenId, tokenSecret, nonce, timestamp);
+            var signature = this.ComputeSignature(accountNumber.ToUpperInvariant(), tokenId, tokenSecret, nonce, timestamp);
 
             return new TokenPassport {
                 account = accountNumber,

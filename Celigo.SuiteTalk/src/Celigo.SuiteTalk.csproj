@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Celigo.SuiteTalk._2018_2</RootNamespace>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.4.0</Version>
+    <Version>3.5.1</Version>
     <Authors>Sameera Perera, CloudExtend.io</Authors>
     <Company>Celigo, Inc</Company>
     <Product>Celigo Wrappers for NetSuite SuiteTalk 2018.2</Product>
     <Description>Proxy Classes for workign with NetSuite SuiteTalk 2018.2. Use with Celigo.ServiceManager.NetSuite nuget package.</Description>
     <Copyright>Copyright © Celigo, Inc. 2018</Copyright>
-    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
     <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
@@ -19,15 +17,15 @@
     <RepositoryType>Git</RepositoryType>
     <PackageReleaseNotes>3.1.0 Targets SuiteTalk 2018.2
 3.4.0 Use SHA-256 for TBA Signature 
-</PackageReleaseNotes>
+3.4.2 .net core 2.1 compatible.
+3.5.0 Regenerated the WSDL classes using SVC-UTIL 2.0.1
+3.5.1 Fix: Account should be uppercased when using in TBA signature calculation.</PackageReleaseNotes>
+    <RootNamespace>SuiteTalk</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-svcutil" Version="1.0.*" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.duplex" Version="4.5.3" />
+    <PackageReference Include="System.ServiceModel.http" Version="4.5.3" />
+    <PackageReference Include="System.ServiceModel.nettcp" Version="4.5.3" />
+    <PackageReference Include="System.ServiceModel.security" Version="4.5.3" />
   </ItemGroup>
 </Project>

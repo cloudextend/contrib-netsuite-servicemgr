@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <Authors>CloudExtend.io</Authors>
     <Company>Celigo</Company>
     <Description>This is a companion package for Celigo.SuiteTalk library. Not useful on its own.</Description>
@@ -13,6 +13,7 @@
     <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
     <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>3.1.0 Environment variables have been parameterized.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
