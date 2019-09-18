@@ -109,19 +109,20 @@ namespace Celigo.ServiceManager.NetSuite
                 IConfigurationProvider configProvider = null
             )
         {
-            if (configProvider != null && configProvider.DataCenter != null)
-            {
-                client.Endpoint.Address = GetDataCenterEndpoint(configProvider.DataCenter.DataCenterDomain);
-            }
+            // Increase binding timeout.
+            client.Endpoint.Binding.SendTimeout = new TimeSpan(0, 10, 0);
 
             SuiteTalkHeader[] headers;
+            string account;
 
             if (client.tokenPassport != null)
             {
+                account = client.tokenPassport.account;
                 headers = new SuiteTalkHeader[] { new SearchPreferencesHeader(client) };
             }
             else if (client.passport != null)
             {
+                account = client.passport.account;
                 headers = new SuiteTalkHeader[] {
                     new ApplicationInfoHeader(this.ApplicationId),
                     new SearchPreferencesHeader(client)
@@ -129,6 +130,7 @@ namespace Celigo.ServiceManager.NetSuite
             }
             else if (tokenPassportProvider != null)
             {
+                account = tokenPassportProvider.GetTokenPassport().account;
                 headers = new SuiteTalkHeader[] {
                     new TokenPassportHeader(tokenPassportProvider),
                     new SearchPreferencesHeader(client)
@@ -136,6 +138,7 @@ namespace Celigo.ServiceManager.NetSuite
             }
             else
             {
+                account = passportProvider.GetPassport().account;
                 headers = new SuiteTalkHeader[] {
                     new ApplicationInfoHeader(this.ApplicationId),
                     new PassportHeader(passportProvider),
@@ -143,6 +146,16 @@ namespace Celigo.ServiceManager.NetSuite
                 };
             }
             var inspector = new SuiteTalkMessageInspector(headers);
+
+            if (configProvider != null && configProvider.DataCenter != null)
+            {
+                client.Endpoint.Address = GetDataCenterEndpoint(configProvider.DataCenter.DataCenterDomain);
+            }
+            else
+            {
+                string subdomain = account.ToLowerInvariant().Replace("_", "-");
+                client.Endpoint.Address = GetDataCenterEndpoint($"https://{subdomain}.suitetalk.api.netsuite.com");
+            }
 
             var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
             client.Endpoint.EndpointBehaviors.Add(endpointBehavior);

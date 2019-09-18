@@ -188,6 +188,11 @@ namespace SuiteTalk
                     creator = () => target.taskJoin = new TaskSearchBasic();
                     break;
         
+                case "taxRegistrationJoin":
+                    result = target.taxRegistrationJoin;
+                    creator = () => target.taxRegistrationJoin = new EntityTaxRegistrationSearchBasic();
+                    break;
+        
                 case "timeJoin":
                     result = target.timeJoin;
                     creator = () => target.timeJoin = new TimeBillSearchBasic();

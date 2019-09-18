@@ -1,0 +1,15 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.1",
+  "options": {
+    "inputs": [
+      "https://webservices.netsuite.com/wsdl/v2018_2_0/netsuite.wsdl"
+    ],
+    "namespaceMappings": [
+      "*, SuiteTalk"
+    ],
+    "outputFile": "Reference.cs",
+    "targetFramework": "netcoreapp2.2",
+    "typeReuseMode": "All"
+  }
+}

@@ -9,6 +9,12 @@ namespace Celigo.SuiteTalk.PassportProviders.EnvironmentVariables
         private readonly object _tokenLock = new object();
         private TokenPassport _tokenPassport;
 
+        private readonly string consumerSecretVariable;
+        private readonly string consumerKeyVariable;
+        private readonly string tokenVarible;
+        private readonly string tokenSecretVariable;
+        private readonly string accountVariable;
+
         public TokenPassport GetTokenPassport()
         {
             if (_tokenPassport == null)
@@ -18,21 +24,24 @@ namespace Celigo.SuiteTalk.PassportProviders.EnvironmentVariables
                     {
                         string env(string varName) {
                             string value = Environment.GetEnvironmentVariable(varName);
-                            if (string.IsNullOrWhiteSpace(value))
+                            if (!string.IsNullOrWhiteSpace(value))
+                            {
+                                return value;
+                            }
+                            else
                             {
                                 throw new InvalidOperationException(varName + " environment variable was not set.");
                             }
-                            return value;
                         }
 
-                        string consumerSecret = env("Celigo_NetSuite_TBA__ConsumerSecret");
-                        string consumerKey = env("Celigo_NetSuite_TBA__ConsumerKey");
+                        string consumerSecret = env(this.consumerSecretVariable);
+                        string consumerKey = env(this.consumerKeyVariable);
 
                         var passportBuilder = new DefaultTokenPassportBuilder(consumerKey, consumerSecret);
 
-                        string token = env("netsuite-tba-token");
-                        string tokenSecret = env("netsuite-tba-token-secret");
-                        string account = env("netsuite-account");
+                        string token = env(this.tokenVarible);
+                        string tokenSecret = env(this.tokenSecretVariable);
+                        string account = env(this.accountVariable);
 
                         _tokenPassport = passportBuilder.Build(account, token, tokenSecret);
                     }
@@ -40,9 +49,22 @@ namespace Celigo.SuiteTalk.PassportProviders.EnvironmentVariables
             return _tokenPassport;
         }
 
+        public EnvVariableTokenPassportProvider(string variablePrefix)
+        {
+            this.consumerKeyVariable = variablePrefix + "__ConsumerKey";
+            this.consumerSecretVariable = variablePrefix + "__ConsumerSecret";
+            this.tokenVarible = variablePrefix + "__Token";
+            this.tokenSecretVariable = variablePrefix + "__TokenSecret";
+            this.accountVariable = variablePrefix + "__Account";
+        }
+
         public EnvVariableTokenPassportProvider()
         {
-
+            this.consumerKeyVariable = "Celigo__NetSuite__TBA__ConsumerKey";
+            this.consumerSecretVariable = "Celigo__NetSuite__TBA__ConsumerSecret";
+            this.tokenVarible = "netsuite-tba-token";
+            this.tokenSecretVariable = "netsuite-tba-token-secret";
+            this.accountVariable = "netsuite-account";
         }
     }
 }

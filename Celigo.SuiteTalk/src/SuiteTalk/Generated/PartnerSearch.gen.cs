@@ -103,6 +103,11 @@ namespace SuiteTalk
                     creator = () => target.opportunityJoin = new OpportunitySearchBasic();
                     break;
         
+                case "taxRegistrationJoin":
+                    result = target.taxRegistrationJoin;
+                    creator = () => target.taxRegistrationJoin = new EntityTaxRegistrationSearchBasic();
+                    break;
+        
                 case "transactionJoin":
                     result = target.transactionJoin;
                     creator = () => target.transactionJoin = new TransactionSearchBasic();

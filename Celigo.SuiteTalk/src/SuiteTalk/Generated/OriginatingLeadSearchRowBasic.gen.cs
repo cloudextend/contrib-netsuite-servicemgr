@@ -88,6 +88,7 @@ namespace SuiteTalk
                     { "dateCreated", r => r.@dateCreated = new [] { new SearchColumnDateField { customLabel = "dateCreated" } } },
                     { "daysOverdue", r => r.@daysOverdue = new [] { new SearchColumnLongField { customLabel = "daysOverdue" } } },
                     { "defaultOrderPriority", r => r.@defaultOrderPriority = new [] { new SearchColumnDoubleField { customLabel = "defaultOrderPriority" } } },
+                    { "defaultTaxReg", r => r.@defaultTaxReg = new [] { new SearchColumnStringField { customLabel = "defaultTaxReg" } } },
                     { "depositBalance", r => r.@depositBalance = new [] { new SearchColumnDoubleField { customLabel = "depositBalance" } } },
                     { "drAccount", r => r.@drAccount = new [] { new SearchColumnStringField { customLabel = "drAccount" } } },
                     { "email", r => r.@email = new [] { new SearchColumnStringField { customLabel = "email" } } },

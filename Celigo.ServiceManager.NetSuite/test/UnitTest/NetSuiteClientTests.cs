@@ -24,7 +24,6 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         [Fact]
         public async Task Can_execute_a_parameterless_SuiteTalk_method()
         {
-            client.Endpoint.Address = new System.ServiceModel.EndpointAddress("https://x.netsuite.com/services/NetSuitePort_2018_x");
             var serverTimeResult = await client.getServerTimeAsync();
             serverTimeResult.status.isSuccess.Should().BeTrue();
             serverTimeResult.serverTime.Year.Should().Be(DateTime.Now.Year);

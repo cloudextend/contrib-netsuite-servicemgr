@@ -1,4 +1,6 @@
-﻿namespace Celigo.ServiceManager.NetSuite
+﻿using SuiteTalk;
+
+namespace Celigo.ServiceManager.NetSuite
 {
     //public interface ISuiteTalkResult<T>
     //{
@@ -9,6 +11,9 @@
 
     //public static class NetSuiteClientExtensions
     //{
-
+    //    public System.Threading.Tasks.Task<string> GetRequestToken(this INetSuiteClient client)
+    //    {
+    //        client.tokenPassport
+    //    }
     //}
 }
