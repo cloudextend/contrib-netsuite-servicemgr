@@ -10,9 +10,9 @@ namespace ThreeStepAuthentication.Controllers
     [Route("api/tsa")]
     public class TsaLoginController : Controller
     {
-        private readonly TokenService _tokenService;
+        private readonly ITokenService _tokenService;
 
-        public TsaLoginController(TokenService tokenService)
+        public TsaLoginController(ITokenService tokenService)
         {
             _tokenService = tokenService;
         }

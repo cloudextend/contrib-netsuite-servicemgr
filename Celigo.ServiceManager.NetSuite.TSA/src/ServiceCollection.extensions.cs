@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
             return services
                 .AddOptions()
                 .Configure<TokenServiceOptions>(configuration.GetSection("Celigo:NetSuite:TBA"))
-                .AddSingleton<TokenService, DefaultTokenService>();
+                .AddSingleton<ITokenService, DefaultTokenService>();
         }
     }
 }

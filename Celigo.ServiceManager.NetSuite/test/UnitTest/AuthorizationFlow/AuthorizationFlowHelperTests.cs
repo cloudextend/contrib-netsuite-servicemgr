@@ -12,7 +12,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite.AuthorizationFlow
 {
     public class AuthorizationFlowHelperTests
     {
-        private readonly TokenService _flowHelper;
+        private readonly ITokenService _flowHelper;
         private readonly string _account;
 
         public AuthorizationFlowHelperTests()
