@@ -119,8 +119,6 @@ namespace Celigo.ServiceManager.NetSuite.TSA
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 httpClient.DefaultRequestHeaders.Add("Authorization", authorizationHeader);
-                var content = new StringContent("", Encoding.UTF8, "application/x-www-form-urlencoded");
-
                 return await httpClient.PostAsync(url, null);
             }
         }
