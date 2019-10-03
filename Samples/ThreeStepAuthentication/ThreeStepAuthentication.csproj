@@ -10,6 +10,7 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,13 +4,13 @@ using System.ServiceModel.Dispatcher;
 
 namespace Celigo.ServiceManager.NetSuite
 {
-    class SuiteTalkEndpointBehavior : IEndpointBehavior
+    public class SuiteTalkEndpointBehavior : IEndpointBehavior
     {
-        private readonly SuiteTalkMessageInspector _inspector;
+        public SuiteTalkMessageInspector MessageInspector { get; }
 
         public SuiteTalkEndpointBehavior(SuiteTalkMessageInspector inspector)
         {
-            _inspector = inspector;
+            MessageInspector = inspector;
         }
 
         public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
@@ -19,7 +19,7 @@ namespace Celigo.ServiceManager.NetSuite
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
-            clientRuntime.ClientMessageInspectors.Add(_inspector);
+            clientRuntime.ClientMessageInspectors.Add(MessageInspector);
         }
 
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)

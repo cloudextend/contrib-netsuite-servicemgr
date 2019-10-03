@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ServiceModel;
-using System.Text;
-
-namespace Celigo.ServiceManager.NetSuite
+﻿namespace Celigo.ServiceManager.NetSuite
 {
     public interface IDataCenterConfiguration
     {
