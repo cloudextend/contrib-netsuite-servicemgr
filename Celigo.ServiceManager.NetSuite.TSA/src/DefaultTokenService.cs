@@ -64,21 +64,7 @@ namespace Celigo.ServiceManager.NetSuite.TSA
                     }
                     else if (response.Content.Headers.ContentLength > 0)
                     {
-                        var responseBody = await response.Content.ReadAsStringAsync();
-                        var erroredResponse = JsonConvert.DeserializeObject<RequestTokenResponse>(responseBody, _serializerSettings);
-                        if (erroredResponse.Error != null)
-                        {
-                            erroredResponse.Error.StatusCode = response.StatusCode;
-                        }
-                        else
-                        {
-                            erroredResponse.Error = new ResponseError {
-                                Code = "UNEXPECTED_ERROR",
-                                Message = responseBody,
-                                StatusCode = response.StatusCode
-                            };
-                        }
-                        return erroredResponse;
+                        return await GetErroredResponse<RequestTokenResponse>(response);
                     }
                     else if (response.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed)
                     {
@@ -104,6 +90,25 @@ namespace Celigo.ServiceManager.NetSuite.TSA
             }
         }
 
+        private async Task<T> GetErroredResponse<T>(HttpResponseMessage response) where T: ITokenResponse
+        {
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var erroredResponse = JsonConvert.DeserializeObject<T>(responseBody, _serializerSettings);
+            if (erroredResponse.Error != null)
+            {
+                erroredResponse.Error.StatusCode = response.StatusCode;
+            }
+            else
+            {
+                erroredResponse.Error = new ResponseError {
+                    Code = "UNEXPECTED_ERROR",
+                    Message = responseBody,
+                    StatusCode = response.StatusCode
+                };
+            }
+            return erroredResponse;
+        }
+
         private string SanitizeForSubdomain(string account) => account.ToLowerInvariant().Replace('_', '-');
 
         private async Task<HttpResponseMessage> PostToTokenEndpoint(string url, string authorizationHeader)
@@ -114,8 +119,6 @@ namespace Celigo.ServiceManager.NetSuite.TSA
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 httpClient.DefaultRequestHeaders.Add("Authorization", authorizationHeader);
-                var content = new StringContent("", Encoding.UTF8, "application/x-www-form-urlencoded");
-
                 return await httpClient.PostAsync(url, null);
             }
         }
@@ -140,9 +143,20 @@ namespace Celigo.ServiceManager.NetSuite.TSA
                         TokenSecret = responseParams.Get("oauth_token_secret")
                     };
                 }
+                else if (response.Content.Headers.ContentLength > 0)
+                {
+                    return await this.GetErroredResponse<AccessTokenResponse>(response);
+                }
                 else
                 {
-                    throw new HttpRequestException($"NetSuite returned a non-200 HTTP Status: {(int)response.StatusCode} {response.ReasonPhrase}");
+                    string message = $"NetSuite returned a non-200 HTTP Status: {(int)response.StatusCode} {response.ReasonPhrase}.";
+                    return new AccessTokenResponse {
+                        Error = new ResponseError {
+                            Code = response.StatusCode.ToString(),
+                            Message = message,
+                            StatusCode = response.StatusCode
+                        }
+                    };
                 }
             }
         }
