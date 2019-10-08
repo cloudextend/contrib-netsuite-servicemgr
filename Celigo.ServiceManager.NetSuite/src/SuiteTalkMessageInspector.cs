@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 
@@ -7,6 +8,8 @@ namespace Celigo.ServiceManager.NetSuite
     public class SuiteTalkMessageInspector : IClientMessageInspector
     {
         private readonly SuiteTalkHeader[] _headers;
+
+        public IEnumerable<SuiteTalkHeader> SuiteTalkSpecificHeaders => _headers;
 
         public void AfterReceiveReply(ref Message reply, object correlationState)
         {

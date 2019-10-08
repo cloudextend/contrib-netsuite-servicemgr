@@ -11,7 +11,7 @@ using System.Web;
 
 namespace Celigo.ServiceManager.NetSuite.TSA
 {
-    public class DefaultTokenService: TokenService
+    public class DefaultTokenService: ITokenService
     {
         private readonly string _consumerKey;
         private readonly string _consumerSecret;

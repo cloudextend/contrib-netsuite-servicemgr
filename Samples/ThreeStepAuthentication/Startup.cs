@@ -23,7 +23,7 @@ namespace ThreeStepAuthentication
         {
             services.AddOptions();
             services.Configure<TokenServiceOptions>(this.Configuration.GetSection("Celigo:UnitTests:NetSuite:TBA"));
-            services.AddSingleton<TokenService, DefaultTokenService>();
+            services.AddSingleton<ITokenService, DefaultTokenService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
