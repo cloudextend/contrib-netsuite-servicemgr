@@ -1,5 +1,5 @@
 # Celigo ServiceManager NetSuite SuiteTalk WebServices
-## (.NET Standard 2.0)
+## (.NET Core 2.1)
 
 NUGET:
 https://www.nuget.org/packages/Celigo.ServiceManager.NetSuite/

@@ -17,6 +17,8 @@ export class HomeComponent {
     }
 
     public onLogin(loginData) {
+        sessionStorage.clear();
+
         const account = loginData.account;
         console.log(`Logging in to ${account}...`);
 
