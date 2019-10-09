@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Celigo.ServiceManager.NetSuite.TSA;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ThreeStepAuthentication.Controllers
+namespace ThreeStepAuth.Controllers
 {
     [Route("api/tsa")]
     public class TsaLoginController : Controller
