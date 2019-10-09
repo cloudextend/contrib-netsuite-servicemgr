@@ -1,8 +1,10 @@
 # Celigo ServiceManager NetSuite SuiteTalk WebServices
-## (.NET Core 2.1)
+## (.NET Standard 2.0)
 
 NUGET:
 https://www.nuget.org/packages/Celigo.ServiceManager.NetSuite/
+
+For some documentation see the blog: https://sameera.tech
 
 ### Testing
 In order to execute the Unit Tests, create an environment variable called `NETSUITE_CREDS` and set it's value as:
