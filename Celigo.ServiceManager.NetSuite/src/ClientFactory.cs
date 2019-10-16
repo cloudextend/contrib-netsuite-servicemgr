@@ -7,6 +7,7 @@ namespace Celigo.ServiceManager.NetSuite
     public class ClientFactory : ClientFactory<NetSuitePortTypeClient>
     {
         public ClientFactory(string appId): base(appId) { }
+        public ClientFactory(ClientFactoryOptions options, IEnumerable<IDynamicEndpointBehavior> dynamicEndpointBehaviors) : base(options, dynamicEndpointBehaviors) { }
     }
 
     public class ClientFactory<T> : ClientFactoryBase<T>, INetSuiteClientFactory where T : class, INetSuiteClient, new()

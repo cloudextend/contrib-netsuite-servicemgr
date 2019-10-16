@@ -1,3 +1,4 @@
+using Celigo.ServiceManager.NetSuite;
 using Celigo.ServiceManager.NetSuite.TSA;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace ThreeStepAuth
 {
@@ -23,6 +25,15 @@ namespace ThreeStepAuth
             services.AddOptions();
             services.Configure<TokenServiceOptions>(this.Configuration.GetSection("Celigo:UnitTests:NetSuite:TBA"));
             services.AddSingleton<ITokenService, DefaultTokenService>();
+            services.AddSingleton(p => {
+                var options = p.GetRequiredService<IOptions<TokenServiceOptions>>();
+                return new ClientFactory(
+                        new ClientFactoryOptions {
+                            ConsumerKey = options.Value.ConsumerKey,
+                            ConsumerSecret = options.Value.ConsumerSecret,
+                        }, null
+                );
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

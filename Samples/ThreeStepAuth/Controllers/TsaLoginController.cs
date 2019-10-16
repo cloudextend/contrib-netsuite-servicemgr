@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Celigo.ServiceManager.NetSuite;
 using Celigo.ServiceManager.NetSuite.TSA;
 using Microsoft.AspNetCore.Mvc;
+using SuiteTalk;
 
 namespace ThreeStepAuth.Controllers
 {
@@ -25,7 +28,7 @@ namespace ThreeStepAuth.Controllers
         }
 
         [HttpGet("authorized-token")]
-        public async Task<ActionResult<AccessTokenResponse>> AuthorizeToken(string account, string requestToken, string tokenSecret, string verifier)
+        public async Task<ActionResult<AccessTokenResponse>> AuthorizeToken(string account, string requestToken, string tokenSecret, string verifier, [FromServices] ClientFactory factory)
         {
             var response = await _tokenService.GetAccessToken(account, requestToken, tokenSecret, verifier);
             return (response.Error == null) ? Ok(response) : StatusCode((int)response.Error.StatusCode, response);

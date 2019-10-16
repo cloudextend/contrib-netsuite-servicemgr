@@ -139,8 +139,8 @@ namespace Celigo.ServiceManager.NetSuite.TSA
                     var responseBody = await response.Content.ReadAsStringAsync();
                     var responseParams = HttpUtility.ParseQueryString(responseBody);
                     return new AccessTokenResponse {
-                        Token = responseParams.Get("oauth_token"),
-                        TokenSecret = responseParams.Get("oauth_token_secret")
+                        Token = responseParams.Get("oauth_token").Trim(),
+                        TokenSecret = responseParams.Get("oauth_token_secret").Trim()
                     };
                 }
                 else if (response.Content.Headers.ContentLength > 0)
