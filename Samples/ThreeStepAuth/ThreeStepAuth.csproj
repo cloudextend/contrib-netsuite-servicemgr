@@ -31,6 +31,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Celigo.ServiceManager.NetSuite.TSA\src\Celigo.ServiceManager.NetSuite.TSA.csproj" />
+    <ProjectReference Include="..\..\Celigo.ServiceManager.NetSuite\src\Celigo.ServiceManager.NetSuite.csproj" />
+    <ProjectReference Include="..\..\Celigo.SuiteTalk\src\Celigo.SuiteTalk.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
