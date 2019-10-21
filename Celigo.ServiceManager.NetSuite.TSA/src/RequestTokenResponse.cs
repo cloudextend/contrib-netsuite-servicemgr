@@ -16,5 +16,7 @@ namespace Celigo.ServiceManager.NetSuite.TSA
         public bool IsCallbackConfirmed { get; set; }
 
         public ResponseError Error { get; set; }
+
+        public string Next { get; set; }
     }
 }
