@@ -38,7 +38,8 @@ namespace Celigo.ServiceManager.NetSuite.TSA
             if (account == null) throw new ArgumentNullException(nameof(account));
             if (callbackUrl == null) throw new ArgumentNullException(nameof(callbackUrl));
 
-            string url = $"https://{this.SanitizeForSubdomain(account)}.restlets.api.netsuite.com/rest/requesttoken";
+            string accountSpecificSubdomain = this.SanitizeForSubdomain(account);
+            string url = $"https://{accountSpecificSubdomain}.restlets.api.netsuite.com/rest/requesttoken";
 
             using (var httpClient = new HttpClient())
             {
@@ -56,10 +57,12 @@ namespace Celigo.ServiceManager.NetSuite.TSA
                         var responseBody = await response.Content.ReadAsStringAsync();
                         var resultData = HttpUtility.ParseQueryString(responseBody);
 
+                        var token = resultData.Get("oauth_token").Trim();
                         return new RequestTokenResponse {
                             IsCallbackConfirmed = "true".Equals(resultData.Get("oauth_callback_confirmed").Trim()),
-                            Token = resultData.Get("oauth_token").Trim(),
-                            TokenSecret = resultData.Get("oauth_token_secret").Trim()
+                            Token = token,
+                            TokenSecret = resultData.Get("oauth_token_secret").Trim(),
+                            Next = $"https://{accountSpecificSubdomain}.app.netsuite.com/app/login/secure/authorizetoken.nl?oauth_token={token}"
                         };
                     }
                     else if (response.Content.Headers.ContentLength > 0)
