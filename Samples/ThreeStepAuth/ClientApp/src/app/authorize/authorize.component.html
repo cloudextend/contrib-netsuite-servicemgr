@@ -4,4 +4,6 @@
 <div *ngIf="userToken">
     <p>Your Token: <i>{{userToken}}</i></p>
     <p>Your Token Secret has been written to the console.</p>
+
+    <p><button (click)="revokeToken()">Revoke this token</button></p>
 </div>

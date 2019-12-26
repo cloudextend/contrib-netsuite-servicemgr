@@ -7,10 +7,19 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddThreeStepAuthorizationSupport(this IServiceCollection services, IConfiguration configuration)
         {
-            return services
+            services
                 .AddOptions()
                 .Configure<TokenServiceOptions>(configuration.GetSection("Celigo:NetSuite:TBA"))
+
+                .AddHttpClient()                
+
                 .AddSingleton<ITokenService, DefaultTokenService>();
+
+            services.AddHttpClient<IAccessTokenService, AccessTokenService>();
+            services.AddHttpClient<IRequestTokenService, RequestTokenService>();
+            services.AddHttpClient<IRevokeTokenService, RevokeTokenService>();
+
+            return services;
         }
     }
 }

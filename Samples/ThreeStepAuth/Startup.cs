@@ -23,19 +23,13 @@ namespace ThreeStepAuth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
+            
+            services.AddThreeStepAuthorizationSupport(this.Configuration);
             services.Configure<TokenServiceOptions>(this.Configuration.GetSection("Celigo:UnitTests:NetSuite:TBA"));
-            services.AddSingleton<ITokenService, DefaultTokenService>();
-            services.AddSingleton(p => {
-                var options = p.GetRequiredService<IOptions<TokenServiceOptions>>();
-                return new ClientFactory(
-                        new ClientFactoryOptions {
-                            ConsumerKey = options.Value.ConsumerKey,
-                            ConsumerSecret = options.Value.ConsumerSecret,
-                        }, null
-                );
-            });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(j => j.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => {

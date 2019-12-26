@@ -14,12 +14,18 @@
     <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
     <PackageTags>NetSuite Celigo TSA 3SA Three-Step Authorization</PackageTags>
     <PackageReleaseNotes>1.0.6 Bug Fix: Final TBA tokens need trimming to remove unncessary whitespace characters.
-1.0.7 Include the next URL in the RequestTokenResponse</PackageReleaseNotes>
-    <Version>1.0.7</Version>
+1.0.7 Include the next URL in the RequestTokenResponse
+1.1.0 
+Support for Revoking Tokens [TSA]
+Refactored to use HttpClient Typed Client pattern [TSA].
+Callback URLs moved to constuction time parameters [TSA].
+    </PackageReleaseNotes>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.json" Version="12.0.2" />
