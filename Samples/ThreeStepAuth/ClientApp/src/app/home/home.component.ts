@@ -22,9 +22,7 @@ export class HomeComponent {
         const account = loginData.account;
         console.log(`Logging in to ${account}...`);
 
-        const callbakUrl = encodeURIComponent(`${window.location.href}authorize`);
-
-        this._http.get<RequestTokenRespone>(`/api/tsa/request-token?account=${account}&callbackUrl=${callbakUrl}`)
+        this._http.get<RequestTokenRespone>(`/api/tsa/request-token?account=${account}`)
             .subscribe(
                 response => {
                     console.log(response);

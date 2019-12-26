@@ -11,17 +11,28 @@ using System.Web;
 
 namespace Celigo.ServiceManager.NetSuite.TSA
 {
+    [Obsolete]
     public class DefaultTokenService: ITokenService
     {
         private readonly string _consumerKey;
         private readonly string _consumerSecret;
+        private readonly string _callbackUrl;
+        private readonly IHttpClientFactory _clientFactory;
 
         private readonly JsonSerializerSettings _serializerSettings;
 
-        public DefaultTokenService(string consumerKey, string consumerSecret)
+        public DefaultTokenService(IHttpClientFactory clientFactory, string consumerKey, string consumerSecret, string callbackUrl)
         {
+            if (string.IsNullOrWhiteSpace(consumerKey)) throw new ArgumentNullException(nameof(consumerKey), "Consumer Key must be specified.");
+            if (string.IsNullOrWhiteSpace(consumerSecret)) throw new ArgumentNullException(nameof(consumerSecret), "Consumer Secrete must be specified");
+            if (string.IsNullOrWhiteSpace(callbackUrl)) throw new ArgumentNullException(nameof(callbackUrl), "Callback URL must be specified");
+
             _consumerKey = consumerKey;
             _consumerSecret = consumerSecret;
+
+            _callbackUrl = callbackUrl;
+
+            _clientFactory = clientFactory;
 
             _serializerSettings = new JsonSerializerSettings {
                 NullValueHandling = NullValueHandling.Ignore,
@@ -29,9 +40,12 @@ namespace Celigo.ServiceManager.NetSuite.TSA
             };
         }
 
-        public DefaultTokenService(IOptions<TokenServiceOptions> options): this(options.Value.ConsumerKey, options.Value.ConsumerSecret)
+        public DefaultTokenService(IHttpClientFactory clientFactory, IOptions<TokenServiceOptions> options)
+            : this(clientFactory, options.Value.ConsumerKey, options.Value.ConsumerSecret, options.Value.CallbackUrl)
         {
         }
+
+        public async Task<RequestTokenResponse> GetRequestToken(string account) => await this.GetRequestToken(account, _callbackUrl);
 
         public async Task<RequestTokenResponse> GetRequestToken(string account, string callbackUrl)
         {
@@ -41,54 +55,44 @@ namespace Celigo.ServiceManager.NetSuite.TSA
             string accountSpecificSubdomain = this.SanitizeForSubdomain(account);
             string url = $"https://{accountSpecificSubdomain}.restlets.api.netsuite.com/rest/requesttoken";
 
-            using (var httpClient = new HttpClient())
+            using (var response = await this.RequestWithBasicOAuthHeader(account, url, HttpMethod.Post))
             {
-                httpClient.DefaultRequestHeaders.Accept.Clear();
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string authorizationHeader = this.GetAuthorizationHeaderValue(account, url, callbackUrl);
-                httpClient.DefaultRequestHeaders.Add("Authorization", authorizationHeader);
-
-                using (var content = new StringContent("", Encoding.UTF8, "application/x-www-form-urlencoded"))
-                using (var response = await httpClient.PostAsync(url, null))
+                if (response.IsSuccessStatusCode)
                 {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var responseBody = await response.Content.ReadAsStringAsync();
-                        var resultData = HttpUtility.ParseQueryString(responseBody);
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    var resultData = HttpUtility.ParseQueryString(responseBody);
 
-                        var token = resultData.Get("oauth_token").Trim();
-                        return new RequestTokenResponse {
-                            IsCallbackConfirmed = "true".Equals(resultData.Get("oauth_callback_confirmed").Trim()),
-                            Token = token,
-                            TokenSecret = resultData.Get("oauth_token_secret").Trim(),
-                            Next = $"https://{accountSpecificSubdomain}.app.netsuite.com/app/login/secure/authorizetoken.nl?oauth_token={token}"
-                        };
-                    }
-                    else if (response.Content.Headers.ContentLength > 0)
-                    {
-                        return await GetErroredResponse<RequestTokenResponse>(response);
-                    }
-                    else if (response.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed)
-                    {
-                        return new RequestTokenResponse {
-                            Error = new ResponseError {
-                                Code = response.StatusCode.ToString(),
-                                Message = $"Account {account} may not be configured to support 3-Step Authentication.",
-                                StatusCode = response.StatusCode
-                            }
-                        };
-                    }
-                    else
-                    {
-                        return new RequestTokenResponse {
-                            Error = new ResponseError {
-                                Code = response.StatusCode.ToString(),
-                                Message = $"NetSuite returned a non 200 HTTP Status: {(int)response.StatusCode} {response.ReasonPhrase}",
-                                StatusCode = response.StatusCode
-                            }
-                        };
-                    }
+                    var token = resultData.Get("oauth_token").Trim();
+                    return new RequestTokenResponse {
+                        IsCallbackConfirmed = "true".Equals(resultData.Get("oauth_callback_confirmed").Trim()),
+                        Token = token,
+                        TokenSecret = resultData.Get("oauth_token_secret").Trim(),
+                        Next = $"https://{accountSpecificSubdomain}.app.netsuite.com/app/login/secure/authorizetoken.nl?oauth_token={token}"
+                    };
+                }
+                else if (response.Content.Headers.ContentLength > 0)
+                {
+                    return await GetErroredResponse<RequestTokenResponse>(response);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed)
+                {
+                    return new RequestTokenResponse {
+                        Error = new ResponseError {
+                            Code = response.StatusCode.ToString(),
+                            Message = $"Account {account} may not be configured to support 3-Step Authentication.",
+                            StatusCode = response.StatusCode
+                        }
+                    };
+                }
+                else
+                {
+                    return new RequestTokenResponse {
+                        Error = new ResponseError {
+                            Code = response.StatusCode.ToString(),
+                            Message = $"NetSuite returned a non 200 HTTP Status: {(int)response.StatusCode} {response.ReasonPhrase}",
+                            StatusCode = response.StatusCode
+                        }
+                    };
                 }
             }
         }
@@ -175,18 +179,19 @@ namespace Celigo.ServiceManager.NetSuite.TSA
             };
         }
 
-        protected string GetAuthorizationHeaderValue(string account, string requestUrl, string callbackUrl)
+        protected string GetAuthorizationHeaderValue(string account, string requestUrl, string callbackUrl, string httpMethod = "POST")
         {
             var oauthParams = this.GetCommonOAuthParameters();
             oauthParams.Add("oauth_callback", callbackUrl);
 
-            return this.GetAuthorizationHeaderValue(account, requestUrl, oauthParams);
+            return this.GetAuthorizationHeaderValue(account, requestUrl, oauthParams, httpMethod: httpMethod);
         }
 
         protected string GetAuthorizationHeaderValue(string account,
                                                      string requestUrl,
                                                      SortedDictionary<string, string> oauthParams,
-                                                     string tokenSecret = "")
+                                                     string tokenSecret = "",
+                                                     string httpMethod = "POST")
         {
             string E(string data)
             {
@@ -223,7 +228,7 @@ namespace Celigo.ServiceManager.NetSuite.TSA
                             .Append(encodedValue);
             }
 
-            string baseString = $"POST&{E(requestUrl)}&{E(baseStringBuilder.ToString())}";
+            string baseString = $"{httpMethod}&{E(requestUrl)}&{E(baseStringBuilder.ToString())}";
 
             return headerBuilder.Append(", oauth_signature=\"")
                         .Append(E(this.ComputeSignature(baseString, tokenSecret)))
@@ -242,10 +247,7 @@ namespace Celigo.ServiceManager.NetSuite.TSA
             return value.ToString();
         }
 
-        protected virtual long ComputeTimestamp()
-        {
-            return ((long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
-        }
+        protected virtual long ComputeTimestamp() => ((long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
 
         private string ComputeSignature(string baseString, string tokenSecret)
         {
@@ -258,6 +260,44 @@ namespace Celigo.ServiceManager.NetSuite.TSA
             {
                 byte[] baseStringHash = hmacSha256.ComputeHash(baseStringBytes);
                 return Convert.ToBase64String(baseStringHash);
+            }
+        }
+
+        public async Task RevokeToken(string account, string token)
+        {
+            if (account == null) throw new ArgumentNullException(nameof(account));
+
+            string accountSpecificSubdomain = this.SanitizeForSubdomain(account);
+            string url = $"htttps://{accountSpecificSubdomain}.restlets.api.netsuite.com/rest/revoketoken?consumerKey={_consumerKey}&token={token}";
+
+            using (var response = await this.RequestWithBasicOAuthHeader(account, url, HttpMethod.Get))
+            {
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
+        private async Task<HttpResponseMessage> RequestWithBasicOAuthHeader(string account, string url, HttpMethod httpMethod)
+        {
+            using (var httpClient = _clientFactory.CreateClient())
+            {
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string authorizationHeader = this.GetAuthorizationHeaderValue(account, url, _callbackUrl, httpMethod: httpMethod.Method);
+                httpClient.DefaultRequestHeaders.Add("Authorization", authorizationHeader);
+
+                if (httpMethod == HttpMethod.Get)
+                {
+                    return await httpClient.GetAsync(url);
+                }
+                else if (httpMethod == HttpMethod.Post)
+                {
+                    return await httpClient.PostAsync(url, null);
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(nameof(httpMethod), "Only GET and POST are supported.");
+                }
             }
         }
     }

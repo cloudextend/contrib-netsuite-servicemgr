@@ -50,11 +50,13 @@ namespace SuiteTalk
 
         private string ComputeNonce()
         {
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] data = new byte[20];
-            rng.GetBytes(data);
-            int value = Math.Abs(BitConverter.ToInt32(data, 0));
-            return value.ToString();
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            {
+                byte[] data = new byte[20];
+                rng.GetBytes(data);
+                int value = Math.Abs(BitConverter.ToInt32(data, 0));
+                return value.ToString();
+            }
         }
 
         private long ComputeTimestamp()
