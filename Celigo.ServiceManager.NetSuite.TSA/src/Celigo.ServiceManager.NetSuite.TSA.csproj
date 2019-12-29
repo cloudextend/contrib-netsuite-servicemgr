@@ -19,8 +19,11 @@
 Support for Revoking Tokens [TSA]
 Refactored to use HttpClient Typed Client pattern [TSA].
 Callback URLs moved to constuction time parameters [TSA].
-    </PackageReleaseNotes>
-    <Version>1.1.0</Version>
+
+1.1.5
+Resolving some internal version conflicts.
+</PackageReleaseNotes>
+    <Version>1.1.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
