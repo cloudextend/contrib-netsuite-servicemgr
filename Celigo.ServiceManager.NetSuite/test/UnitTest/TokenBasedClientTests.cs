@@ -16,9 +16,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         {
             var testConfig = new TestConfiguration();
             var clientFactory = new ClientFactory(testConfig.ApplicationId);
-
             _client = clientFactory.CreateClient(testConfig.TokenPassportProvider);
-            var binding = (BasicHttpBinding)_client.Endpoint.Binding;
         }
 
         [Fact]

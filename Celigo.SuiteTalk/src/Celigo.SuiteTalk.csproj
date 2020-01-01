@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>Celigo.SuiteTalk</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.0.0</Version>
+    <Version>4.2.0</Version>
     <Authors>Sameera Perera, CloudExtend.io</Authors>
     <Company>Celigo, Inc</Company>
     <Product>Celigo Wrappers for NetSuite SuiteTalk 2019.1</Product>
@@ -19,9 +19,11 @@
     <PackageReleaseNotes>3.1.0 Targets SuiteTalk 2018.2
 3.4.0 Use SHA-256 for TBA Signature 
 3.4.2 .net core 2.1 compatible.
-
-4.0.0 Targets SuiteTalk 2019.1. From this point on, major versions of this library will always indicate an upgrade in the SuiteTalk version.</PackageReleaseNotes>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+3.5.0 Regenerated the WSDL classes using SVC-UTIL 2.0.1
+3.5.1 Fix: Account should be uppercased when using in TBA signature calculation.
+4.2.0 Recompiled to .NET Standard 2.0
+</PackageReleaseNotes>
+    <RootNamespace>SuiteTalk</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.ServiceModel.duplex" Version="4.5.3" />

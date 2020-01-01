@@ -12,7 +12,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Retries
 {
     public class RetryWithPollyTest
     {
-        [Fact]
+        [Fact(Skip = "This test should check whether multiple retries were done. Not that it was successful eventually.")]
         public async Task Retries_multiple_times_when_concurrent_error_is_encountered()
         {
             var config = new TestConfiguration();

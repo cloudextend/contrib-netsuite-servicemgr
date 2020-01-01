@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FakeItEasy" Version="5.5.0" />
     <PackageReference Include="FluentAssertions" Version="5.6.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="Polly" Version="7.1.0" />
@@ -29,8 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Celigo.SuiteTalk.PassportProviders.EnvironmentVariables\src\Celigo.SuiteTalk.PassportProviders.EnvironmentVariables.csproj" />
+    <ProjectReference Include="..\..\..\Celigo.ServiceManager.NetSuite.TSA\src\Celigo.ServiceManager.NetSuite.TSA.csproj" />
     <ProjectReference Include="..\..\..\Celigo.SuiteTalk\src\Celigo.SuiteTalk.csproj" />
+    <ProjectReference Include="..\..\..\PassportProviders.EnvVariables\src\PassportProviders.EnvVariables.csproj" />
     <ProjectReference Include="..\..\src\Celigo.ServiceManager.NetSuite.csproj" />
   </ItemGroup>
 

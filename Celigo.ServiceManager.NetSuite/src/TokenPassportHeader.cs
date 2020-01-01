@@ -13,6 +13,8 @@ namespace Celigo.ServiceManager.NetSuite
 
         public override string Name { get; } = "tokenPassport";
 
+        public ITokenPassportProvider TokenPassportProvider => _provider;
+
         public TokenPassportHeader(ITokenPassportProvider passportProvider)
         {
             _provider = passportProvider;
