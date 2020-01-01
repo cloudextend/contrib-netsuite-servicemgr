@@ -19,4 +19,6 @@
 5. Ensure that all `Order` attributes have been removed from XmlElementAttribute annotations by searching for the text `Order=`.
    If there are any ordering left, remove them as well.
 
+6. Open `SuiteTalkSchemas.cs` and update the URLs for the namespaces.
+
 5. Build the project.
