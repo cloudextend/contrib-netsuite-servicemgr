@@ -5,7 +5,7 @@ using Xunit;
 namespace Tests.Celigo.ServiceManager.NetSuite
 {
     public class Search_utility_method_tests
-    { 
+    {
         [Fact]
         public void Create_basic_of_a_SearchRow()
         {
@@ -73,7 +73,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
 
             var createdJoin = searchRow.CreateJoin("jobJoin");
             jobJoin = searchRow.GetJoin("jobJoin");
-            
+
             jobJoin.Should().Be(createdJoin);
         }
 

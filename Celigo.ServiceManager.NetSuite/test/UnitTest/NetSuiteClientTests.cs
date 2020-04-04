@@ -8,6 +8,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
 {
     using Meta;
     using System.Linq;
+    using System.ServiceModel;
     using Task = System.Threading.Tasks.Task;
 
     public class NetSuiteClientTests
@@ -119,7 +120,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
                     subsidiary = new RecordRef { internalId = "1" },
                     location = new RecordRef { internalId = "5" },
                     expenseList = new VendorBillExpenseList {
-                        expense = new [] {
+                        expense = new[] {
                             new VendorBillExpense {
                                 account = new RecordRef { internalId = "119" },
 
