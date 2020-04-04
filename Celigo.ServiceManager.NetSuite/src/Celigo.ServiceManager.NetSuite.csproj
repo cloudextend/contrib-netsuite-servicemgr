@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>4.2.0</Version>
+    <Version>6.0.0</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
     <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2018.2</Description>
@@ -28,6 +28,9 @@ INetSuiteClientFactory interface has been changed.
 
 4.2.0 
 Recompiled to .NET Standard 2.0
+
+6.0.0
+SuiteTalk 2019.2
     </PackageReleaseNotes>
   </PropertyGroup>
 
