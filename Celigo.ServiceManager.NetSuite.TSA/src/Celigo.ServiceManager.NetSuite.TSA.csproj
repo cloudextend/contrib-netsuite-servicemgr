@@ -22,8 +22,11 @@ Callback URLs moved to constuction time parameters [TSA].
 
 1.1.5
 Resolving some internal version conflicts.
+
+1.2.0
+Built with ServiceManager 6.0
 </PackageReleaseNotes>
-    <Version>1.1.5</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
