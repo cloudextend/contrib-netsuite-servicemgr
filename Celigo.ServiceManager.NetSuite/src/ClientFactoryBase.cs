@@ -77,7 +77,7 @@ namespace Celigo.ServiceManager.NetSuite
             return ConfigureClient(client, account, configProvider);
         }
 
-        private T ConfigureClient(T client, string account, IConfigurationProvider configProvider)
+        protected T ConfigureClient(T client, string account, IConfigurationProvider configProvider)
         {
             // Increase binding timeout.
             client.Endpoint.Binding.SendTimeout = new TimeSpan(0, 10, 0);
@@ -127,7 +127,7 @@ namespace Celigo.ServiceManager.NetSuite
 
         private void AddEndpointBehaviors(T client, string applicationId, IPassportProvider passportProvider)
         {
-            if (applicationId == null) throw new InvalidOperationException("The Applicaiton ID was not specified.");
+            if (applicationId == null) throw new InvalidOperationException("The Application ID was not specified.");
             if (client.passport == null && passportProvider == null) throw new InvalidOperationException("A Passport was not specified and no provider was given.");
 
             SuiteTalkHeader[] headers;
