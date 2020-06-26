@@ -82,7 +82,7 @@ namespace Celigo.ServiceManager.NetSuite
             // Increase binding timeout.
             client.Endpoint.Binding.SendTimeout = new TimeSpan(0, 10, 0);
 
-            if (configProvider != null && configProvider.DataCenter != null)
+            if (configProvider?.DataCenter != null)
             {
                 client.Endpoint.Address = GetDataCenterEndpoint(configProvider.DataCenter.DataCenterDomain);
             }
