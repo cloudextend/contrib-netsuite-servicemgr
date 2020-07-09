@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
@@ -85,10 +86,10 @@ namespace Celigo.ServiceManager.NetSuite.REST
         }
 
         protected virtual long ComputeTimestamp() =>
-            ((long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
+            ((long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
 
         protected static StringContent CreateJsonMessageContent<T>(T content) =>
-            new StringContent(JsonSerializer.Serialize(content, SerializerSettings));
+            new StringContent(JsonSerializer.Serialize(content, SerializerSettings), Encoding.UTF8, "application/json");
         
         protected string GetAuthorizationHeaderValue(string account,
                                                      Uri requestUri,
@@ -117,7 +118,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
             var headerBuilder = new StringBuilder(300);
             var baseStringBuilder = new StringBuilder(300);
 
-            headerBuilder.Append($"realm=\"{E(account.ToUpperInvariant().Replace('_', '-'))}\"");
+            headerBuilder.Append($"OAuth realm=\"{E(account.ToUpperInvariant().Replace('_', '-'))}\"");
             bool isFirstParam = true;
 
             foreach (var pair in oauthParams)
@@ -190,9 +191,8 @@ namespace Celigo.ServiceManager.NetSuite.REST
             Action<HttpRequestMessage> configureRequest = null)
         {
             var request = new HttpRequestMessage(method, url);
-            request.Headers.Authorization = new AuthenticationHeaderValue("OAuth", authorizationHeader);
+            request.Headers.TryAddWithoutValidation("Authorization", authorizationHeader);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            
             request.Content = content;
 
             configureRequest?.Invoke(request);

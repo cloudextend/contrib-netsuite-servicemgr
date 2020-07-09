@@ -11,11 +11,6 @@ namespace _.Given_a_RestletClient
 {
     public class When_making_a_parameterless_GET: GivenRestletClient
     {
-        private const string _expectedBasePath = "https://tstdrv12345.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script="
-                                                    + Script
-                                                    + "&deploy="
-                                                    + Deploy;
-
         [Fact]
         public async Task It_invokes_the_RESTlet_hosted_in_the_target_account()
         {
@@ -24,10 +19,9 @@ namespace _.Given_a_RestletClient
 
             
             A.CallTo(() => this.MessageHandler.SendAsync(
-                                A<HttpRequestMessage>.That.Matches(m => IsExpectedRequest(m, _expectedBasePath)), 
+                                A<HttpRequestMessage>.That.Matches(m => IsExpectedOAuthRequest(m, ExpectedBasePath)), 
                                 A<CancellationToken>.Ignored)
             ).MustHaveHappenedOnceExactly();
-            
         }
     }
 }

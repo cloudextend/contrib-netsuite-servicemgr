@@ -37,5 +37,11 @@ namespace Celigo.ServiceManager.NetSuite.REST
                 throw new ArgumentOutOfRangeException(nameof(restletName), $"A RESTlet named {restletName} has not been registered.");
             }
         }
+
+        public IRestletProxy CreateClient(string restletName, string account, string token, string tokenSecret) =>
+            new TbaRestletProxy(account, token, tokenSecret, CreateClient(restletName));
+        
+        public IRestletProxy CreateClient(string restletName, Passport passport) =>
+            new BasicCredsRestletProxy(passport, CreateClient(restletName));
     }
 }

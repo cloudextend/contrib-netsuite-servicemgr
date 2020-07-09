@@ -9,6 +9,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="UnitTest1.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove=".DS_Store" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="FakeItEasy" Version="6.1.0" />
         <PackageReference Include="FluentAssertions" Version="5.10.3" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
