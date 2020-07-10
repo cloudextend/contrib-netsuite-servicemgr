@@ -15,7 +15,7 @@ namespace _.Given_a_RestletClient
 
             var options = Options.Create(RestClientOptions);
 
-            Client = new RestletClient(httpClient, options, RestletConfig);
+            Client = new RestletClient(httpClient, options, Options.Create(RestletConfig));
         }
 
         protected bool IsExpectedOAuthRequest(HttpRequestMessage m, string expectedUrl) =>

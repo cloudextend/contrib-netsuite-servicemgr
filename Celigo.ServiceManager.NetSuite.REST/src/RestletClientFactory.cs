@@ -18,10 +18,18 @@ namespace Celigo.ServiceManager.NetSuite.REST
         private readonly IHttpClientFactory _clientFactory;
         private readonly IOptions<RestClientOptions> _restClientOptions;
 
-        public RestletClientFactory(IEnumerable<RestletConfig> configs, IHttpClientFactory clientFactory, IOptions<RestClientOptions> options)
+        public RestletClientFactory(IHttpClientFactory clientFactory, IOptions<RestletConfigOptions> configOptions, IOptions<RestClientOptions> options)
         {
             _clientFactory = clientFactory;
-            _registry = configs.ToDictionary(c => c.RestletName);
+
+            var restlets = configOptions.Value?.Restlets ?? throw new InvalidOperationException("At least one RESTlet must be configured.");
+
+            if (restlets.Any(r => r.Deploy == null || r.Script == null || r.RestletName == null))
+            {
+                throw new InvalidOperationException("At least one RESTlet has not been properly configured.");
+            }
+            
+            _registry = configOptions.Value.Restlets.ToDictionary(c => c.RestletName);
             _restClientOptions = options;
         }
 
@@ -30,7 +38,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
             if (_registry.TryGetValue(restletName, out var restlet))
             {
                 var httpClient = _clientFactory.CreateClient(restletName);
-                return new RestletClient(httpClient, _restClientOptions, restlet);
+                return new RestletClient(httpClient, _restClientOptions, Options.Create(restlet));
             }
             else
             {

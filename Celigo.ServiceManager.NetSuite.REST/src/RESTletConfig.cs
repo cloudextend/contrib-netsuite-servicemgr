@@ -10,4 +10,9 @@ namespace Celigo.ServiceManager.NetSuite.REST
 
         public const string ConfigurationSectionName = "Celigo:NetSuite:REST";
     }
+
+    public class RestletConfigOptions
+    {
+        public RestletConfig[] Restlets { get; set; }
+    }
 }
