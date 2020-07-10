@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Reflection.Metadata;
@@ -13,6 +14,8 @@ namespace Celigo.ServiceManager.NetSuite.REST
         public string Account { get; set; }    
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public string RoleId { get; set; }
     }
     
     public interface IRestletClient
@@ -61,7 +64,10 @@ namespace Celigo.ServiceManager.NetSuite.REST
                                              in string tokenSecret, 
                                              params (string key, string value)[] queryParams)
         {
-            var (requestUrl, authHeader) = GenerateHeaderAndUrl(account, token, tokenSecret, isBasicAuth: false, queryParams);
+            var urlBuilder = this.CreateUrlBuilder(account);
+            string authHeader = this.GetTbaAuthHeader("GET", account, token, tokenSecret, urlBuilder.ToString(), queryParams);
+
+            var requestUrl = this.CreateRequestUrl(urlBuilder, queryParams);
             return this.SendRequest(HttpMethod.Get, requestUrl, authHeader, _emptyContent);
         }
 
@@ -71,7 +77,10 @@ namespace Celigo.ServiceManager.NetSuite.REST
                                                  in T message, 
                                                  params (string key, string value)[] queryParams)
         {
-            var (requestUrl, authHeader) = GenerateHeaderAndUrl(account, token, tokenSecret, isBasicAuth: false, queryParams);
+            var urlBuilder = this.CreateUrlBuilder(account);
+            string authHeader = this.GetTbaAuthHeader("POST", account, token, tokenSecret, urlBuilder.ToString(), queryParams);
+
+            var requestUrl = this.CreateRequestUrl(urlBuilder, queryParams);
             return this.SendRequest(HttpMethod.Post, requestUrl, authHeader, CreateJsonMessageContent(message));
         }
 
@@ -79,12 +88,9 @@ namespace Celigo.ServiceManager.NetSuite.REST
                                              params (string key, string value)[] queryParams)
         {
             ValidateBasicCreds(passport);
-            
-            var (requestUrl, authHeader) = GenerateHeaderAndUrl(passport.Account, 
-                                                                passport.Email, 
-                                                                passport.Password, 
-                                                                isBasicAuth: true, 
-                                                                queryParams);
+
+            string authHeader = this.GetBasicAuthHeaderValue(passport);
+            Uri requestUrl = this.CreateRequestUrl(this.CreateUrlBuilder(passport.Account), queryParams);
             
             return this.SendRequest(HttpMethod.Get, requestUrl, authHeader, _emptyContent);
         }
@@ -94,14 +100,16 @@ namespace Celigo.ServiceManager.NetSuite.REST
                                                  params (string key, string value)[] queryParams)
         {
             ValidateBasicCreds(passport);
+
+            string authHeader = this.GetBasicAuthHeaderValue(passport);
+            Uri requestUrl = this.CreateRequestUrl(this.CreateUrlBuilder(passport.Account), queryParams);
             
-            var (requestUrl, authHeader) = GenerateHeaderAndUrl(passport.Account, passport.Email, passport.Password, isBasicAuth: true, queryParams);
             return this.SendRequest(HttpMethod.Post, requestUrl, authHeader, CreateJsonMessageContent(message));
         }
 
         private StringBuilder CreateUrlBuilder(string account) => new StringBuilder("https://")
-                                                                .Append(account.ToLowerInvariant().Replace('_', '-'))
-                                                                .Append(_restletRelativePath);
+                                                                    .Append(account.ToLowerInvariant().Replace('_', '-'))
+                                                                    .Append(_restletRelativePath);
 
         private Uri CreateRequestUrl(StringBuilder urlBuilder, (string key, string value)[] queryParams)
         {
@@ -122,14 +130,26 @@ namespace Celigo.ServiceManager.NetSuite.REST
             return new Uri(urlBuilder.ToString());
         }
 
-        private string GetBasicAuthHeaderValue(string username, string password) =>
-            $"NLAuth nlauth_email={WebUtility.UrlEncode(username)}, nlauth_signature={Uri.EscapeDataString(password)}";
+        private string GetBasicAuthHeaderValue(Passport passport) =>
+            new StringBuilder(120)
+                .Append("NLAuth nlauth_account=").Append(passport.Account)
+                .Append("nlauth_email=").Append(WebUtility.UrlEncode(passport.Email))
+                .Append("nlauth_signature=").Append(Uri.EscapeDataString(passport.Password))
+                .Append(passport.RoleId != null ? "nlauth_role=" + passport.RoleId: "")
+                .ToString();
+        
+        private string GetTbaAuthHeader(string httpMethod, 
+                                         string account, 
+                                         string key, 
+                                         string secret,
+                                         string baseUrl,
+                                         (string key, string value)[] queryParams)
+        {
+            var oauthParams = GetAllOauthParams(queryParams);
+            return this.GetAuthorizationHeaderValue(account, baseUrl, oauthParams, key, secret, httpMethod);
+        }
 
-        private (Uri requestUrl, string authHeader) GenerateHeaderAndUrl(string account, 
-                                                                         string key, 
-                                                                         string secret, 
-                                                                         bool isBasicAuth,
-                                                                         (string key, string value)[] queryParams)
+        private SortedDictionary<string, string> GetAllOauthParams((string key, string value)[] queryParams)
         {
             var oauthParams = this.GetCommonOAuthParameters();
             oauthParams.Add(_scriptParamName, _restlet.Script);
@@ -139,14 +159,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
                 oauthParams.Add(queryParams[i].key, queryParams[i].value);
             }
 
-            var urlBuilder = this.CreateUrlBuilder(account);
-            
-            string authHeader = isBasicAuth
-                ? this.GetBasicAuthHeaderValue(key, secret)
-                : this.GetAuthorizationHeaderValue(account, urlBuilder.ToString(), oauthParams, key, secret, "GET");
-
-            var requestUrl = this.CreateRequestUrl(urlBuilder, queryParams);
-            return (requestUrl, authHeader);
+            return oauthParams;
         }
 
         private void ValidateBasicCreds(in Passport passport)
