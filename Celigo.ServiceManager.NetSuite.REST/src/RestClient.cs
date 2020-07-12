@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -24,7 +26,28 @@ namespace Celigo.ServiceManager.NetSuite.REST
 
         protected readonly string ConsumerKey;
         protected readonly string ConsumerSecret;
-        
+
+        public virtual string SignatureAlgorithmName
+        {
+            get {
+                Debug.Assert(
+                    HasConsistentHashAlgortimOverriding(), 
+                    $"If you override either the {nameof(SignatureAlgorithmName)} property or {nameof(ComputeSignature)} method,"
+                    + " you should override the other as a best practice, even if they use the same algorithm.");
+                return "HMAC-SHA256";
+            }
+        }
+
+        private bool HasConsistentHashAlgortimOverriding()
+        {
+            var t = this.GetType();
+            if (t == typeof(RestClient)) return true;
+                
+            var compSigMethod = t.GetMethod(nameof(ComputeSignature), BindingFlags.Instance | BindingFlags.NonPublic);
+            var algoNameProp = t.GetProperty(nameof(SignatureAlgorithmName));
+            return compSigMethod!.DeclaringType == algoNameProp!.DeclaringType;
+        }
+
         public static JsonSerializerOptions SerializerSettings { get; set; } = new JsonSerializerOptions {
                                                                              IgnoreNullValues = true,
                                                                              PropertyNamingPolicy = JsonNamingPolicy.CamelCase
@@ -84,7 +107,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
                 return Convert.ToBase64String(baseStringHash);
             }
         }
-
+        
         protected virtual long ComputeTimestamp() =>
             ((long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
 
@@ -161,7 +184,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
             return new SortedDictionary<string, string> {
                 { "oauth_consumer_key", ConsumerKey },
                 { "oauth_nonce", this.ComputeNonce() },
-                { "oauth_signature_method", "HMAC-SHA256" },
+                { "oauth_signature_method", this.SignatureAlgorithmName },
                 { "oauth_timestamp", this.ComputeTimestamp().ToString() },
                 { "oauth_version", "1.0" }
             };

@@ -16,9 +16,17 @@ namespace _.Utils
 
         public RestClientTestBase()
         {
-            MessageHandler = A.Fake<IFakeMessageHandler>();
-            A.CallTo(() => MessageHandler.SendAsync(A<HttpRequestMessage>.Ignored, A<CancellationToken>.Ignored))
-                .Returns(Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)));
+            this.MessageHandler = CreateMockedMessageHandler();
         }
+
+        public static IFakeMessageHandler CreateMockedMessageHandler()
+        {
+             var messageHandler = A.Fake<IFakeMessageHandler>();
+             A.CallTo(() => messageHandler.SendAsync(A<HttpRequestMessage>.Ignored, A<CancellationToken>.Ignored))
+                 .Returns(Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)));
+             return messageHandler;
+        }
+        
+        public static HttpClient CreateMockHttpClient() => new HttpClient(new FakeMessageHandlerProxy(CreateMockedMessageHandler()));
     }
 }

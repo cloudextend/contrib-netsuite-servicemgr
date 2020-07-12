@@ -37,16 +37,16 @@ namespace Celigo.ServiceManager.NetSuite.REST
         private const string _scriptParamName = "script";
         private const string _deployParamName = "deploy";
         
-        //public RestletClient(HttpClient httpClient, IOptions<RestClientOptions> options, RestletConfig restlet) 
-        //    : base(httpClient, options)
-        //{
-        //    _ = restlet.Deploy ??
-        //        throw new ArgumentNullException($"{nameof(RestletConfig)}.{nameof(RestletConfig.Deploy)}");
-        //    _ = restlet.Script ??
-        //        throw new ArgumentNullException($"{nameof(RestletConfig)}.{nameof(RestletConfig.Script)}");
+        public RestletClient(HttpClient httpClient, IOptions<RestClientOptions> options, RestletConfig restlet) 
+            : base(httpClient, options)
+        {
+            _ = restlet.Deploy ??
+                throw new ArgumentNullException($"{nameof(RestletConfig)}.{nameof(RestletConfig.Deploy)}");
+            _ = restlet.Script ??
+                throw new ArgumentNullException($"{nameof(RestletConfig)}.{nameof(RestletConfig.Script)}");
             
-        //    _restlet = restlet;
-        //}
+            _restlet = restlet;
+        }
 
         public RestletClient(HttpClient httpClient, IOptions<RestClientOptions> options, IOptions<RestletConfig> restlet)
             : base(httpClient, options) 
