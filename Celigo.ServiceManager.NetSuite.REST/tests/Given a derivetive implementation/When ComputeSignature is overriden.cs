@@ -44,6 +44,7 @@ namespace _.Given_a_derivetive_implementation
             try
             {
                 await incorrect.Get("TSTDRV1234", new Uri("https://someserver.com"), "TKN", "SEC");
+                Assert.False(true, "An assertion failure should have happened.");
             }
             catch (Exception e)
             {

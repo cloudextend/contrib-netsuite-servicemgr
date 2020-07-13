@@ -95,6 +95,8 @@ namespace Celigo.ServiceManager.NetSuite.REST
 
         protected virtual string ComputeSignature(string baseString, string tokenSecret)
         {
+            Debug.Assert(this.HasConsistentHashAlgortimOverriding());
+            
             string key = string.Concat(ConsumerSecret, "&", tokenSecret);
 
             var encoding = Encoding.ASCII;
