@@ -113,18 +113,17 @@ namespace Celigo.ServiceManager.NetSuite.REST
 
         private Uri CreateRequestUrl(StringBuilder urlBuilder, (string key, string value)[] queryParams)
         {
-            urlBuilder
-                .Append("?script=")
-                .Append(_restlet.Script)
-                .Append("&deploy=")
-                .Append(_restlet.Deploy);
+            urlBuilder.Append("?script=")
+                      .Append(_restlet.Script)
+                      .Append("&deploy=")
+                      .Append(_restlet.Deploy);
 
             for (int i = queryParams.Length - 1; i >= 0; i--)
             {
-                urlBuilder.Append("&");
-                urlBuilder.Append(queryParams[i].key);
-                urlBuilder.Append("=");
-                urlBuilder.Append(queryParams[i].value);
+                urlBuilder.Append("&")
+                          .Append(queryParams[i].key)
+                          .Append("=")
+                          .Append(queryParams[i].value);
             }
             
             return new Uri(urlBuilder.ToString());
@@ -132,10 +131,10 @@ namespace Celigo.ServiceManager.NetSuite.REST
 
         private string GetBasicAuthHeaderValue(Passport passport) =>
             new StringBuilder(120)
-                .Append("NLAuth nlauth_account=").Append(passport.Account)
-                .Append("nlauth_email=").Append(WebUtility.UrlEncode(passport.Email))
+                .Append("NLAuth nlauth_account=").Append(passport.Account).Append(", ")
+                .Append("nlauth_email=").Append(WebUtility.UrlEncode(passport.Email)).Append(", ")
                 .Append("nlauth_signature=").Append(Uri.EscapeDataString(passport.Password))
-                .Append(passport.RoleId != null ? "nlauth_role=" + passport.RoleId: "")
+                .Append(passport.RoleId != null ? ", nlauth_role=" + passport.RoleId: "")
                 .ToString();
         
         private string GetTbaAuthHeader(string httpMethod, 
