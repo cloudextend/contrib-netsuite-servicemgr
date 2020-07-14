@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>netcoreapp3.1</TargetFramework>
+      <Version>1.0.4</Version>
+      <Authors>Sameera Perera</Authors>
+      <Company>Celigo, Inc.</Company>
+      <Description>REST Client for NetSuite REST API and RESTlets</Description>
+      <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+      <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
+      <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
+      <Copyright>Copyright © Celigo, Inc. 2020</Copyright>
+      <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
+      <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
+      <RepositoryType>Git</RepositoryType>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+      <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.5" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.5" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.5" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.5" />
+    </ItemGroup>
+
+</Project>
