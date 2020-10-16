@@ -77,18 +77,6 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         }
 
         [Fact]
-        public async Task Can_execute_a_PickList_lookup_on_a_CustomRecord()
-        {
-            var gsvDesc = new GetSelectValueFieldDescription {
-                customRecordType = new RecordRef { internalId = "54" },
-                field = "custrecord_advpromo_customer_sid"
-            };
-            var result = await client.getSelectValueAsync(gsvDesc, 0);
-            result.status.isSuccess.Should().BeTrue();
-            result.baseRefList.Should().NotBeNull();
-        }
-
-        [Fact]
         public async Task Deserializes_base_class_properties_when_fetching()
         {
             // This test fails due to a NS WSDL issue as explained in https://github.com/dotnet/wcf/issues/3073
@@ -101,34 +89,15 @@ namespace Tests.Celigo.ServiceManager.NetSuite
 
             customizationList.status.isSuccess.Should().BeTrue();
             customizationList.customizationRefList.Should().NotBeNull();
-            customizationList.customizationRefList.Length.Should().BeGreaterThan(0, "Test is inconclusive on this account without Transaction Body Custom Fields");
+            customizationList.customizationRefList.Length.Should().BeGreaterThan(0,
+                "Test is inconclusive on this account without Transaction Body Custom Fields");
 
             var customFields = await client.getListAsync(customizationList.customizationRefList);
             customFields.status.isSuccess.Should().BeTrue();
             customFields.readResponse.Should().NotBeNull();
             customFields.readResponse.Length.Should().BeGreaterThan(0);
-            customFields.readResponse.All(r => r.record is TransactionBodyCustomField field && field.fieldTypeSpecified).Should().BeTrue();
-        }
-
-        [Fact]
-        public async Task Can_upload_records_with_picklists()
-        {
-            var result = await client.addAsync(
-                new VendorBill {
-                    entity = new RecordRef { internalId = "992" },
-                    subsidiary = new RecordRef { internalId = "1" },
-                    location = new RecordRef { internalId = "5" },
-                    expenseList = new VendorBillExpenseList {
-                        expense = new [] {
-                            new VendorBillExpense {
-                                account = new RecordRef { internalId = "119" },
-
-                            }
-                        }
-                    }
-                }
-            );
-
+            customFields.readResponse.All(r => r.record is TransactionBodyCustomField field && field.fieldTypeSpecified)
+                .Should().BeTrue();
         }
     }
 }

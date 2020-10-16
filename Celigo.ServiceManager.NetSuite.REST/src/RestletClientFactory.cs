@@ -9,7 +9,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
 {
     public interface IRestletClientFactory
     {
-        RestletClient CreateClient(string restletName);
+        IRestletClient CreateClient(string restletName);
     }
 
     public class RestletClientFactory : IRestletClientFactory
@@ -28,12 +28,12 @@ namespace Celigo.ServiceManager.NetSuite.REST
             {
                 throw new InvalidOperationException("At least one RESTlet has not been properly configured.");
             }
-            
+
             _registry = configOptions.Value.Restlets.ToDictionary(c => c.RestletName);
             _restClientOptions = options;
         }
 
-        public RestletClient CreateClient(string restletName)
+        public IRestletClient CreateClient(string restletName)
         {
             if (_registry.TryGetValue(restletName, out var restlet))
             {
@@ -48,7 +48,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
 
         public IRestletProxy CreateClient(string restletName, string account, string token, string tokenSecret) =>
             new TbaRestletProxy(account, token, tokenSecret, CreateClient(restletName));
-        
+
         public IRestletProxy CreateClient(string restletName, Passport passport) =>
             new BasicCredsRestletProxy(passport, CreateClient(restletName));
     }
