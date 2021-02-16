@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Celigo.SuiteTalk\src\Celigo.SuiteTalk.csproj" />
       <ProjectReference Include="..\src\Celigo.ServiceManager.NetSuite.REST.csproj" />
     </ItemGroup>
 

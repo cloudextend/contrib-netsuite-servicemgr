@@ -54,10 +54,10 @@ namespace Celigo.ServiceManager.NetSuite.REST
                                                                          };
 
         public RestClient(HttpClient httpClient, IOptions<RestClientOptions> options)
-            : this(httpClient, options.Value.ConsumerKey, options.Value.ConsumerSecret) { }
-
-        public RestClient(HttpClient httpClient, string consumerKey, string consumerSecret)
         {
+            string consumerKey = options.Value.ConsumerKey;
+            string consumerSecret = options.Value.ConsumerSecret;
+            
             if (string.IsNullOrWhiteSpace(consumerKey))
                 throw new ArgumentNullException(nameof(consumerKey), "Consumer Key must be specified.");
             if (string.IsNullOrWhiteSpace(consumerSecret))

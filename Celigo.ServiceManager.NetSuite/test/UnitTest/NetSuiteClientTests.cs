@@ -2,6 +2,7 @@ using Celigo.ServiceManager.NetSuite;
 using FluentAssertions;
 using SuiteTalk;
 using System;
+using System.Text;
 using Xunit;
 
 namespace Tests.Celigo.ServiceManager.NetSuite
@@ -129,6 +130,17 @@ namespace Tests.Celigo.ServiceManager.NetSuite
                 }
             );
 
+        }
+
+        [Fact]
+        public async Task Can_upload_files()
+        {
+            var result = await client.addAsync(
+                new File {
+                    name = "TestUrl.url",
+                    url = "https://google.com"
+                }
+            );
         }
     }
 }

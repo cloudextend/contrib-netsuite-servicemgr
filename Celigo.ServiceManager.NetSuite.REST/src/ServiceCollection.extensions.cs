@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddOptions()
                 .Configure<RestClientOptions>(configuration.GetSection(RestClientOptions.ConfigurationSectionName))
                 .AddHttpClient()
-                ;
+                .AddHttpClient<IRestClient, RestClient>();
 
             return services;
         }
@@ -42,7 +42,6 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             services.AddHttpClient<IRestletClient, RestletClient>();
-            services.AddHttpClient<IRestClient, RestClient>();
             
             services.AddSingleton<IRestletClientFactory, RestletClientFactory>();
 
