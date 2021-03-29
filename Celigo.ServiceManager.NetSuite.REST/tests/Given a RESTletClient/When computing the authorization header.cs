@@ -41,6 +41,26 @@ namespace _.Given_a_RestletClient
             _authParameter.Should().Contain("oauth_version=\"1.0\"");
         }
 
+        [Fact]
+        public async Task It_should_include_proper_account_for_sandbox()
+        {
+            A.CallTo(() => this.MessageHandler.SendAsync(A<HttpRequestMessage>.Ignored, A<CancellationToken>.Ignored))
+                .ReturnsLazily(callParams => {
+                    var req = callParams.Arguments[0] as HttpRequestMessage;
+                    _authScheme = req.Headers.Authorization.Scheme;
+                    _authParameter = req.Headers.Authorization.Parameter;
+
+                    return Task.FromResult(new HttpResponseMessage(System.Net.HttpStatusCode.OK));
+                });
+
+            await _client.Get(
+                "1234-sb1",
+                new Uri("https://1234-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=custscript1&deploy=custdeploy1"),
+                _token,
+                _tokenSecret);
+            _authParameter.Should().Contain("realm=\"1234_SB1\"");
+        }
+
 
         private async Task When()
         {
@@ -65,7 +85,7 @@ namespace _.Given_a_RestletClient
         public When_computing_the_authorization_header()
         {
             _client = new TestableRestClient(
-                new HttpClient(new FakeMessageHandlerProxy(this.MessageHandler)), 
+                new HttpClient(new FakeMessageHandlerProxy(this.MessageHandler)),
                 Options.Create(
                     new RestClientOptions {
                         ConsumerKey = _consumerKey,
@@ -73,7 +93,7 @@ namespace _.Given_a_RestletClient
                     })
             );
         }
-        
+
         // These sample tokens, nonce values and final signature are taken from http://lti.tools/oauth/
 
         private readonly string _consumerKey = "dpf43f3p2l4k3l03";
