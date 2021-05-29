@@ -17,7 +17,9 @@ namespace Celigo.ServiceManager.NetSuite.REST
     public interface IRestClient
     {
         Task<HttpResponseMessage> Get(string account, Uri requestUri, string token, string tokenSecret);
+        Task<HttpResponseMessage> Patch<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
         Task<HttpResponseMessage> Post<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
+        Task<HttpResponseMessage> Put<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
     }
 
     public class RestClient : IRestClient
@@ -29,7 +31,8 @@ namespace Celigo.ServiceManager.NetSuite.REST
 
         public virtual string SignatureAlgorithmName
         {
-            get {
+            get
+            {
                 Debug.Assert(
                     HasConsistentHashAlgortimOverriding(),
                     $"If you override either the {nameof(SignatureAlgorithmName)} property or {nameof(ComputeSignature)} method,"
@@ -48,10 +51,11 @@ namespace Celigo.ServiceManager.NetSuite.REST
             return compSigMethod!.DeclaringType == algoNameProp!.DeclaringType;
         }
 
-        public static JsonSerializerOptions SerializerSettings { get; set; } = new JsonSerializerOptions {
-                                                                             IgnoreNullValues = true,
-                                                                             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                                                                         };
+        public static JsonSerializerOptions SerializerSettings { get; set; } = new JsonSerializerOptions
+        {
+            IgnoreNullValues = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
 
         public RestClient(HttpClient httpClient, IOptions<RestClientOptions> options)
             : this(httpClient, options.Value.ConsumerKey, options.Value.ConsumerSecret) { }
@@ -198,11 +202,31 @@ namespace Celigo.ServiceManager.NetSuite.REST
             return SendRequest(HttpMethod.Get, requestUri, authorizationHeader);
         }
 
+        public Task<HttpResponseMessage> Patch<T>(string account, Uri requestUri, string token, string tokenSecret, T content)
+        {
+            string authorizationHeader = this.GetAuthorizationHeaderValue(account, requestUri, token, tokenSecret, "PATCH");
+
+            return SendRequest(HttpMethod.Patch,
+                                requestUri,
+                                authorizationHeader,
+                                CreateJsonMessageContent(content));
+        }
+
         public Task<HttpResponseMessage> Post<T>(string account, Uri requestUri, string token, string tokenSecret, T content)
         {
             string authorizationHeader = this.GetAuthorizationHeaderValue(account, requestUri, token, tokenSecret, "POST");
 
             return SendRequest(HttpMethod.Post,
+                                requestUri,
+                                authorizationHeader,
+                                CreateJsonMessageContent(content));
+        }
+
+        public Task<HttpResponseMessage> Put<T>(string account, Uri requestUri, string token, string tokenSecret, T content)
+        {
+            string authorizationHeader = this.GetAuthorizationHeaderValue(account, requestUri, token, tokenSecret, "PUT");
+
+            return SendRequest(HttpMethod.Put,
                                 requestUri,
                                 authorizationHeader,
                                 CreateJsonMessageContent(content));
