@@ -20,6 +20,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
         Task<HttpResponseMessage> Patch<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
         Task<HttpResponseMessage> Post<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
         Task<HttpResponseMessage> Put<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
+        Task<HttpResponseMessage> Delete(string account, Uri requestUri, string token, string tokenSecret);
     }
 
     public class RestClient : IRestClient
@@ -230,6 +231,14 @@ namespace Celigo.ServiceManager.NetSuite.REST
                                 requestUri,
                                 authorizationHeader,
                                 CreateJsonMessageContent(content));
+        }
+        
+        public Task<HttpResponseMessage> Delete(string account, Uri requestUri, string token, string tokenSecret)
+        {
+            string authorizationHeader = this.GetAuthorizationHeaderValue(account, requestUri, token, tokenSecret, "DELETE");
+            return SendRequest(HttpMethod.Delete,
+                                requestUri,
+                                authorizationHeader);
         }
 
         protected virtual Task<HttpResponseMessage> SendRequest(
