@@ -2,7 +2,7 @@
 
     <PropertyGroup>
       <TargetFramework>netcoreapp3.1</TargetFramework>
-      <Version>1.1.0</Version>
+      <Version>1.2.0</Version>
       <Authors>CloudExtend.io</Authors>
       <Company>Celigo, Inc.</Company>
       <Description>REST Client for NetSuite REST API and RESTlets</Description>
@@ -16,7 +16,8 @@
       <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
       <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <PackageReleaseNotes>
-        1.1.0 Support PATCH and PUT HTTP requests in IRestClient.
+        v1.1.0 - Support PATCH and PUT HTTP requests in IRestClient.
+        v1.2.0 - Added support for HTTP DELETE in RestClient.
       </PackageReleaseNotes>
     </PropertyGroup>
 
