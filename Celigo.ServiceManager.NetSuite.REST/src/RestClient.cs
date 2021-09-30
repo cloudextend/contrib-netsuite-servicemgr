@@ -17,7 +17,10 @@ namespace Celigo.ServiceManager.NetSuite.REST
     public interface IRestClient
     {
         Task<HttpResponseMessage> Get(string account, Uri requestUri, string token, string tokenSecret);
+        Task<HttpResponseMessage> Patch<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
         Task<HttpResponseMessage> Post<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
+        Task<HttpResponseMessage> Put<T>(string account, Uri requestUri, string token, string tokenSecret, T content);
+        Task<HttpResponseMessage> Delete(string account, Uri requestUri, string token, string tokenSecret);
     }
 
     public class RestClient : IRestClient
@@ -29,9 +32,10 @@ namespace Celigo.ServiceManager.NetSuite.REST
 
         public virtual string SignatureAlgorithmName
         {
-            get {
+            get
+            {
                 Debug.Assert(
-                    HasConsistentHashAlgortimOverriding(), 
+                    HasConsistentHashAlgortimOverriding(),
                     $"If you override either the {nameof(SignatureAlgorithmName)} property or {nameof(ComputeSignature)} method,"
                     + " you should override the other as a best practice, even if they use the same algorithm.");
                 return "HMAC-SHA256";
@@ -42,16 +46,17 @@ namespace Celigo.ServiceManager.NetSuite.REST
         {
             var t = this.GetType();
             if (t == typeof(RestClient)) return true;
-                
+
             var compSigMethod = t.GetMethod(nameof(ComputeSignature), BindingFlags.Instance | BindingFlags.NonPublic);
             var algoNameProp = t.GetProperty(nameof(SignatureAlgorithmName));
             return compSigMethod!.DeclaringType == algoNameProp!.DeclaringType;
         }
 
-        public static JsonSerializerOptions SerializerSettings { get; set; } = new JsonSerializerOptions {
-                                                                             IgnoreNullValues = true,
-                                                                             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                                                                         };
+        public static JsonSerializerOptions SerializerSettings { get; set; } = new JsonSerializerOptions
+        {
+            IgnoreNullValues = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
 
         public RestClient(HttpClient httpClient, IOptions<RestClientOptions> options)
         {
@@ -96,26 +101,26 @@ namespace Celigo.ServiceManager.NetSuite.REST
         protected virtual string ComputeSignature(string baseString, string tokenSecret)
         {
             Debug.Assert(this.HasConsistentHashAlgortimOverriding());
-            
+
             string key = string.Concat(ConsumerSecret, "&", tokenSecret);
 
             var encoding = Encoding.ASCII;
             byte[] keyBytes = encoding.GetBytes(key);
             byte[] baseStringBytes = encoding.GetBytes(baseString);
-            
+
             using (var hmacSha256 = new HMACSHA256(keyBytes))
             {
                 byte[] baseStringHash = hmacSha256.ComputeHash(baseStringBytes);
                 return Convert.ToBase64String(baseStringHash);
             }
         }
-        
+
         protected virtual long ComputeTimestamp() =>
             ((long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
 
         protected static StringContent CreateJsonMessageContent<T>(T content) =>
             new StringContent(JsonSerializer.Serialize(content, SerializerSettings), Encoding.UTF8, "application/json");
-        
+
         protected string GetAuthorizationHeaderValue(string account,
                                                      Uri requestUri,
                                                      string token,
@@ -124,11 +129,11 @@ namespace Celigo.ServiceManager.NetSuite.REST
         {
             var oauthParams = this.GetCommonOAuthParameters();
             this.AddQueryParamsFrom(requestUri, oauthParams);
-            
+
             string basePath = requestUri.GetLeftPart(UriPartial.Path);
             return this.GetAuthorizationHeaderValue(account, basePath, oauthParams, token, tokenSecret, httpMethod);
         }
-        
+
         protected string GetAuthorizationHeaderValue(string account,
                                                     string baseUrlPath,
                                                     SortedDictionary<string, string> oauthParams,
@@ -137,13 +142,13 @@ namespace Celigo.ServiceManager.NetSuite.REST
                                                     string httpMethod)
         {
             oauthParams.Add("oauth_token", token);
-            
+
             string E(string data) => Uri.EscapeDataString(data);
 
             var headerBuilder = new StringBuilder(300);
             var baseStringBuilder = new StringBuilder(300);
 
-            headerBuilder.Append($"OAuth realm=\"{E(account.ToUpperInvariant().Replace('_', '-'))}\"");
+            headerBuilder.Append($"OAuth realm=\"{E(account.ToUpperInvariant().Replace('-', '_'))}\"");
             bool isFirstParam = true;
 
             foreach (var pair in oauthParams)
@@ -198,14 +203,42 @@ namespace Celigo.ServiceManager.NetSuite.REST
             return SendRequest(HttpMethod.Get, requestUri, authorizationHeader);
         }
 
+        public Task<HttpResponseMessage> Patch<T>(string account, Uri requestUri, string token, string tokenSecret, T content)
+        {
+            string authorizationHeader = this.GetAuthorizationHeaderValue(account, requestUri, token, tokenSecret, "PATCH");
+
+            return SendRequest(HttpMethod.Patch,
+                                requestUri,
+                                authorizationHeader,
+                                CreateJsonMessageContent(content));
+        }
+
         public Task<HttpResponseMessage> Post<T>(string account, Uri requestUri, string token, string tokenSecret, T content)
         {
             string authorizationHeader = this.GetAuthorizationHeaderValue(account, requestUri, token, tokenSecret, "POST");
-            
-            return SendRequest(HttpMethod.Post, 
-                                requestUri, 
+
+            return SendRequest(HttpMethod.Post,
+                                requestUri,
                                 authorizationHeader,
                                 CreateJsonMessageContent(content));
+        }
+
+        public Task<HttpResponseMessage> Put<T>(string account, Uri requestUri, string token, string tokenSecret, T content)
+        {
+            string authorizationHeader = this.GetAuthorizationHeaderValue(account, requestUri, token, tokenSecret, "PUT");
+
+            return SendRequest(HttpMethod.Put,
+                                requestUri,
+                                authorizationHeader,
+                                CreateJsonMessageContent(content));
+        }
+        
+        public Task<HttpResponseMessage> Delete(string account, Uri requestUri, string token, string tokenSecret)
+        {
+            string authorizationHeader = this.GetAuthorizationHeaderValue(account, requestUri, token, tokenSecret, "DELETE");
+            return SendRequest(HttpMethod.Delete,
+                                requestUri,
+                                authorizationHeader);
         }
 
         protected virtual Task<HttpResponseMessage> SendRequest(
