@@ -100,10 +100,11 @@ namespace Celigo.ServiceManager.NetSuite.REST
             _restlet = restlet.Value;       
         }
 
-        public Task<HttpResponseMessage> Get(in string account, 
-                                             in string token, 
-                                             in string tokenSecret, 
-                                             IReadOnlyDictionary<string, string> queryParams = null)
+        public Task<HttpResponseMessage> Get(
+            in string account, 
+            in string token, 
+            in string tokenSecret, 
+            IReadOnlyDictionary<string, string> queryParams = null)
         {
             var urlBuilder = this.CreateUrlBuilder(account);
             string authHeader = this.GetTbaAuthHeader("GET", account, token, tokenSecret, urlBuilder.ToString(), queryParams);
@@ -129,8 +130,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
         
         public Task<HttpResponseMessage> Get(
             in Passport passport, 
-            IReadOnlyDictionary<string, string> queryParams = null
-        )
+            IReadOnlyDictionary<string, string> queryParams = null)
         {
             ValidateBasicCreds(passport);
 
@@ -143,8 +143,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
         public Task<HttpResponseMessage> Post<T>(
             in Passport passport,
             in T message, 
-            IReadOnlyDictionary<string, string> queryParams
-        )
+            IReadOnlyDictionary<string, string> queryParams)
         {
             ValidateBasicCreds(passport);
 
@@ -160,8 +159,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
             in string token,
             in string tokenSecret,
             (string key, string value) queryParam,
-            params (string key, string value)[] queryParams
-        )
+            params (string key, string value)[] queryParams)
         {
             var paramsMap = queryParams.ToDictionary(param => param.key, param => param.value);
             paramsMap[queryParam.key] = queryParam.value;
@@ -172,8 +170,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
         public Task<HttpResponseMessage> Get(
             in Passport passport,
             (string key, string value) queryParam,
-            params (string key, string value)[] queryParams
-        )
+            params (string key, string value)[] queryParams)
         {
             var paramsMap = queryParams.ToDictionary(param => param.key, param => param.value);
             paramsMap[queryParam.key] = queryParam.value;
@@ -187,8 +184,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
             in string tokenSecret,
             in T message,
             (string key, string value) queryParam,
-            params (string key, string value)[] queryParams
-        )
+            params (string key, string value)[] queryParams)
         {
             var paramsMap = queryParams.ToDictionary(param => param.key, param => param.value);
             paramsMap[queryParam.key] = queryParam.value;
@@ -200,8 +196,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
             in Passport passport,
             in T message,
             (string key, string value) queryParam,
-            params (string key, string value)[] queryParams
-        )
+            params (string key, string value)[] queryParams)
         {
             var paramsMap = queryParams.ToDictionary(param => param.key, param => param.value);
             paramsMap[queryParam.key] = queryParam.value;
@@ -240,12 +235,13 @@ namespace Celigo.ServiceManager.NetSuite.REST
                 .Append(passport.RoleId != null ? ", nlauth_role=" + passport.RoleId: "")
                 .ToString();
         
-        private string GetTbaAuthHeader(string httpMethod, 
-                                         string account, 
-                                         string key, 
-                                         string secret,
-                                         string baseUrl,
-                                         IReadOnlyDictionary<string, string> queryParams)
+        private string GetTbaAuthHeader(
+            string httpMethod, 
+            string account, 
+            string key, 
+            string secret,
+            string baseUrl,
+            IReadOnlyDictionary<string, string> queryParams)
         {
             var oauthParams = GetAllOauthParams(queryParams);
             return this.GetAuthorizationHeaderValue(account, baseUrl, oauthParams, key, secret, httpMethod);
