@@ -219,14 +219,16 @@ namespace Celigo.ServiceManager.NetSuite.REST
                       .Append("&deploy=")
                       .Append(_restlet.Deploy);
 
-            foreach (var param in queryParams)   
+            if (queryParams == null) return new Uri(urlBuilder.ToString());
+            
+            foreach (var param in queryParams)
             {
                 urlBuilder.Append("&")
-                          .Append(param.Key)
-                          .Append("=")
-                          .Append(param.Value);
+                    .Append(param.Key)
+                    .Append("=")
+                    .Append(param.Value);
             }
-            
+
             return new Uri(urlBuilder.ToString());
         }
 
@@ -254,6 +256,9 @@ namespace Celigo.ServiceManager.NetSuite.REST
             var oauthParams = this.GetCommonOAuthParameters();
             oauthParams.Add(_scriptParamName, _restlet.Script);
             oauthParams.Add(_deployParamName, _restlet.Deploy);
+
+            if (queryParams == null) return oauthParams;
+            
             foreach (var param in queryParams)
             {
                 oauthParams.Add(param.Key, param.Value);

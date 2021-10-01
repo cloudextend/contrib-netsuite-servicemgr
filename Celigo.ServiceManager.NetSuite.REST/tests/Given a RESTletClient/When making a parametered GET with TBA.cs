@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -16,8 +17,10 @@ namespace _.Given_a_RestletClient
             var response = await Client.Get("TSTDRV12345", 
                                 "DUMMYTOKEN", 
                                 "DUMMYSECRET", 
-                                ("search", "foo"),
-                                ("filter", "b")
+                                new Dictionary<string, string>() {
+                                    { "search", "foo" },
+                                    {"filter", "b"}
+                                }
                             );
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
