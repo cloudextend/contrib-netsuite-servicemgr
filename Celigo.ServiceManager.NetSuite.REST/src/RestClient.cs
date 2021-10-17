@@ -59,10 +59,10 @@ namespace Celigo.ServiceManager.NetSuite.REST
         };
 
         public RestClient(HttpClient httpClient, IOptions<RestClientOptions> options)
-            : this(httpClient, options.Value.ConsumerKey, options.Value.ConsumerSecret) { }
-
-        public RestClient(HttpClient httpClient, string consumerKey, string consumerSecret)
         {
+            string consumerKey = options.Value.ConsumerKey;
+            string consumerSecret = options.Value.ConsumerSecret;
+            
             if (string.IsNullOrWhiteSpace(consumerKey))
                 throw new ArgumentNullException(nameof(consumerKey), "Consumer Key must be specified.");
             if (string.IsNullOrWhiteSpace(consumerSecret))
@@ -121,11 +121,12 @@ namespace Celigo.ServiceManager.NetSuite.REST
         protected static StringContent CreateJsonMessageContent<T>(T content) =>
             new StringContent(JsonSerializer.Serialize(content, SerializerSettings), Encoding.UTF8, "application/json");
 
-        protected string GetAuthorizationHeaderValue(string account,
-                                                     Uri requestUri,
-                                                     string token,
-                                                     string tokenSecret,
-                                                     string httpMethod)
+        protected string GetAuthorizationHeaderValue(
+            string account,
+            Uri requestUri,
+            string token,
+            string tokenSecret,
+            string httpMethod)
         {
             var oauthParams = this.GetCommonOAuthParameters();
             this.AddQueryParamsFrom(requestUri, oauthParams);
@@ -134,12 +135,13 @@ namespace Celigo.ServiceManager.NetSuite.REST
             return this.GetAuthorizationHeaderValue(account, basePath, oauthParams, token, tokenSecret, httpMethod);
         }
 
-        protected string GetAuthorizationHeaderValue(string account,
-                                                    string baseUrlPath,
-                                                    SortedDictionary<string, string> oauthParams,
-                                                    string token,
-                                                    string tokenSecret,
-                                                    string httpMethod)
+        protected string GetAuthorizationHeaderValue(
+            string account,
+            string baseUrlPath,
+            SortedDictionary<string, string> oauthParams,
+            string token,
+            string tokenSecret,
+            string httpMethod)
         {
             oauthParams.Add("oauth_token", token);
 
