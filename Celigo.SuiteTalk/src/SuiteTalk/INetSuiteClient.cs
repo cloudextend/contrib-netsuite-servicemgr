@@ -31,7 +31,7 @@ namespace SuiteTalk
         public SearchPreferences searchPreferences { get; set; }
         public PartnerInfo partnerInfo { get; set; }
 
-        public string SuiteTalkVersion { get { return "2018.2"; } }
+        public string SuiteTalkVersion { get { return "2021.2"; } }
 
         public static System.ServiceModel.EndpointAddress GetDefaultEndpoint()
         {
