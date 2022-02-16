@@ -1,0 +1,18 @@
+pool:
+  name: "Azure Pipelines"
+  vmImage: "ubuntu-latest"
+
+resources:
+  repositories:
+    - repository: "ce-pipelines"
+      type: "github"
+      name: "pro-celigo/templates-pipelines"
+      endpoint: "GitHub BuildBot PAT"
+      ref: "refs/tags/v3.0.1"
+
+steps:
+  - template: "templates/push-nupkg.yml@ce-pipelines"
+    parameters:
+      ProjectName: "$(Build.DefinitionName)"
+      GitHubPackagesPAT: "$(GitHubPackagesPAT)"
+      WorkingDir: "$(WorkingDir)"
