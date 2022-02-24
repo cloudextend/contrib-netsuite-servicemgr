@@ -8,11 +8,13 @@ resources:
       type: "github"
       name: "pro-celigo/templates-pipelines"
       endpoint: "GitHub BuildBot PAT"
-      ref: "refs/tags/v3.0.1"
+      ref: "refs/tags/v3.1.1"
 
 steps:
   - template: "templates/push-nupkg.yml@ce-pipelines"
     parameters:
       ProjectName: "$(Build.DefinitionName)"
       GitHubPackagesPAT: "$(GitHubPackagesPAT)"
+      NuGetPackagesPAT: "$(NuGetPackagesPAT)"
+      PackageDestination: "$(PackageDestination)"
       WorkingDir: "$(WorkingDir)"
