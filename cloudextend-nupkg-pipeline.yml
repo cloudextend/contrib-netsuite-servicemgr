@@ -16,5 +16,5 @@ steps:
       ProjectName: "$(Build.DefinitionName)"
       GitHubPackagesPAT: "$(GitHubPackagesPAT)"
       NuGetPackagesPAT: "$(NuGetPackagesPAT)"
-      PackageDestination: "$(PackageDestination)"
+      PackageDestination: "NuGet.org"
       WorkingDir: "$(WorkingDir)"
