@@ -1,3 +1,4 @@
+
 // Generator { Name = "SearchRecordGenerator", Template = "ISearch" }
 
 using System;
@@ -106,6 +107,11 @@ namespace SuiteTalk
                 case "transactionJoin":
                     result = target.transactionJoin;
                     creator = () => target.transactionJoin = new TransactionSearchBasic();
+                    break;
+        
+                case "usageJoin":
+                    result = target.usageJoin;
+                    creator = () => target.usageJoin = new UsageSearchBasic();
                     break;
         
                 case "userJoin":

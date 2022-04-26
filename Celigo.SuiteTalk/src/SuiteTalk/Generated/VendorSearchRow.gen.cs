@@ -1,3 +1,4 @@
+
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -57,10 +58,11 @@ namespace SuiteTalk
       //      yield return this.contactPrimaryJoin;
       //      yield return this.expAccountJoin;
       //      yield return this.fileJoin;
+      //      yield return this.manufacturingLocationsJoin;
       //      yield return this.messagesJoin;
-      //      yield return this.mseSubsidiaryJoin;
       //      yield return this.messagesFromJoin;
       //      yield return this.messagesToJoin;
+      //      yield return this.mseSubsidiaryJoin;
       //      yield return this.taxRegistrationJoin;
       //      yield return this.timeApproverJoin;
       //      yield return this.transactionJoin;
@@ -119,14 +121,14 @@ namespace SuiteTalk
                     creator = () => target.fileJoin = new FileSearchRowBasic();
                     break;
         
+                case "manufacturingLocationsJoin":
+                    result = target.manufacturingLocationsJoin;
+                    creator = () => target.manufacturingLocationsJoin = new LocationSearchRowBasic();
+                    break;
+        
                 case "messagesJoin":
                     result = target.messagesJoin;
                     creator = () => target.messagesJoin = new MessageSearchRowBasic();
-                    break;
-        
-                case "mseSubsidiaryJoin":
-                    result = target.mseSubsidiaryJoin;
-                    creator = () => target.mseSubsidiaryJoin = new MseSubsidiarySearchRowBasic();
                     break;
         
                 case "messagesFromJoin":
@@ -137,6 +139,11 @@ namespace SuiteTalk
                 case "messagesToJoin":
                     result = target.messagesToJoin;
                     creator = () => target.messagesToJoin = new MessageSearchRowBasic();
+                    break;
+        
+                case "mseSubsidiaryJoin":
+                    result = target.mseSubsidiaryJoin;
+                    creator = () => target.mseSubsidiaryJoin = new MseSubsidiarySearchRowBasic();
                     break;
         
                 case "taxRegistrationJoin":

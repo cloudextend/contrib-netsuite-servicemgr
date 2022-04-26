@@ -1,9 +1,9 @@
 ﻿namespace SuiteTalk
 {
-    public interface IPassportProvider
-    {
-        Passport GetPassport();
-    }
+    // public interface IPassportProvider
+    // {
+    //     Passport GetPassport();
+    // }
 
     public interface IPreferenceProvider
     {

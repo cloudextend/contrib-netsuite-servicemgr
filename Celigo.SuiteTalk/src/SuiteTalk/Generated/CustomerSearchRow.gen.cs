@@ -1,3 +1,4 @@
+
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -71,6 +72,7 @@ namespace SuiteTalk
       //      yield return this.originatingLeadJoin;
       //      yield return this.parentCustomerJoin;
       //      yield return this.partnerJoin;
+      //      yield return this.paymentInstrumentJoin;
       //      yield return this.pricingJoin;
       //      yield return this.purchasedItemJoin;
       //      yield return this.resourceAllocationJoin;
@@ -207,6 +209,11 @@ namespace SuiteTalk
                 case "partnerJoin":
                     result = target.partnerJoin;
                     creator = () => target.partnerJoin = new PartnerSearchRowBasic();
+                    break;
+        
+                case "paymentInstrumentJoin":
+                    result = target.paymentInstrumentJoin;
+                    creator = () => target.paymentInstrumentJoin = new PaymentInstrumentSearchRowBasic();
                     break;
         
                 case "pricingJoin":

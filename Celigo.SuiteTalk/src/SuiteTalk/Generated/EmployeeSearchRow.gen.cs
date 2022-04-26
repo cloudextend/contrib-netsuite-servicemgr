@@ -1,3 +1,4 @@
+
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -57,6 +58,7 @@ namespace SuiteTalk
       //      yield return this.fileJoin;
       //      yield return this.hcmJobJoin;
       //      yield return this.locationJoin;
+      //      yield return this.managedJobJoin;
       //      yield return this.messagesJoin;
       //      yield return this.messagesFromJoin;
       //      yield return this.messagesToJoin;
@@ -117,6 +119,11 @@ namespace SuiteTalk
                 case "locationJoin":
                     result = target.locationJoin;
                     creator = () => target.locationJoin = new LocationSearchRowBasic();
+                    break;
+        
+                case "managedJobJoin":
+                    result = target.managedJobJoin;
+                    creator = () => target.managedJobJoin = new JobSearchRowBasic();
                     break;
         
                 case "messagesJoin":

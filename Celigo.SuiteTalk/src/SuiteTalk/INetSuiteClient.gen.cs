@@ -1,22 +1,15 @@
-// Generator: ClientStubGenerator, Template: INetSuiteClient
 namespace SuiteTalk
 {
     #pragma warning disable IDE1006 // Naming Styles
 
     public partial interface INetSuiteClient
     {
-        System.Threading.Tasks.Task<SessionResponse> loginAsync();
-        System.Threading.Tasks.Task<SessionResponse> ssoLoginAsync(SsoPassport ssoPassport);
-        System.Threading.Tasks.Task<SessionResponse> mapSsoAsync(SsoCredentials ssoCredentials);
         System.Threading.Tasks.Task<SessionResponse> changePasswordAsync(ChangePassword changePassword);
         System.Threading.Tasks.Task<SessionResponse> changeEmailAsync(ChangeEmail changeEmail);
-        System.Threading.Tasks.Task<SessionResponse> logoutAsync();
         System.Threading.Tasks.Task<WriteResponse> addAsync(Record record);
         System.Threading.Tasks.Task<WriteResponse> deleteAsync(BaseRef baseRef,DeletionReason deletionReason);
-        System.Threading.Tasks.Task<SearchResult> searchAsync(SearchRecord searchRecord);
-        System.Threading.Tasks.Task<SearchResult> searchMoreAsync(int pageIndex);
-        System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(string searchId,int pageIndex);
-        System.Threading.Tasks.Task<SearchResult> searchNextAsync();
+        System.Threading.Tasks.Task<SearchResult> searchAsync(SearchPreferences searchPreferences,SearchRecord searchRecord);
+        System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(SearchPreferences searchPreferences,string searchId,int pageIndex);
         System.Threading.Tasks.Task<WriteResponse> updateAsync(Record record);
         System.Threading.Tasks.Task<WriteResponse> upsertAsync(Record record);
         System.Threading.Tasks.Task<WriteResponseList> addListAsync(Record[] record);
@@ -47,51 +40,20 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<AsyncStatusResult> asyncDeleteListAsync(BaseRef[] baseRef,DeletionReason deletionReason);
         System.Threading.Tasks.Task<AsyncStatusResult> asyncGetListAsync(BaseRef[] baseRef);
         System.Threading.Tasks.Task<AsyncStatusResult> asyncInitializeListAsync(InitializeRecord[] initializeRecord);
-        System.Threading.Tasks.Task<AsyncStatusResult> asyncSearchAsync(SearchRecord searchRecord);
+        System.Threading.Tasks.Task<AsyncStatusResult> asyncSearchAsync(SearchPreferences searchPreferences,SearchRecord searchRecord);
         System.Threading.Tasks.Task<AsyncResult> getAsyncResultAsync(string jobId,int pageIndex);
         System.Threading.Tasks.Task<AsyncStatusResult> checkAsyncStatusAsync(string jobId);
         System.Threading.Tasks.Task<GetDeletedResult> getDeletedAsync(GetDeletedFilter getDeletedFilter,int pageIndex);
+        System.Threading.Tasks.Task<GetAccountGovernanceInfoResult> getAccountGovernanceInfoAsync();
+        System.Threading.Tasks.Task<GetIntegrationGovernanceInfoResult> getIntegrationGovernanceInfoAsync();
     }
 
     public partial class NetSuitePortTypeClient: INetSuiteClient
     {
-      public virtual async System.Threading.Tasks.Task<SessionResponse> loginAsync()
-      {
-          var request = new loginRequest() {
-                      applicationInfo = applicationInfo,
-                      partnerInfo = partnerInfo,
-                      passport = passport,
-          };
-          var response = await ((NetSuitePortType)this).loginAsync(request);
-          return response.sessionResponse;
-      }
-
-      public virtual async System.Threading.Tasks.Task<SessionResponse> ssoLoginAsync(SsoPassport ssoPassport)
-      {
-          var request = new ssoLoginRequest() {
-                      applicationInfo = applicationInfo,
-                      partnerInfo = partnerInfo,
-                      ssoPassport = ssoPassport,
-          };
-          var response = await ((NetSuitePortType)this).ssoLoginAsync(request);
-          return response.sessionResponse;
-      }
-
-      public virtual async System.Threading.Tasks.Task<SessionResponse> mapSsoAsync(SsoCredentials ssoCredentials)
-      {
-          var request = new mapSsoRequest() {
-                      applicationInfo = applicationInfo,
-                      partnerInfo = partnerInfo,
-                      ssoCredentials = ssoCredentials,
-          };
-          var response = await ((NetSuitePortType)this).mapSsoAsync(request);
-          return response.sessionResponse;
-      }
-
-      public virtual async System.Threading.Tasks.Task<SessionResponse> changePasswordAsync(ChangePassword changePassword)
+      public async System.Threading.Tasks.Task<SessionResponse> changePasswordAsync(ChangePassword changePassword)
       {
           var request = new changePasswordRequest() {
-                      passport = passport,
+                      tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
                       changePassword = changePassword,
@@ -100,10 +62,10 @@ namespace SuiteTalk
           return response.sessionResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<SessionResponse> changeEmailAsync(ChangeEmail changeEmail)
+      public async System.Threading.Tasks.Task<SessionResponse> changeEmailAsync(ChangeEmail changeEmail)
       {
           var request = new changeEmailRequest() {
-                      passport = passport,
+                      tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
                       changeEmail = changeEmail,
@@ -112,19 +74,9 @@ namespace SuiteTalk
           return response.sessionResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<SessionResponse> logoutAsync()
-      {
-          var request = new logoutRequest() {
-                      applicationInfo = applicationInfo,
-          };
-          var response = await ((NetSuitePortType)this).logoutAsync(request);
-          return response.sessionResponse;
-      }
-
-      public virtual async System.Threading.Tasks.Task<WriteResponse> addAsync(Record record)
+      public async System.Threading.Tasks.Task<WriteResponse> addAsync(Record record)
       {
           var request = new addRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -135,10 +87,9 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponse> deleteAsync(BaseRef baseRef,DeletionReason deletionReason)
+      public async System.Threading.Tasks.Task<WriteResponse> deleteAsync(BaseRef baseRef,DeletionReason deletionReason)
       {
           var request = new deleteRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -150,10 +101,9 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<SearchResult> searchAsync(SearchRecord searchRecord)
+      public async System.Threading.Tasks.Task<SearchResult> searchAsync(SearchPreferences searchPreferences,SearchRecord searchRecord)
       {
           var request = new searchRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -164,21 +114,9 @@ namespace SuiteTalk
           return response.searchResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<SearchResult> searchMoreAsync(int pageIndex)
-      {
-          var request = new searchMoreRequest() {
-                      applicationInfo = applicationInfo,
-                      searchPreferences = searchPreferences,
-                      pageIndex = pageIndex,
-          };
-          var response = await ((NetSuitePortType)this).searchMoreAsync(request);
-          return response.searchResult;
-      }
-
-      public virtual async System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(string searchId,int pageIndex)
+      public async System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(SearchPreferences searchPreferences,string searchId,int pageIndex)
       {
           var request = new searchMoreWithIdRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -190,20 +128,9 @@ namespace SuiteTalk
           return response.searchResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<SearchResult> searchNextAsync()
-      {
-          var request = new searchNextRequest() {
-                      applicationInfo = applicationInfo,
-                      searchPreferences = searchPreferences,
-          };
-          var response = await ((NetSuitePortType)this).searchNextAsync(request);
-          return response.searchResult;
-      }
-
-      public virtual async System.Threading.Tasks.Task<WriteResponse> updateAsync(Record record)
+      public async System.Threading.Tasks.Task<WriteResponse> updateAsync(Record record)
       {
           var request = new updateRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -214,10 +141,9 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponse> upsertAsync(Record record)
+      public async System.Threading.Tasks.Task<WriteResponse> upsertAsync(Record record)
       {
           var request = new upsertRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -228,10 +154,9 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponseList> addListAsync(Record[] record)
+      public async System.Threading.Tasks.Task<WriteResponseList> addListAsync(Record[] record)
       {
           var request = new addListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -242,10 +167,9 @@ namespace SuiteTalk
           return response.writeResponseList;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponseList> deleteListAsync(BaseRef[] baseRef,DeletionReason deletionReason)
+      public async System.Threading.Tasks.Task<WriteResponseList> deleteListAsync(BaseRef[] baseRef,DeletionReason deletionReason)
       {
           var request = new deleteListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -257,10 +181,9 @@ namespace SuiteTalk
           return response.writeResponseList;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponseList> updateListAsync(Record[] record)
+      public async System.Threading.Tasks.Task<WriteResponseList> updateListAsync(Record[] record)
       {
           var request = new updateListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -271,10 +194,9 @@ namespace SuiteTalk
           return response.writeResponseList;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponseList> upsertListAsync(Record[] record)
+      public async System.Threading.Tasks.Task<WriteResponseList> upsertListAsync(Record[] record)
       {
           var request = new upsertListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -285,10 +207,9 @@ namespace SuiteTalk
           return response.writeResponseList;
       }
 
-      public virtual async System.Threading.Tasks.Task<ReadResponse> getAsync(BaseRef baseRef)
+      public async System.Threading.Tasks.Task<ReadResponse> getAsync(BaseRef baseRef)
       {
           var request = new getRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -299,10 +220,9 @@ namespace SuiteTalk
           return response.readResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<ReadResponseList> getListAsync(BaseRef[] baseRef)
+      public async System.Threading.Tasks.Task<ReadResponseList> getListAsync(BaseRef[] baseRef)
       {
           var request = new getListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -313,10 +233,9 @@ namespace SuiteTalk
           return response.readResponseList;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetAllResult> getAllAsync(GetAllRecord record)
+      public async System.Threading.Tasks.Task<GetAllResult> getAllAsync(GetAllRecord record)
       {
           var request = new getAllRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -327,10 +246,9 @@ namespace SuiteTalk
           return response.getAllResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetSavedSearchResult> getSavedSearchAsync(GetSavedSearchRecord record)
+      public async System.Threading.Tasks.Task<GetSavedSearchResult> getSavedSearchAsync(GetSavedSearchRecord record)
       {
           var request = new getSavedSearchRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -341,10 +259,9 @@ namespace SuiteTalk
           return response.getSavedSearchResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetCustomizationIdResult> getCustomizationIdAsync(CustomizationType customizationType,bool includeInactives)
+      public async System.Threading.Tasks.Task<GetCustomizationIdResult> getCustomizationIdAsync(CustomizationType customizationType,bool includeInactives)
       {
           var request = new getCustomizationIdRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -356,10 +273,9 @@ namespace SuiteTalk
           return response.getCustomizationIdResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<ReadResponse> initializeAsync(InitializeRecord initializeRecord)
+      public async System.Threading.Tasks.Task<ReadResponse> initializeAsync(InitializeRecord initializeRecord)
       {
           var request = new initializeRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -370,10 +286,9 @@ namespace SuiteTalk
           return response.readResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<ReadResponseList> initializeListAsync(InitializeRecord[] initializeRecord)
+      public async System.Threading.Tasks.Task<ReadResponseList> initializeListAsync(InitializeRecord[] initializeRecord)
       {
           var request = new initializeListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -384,10 +299,9 @@ namespace SuiteTalk
           return response.readResponseList;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetSelectValueResult> getSelectValueAsync(GetSelectValueFieldDescription fieldDescription,int pageIndex)
+      public async System.Threading.Tasks.Task<GetSelectValueResult> getSelectValueAsync(GetSelectValueFieldDescription fieldDescription,int pageIndex)
       {
           var request = new getSelectValueRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -399,10 +313,9 @@ namespace SuiteTalk
           return response.getSelectValueResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetItemAvailabilityResult> getItemAvailabilityAsync(ItemAvailabilityFilter itemAvailabilityFilter)
+      public async System.Threading.Tasks.Task<GetItemAvailabilityResult> getItemAvailabilityAsync(ItemAvailabilityFilter itemAvailabilityFilter)
       {
           var request = new getItemAvailabilityRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -413,10 +326,9 @@ namespace SuiteTalk
           return response.getItemAvailabilityResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetBudgetExchangeRateResult> getBudgetExchangeRateAsync(BudgetExchangeRateFilter budgetExchangeRateFilter)
+      public async System.Threading.Tasks.Task<GetBudgetExchangeRateResult> getBudgetExchangeRateAsync(BudgetExchangeRateFilter budgetExchangeRateFilter)
       {
           var request = new getBudgetExchangeRateRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -427,10 +339,9 @@ namespace SuiteTalk
           return response.getBudgetExchangeRateResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetCurrencyRateResult> getCurrencyRateAsync(CurrencyRateFilter currencyRateFilter)
+      public async System.Threading.Tasks.Task<GetCurrencyRateResult> getCurrencyRateAsync(CurrencyRateFilter currencyRateFilter)
       {
           var request = new getCurrencyRateRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -441,10 +352,9 @@ namespace SuiteTalk
           return response.getCurrencyRateResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetDataCenterUrlsResult> getDataCenterUrlsAsync(string account)
+      public async System.Threading.Tasks.Task<GetDataCenterUrlsResult> getDataCenterUrlsAsync(string account)
       {
           var request = new getDataCenterUrlsRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -455,10 +365,9 @@ namespace SuiteTalk
           return response.getDataCenterUrlsResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetPostingTransactionSummaryResult> getPostingTransactionSummaryAsync(PostingTransactionSummaryField fields,PostingTransactionSummaryFilter filters,int pageIndex,string operationId)
+      public async System.Threading.Tasks.Task<GetPostingTransactionSummaryResult> getPostingTransactionSummaryAsync(PostingTransactionSummaryField fields,PostingTransactionSummaryFilter filters,int pageIndex,string operationId)
       {
           var request = new getPostingTransactionSummaryRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -472,10 +381,9 @@ namespace SuiteTalk
           return response.getPostingTransactionSummaryResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetServerTimeResult> getServerTimeAsync()
+      public async System.Threading.Tasks.Task<GetServerTimeResult> getServerTimeAsync()
       {
           var request = new getServerTimeRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -484,10 +392,9 @@ namespace SuiteTalk
           return response.getServerTimeResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponse> attachAsync(AttachReference attachReference)
+      public async System.Threading.Tasks.Task<WriteResponse> attachAsync(AttachReference attachReference)
       {
           var request = new attachRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -498,10 +405,9 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponse> detachAsync(DetachReference detachReference)
+      public async System.Threading.Tasks.Task<WriteResponse> detachAsync(DetachReference detachReference)
       {
           var request = new detachRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -512,10 +418,9 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponse> updateInviteeStatusAsync(UpdateInviteeStatusReference updateInviteeStatusReference)
+      public async System.Threading.Tasks.Task<WriteResponse> updateInviteeStatusAsync(UpdateInviteeStatusReference updateInviteeStatusReference)
       {
           var request = new updateInviteeStatusRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -526,10 +431,9 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<WriteResponseList> updateInviteeStatusListAsync(UpdateInviteeStatusReference[] updateInviteeStatusReference)
+      public async System.Threading.Tasks.Task<WriteResponseList> updateInviteeStatusListAsync(UpdateInviteeStatusReference[] updateInviteeStatusReference)
       {
           var request = new updateInviteeStatusListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -540,10 +444,9 @@ namespace SuiteTalk
           return response.writeResponseList;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncAddListAsync(Record[] record)
+      public async System.Threading.Tasks.Task<AsyncStatusResult> asyncAddListAsync(Record[] record)
       {
           var request = new asyncAddListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -554,10 +457,9 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncUpdateListAsync(Record[] record)
+      public async System.Threading.Tasks.Task<AsyncStatusResult> asyncUpdateListAsync(Record[] record)
       {
           var request = new asyncUpdateListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -568,10 +470,9 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncUpsertListAsync(Record[] record)
+      public async System.Threading.Tasks.Task<AsyncStatusResult> asyncUpsertListAsync(Record[] record)
       {
           var request = new asyncUpsertListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -582,10 +483,9 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncDeleteListAsync(BaseRef[] baseRef,DeletionReason deletionReason)
+      public async System.Threading.Tasks.Task<AsyncStatusResult> asyncDeleteListAsync(BaseRef[] baseRef,DeletionReason deletionReason)
       {
           var request = new asyncDeleteListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -597,10 +497,9 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncGetListAsync(BaseRef[] baseRef)
+      public async System.Threading.Tasks.Task<AsyncStatusResult> asyncGetListAsync(BaseRef[] baseRef)
       {
           var request = new asyncGetListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -611,10 +510,9 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncInitializeListAsync(InitializeRecord[] initializeRecord)
+      public async System.Threading.Tasks.Task<AsyncStatusResult> asyncInitializeListAsync(InitializeRecord[] initializeRecord)
       {
           var request = new asyncInitializeListRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -625,10 +523,9 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncSearchAsync(SearchRecord searchRecord)
+      public async System.Threading.Tasks.Task<AsyncStatusResult> asyncSearchAsync(SearchPreferences searchPreferences,SearchRecord searchRecord)
       {
           var request = new asyncSearchRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -639,10 +536,9 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncResult> getAsyncResultAsync(string jobId,int pageIndex)
+      public async System.Threading.Tasks.Task<AsyncResult> getAsyncResultAsync(string jobId,int pageIndex)
       {
           var request = new getAsyncResultRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -654,10 +550,9 @@ namespace SuiteTalk
           return response.asyncResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> checkAsyncStatusAsync(string jobId)
+      public async System.Threading.Tasks.Task<AsyncStatusResult> checkAsyncStatusAsync(string jobId)
       {
           var request = new checkAsyncStatusRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -668,10 +563,9 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<GetDeletedResult> getDeletedAsync(GetDeletedFilter getDeletedFilter,int pageIndex)
+      public async System.Threading.Tasks.Task<GetDeletedResult> getDeletedAsync(GetDeletedFilter getDeletedFilter,int pageIndex)
       {
           var request = new getDeletedRequest() {
-                      passport = passport,
                       tokenPassport = tokenPassport,
                       applicationInfo = applicationInfo,
                       partnerInfo = partnerInfo,
@@ -681,6 +575,28 @@ namespace SuiteTalk
           };
           var response = await ((NetSuitePortType)this).getDeletedAsync(request);
           return response.getDeletedResult;
+      }
+
+      public async System.Threading.Tasks.Task<GetAccountGovernanceInfoResult> getAccountGovernanceInfoAsync()
+      {
+          var request = new getAccountGovernanceInfoRequest() {
+                      tokenPassport = tokenPassport,
+                      applicationInfo = applicationInfo,
+                      partnerInfo = partnerInfo,
+          };
+          var response = await ((NetSuitePortType)this).getAccountGovernanceInfoAsync(request);
+          return response.getAccountGovernanceInfoResult;
+      }
+
+      public async System.Threading.Tasks.Task<GetIntegrationGovernanceInfoResult> getIntegrationGovernanceInfoAsync()
+      {
+          var request = new getIntegrationGovernanceInfoRequest() {
+                      tokenPassport = tokenPassport,
+                      applicationInfo = applicationInfo,
+                      partnerInfo = partnerInfo,
+          };
+          var response = await ((NetSuitePortType)this).getIntegrationGovernanceInfoAsync(request);
+          return response.getIntegrationGovernanceInfoResult;
       }
 
     }

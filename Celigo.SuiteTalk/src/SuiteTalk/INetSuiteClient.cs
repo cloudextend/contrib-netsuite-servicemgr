@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace SuiteTalk
 {
-    public partial interface INetSuiteClient : NetSuitePortType, IPassportProvider, IPreferenceProvider
+    public partial interface INetSuiteClient : NetSuitePortType, IPreferenceProvider
     {
 #pragma warning disable IDE1006 // Naming Styles
         ApplicationInfo applicationInfo { get; set; }
-        Passport passport { get; set; }
+        // Passport passport { get; set; }
         TokenPassport tokenPassport { get; set; }
         Preferences preferences { get; set; }
         SearchPreferences searchPreferences { get; set; }
@@ -25,13 +25,13 @@ namespace SuiteTalk
     public partial class NetSuitePortTypeClient : INetSuiteClient
     {
         public ApplicationInfo applicationInfo { get; set; }
-        public Passport passport { get; set; }
+        // public Passport passport { get; set; }
         public TokenPassport tokenPassport { get; set; }
         public Preferences preferences { get; set; }
         public SearchPreferences searchPreferences { get; set; }
         public PartnerInfo partnerInfo { get; set; }
 
-        public string SuiteTalkVersion { get { return "2018.2"; } }
+        public string SuiteTalkVersion { get { return "2021.2"; } }
 
         public static System.ServiceModel.EndpointAddress GetDefaultEndpoint()
         {
@@ -42,7 +42,7 @@ namespace SuiteTalk
         {
             var originalPreferences = this.searchPreferences;
             this.searchPreferences = searchPreferences;
-            var result = await this.searchAsync(searchRecord);
+            var result = await this.searchAsync(searchRecord, searchPreferences);
             this.searchPreferences = originalPreferences;
 
             return result;

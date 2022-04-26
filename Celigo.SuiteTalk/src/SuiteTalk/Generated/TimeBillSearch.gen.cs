@@ -1,3 +1,4 @@
+
 // Generator { Name = "SearchRecordGenerator", Template = "ISearch" }
 
 using System;
@@ -133,6 +134,11 @@ namespace SuiteTalk
                     creator = () => target.taskJoin = new TaskSearchBasic();
                     break;
         
+                case "timeSheetJoin":
+                    result = target.timeSheetJoin;
+                    creator = () => target.timeSheetJoin = new TimeSheetSearchBasic();
+                    break;
+        
                 case "userJoin":
                     result = target.userJoin;
                     creator = () => target.userJoin = new EmployeeSearchBasic();
@@ -141,11 +147,6 @@ namespace SuiteTalk
                 case "vendorJoin":
                     result = target.vendorJoin;
                     creator = () => target.vendorJoin = new VendorSearchBasic();
-                    break;
-        
-                case "timeSheetJoin":
-                    result = target.timeSheetJoin;
-                    creator = () => target.timeSheetJoin = new TimeSheetSearchBasic();
                     break;
                         default:
                     throw new ArgumentException("TimeBillSearch does not have a " + joinName);

@@ -16,14 +16,14 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Retries
         public async Task Retries_multiple_times_when_concurrent_error_is_encountered()
         {
             var config = new TestConfiguration();
-            var client = new ClientFactory<PollyNetSuiteClient>(config.ApplicationId).CreateClient(config.PassportProvider);
+            var client = new ClientFactory<PollyNetSuiteClient>(config.ApplicationId).CreateClient(config.TokenPassportProvider);
 
             client.Should().NotBeNull();
 
             var tasks = new Task<SearchResult>[20];
             for (int i = 0; i < tasks.Length; i++)
             {
-                tasks[i] = client.searchAsync(new EmployeeSearchBasic());
+                tasks[i] = client.searchAsync(new EmployeeSearchBasic(), new SearchPreferences());
             }
 
             var result = await System.Threading.Tasks.Task.WhenAll(tasks);

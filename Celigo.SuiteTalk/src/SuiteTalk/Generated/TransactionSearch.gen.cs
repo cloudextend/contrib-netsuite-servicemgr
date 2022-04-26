@@ -1,3 +1,4 @@
+
 // Generator { Name = "SearchRecordGenerator", Template = "ISearch" }
 
 using System;
@@ -86,6 +87,11 @@ namespace SuiteTalk
                 case "applyingTransactionJoin":
                     result = target.applyingTransactionJoin;
                     creator = () => target.applyingTransactionJoin = new TransactionSearchBasic();
+                    break;
+        
+                case "assemblyJoin":
+                    result = target.assemblyJoin;
+                    creator = () => target.assemblyJoin = new ItemSearchBasic();
                     break;
         
                 case "billingAddressJoin":
@@ -203,6 +209,11 @@ namespace SuiteTalk
                     creator = () => target.headerBillingAccountJoin = new BillingAccountSearchBasic();
                     break;
         
+                case "installmentJoin":
+                    result = target.installmentJoin;
+                    creator = () => target.installmentJoin = new InstallmentSearchBasic();
+                    break;
+        
                 case "inventoryDetailJoin":
                     result = target.inventoryDetailJoin;
                     creator = () => target.inventoryDetailJoin = new InventoryDetailSearchBasic();
@@ -268,6 +279,11 @@ namespace SuiteTalk
                     creator = () => target.opportunityJoin = new OpportunitySearchBasic();
                     break;
         
+                case "outsourcingVendorJoin":
+                    result = target.outsourcingVendorJoin;
+                    creator = () => target.outsourcingVendorJoin = new VendorSearchBasic();
+                    break;
+        
                 case "paidTransactionJoin":
                     result = target.paidTransactionJoin;
                     creator = () => target.paidTransactionJoin = new TransactionSearchBasic();
@@ -281,6 +297,16 @@ namespace SuiteTalk
                 case "payingTransactionJoin":
                     result = target.payingTransactionJoin;
                     creator = () => target.payingTransactionJoin = new TransactionSearchBasic();
+                    break;
+        
+                case "paymentInstrumentJoin":
+                    result = target.paymentInstrumentJoin;
+                    creator = () => target.paymentInstrumentJoin = new PaymentInstrumentSearchBasic();
+                    break;
+        
+                case "paymentOptionJoin":
+                    result = target.paymentOptionJoin;
+                    creator = () => target.paymentOptionJoin = new PaymentOptionSearchBasic();
                     break;
         
                 case "payrollItemJoin":

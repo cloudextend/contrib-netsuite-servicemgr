@@ -1,3 +1,4 @@
+
 // Generator { Name = "SearchRecordGenerator", Template = "ISearch" }
 
 using System;
@@ -88,14 +89,14 @@ namespace SuiteTalk
                     creator = () => target.fileJoin = new FileSearchBasic();
                     break;
         
+                case "manufacturingLocationsJoin":
+                    result = target.manufacturingLocationsJoin;
+                    creator = () => target.manufacturingLocationsJoin = new LocationSearchBasic();
+                    break;
+        
                 case "messagesJoin":
                     result = target.messagesJoin;
                     creator = () => target.messagesJoin = new MessageSearchBasic();
-                    break;
-        
-                case "mseSubsidiaryJoin":
-                    result = target.mseSubsidiaryJoin;
-                    creator = () => target.mseSubsidiaryJoin = new MseSubsidiarySearchBasic();
                     break;
         
                 case "messagesFromJoin":
@@ -106,6 +107,11 @@ namespace SuiteTalk
                 case "messagesToJoin":
                     result = target.messagesToJoin;
                     creator = () => target.messagesToJoin = new MessageSearchBasic();
+                    break;
+        
+                case "mseSubsidiaryJoin":
+                    result = target.mseSubsidiaryJoin;
+                    creator = () => target.mseSubsidiaryJoin = new MseSubsidiarySearchBasic();
                     break;
         
                 case "taxRegistrationJoin":

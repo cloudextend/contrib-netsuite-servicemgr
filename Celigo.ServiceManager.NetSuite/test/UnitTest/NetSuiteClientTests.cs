@@ -19,7 +19,7 @@ namespace Tests.Celigo.ServiceManager.NetSuite
         {
             var config = new TestConfiguration();
             var factory = new ClientFactory(config.ApplicationId);
-            client = factory.CreateClient(config.PassportProvider);
+            client = factory.CreateClient(config.TokenPassportProvider);
         }
 
         [Fact]

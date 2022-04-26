@@ -38,38 +38,13 @@ namespace Celigo.ServiceManager.NetSuite
                 configProvider
             );
 
-        public T CreateClient(string applicationId, IPassportProvider passportProvider, IConfigurationProvider configProvider = null) => 
-            this.ConfigureClient(
-                new T(),
-                applicationId,
-                passportProvider,
-                configProvider
-            );
-
-        protected T ConfigureClient(
-                T client,
-                string applicationId,
-                IPassportProvider passportProvider,
-                IConfigurationProvider configProvider = null
-            )
-        {
-            if (applicationId == null) throw new InvalidOperationException("Application ID is required for use with basic credentials.");
-
-            string account = this.GetAccountNumber(client, passportProvider)
-                    ?? throw new InvalidOperationException("An Account number was not provided to be used with basic credentials.");
-
-            this.AddEndpointBehaviors(client, applicationId, passportProvider);
-
-            return ConfigureClient(client, account, configProvider);
-        }
-
         protected T ConfigureClient(
                 T client,
                 ITokenPassportProvider tokenPassportProvider,
                 IConfigurationProvider configProvider = null
             )
         {
-            string account = this.GetAccountNumber(client, tokenPassportProvider: tokenPassportProvider)
+            string account = this.GetAccountNumber(tokenPassportProvider: tokenPassportProvider)
                     ?? throw new InvalidOperationException("An Account number was not provided to be used with basic credentials.");
 
             this.AddEndpointBehaviors(client, tokenPassportProvider);
@@ -99,13 +74,9 @@ namespace Celigo.ServiceManager.NetSuite
         }
 
 
-        private string GetAccountNumber(T client, 
-                                        IPassportProvider passportProvider = null, 
-                                        ITokenPassportProvider tokenPassportProvider = null)
+        private string GetAccountNumber(ITokenPassportProvider tokenPassportProvider = null)
         {
-            return client.passport?.account
-                ?? tokenPassportProvider?.GetTokenPassport()?.account
-                ?? passportProvider?.GetPassport()?.account;
+            return tokenPassportProvider?.GetTokenPassport()?.account;
         }
 
         private EndpointAddress GetDataCenterEndpoint(string dataCenter)
@@ -124,38 +95,6 @@ namespace Celigo.ServiceManager.NetSuite
                 );
             }
         }
-
-        private void AddEndpointBehaviors(T client, string applicationId, IPassportProvider passportProvider)
-        {
-            if (applicationId == null) throw new InvalidOperationException("The Application ID was not specified.");
-            if (client.passport == null && passportProvider == null) throw new InvalidOperationException("A Passport was not specified and no provider was given.");
-
-            SuiteTalkHeader[] headers;
-
-            if (client.passport != null)
-            {
-                headers = new SuiteTalkHeader[] {
-                    new ApplicationInfoHeader(applicationId),
-                    new SearchPreferencesHeader(client)
-                };
-            }
-            else
-            {
-                headers = new SuiteTalkHeader[] {
-                    new ApplicationInfoHeader(applicationId),
-                    new PassportHeader(passportProvider),
-                    new SearchPreferencesHeader(client)
-                };
-            }
-
-            var inspector = new SuiteTalkMessageInspector(headers);
-
-            var endpointBehavior = new SuiteTalkEndpointBehavior(inspector);
-            client.Endpoint.EndpointBehaviors.Add(endpointBehavior);
-
-            this.AddDynamicEndpointBehaviours(client);
-        }
-
         protected void AddEndpointBehaviors(T client, ITokenPassportProvider tokenPassportProvider)
         {
             if (client.tokenPassport == null && tokenPassportProvider == null)

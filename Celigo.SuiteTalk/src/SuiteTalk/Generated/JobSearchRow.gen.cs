@@ -1,3 +1,4 @@
+
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -55,6 +56,7 @@ namespace SuiteTalk
       //      yield return this.billingScheduleJoin;
       //      yield return this.contactPrimaryJoin;
       //      yield return this.customerJoin;
+      //      yield return this.projectManagerJoin;
       //      yield return this.projectTaskJoin;
       //      yield return this.resourceAllocationJoin;
       //      yield return this.taskJoin;
@@ -100,6 +102,11 @@ namespace SuiteTalk
                 case "customerJoin":
                     result = target.customerJoin;
                     creator = () => target.customerJoin = new CustomerSearchRowBasic();
+                    break;
+        
+                case "projectManagerJoin":
+                    result = target.projectManagerJoin;
+                    creator = () => target.projectManagerJoin = new EmployeeSearchRowBasic();
                     break;
         
                 case "projectTaskJoin":
