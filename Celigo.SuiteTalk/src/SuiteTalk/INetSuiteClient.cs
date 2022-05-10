@@ -7,7 +7,6 @@ namespace SuiteTalk
     {
 #pragma warning disable IDE1006 // Naming Styles
         ApplicationInfo applicationInfo { get; set; }
-        // Passport passport { get; set; }
         TokenPassport tokenPassport { get; set; }
         Preferences preferences { get; set; }
         SearchPreferences searchPreferences { get; set; }
@@ -25,7 +24,6 @@ namespace SuiteTalk
     public partial class NetSuitePortTypeClient : INetSuiteClient
     {
         public ApplicationInfo applicationInfo { get; set; }
-        // public Passport passport { get; set; }
         public TokenPassport tokenPassport { get; set; }
         public Preferences preferences { get; set; }
         public SearchPreferences searchPreferences { get; set; }
