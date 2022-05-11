@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "ThreeStepAuth";
+}
+
+@* <div class="text-center"> *@
+@*     <h1 class="display-4">Welcome</h1> *@
+@*     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+@* </div> *@
+@model ThreeStepAuthMVC.Models.Account 
+
+<div class="text-center">
+    <h1 class="display-4">Login via NetSuite</h1>
+     @* @using (Html.BeginForm("Login", "Home", FormMethod.Post)) *@
+     @* { *@
+     @Html.TextBoxFor(m => m.AccountName) 
+    
+     <input type="submit"  onclick="login()"/> 
+     @* } *@
+</div>
+
+
+

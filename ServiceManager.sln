@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Celigo.ServiceManager.NetSu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Celigo.ServiceManager.NetSuite.REST.UnitTests", "Celigo.ServiceManager.NetSuite.REST\tests\Celigo.ServiceManager.NetSuite.REST.UnitTests.csproj", "{6C98C921-3CE8-499C-B67B-04DF52F8C14F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreeStepAuthMVC", "Samples\ThreeStepAuthMVC\ThreeStepAuthMVC.csproj", "{DB10A0D5-1A24-4BE3-A302-13201C5E55B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,12 +70,17 @@ Global
 		{0B2A5AAC-93C5-4DEF-BEE4-FC09A8E5CC35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B2A5AAC-93C5-4DEF-BEE4-FC09A8E5CC35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B2A5AAC-93C5-4DEF-BEE4-FC09A8E5CC35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB10A0D5-1A24-4BE3-A302-13201C5E55B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB10A0D5-1A24-4BE3-A302-13201C5E55B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB10A0D5-1A24-4BE3-A302-13201C5E55B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB10A0D5-1A24-4BE3-A302-13201C5E55B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CBAAD26C-0CBE-4899-8931-8FAD3ACC37EA} = {7170DE1A-6F01-4571-AC82-228E00269EFB}
+		{DB10A0D5-1A24-4BE3-A302-13201C5E55B9} = {7170DE1A-6F01-4571-AC82-228E00269EFB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F748508-F7FF-4F09-B5CC-4DEEE247969C}
