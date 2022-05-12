@@ -8,7 +8,6 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<SessionResponse> changeEmailAsync(ChangeEmail changeEmail);
         System.Threading.Tasks.Task<WriteResponse> addAsync(Record record);
         System.Threading.Tasks.Task<WriteResponse> deleteAsync(BaseRef baseRef,DeletionReason deletionReason);
-        System.Threading.Tasks.Task<SearchResult> searchAsync(SearchPreferences searchPreferences,SearchRecord searchRecord);
         System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(SearchPreferences searchPreferences,string searchId,int pageIndex);
         System.Threading.Tasks.Task<WriteResponse> updateAsync(Record record);
         System.Threading.Tasks.Task<WriteResponse> upsertAsync(Record record);
@@ -99,19 +98,6 @@ namespace SuiteTalk
           };
           var response = await ((NetSuitePortType)this).deleteAsync(request);
           return response.writeResponse;
-      }
-
-      public async System.Threading.Tasks.Task<SearchResult> searchAsync(SearchPreferences searchPreferences,SearchRecord searchRecord)
-      {
-          var request = new searchRequest() {
-                      tokenPassport = tokenPassport,
-                      applicationInfo = applicationInfo,
-                      partnerInfo = partnerInfo,
-                      searchPreferences = searchPreferences,
-                      searchRecord = searchRecord,
-          };
-          var response = await ((NetSuitePortType)this).searchAsync(request);
-          return response.searchResult;
       }
 
       public async System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(SearchPreferences searchPreferences,string searchId,int pageIndex)
