@@ -1,3 +1,4 @@
+
 // Generator { Name = "SearchRecordGenerator", Template = "ISearch" }
 
 using System;
@@ -58,6 +59,11 @@ namespace SuiteTalk
                     creator = () => target.basic = new ItemSearchBasic();
                     break;
 
+                case "accountingBookRevRecScheduleJoin":
+                    result = target.accountingBookRevRecScheduleJoin;
+                    creator = () => target.accountingBookRevRecScheduleJoin = new RevRecTemplateSearchBasic();
+                    break;
+        
                 case "assemblyItemBillOfMaterialsJoin":
                     result = target.assemblyItemBillOfMaterialsJoin;
                     creator = () => target.assemblyItemBillOfMaterialsJoin = new AssemblyItemBomSearchBasic();
@@ -86,6 +92,11 @@ namespace SuiteTalk
                 case "fileJoin":
                     result = target.fileJoin;
                     creator = () => target.fileJoin = new FileSearchBasic();
+                    break;
+        
+                case "hierarchyNodeJoin":
+                    result = target.hierarchyNodeJoin;
+                    creator = () => target.hierarchyNodeJoin = new MerchandiseHierarchyNodeSearchBasic();
                     break;
         
                 case "inventoryDetailJoin":

@@ -29,9 +29,9 @@ namespace Tests.Celigo.ServiceManager.NetSuite.Retries
                                 });
         }
 
-        public override Task<SearchResult> searchAsync(SearchRecord searchRecord)
+        public override Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPref)
         {
-            return _retryPolicy.ExecuteAsync(() => base.searchAsync(searchRecord));
+            return _retryPolicy.ExecuteAsync(() => base.searchAsync(searchRecord, searchPref));
         }
     }
 }

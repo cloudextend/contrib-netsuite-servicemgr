@@ -1,3 +1,4 @@
+
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -57,6 +58,7 @@ namespace SuiteTalk
       //      yield return this.advanceToApplyAccountJoin;
       //      yield return this.appliedToTransactionJoin;
       //      yield return this.applyingTransactionJoin;
+      //      yield return this.assemblyJoin;
       //      yield return this.billingAddressJoin;
       //      yield return this.billingTransactionJoin;
       //      yield return this.binNumberJoin;
@@ -80,6 +82,7 @@ namespace SuiteTalk
       //      yield return this.fromLocationJoin;
       //      yield return this.fulfillingTransactionJoin;
       //      yield return this.headerBillingAccountJoin;
+      //      yield return this.installmentJoin;
       //      yield return this.inventoryDetailJoin;
       //      yield return this.itemJoin;
       //      yield return this.itemNumberJoin;
@@ -93,9 +96,12 @@ namespace SuiteTalk
       //      yield return this.messagesJoin;
       //      yield return this.nextApproverJoin;
       //      yield return this.opportunityJoin;
+      //      yield return this.outsourcingVendorJoin;
       //      yield return this.paidTransactionJoin;
       //      yield return this.partnerJoin;
       //      yield return this.payingTransactionJoin;
+      //      yield return this.paymentInstrumentJoin;
+      //      yield return this.paymentOptionJoin;
       //      yield return this.payrollItemJoin;
       //      yield return this.projectTaskJoin;
       //      yield return this.purchaseOrderJoin;
@@ -169,6 +175,11 @@ namespace SuiteTalk
                 case "applyingTransactionJoin":
                     result = target.applyingTransactionJoin;
                     creator = () => target.applyingTransactionJoin = new TransactionSearchRowBasic();
+                    break;
+        
+                case "assemblyJoin":
+                    result = target.assemblyJoin;
+                    creator = () => target.assemblyJoin = new ItemSearchRowBasic();
                     break;
         
                 case "billingAddressJoin":
@@ -286,6 +297,11 @@ namespace SuiteTalk
                     creator = () => target.headerBillingAccountJoin = new BillingAccountSearchRowBasic();
                     break;
         
+                case "installmentJoin":
+                    result = target.installmentJoin;
+                    creator = () => target.installmentJoin = new InstallmentSearchRowBasic();
+                    break;
+        
                 case "inventoryDetailJoin":
                     result = target.inventoryDetailJoin;
                     creator = () => target.inventoryDetailJoin = new InventoryDetailSearchRowBasic();
@@ -351,6 +367,11 @@ namespace SuiteTalk
                     creator = () => target.opportunityJoin = new OpportunitySearchRowBasic();
                     break;
         
+                case "outsourcingVendorJoin":
+                    result = target.outsourcingVendorJoin;
+                    creator = () => target.outsourcingVendorJoin = new VendorSearchRowBasic();
+                    break;
+        
                 case "paidTransactionJoin":
                     result = target.paidTransactionJoin;
                     creator = () => target.paidTransactionJoin = new TransactionSearchRowBasic();
@@ -364,6 +385,16 @@ namespace SuiteTalk
                 case "payingTransactionJoin":
                     result = target.payingTransactionJoin;
                     creator = () => target.payingTransactionJoin = new TransactionSearchRowBasic();
+                    break;
+        
+                case "paymentInstrumentJoin":
+                    result = target.paymentInstrumentJoin;
+                    creator = () => target.paymentInstrumentJoin = new PaymentInstrumentSearchRowBasic();
+                    break;
+        
+                case "paymentOptionJoin":
+                    result = target.paymentOptionJoin;
+                    creator = () => target.paymentOptionJoin = new PaymentOptionSearchRowBasic();
                     break;
         
                 case "payrollItemJoin":

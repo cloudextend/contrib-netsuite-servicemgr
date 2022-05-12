@@ -1,3 +1,4 @@
+
 // Generator { Name = "SearchRecordGenerator", Template = "ISearch" }
 
 using System;
@@ -58,6 +59,11 @@ namespace SuiteTalk
                     creator = () => target.basic = new BomSearchBasic();
                     break;
 
+                case "assemblyItemJoin":
+                    result = target.assemblyItemJoin;
+                    creator = () => target.assemblyItemJoin = new AssemblyItemBomSearchBasic();
+                    break;
+        
                 case "revisionJoin":
                     result = target.revisionJoin;
                     creator = () => target.revisionJoin = new BomRevisionSearchBasic();
@@ -66,11 +72,6 @@ namespace SuiteTalk
                 case "transactionJoin":
                     result = target.transactionJoin;
                     creator = () => target.transactionJoin = new TransactionSearchBasic();
-                    break;
-        
-                case "assemblyItemJoin":
-                    result = target.assemblyItemJoin;
-                    creator = () => target.assemblyItemJoin = new AssemblyItemBomSearchBasic();
                     break;
                         default:
                     throw new ArgumentException("BomSearch does not have a " + joinName);

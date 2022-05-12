@@ -1,3 +1,4 @@
+
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -51,12 +52,14 @@ namespace SuiteTalk
         // public IEnumerable<SearchRowBasic> GetJoins()
         // {
         //    yield return this.basic;
+      //      yield return this.accountingBookRevRecScheduleJoin;
       //      yield return this.assemblyItemBillOfMaterialsJoin;
       //      yield return this.binNumberJoin;
       //      yield return this.binOnHandJoin;
       //      yield return this.correlatedItemJoin;
       //      yield return this.effectiveRevisionJoin;
       //      yield return this.fileJoin;
+      //      yield return this.hierarchyNodeJoin;
       //      yield return this.inventoryDetailJoin;
       //      yield return this.inventoryLocationJoin;
       //      yield return this.inventoryNumberJoin;
@@ -95,6 +98,11 @@ namespace SuiteTalk
                     break;
 
 
+                case "accountingBookRevRecScheduleJoin":
+                    result = target.accountingBookRevRecScheduleJoin;
+                    creator = () => target.accountingBookRevRecScheduleJoin = new RevRecTemplateSearchRowBasic();
+                    break;
+        
                 case "assemblyItemBillOfMaterialsJoin":
                     result = target.assemblyItemBillOfMaterialsJoin;
                     creator = () => target.assemblyItemBillOfMaterialsJoin = new AssemblyItemBomSearchRowBasic();
@@ -123,6 +131,11 @@ namespace SuiteTalk
                 case "fileJoin":
                     result = target.fileJoin;
                     creator = () => target.fileJoin = new FileSearchRowBasic();
+                    break;
+        
+                case "hierarchyNodeJoin":
+                    result = target.hierarchyNodeJoin;
+                    creator = () => target.hierarchyNodeJoin = new MerchandiseHierarchyNodeSearchRowBasic();
                     break;
         
                 case "inventoryDetailJoin":

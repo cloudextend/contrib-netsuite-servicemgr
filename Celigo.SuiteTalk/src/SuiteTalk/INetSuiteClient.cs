@@ -3,11 +3,10 @@ using System.Threading.Tasks;
 
 namespace SuiteTalk
 {
-    public partial interface INetSuiteClient : NetSuitePortType, IPassportProvider, IPreferenceProvider
+    public partial interface INetSuiteClient : NetSuitePortType, IPreferenceProvider
     {
 #pragma warning disable IDE1006 // Naming Styles
         ApplicationInfo applicationInfo { get; set; }
-        Passport passport { get; set; }
         TokenPassport tokenPassport { get; set; }
         Preferences preferences { get; set; }
         SearchPreferences searchPreferences { get; set; }
@@ -17,7 +16,7 @@ namespace SuiteTalk
 
         ServiceEndpoint Endpoint { get; }
 
-        Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences);
+        Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPref);
 #pragma warning restore IDE1006 // Naming Styles
 
     }
@@ -25,27 +24,34 @@ namespace SuiteTalk
     public partial class NetSuitePortTypeClient : INetSuiteClient
     {
         public ApplicationInfo applicationInfo { get; set; }
-        public Passport passport { get; set; }
         public TokenPassport tokenPassport { get; set; }
         public Preferences preferences { get; set; }
         public SearchPreferences searchPreferences { get; set; }
         public PartnerInfo partnerInfo { get; set; }
 
-        public string SuiteTalkVersion { get { return "2018.2"; } }
+        public string SuiteTalkVersion { get { return "2021.2"; } }
+        
+        public virtual async Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPref)
+        {
+            var request = new searchRequest() {
+                tokenPassport = tokenPassport,
+                applicationInfo = applicationInfo,
+                partnerInfo = partnerInfo,
+                searchPreferences = searchPref,
+                searchRecord = searchRecord,
+            };
+            var response = await ((NetSuitePortType)this).searchAsync(request);
+            return response.searchResult;
+        }
 
         public static System.ServiceModel.EndpointAddress GetDefaultEndpoint()
         {
             return GetDefaultEndpointAddress();
         }
 
-        public virtual async Task<SearchResult> searchAsync(SearchRecord searchRecord, SearchPreferences searchPreferences)
+        public virtual async Task<SearchResult> searchAsync(SearchRecord searchRecord)
         {
-            var originalPreferences = this.searchPreferences;
-            this.searchPreferences = searchPreferences;
-            var result = await this.searchAsync(searchRecord);
-            this.searchPreferences = originalPreferences;
-
-            return result;
+            return await this.searchAsync(searchRecord, this.searchPreferences);
         }
     }
 }

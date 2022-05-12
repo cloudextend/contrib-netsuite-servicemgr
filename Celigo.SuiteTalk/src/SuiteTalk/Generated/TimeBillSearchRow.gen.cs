@@ -1,3 +1,4 @@
+
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -66,9 +67,9 @@ namespace SuiteTalk
       //      yield return this.projectTaskAssignmentJoin;
       //      yield return this.resourceAllocationJoin;
       //      yield return this.taskJoin;
+      //      yield return this.timeSheetJoin;
       //      yield return this.userJoin;
       //      yield return this.vendorJoin;
-      //      yield return this.timeSheetJoin;
         //}
 
 
@@ -167,6 +168,11 @@ namespace SuiteTalk
                     creator = () => target.taskJoin = new TaskSearchRowBasic();
                     break;
         
+                case "timeSheetJoin":
+                    result = target.timeSheetJoin;
+                    creator = () => target.timeSheetJoin = new TimeSheetSearchRowBasic();
+                    break;
+        
                 case "userJoin":
                     result = target.userJoin;
                     creator = () => target.userJoin = new EmployeeSearchRowBasic();
@@ -175,11 +181,6 @@ namespace SuiteTalk
                 case "vendorJoin":
                     result = target.vendorJoin;
                     creator = () => target.vendorJoin = new VendorSearchRowBasic();
-                    break;
-        
-                case "timeSheetJoin":
-                    result = target.timeSheetJoin;
-                    creator = () => target.timeSheetJoin = new TimeSheetSearchRowBasic();
                     break;
                         default:
                     throw new ArgumentException("TimeBillSearchRow does not have a " + joinName);

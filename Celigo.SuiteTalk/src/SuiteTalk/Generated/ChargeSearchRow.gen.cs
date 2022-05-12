@@ -1,3 +1,4 @@
+
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -61,6 +62,7 @@ namespace SuiteTalk
       //      yield return this.salesOrderJoin;
       //      yield return this.timeJoin;
       //      yield return this.transactionJoin;
+      //      yield return this.usageJoin;
       //      yield return this.userJoin;
         //}
 
@@ -133,6 +135,11 @@ namespace SuiteTalk
                 case "transactionJoin":
                     result = target.transactionJoin;
                     creator = () => target.transactionJoin = new TransactionSearchRowBasic();
+                    break;
+        
+                case "usageJoin":
+                    result = target.usageJoin;
+                    creator = () => target.usageJoin = new UsageSearchRowBasic();
                     break;
         
                 case "userJoin":

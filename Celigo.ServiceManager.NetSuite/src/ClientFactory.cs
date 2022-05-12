@@ -28,34 +28,16 @@ namespace Celigo.ServiceManager.NetSuite
                                 ? new DefaultTokenPassportBuilder(options.ConsumerKey, options.ConsumerSecret)
                                 : null;
         }
-
-        public T CreateClient(Passport passport, IConfigurationProvider configurationProvider = null)
-        {
-            var client = new T { passport = passport };
-            return this.ConfigureClient(client, _appId, client, configProvider: configurationProvider);
-        }
         
         public T CreateClient(TbaUserToken userToken, IConfigurationProvider configurationProvider = null)
         {
             var tokenPassportProvider = new DefaultTokenPassportManager(_passportBuilder, userToken);
             return this.CreateClient(tokenPassportProvider, configurationProvider);
         }
-
-        public T CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider = null) => 
-            this.CreateClient(_appId, passportProvider, configProvider);
-
         
-        INetSuiteClient 
-            INetSuiteClientFactory.CreateClient(Passport passport, IConfigurationProvider configurationProvider) => 
-                this.CreateClient(passport, configurationProvider);
-
         INetSuiteClient 
             INetSuiteClientFactory.CreateClient(TbaUserToken userToken, IConfigurationProvider configurationProvider) => 
                 this.CreateClient(userToken, configurationProvider);
-
-        INetSuiteClient 
-            INetSuiteClientFactory.CreateClient(IPassportProvider passportProvider, IConfigurationProvider configProvider) => 
-                this.CreateClient(passportProvider, configProvider);
 
         INetSuiteClient 
             INetSuiteClientFactory.CreateClient(ITokenPassportProvider passportProvider, IConfigurationProvider configProvider) => 
