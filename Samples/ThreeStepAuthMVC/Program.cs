@@ -13,7 +13,7 @@ builder.Services
     .AddHttpClient()                
 
     .AddSingleton<ITokenService, DefaultTokenService>();
-
+builder.Services.Configure<TokenServiceOptions>(builder.Configuration.GetSection("Celigo:NetSuite:TSA"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

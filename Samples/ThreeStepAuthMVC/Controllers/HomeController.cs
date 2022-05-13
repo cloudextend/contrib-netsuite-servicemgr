@@ -15,34 +15,20 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        
         Console.Write(_logger);
         return View();
     }
 
-    public IActionResult Login(Account account)
+    public IActionResult Authorize(string oauth_token, string oauth_verifier)
     {
-        
+        ViewBag.State = "Authorizing...";
+        ViewBag.OauthToken = oauth_token;
+        ViewBag.OauthVerifier = oauth_verifier;
+        ViewBag.UserToken = ViewBag.UserSecret = "";
 
-       // const account = loginData.account;
-        //console.log(`Logging in to ${account}...`);
-
-        // this._http.get<RequestTokenRespone>(`/api/tsa/request-token?account=${account}`)
-        // .subscribe(
-        //     response => {
-        //         console.log(response);
-        //
-        //         sessionStorage.setItem("celigo_oauth_token_secret", response.tokenSecret);
-        //         sessionStorage.setItem("celigo_account", account);
-        //
-        //         window.location.href = `https://${account}.app.netsuite.com/app/login/secure/authorizetoken.nl?oauth_token=${response.token}`;
-        //     },
-        //     error => {
-        //         console.error(error);
-        //     }
-       // );
-        return View("Privacy");
+        return View("Authorize");
     }
+
     public IActionResult Privacy()
     {
         return View();
