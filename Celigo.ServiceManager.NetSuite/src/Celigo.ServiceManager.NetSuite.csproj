@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>5.0.0</Version>
+    <Version>7.0.0</Version>
     <Authors>Sameera Perera</Authors>
     <Company>Celigo, Inc.</Company>
     <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2018.2</Description>
@@ -29,7 +29,7 @@ INetSuiteClientFactory interface has been changed.
 4.2.0 
 Recompiled to .NET Standard 2.0
       
-5.0.0 BREAKING CHANGES: Upgraded to SuiteTalk 2021.2; Removed support for Basic Credentials.
+7.0.0 BREAKING CHANGES: Upgraded to SuiteTalk 2021.2; Removed support for Basic Credentials.
     </PackageReleaseNotes>
   </PropertyGroup>
 
