@@ -1,7 +1,5 @@
-using Celigo.ServiceManager.NetSuite;
 using Celigo.ServiceManager.NetSuite.TSA;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace ThreeStepAuthMVC.Controllers
 {

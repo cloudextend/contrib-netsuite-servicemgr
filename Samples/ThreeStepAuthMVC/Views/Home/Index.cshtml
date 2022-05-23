@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "ThreeStepAuth";
+    ViewData["Title"] = "Home - NetSuite Three Step Authorization Flow";
 }
 
 @model Account 
 
 <div class="text-center">
-    <h1 class="display-4">Login via NetSuite</h1>
+    <p class="display-6">Provide your NetSuite Account Number</p>
     @Html.TextBoxFor(m => m.AccountName)
     
     <input type="submit" onclick="login()"/>

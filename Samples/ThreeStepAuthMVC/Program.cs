@@ -9,10 +9,10 @@ builder.Services.AddScoped<IAccessTokenService,AccessTokenService>();
 builder.Services.AddScoped<IRevokeTokenService,RevokeTokenService>();
 builder.Services
     .AddOptions()
+    .AddHttpClient()
+    .AddSingleton<IAccessTokenService,AccessTokenService>()
+    .AddSingleton<IRequestTokenService, RequestTokenService>();
 
-    .AddHttpClient()                
-
-    .AddSingleton<ITokenService, DefaultTokenService>();
 builder.Services.Configure<TokenServiceOptions>(builder.Configuration.GetSection("Celigo:NetSuite:TSA"));
 var app = builder.Build();
 

@@ -9,11 +9,10 @@
 <div id="authorized" style="display: none">
     <p>Your Token: <i id="token"></i></p>
     <p>Your Token Secret has been written to the console.</p>
-
-    <p>
-        <button onclick="revokeToken()">Revoke this token</button>
-    </p>
-    
+    <button id="revokeButton" onclick="revokeToken()">Revoke this token</button>
+</div>
+<div id="homePage" style="display: none">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home Page</a>
 </div>
 <script>
 
@@ -51,6 +50,8 @@
                if (response && response.status === 200) {
                   alert("revoked");
                   document.getElementById("text").innerText = "Revoked";
+                  document.getElementById("revokeButton").style.display ="none";
+                  document.getElementById("homePage").style.display = "block";
                 }
            });
         }
