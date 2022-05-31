@@ -23,7 +23,7 @@
 3.5.1 Fix: Account should be uppercased when using in TBA signature calculation.
 4.2.0 Recompiled to .NET Standard 2.0
 7.0.0 Upgraded to SuiteTalk 2021.2; Removed support for Basic Credentials.
-7.0.0 Fixed issue #69. 
+7.1.0 Fixed issue #69. 
 </PackageReleaseNotes>
     <RootNamespace>SuiteTalk</RootNamespace>
   </PropertyGroup>
