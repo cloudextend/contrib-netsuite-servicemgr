@@ -1,0 +1,58 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "ThreeStepAuth";
+}
+
+<h3 id="text" >
+   Authorizing
+</h3>
+<div id="authorized" style="display: none">
+    <p>Your Token: <i id="token"></i></p>
+    <p>Your Token Secret has been written to the console.</p>
+    <button id="revokeButton" onclick="revokeToken()">Revoke this token</button>
+</div>
+<div id="homePage" style="display: none">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home Page</a>
+</div>
+<script>
+
+    const _account = sessionStorage.getItem("celigo_account");
+    const _tokenSecret = sessionStorage.getItem("celigo_oauth_token_secret");
+    var token, tokenSecret;  
+    var url = "/api/tsa/authorized-token?"
+               + `account=${_account}`
+               + `&requestToken=@ViewBag.OauthToken`
+               + `&tokenSecret=${_tokenSecret}`
+               + `&verifier=@ViewBag.OauthVerifier`;
+   
+       fetch(url)
+         .then((response) => {
+            if (response && response.status === 200) {
+                return response.json();
+           }
+            else{throw Error(response);}
+        }).then((result)=>{
+            document.getElementById("text").innerText = "Authorized";
+            document.getElementById("authorized").style.display = "block";
+            document.getElementById("token").innerText = result.token;
+            console.log("Authorized Token Secret: " + result.tokenSecret);
+            token = result.token;
+            tokenSecret = result.tokenSecret;
+            })
+        .catch((error) => {
+              console.log(error);
+        })
+        
+        revokeToken = function(){
+           console.log(tokenSecret);
+           var url = "/api/tsa/revoke-token?" + "account=" + _account + "&token=" + token + "&tokenSecret=" + tokenSecret;
+           fetch(url).then((response)=>{
+               if (response && response.status === 200) {
+                  alert("revoked");
+                  document.getElementById("text").innerText = "Revoked";
+                  document.getElementById("revokeButton").style.display ="none";
+                  document.getElementById("homePage").style.display = "block";
+                }
+           });
+        }
+</script>
