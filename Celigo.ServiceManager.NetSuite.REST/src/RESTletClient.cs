@@ -221,7 +221,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
                 urlBuilder.Append("&")
                     .Append(param.Key)
                     .Append("=")
-                    .Append(param.Value);
+                    .Append(System.Web.HttpUtility.UrlEncode(param.Value));
             }
 
             return new Uri(urlBuilder.ToString());
