@@ -8,7 +8,7 @@ resources:
       type: "github"
       name: "pro-celigo/templates-pipelines"
       endpoint: "GitHub BuildBot PAT"
-      ref: "refs/tags/v3.1.1"
+      ref: "refs/tags/v3.2.2"
 
 steps:
   - template: "templates/push-nupkg.yml@ce-pipelines"
@@ -18,3 +18,4 @@ steps:
       NuGetPackagesPAT: "$(NuGetPackagesPAT)"
       PackageDestination: "NuGet.org"
       WorkingDir: "$(WorkingDir)"
+      DotNetVersionToUse: "$(DotNetVersionToUse)"

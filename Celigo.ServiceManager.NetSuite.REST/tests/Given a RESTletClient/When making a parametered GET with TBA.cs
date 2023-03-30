@@ -31,5 +31,25 @@ namespace _.Given_a_RestletClient
                     ))
                 .MustHaveHappenedOnceExactly();
         }
+        
+        [Fact]
+        public async Task It_appends_url_encoded_query_param_to_the_url()
+        {
+            var response = await Client.Get("TSTDRV12345", 
+                "DUMMYTOKEN", 
+                "DUMMYSECRET", 
+                new Dictionary<string, string>() {
+                    { "search", "%eddy" }
+                }
+            );
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            A.CallTo(() =>
+                    this.MessageHandler.SendAsync(
+                        A<HttpRequestMessage>.That.Matches(m => m.RequestUri.Query.Contains("search=%25eddy")),
+                        A<CancellationToken>.Ignored
+                    ))
+                .MustHaveHappenedOnceExactly();
+        }
     }
 }
