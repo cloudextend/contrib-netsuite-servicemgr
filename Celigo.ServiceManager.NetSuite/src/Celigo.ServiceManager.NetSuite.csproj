@@ -1,46 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>7.1.0</Version>
-    <Authors>Sameera Perera</Authors>
-    <Company>Celigo, Inc.</Company>
-    <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2018.2</Description>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
-    <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
-    <Copyright>Copyright © Celigo, Inc. 2018</Copyright>
-    <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
-    <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>3.3.0 IDynamicEndpointBahavior
-3.4.2 Bug fix on Data Center URL construction.
-3.4.3 Ensure that the auto generated Account specific subdomain conforms to the rules.
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Version>7.1.1</Version>
+        <Authors>Sameera Perera</Authors>
+        <Company>Celigo, Inc.</Company>
+        <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2018.2</Description>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
+        <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
+        <Copyright>Copyright © Celigo, Inc. 2018</Copyright>
+        <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
+        <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageReleaseNotes>3.3.0 IDynamicEndpointBahavior
+            3.4.2 Bug fix on Data Center URL construction.
+            3.4.3 Ensure that the auto generated Account specific subdomain conforms to the rules.
 
-4.0.0 Skip this version. Sorry :(
+            4.0.0 Skip this version. Sorry :(
 
-4.1.0 BREAKING CHANGES:
-INetSuiteClientFactory interface has been changed. 
-  INetSuiteClientFactry.ApplicationId has been removed.
-  INetSuiteClientFactory.CreateClient() has been removed. If you are using the library with only a single user (where Passport or TbaUserToken would always be the same), you may subclass the ClientFactory and implement a paramterless CreateClient() method.
+            4.1.0 BREAKING CHANGES:
+            INetSuiteClientFactory interface has been changed.
+            INetSuiteClientFactry.ApplicationId has been removed.
+            INetSuiteClientFactory.CreateClient() has been removed. If you are using the library with only a single user (where Passport or TbaUserToken would always be the same), you may subclass the ClientFactory and implement a paramterless CreateClient() method.
 
-4.2.0 
-Recompiled to .NET Standard 2.0
-      
-7.0.0 BREAKING CHANGES: Upgraded to SuiteTalk 2021.2; Removed support for Basic Credentials.
-7.0.1 Updated to use new version of Celigo.SuiteTalk
-7.1.0 Updated to use new version of Celigo.SuiteTalk
-    </PackageReleaseNotes>
-  </PropertyGroup>
+            4.2.0
+            Recompiled to .NET Standard 2.0
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
+            7.0.0 BREAKING CHANGES: Upgraded to SuiteTalk 2021.2; Removed support for Basic Credentials.
+            7.0.1 Updated to use new version of Celigo.SuiteTalk
+            7.1.0 Updated to use new version of Celigo.SuiteTalk
+            7.1.1 Updated to use new version of Celigo.SuiteTalk
+        </PackageReleaseNotes>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Celigo.SuiteTalk\src\Celigo.SuiteTalk.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Celigo.SuiteTalk\src\Celigo.SuiteTalk.csproj"/>
+    </ItemGroup>
 
 </Project>

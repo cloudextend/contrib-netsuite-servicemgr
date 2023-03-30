@@ -19,12 +19,16 @@
 5. Ensure that all `Order` attributes have been removed from XmlElementAttribute annotations by searching for the text `Order=`.
    If there are any ordering left, remove them as well.
 
-6. Update the references to the SuiteTalk version:
-	6.1 Update the namesapce URLs in `SuiteTalkSchemas.cs`. 
-	6.2 Update `SuiteTalkVersion` in `INetSuiteClient.cs`
+6. Comment out `System.ComponentModel.DefaultValueAttribute` for all replace all fields
+
+7. Update the references to the SuiteTalk version:
+
+   7.1 Update the namesapce URLs in `SuiteTalkSchemas.cs`.
+
+	7.2 Update `SuiteTalkVersion` in `INetSuiteClient.cs`
 
 8. Delete contents of the `<SolutionDir>\Celigo.SuiteTalk\src\SuiteTalk\Generated` folder.
 
-9. Unload the `UnitTests` project. 
+9. Unload the `UnitTests` project.
 
 10. Perform the build.
