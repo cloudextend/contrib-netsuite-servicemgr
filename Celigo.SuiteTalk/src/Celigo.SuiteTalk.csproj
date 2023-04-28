@@ -5,7 +5,7 @@
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>7.1.1</Version>
+        <Version>7.1.2</Version>
         <Authors>Sameera Perera, CloudExtend.io</Authors>
         <Company>Celigo, Inc</Company>
         <Product>Celigo Wrappers for NetSuite SuiteTalk 2018.2</Product>
@@ -26,13 +26,14 @@
             7.0.0 Upgraded to SuiteTalk 2021.2; Removed support for Basic Credentials.
             7.1.0 Fixed issue #69.
             7.1.1 Avoid default value for replaceAll
+            7.1.2 Add missing property TransactionStatus
         </PackageReleaseNotes>
         <RootNamespace>SuiteTalk</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="System.ServiceModel.duplex" Version="4.5.3"/>
-        <PackageReference Include="System.ServiceModel.http" Version="4.5.3"/>
-        <PackageReference Include="System.ServiceModel.nettcp" Version="4.5.3"/>
-        <PackageReference Include="System.ServiceModel.security" Version="4.5.3"/>
+        <PackageReference Include="System.ServiceModel.duplex" Version="4.5.3" />
+        <PackageReference Include="System.ServiceModel.http" Version="4.5.3" />
+        <PackageReference Include="System.ServiceModel.nettcp" Version="4.5.3" />
+        <PackageReference Include="System.ServiceModel.security" Version="4.5.3" />
     </ItemGroup>
 </Project>
