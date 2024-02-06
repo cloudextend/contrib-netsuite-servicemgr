@@ -1,0 +1,4 @@
+* @cloudextend/codeowners-trackleads
+
+CODEOWNERS @cloudextend/codeowners-core
+*.yml @cloudextend/codeowners-core
