@@ -6,16 +6,23 @@ resources:
   repositories:
     - repository: "ce-pipelines"
       type: "github"
-      name: "pro-celigo/templates-pipelines"
+      name: "cloudextend/templates-pipelines"
       endpoint: "GitHub BuildBot PAT"
-      ref: "refs/tags/v3.2.2"
+      ref: "refs/tags/v7.0.1"
 
-steps:
-  - template: "templates/push-nupkg.yml@ce-pipelines"
-    parameters:
-      ProjectName: "$(Build.DefinitionName)"
-      GitHubPackagesPAT: "$(GitHubPackagesPAT)"
-      NuGetPackagesPAT: "$(NuGetPackagesPAT)"
-      PackageDestination: "NuGet.org"
-      WorkingDir: "$(WorkingDir)"
-      DotNetVersionToUse: "$(DotNetVersionToUse)"
+stages:
+  - stage: "stageNuGetPackageDeployment"
+    displayName: "Build and Publish NuGet Package"
+    jobs:
+      - job: "jobBuildPublishNuGetPackage"
+        steps:
+          - template: "steps/checkout.yml@ce-pipelines"
+
+          - template: "templates/push-nupkg.yml@ce-pipelines"
+            parameters:
+              ProjectName: "$(Build.DefinitionName)"
+              GitHubPackagesPAT: "$(GitHubPackagesPAT)"
+              NuGetPackagesPAT: "$(NuGetPackagesPAT)"
+              NuGetConfigPath: "$(NuGetConfigPath)"
+              PackageDestination: "CloudExtend"
+              WorkingDir: "$(WorkingDir)"
