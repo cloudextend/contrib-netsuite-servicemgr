@@ -7,6 +7,7 @@ namespace Celigo.ServiceManager.NetSuite.REST
         public string Deploy { get; set; }
 
         public string RestletName { get; set; }
+        public int HttpTimeoutInMinutes { get; set; } = 2;
 
         public const string ConfigurationSectionName = "Celigo:NetSuite:REST";
     }
