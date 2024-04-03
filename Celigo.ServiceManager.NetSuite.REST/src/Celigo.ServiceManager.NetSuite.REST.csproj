@@ -2,7 +2,7 @@
 
     <PropertyGroup>
       <TargetFramework>netcoreapp3.1</TargetFramework>
-      <Version>1.3.1</Version>
+      <Version>1.3.2</Version>
       <Authors>CloudExtend.io</Authors>
       <Company>Celigo, Inc.</Company>
       <Description>REST Client for NetSuite REST API and RESTlets</Description>
@@ -20,6 +20,7 @@
         v1.2.0 - Added support for HTTP DELETE in RestClient.
         v1.3.0 - Deprecating the way query params were passed to the IRestletClient
         v1.3.1 - Add URL encoding to query params within RESTletClient
+        v1.3.2 - Added support for HTTP timeout with custom value while using RestletClient
       </PackageReleaseNotes>
     </PropertyGroup>
 
