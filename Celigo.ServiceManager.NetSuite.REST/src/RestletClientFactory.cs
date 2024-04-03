@@ -38,6 +38,12 @@ namespace Celigo.ServiceManager.NetSuite.REST
             if (_registry.TryGetValue(restletName, out var restlet))
             {
                 var httpClient = _clientFactory.CreateClient(restletName);
+                httpClient.Timeout =
+                    string.IsNullOrWhiteSpace(restlet.HttpTimeOutInMinutes)
+                        ? TimeSpan.FromMinutes(
+                            Convert.ToInt32(restlet.HttpTimeOutInMinutes))
+                        : TimeSpan.FromMinutes(2);
+
                 return new RestletClient(httpClient, _restClientOptions, Options.Create(restlet));
             }
             else
