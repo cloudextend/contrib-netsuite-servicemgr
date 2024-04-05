@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>7.1.2</Version>
+        <TargetFramework>net6.0</TargetFramework>
+        <Version>8.0.0</Version>
         <Authors>Sameera Perera</Authors>
         <Company>Celigo, Inc.</Company>
         <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2018.2</Description>
@@ -34,6 +34,8 @@
             7.1.0 Updated to use new version of Celigo.SuiteTalk
             7.1.1 Updated to use new version of Celigo.SuiteTalk
             7.1.2 Updated to use new version of Celigo.SuiteTalk
+            
+            8.0.0 Updated .Net Version
         </PackageReleaseNotes>
     </PropertyGroup>
 
