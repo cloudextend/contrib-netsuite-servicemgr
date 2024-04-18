@@ -8,7 +8,7 @@ resources:
       type: "github"
       name: "cloudextend/templates-pipelines"
       endpoint: "GitHub BuildBot PAT"
-      ref: "refs/tags/v7.0.1"
+      ref: "refs/tags/v7.1.1"
 
 stages:
   - stage: "stageNuGetPackageDeployment"
@@ -24,5 +24,5 @@ stages:
               GitHubPackagesPAT: "$(GitHubPackagesPAT)"
               NuGetPackagesPAT: "$(NuGetPackagesPAT)"
               NuGetConfigPath: "$(NuGetConfigPath)"
-              PackageDestination: "NuGet.org"
+              PackageDestination: "CloudExtend"
               WorkingDir: "$(WorkingDir)"
