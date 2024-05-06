@@ -24,5 +24,5 @@ stages:
               GitHubPackagesPAT: "$(GitHubPackagesPAT)"
               NuGetPackagesPAT: "$(NuGetPackagesPAT)"
               NuGetConfigPath: "$(NuGetConfigPath)"
-              PackageDestination: "CloudExtend"
+              PackageDestination: "NuGet.org"
               WorkingDir: "$(WorkingDir)"
