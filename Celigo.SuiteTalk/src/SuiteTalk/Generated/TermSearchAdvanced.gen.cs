@@ -1,4 +1,3 @@
-
 // Generator { Name: SearchAdvancedGenerator, Template: ISearchAdvanced }
 
 using System;

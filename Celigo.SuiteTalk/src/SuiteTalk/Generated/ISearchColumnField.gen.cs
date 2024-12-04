@@ -1,10 +1,14 @@
-
 // Generator { Name = "SearchRecordGenerator", Template = "ISearchColumnField" }
 
 using System;
 
 namespace SuiteTalk
 {
+
+      partial class SearchColumnStringField : ISearchColumnField<string>
+      {
+            public object GetSearchValue() => this.searchValue;
+      }
 
       partial class SearchColumnSelectField : ISearchColumnField<RecordRef>
       {
@@ -32,11 +36,6 @@ namespace SuiteTalk
       }
 
       partial class SearchColumnLongField : ISearchColumnField<long>, IValueTypeSearchColumnField<long>
-      {
-            public object GetSearchValue() => this.searchValue;
-      }
-
-      partial class SearchColumnStringField : ISearchColumnField<string>
       {
             public object GetSearchValue() => this.searchValue;
       }

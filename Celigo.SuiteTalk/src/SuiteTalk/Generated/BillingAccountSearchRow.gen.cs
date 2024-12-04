@@ -1,4 +1,3 @@
-
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -52,6 +51,7 @@ namespace SuiteTalk
         // public IEnumerable<SearchRowBasic> GetJoins()
         // {
         //    yield return this.basic;
+      //      yield return this.customerJoin;
       //      yield return this.jobJoin;
         //}
 
@@ -76,6 +76,11 @@ namespace SuiteTalk
                     break;
 
 
+                case "customerJoin":
+                    result = target.customerJoin;
+                    creator = () => target.customerJoin = new CustomerSearchRowBasic();
+                    break;
+        
                 case "jobJoin":
                     result = target.jobJoin;
                     creator = () => target.jobJoin = new JobSearchRowBasic();
