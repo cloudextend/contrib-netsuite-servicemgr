@@ -8,7 +8,7 @@ resources:
       type: "github"
       name: "cloudextend/templates-pipelines"
       endpoint: "GitHub BuildBot PAT"
-      ref: "refs/tags/v7.1.1"
+      ref: "refs/tags/v7.2.0"
 
 stages:
   - stage: "stageNuGetPackageDeployment"

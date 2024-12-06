@@ -5,7 +5,7 @@
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>7.1.2</Version>
+        <Version>8.0.0</Version>
         <Authors>Sameera Perera, CloudExtend.io</Authors>
         <Company>Celigo, Inc</Company>
         <Product>Celigo Wrappers for NetSuite SuiteTalk 2018.2</Product>
@@ -27,6 +27,7 @@
             7.1.0 Fixed issue #69.
             7.1.1 Avoid default value for replaceAll
             7.1.2 Add missing property TransactionStatus
+            8.0.0 Upgraded SuiteTalk to WSDL 2024.1 
         </PackageReleaseNotes>
         <RootNamespace>SuiteTalk</RootNamespace>
     </PropertyGroup>

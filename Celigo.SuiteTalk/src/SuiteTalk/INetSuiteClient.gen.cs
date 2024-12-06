@@ -1,3 +1,4 @@
+// Generator: ClientStubGenerator, Template: INetSuiteClient
 namespace SuiteTalk
 {
     #pragma warning disable IDE1006 // Naming Styles
@@ -8,7 +9,8 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<SessionResponse> changeEmailAsync(ChangeEmail changeEmail);
         System.Threading.Tasks.Task<WriteResponse> addAsync(Record record);
         System.Threading.Tasks.Task<WriteResponse> deleteAsync(BaseRef baseRef,DeletionReason deletionReason);
-        System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(SearchPreferences searchPreferences,string searchId,int pageIndex);
+        System.Threading.Tasks.Task<SearchResult> searchAsync(SearchRecord searchRecord);
+        System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(string searchId,int pageIndex);
         System.Threading.Tasks.Task<WriteResponse> updateAsync(Record record);
         System.Threading.Tasks.Task<WriteResponse> upsertAsync(Record record);
         System.Threading.Tasks.Task<WriteResponseList> addListAsync(Record[] record);
@@ -39,7 +41,7 @@ namespace SuiteTalk
         System.Threading.Tasks.Task<AsyncStatusResult> asyncDeleteListAsync(BaseRef[] baseRef,DeletionReason deletionReason);
         System.Threading.Tasks.Task<AsyncStatusResult> asyncGetListAsync(BaseRef[] baseRef);
         System.Threading.Tasks.Task<AsyncStatusResult> asyncInitializeListAsync(InitializeRecord[] initializeRecord);
-        System.Threading.Tasks.Task<AsyncStatusResult> asyncSearchAsync(SearchPreferences searchPreferences,SearchRecord searchRecord);
+        System.Threading.Tasks.Task<AsyncStatusResult> asyncSearchAsync(SearchRecord searchRecord);
         System.Threading.Tasks.Task<AsyncResult> getAsyncResultAsync(string jobId,int pageIndex);
         System.Threading.Tasks.Task<AsyncStatusResult> checkAsyncStatusAsync(string jobId);
         System.Threading.Tasks.Task<GetDeletedResult> getDeletedAsync(GetDeletedFilter getDeletedFilter,int pageIndex);
@@ -100,7 +102,20 @@ namespace SuiteTalk
           return response.writeResponse;
       }
 
-      public virtual async System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(SearchPreferences searchPreferences,string searchId,int pageIndex)
+      public virtual async System.Threading.Tasks.Task<SearchResult> searchAsync(SearchRecord searchRecord)
+      {
+          var request = new searchRequest() {
+                      tokenPassport = tokenPassport,
+                      applicationInfo = applicationInfo,
+                      partnerInfo = partnerInfo,
+                      searchPreferences = searchPreferences,
+                      searchRecord = searchRecord,
+          };
+          var response = await ((NetSuitePortType)this).searchAsync(request);
+          return response.searchResult;
+      }
+
+      public virtual async System.Threading.Tasks.Task<SearchResult> searchMoreWithIdAsync(string searchId,int pageIndex)
       {
           var request = new searchMoreWithIdRequest() {
                       tokenPassport = tokenPassport,
@@ -509,7 +524,7 @@ namespace SuiteTalk
           return response.asyncStatusResult;
       }
 
-      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncSearchAsync(SearchPreferences searchPreferences,SearchRecord searchRecord)
+      public virtual async System.Threading.Tasks.Task<AsyncStatusResult> asyncSearchAsync(SearchRecord searchRecord)
       {
           var request = new asyncSearchRequest() {
                       tokenPassport = tokenPassport,

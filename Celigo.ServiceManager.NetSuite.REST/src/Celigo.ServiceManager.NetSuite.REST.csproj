@@ -1,36 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-      <TargetFramework>net6.0</TargetFramework>
-      <Version>2.0.0</Version>
-      <Authors>CloudExtend.io</Authors>
-      <Company>Celigo, Inc.</Company>
-      <Description>REST Client for NetSuite REST API and RESTlets</Description>
-      <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-      <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
-      <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
-      <Copyright>Copyright © Celigo, Inc. 2020</Copyright>
-      <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
-      <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
-      <RepositoryType>Git</RepositoryType>
-      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-      <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-      <PackageReleaseNotes>
-        v1.1.0 - Support PATCH and PUT HTTP requests in IRestClient.
-        v1.2.0 - Added support for HTTP DELETE in RestClient.
-        v1.3.0 - Deprecating the way query params were passed to the IRestletClient
-        v1.3.1 - Add URL encoding to query params within RESTletClient
-        v1.3.2 - Added support for HTTP timeout with custom value while using RestletClient
-        v2.0.0 - Updated .net version
-      </PackageReleaseNotes>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Version>2.0.0</Version>
+    <Authors>CloudExtend.io</Authors>
+    <Company>Celigo, Inc.</Company>
+    <Description>REST Client for NetSuite REST API and RESTlets</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
+    <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
+    <Copyright>Copyright © Celigo, Inc. 2020</Copyright>
+    <PackageTags>NetSuite Celigo SuiteTalk ServiceManager</PackageTags>
+    <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>
+      v1.1.0 - Support PATCH and PUT HTTP requests in IRestClient.
+      v1.2.0 - Added support for HTTP DELETE in RestClient.
+      v1.3.0 - Deprecating the way query params were passed to the IRestletClient
+      v1.3.1 - Add URL encoding to query params within RESTletClient
+      v1.3.2 - Added support for HTTP timeout with custom value while using RestletClient
+      v2.0.0 - Updated .net version
+    </PackageReleaseNotes>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
-      <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+  </ItemGroup>
 
 </Project>

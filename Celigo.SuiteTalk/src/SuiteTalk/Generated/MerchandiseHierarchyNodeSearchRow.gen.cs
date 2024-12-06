@@ -1,4 +1,3 @@
-
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 
@@ -7,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SuiteTalk
 {
-    public partial class MerchandiseHierarchyNodeSearchRow: ISearchRow, ISearchRow<MerchandiseHierarchyNodeSearchRowBasic>
+    public partial class MerchandiseHierarchyNodeSearchRow: ISearchRow, ISearchRow<MerchandiseHierarchyNodeSearchRowBasic>, ISupportsCustomSearchJoin
     {
         public MerchandiseHierarchyNodeSearchRowBasic GetBasic() => this.basic;
 
@@ -55,6 +54,14 @@ namespace SuiteTalk
       //      yield return this.parentNodeJoin;
         //}
 
+
+          public CustomSearchRowBasic[] GetCustomSearchJoin() => this.customSearchJoin;
+  
+          public CustomSearchRowBasic[] CreateCustomSearchJoin()
+          {
+              if (this.customSearchJoin == null) this.customSearchJoin = new CustomSearchRowBasic[0];
+              return this.customSearchJoin;
+          }
         private static SearchRowBasic GetOrCreateJoin(MerchandiseHierarchyNodeSearchRow target, string joinName, bool createIfNull = false)
         {
             SearchRowBasic result;

@@ -1,4 +1,3 @@
-
 // Generator: SearchStubGenerator
 // Template: ISearchRow
 

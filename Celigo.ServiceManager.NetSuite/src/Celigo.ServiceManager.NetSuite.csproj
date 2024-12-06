@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>7.1.2</Version>
+        <Version>8.0.0</Version>
         <Authors>Sameera Perera</Authors>
         <Company>Celigo, Inc.</Company>
         <Description>ServiceManager for NetSuite SuiteTalk WebServices. Supports NetSuite SuiteTalk 2018.2</Description>
@@ -34,6 +34,7 @@
             7.1.0 Updated to use new version of Celigo.SuiteTalk
             7.1.1 Updated to use new version of Celigo.SuiteTalk
             7.1.2 Updated to use new version of Celigo.SuiteTalk
+            8.0.0 Upgraded to SuiteTalk 2024.1
         </PackageReleaseNotes>
     </PropertyGroup>
 
