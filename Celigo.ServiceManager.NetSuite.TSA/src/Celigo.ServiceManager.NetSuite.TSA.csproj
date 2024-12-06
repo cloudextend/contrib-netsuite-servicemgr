@@ -1,38 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <Copyright>Celigo, Inc.</Copyright>
-    <Company>CloudExtend.io</Company>
-    <Authors>Sameera Perera, CloudExtend.io</Authors>
-    <Description>Provides helper functions to implement NetSuite's Three-step Authorization Flow.</Description>
-    <PackageProjectUrl>https://cloudextend.github.io/contrib-netsuite-servicemgr/</PackageProjectUrl>
-    <RepositoryUrl>https://cloudextend.github.io/contrib-netsuite-servicemgr/</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageIconUrl>https://cloudextend.github.io/contrib-netsuite-servicemgr/logo.png</PackageIconUrl>
-    <PackageTags>NetSuite Celigo TSA 3SA Three-Step Authorization</PackageTags>
-    <PackageReleaseNotes>
-          1.0.6 Bug Fix: Final TBA tokens need trimming to remove unncessary whitespace characters.
-          1.0.7 Include the next URL in the RequestTokenResponse
-          1.1.0 
-              Support for Revoking Tokens [TSA]
-              Refactored to use HttpClient Typed Client pattern [TSA].
-              Callback URLs moved to constuction time parameters [TSA].
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <Copyright>Celigo, Inc.</Copyright>
+        <Company>CloudExtend.io</Company>
+        <Authors>Sameera Perera, CloudExtend.io</Authors>
+        <Description>Provides helper functions to implement NetSuite's Three-step Authorization Flow.</Description>
+        <PackageProjectUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</PackageProjectUrl>
+        <RepositoryUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageIconUrl>https://pro-celigo.github.io/lib-netsuite-servicemgr/logo.png</PackageIconUrl>
+        <PackageTags>NetSuite Celigo TSA 3SA Three-Step Authorization</PackageTags>
+        <PackageReleaseNotes>1.0.6 Bug Fix: Final TBA tokens need trimming to remove unncessary whitespace characters.
+            1.0.7 Include the next URL in the RequestTokenResponse
+            1.1.0
+            Support for Revoking Tokens [TSA]
+            Refactored to use HttpClient Typed Client pattern [TSA].
+            Callback URLs moved to constuction time parameters [TSA].
 
-          1.1.5 Resolving some internal version conflicts.
-          2.0.0 Updated .NET version
-    </PackageReleaseNotes>
-    <Version>2.0.0</Version>
-  </PropertyGroup>
+            1.1.5
+            Resolving some internal version conflicts.
+        </PackageReleaseNotes>
+        <Version>1.1.5</Version>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-    <PackageReference Include="Newtonsoft.json" Version="13.0.3" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.5" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.5" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.5" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.5" />
+        <PackageReference Include="Newtonsoft.json" Version="12.0.2" />
+    </ItemGroup>
 
 </Project>

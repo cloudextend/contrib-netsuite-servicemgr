@@ -5,7 +5,7 @@ namespace SuiteTalk
 {
     partial class NetSuitePortTypeClient
     {
-        // Passport IPassportProvider.GetPassport() => this.passport;
+        //Passport IPassportProvider.GetPassport() => this.passport;
         
         SearchPreferences IPreferenceProvider.GetSearchPreferences() => this.searchPreferences;
 

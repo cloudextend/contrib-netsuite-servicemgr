@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -27,14 +27,14 @@
             7.1.0 Fixed issue #69.
             7.1.1 Avoid default value for replaceAll
             7.1.2 Add missing property TransactionStatus
-            8.0.0 Upgraded the SuiteTalk 2024.1 and .NET version upgraded
+            8.0.0 Upgraded SuiteTalk to WSDL 2024.1 
         </PackageReleaseNotes>
         <RootNamespace>SuiteTalk</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="System.ServiceModel.duplex" Version="6.0.0" />
-        <PackageReference Include="System.ServiceModel.http" Version="8.1.0" />
-        <PackageReference Include="System.ServiceModel.nettcp" Version="8.1.0" />
-        <PackageReference Include="System.ServiceModel.security" Version="6.0.0" />
+        <PackageReference Include="System.ServiceModel.duplex" Version="4.5.3" />
+        <PackageReference Include="System.ServiceModel.http" Version="4.5.3" />
+        <PackageReference Include="System.ServiceModel.nettcp" Version="4.5.3" />
+        <PackageReference Include="System.ServiceModel.security" Version="4.5.3" />
     </ItemGroup>
 </Project>
