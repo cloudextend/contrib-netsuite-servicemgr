@@ -26,3 +26,4 @@ stages:
               NuGetConfigPath: "$(NuGetConfigPath)"
               PackageDestination: "NuGet.org"
               WorkingDir: "$(WorkingDir)"
+              DotNetVersionToUse: "$(DotNetVersionToUse)"
