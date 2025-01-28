@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
     <Authors>CloudExtend.io</Authors>
     <Company>Celigo, Inc.</Company>
     <Description>REST Client for NetSuite REST API and RESTlets</Description>
@@ -16,12 +16,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>
-      v1.1.0 - Support PATCH and PUT HTTP requests in IRestClient.
-      v1.2.0 - Added support for HTTP DELETE in RestClient.
-      v1.3.0 - Deprecating the way query params were passed to the IRestletClient
-      v1.3.1 - Add URL encoding to query params within RESTletClient
-      v1.3.2 - Added support for HTTP timeout with custom value while using RestletClient
-      v2.0.0 - Updated .net version
+      v2.1.0 - Added support for HTTP DELETE in RESTletClient
     </PackageReleaseNotes>
   </PropertyGroup>
 
