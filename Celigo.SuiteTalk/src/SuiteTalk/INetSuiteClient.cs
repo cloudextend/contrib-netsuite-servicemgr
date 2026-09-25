@@ -32,7 +32,7 @@ namespace SuiteTalk
 
         public string SuiteTalkVersion
         {
-            get { return "2024.1"; }
+            get { return "2025.2"; }
         }
 
         public virtual async Task<SearchResult> searchAsync(
