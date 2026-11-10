@@ -54,8 +54,8 @@ namespace Celigo.ServiceManager.NetSuite
 
         protected T ConfigureClient(T client, string account, IConfigurationProvider configProvider)
         {
-            // Increase binding timeout.
-            client.Endpoint.Binding.SendTimeout = new TimeSpan(0, 10, 0);
+            // Must stay under NetSuite's five-minute token passport window so a slow call ends as a timeout, not a login fault.
+            client.Endpoint.Binding.SendTimeout = TimeSpan.FromMinutes(4);
 
             if (configProvider?.DataCenter != null)
             {
